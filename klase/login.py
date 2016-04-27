@@ -1,8 +1,7 @@
 class Login(object):
 
 	def __init__(self,username,password):
-		self.username = username
-		self.ID, self.imePrezime, self.uloga = self.__checkCreds(username,password)
+		self.ID, self.username, self.imePrezime, self.uloga = self.__checkCreds(username,password)
 
 	def __readFile(self):
 		fileName = "files/korisnici.txt"
@@ -19,7 +18,13 @@ class Login(object):
 			ID = l[0]
 			imePrezime = l[1]
 			uloga = l[4]
+
 			if username == l[2] and password == l[3]:
-				return ID, imePrezime, uloga
+				return ID, username, imePrezime, uloga
+			else:
+				x = 1
+
+		if x != 0:
+			return None,None,None,None
 
 
