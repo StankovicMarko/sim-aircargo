@@ -1,0 +1,4 @@
+1|Marko Jokic|marko|jokic|mhangar
+2|Petar Petrovic|pera|petrovic|mtransport
+3|Marko Stankovic|admin|admin|mtransport
+4|Ime Prezime|radnik|password|radnik
