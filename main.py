@@ -1,11 +1,10 @@
 from klase.login import *
 from klase.korisnik import *
-from GUI.LoginWindow import *
+from GUI.windows import *
 
 def main():
 
-	root = tk.Tk()
-	application = LoginWindow(root)
+	application = Glavna()
 	application.mainloop()
 
 if __name__ == "__main__":
