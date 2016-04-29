@@ -32,6 +32,7 @@ class LoginWindow(tk.Frame):
         self.grid()
         self.createWidgets()
         self.controler = controler
+        self.controler.title("Aplikacija")
 
     def createWidgets(self):
         self.usernameLabel = tk.Label(self,text="Username:")
