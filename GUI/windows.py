@@ -152,8 +152,10 @@ class PotraziteljPanel(tk.Frame):
     def podnesiZahtevButtonFrameWidgets(self):
         self.PodnesiZahtevButtonFrame = tk.Frame(self)
         self.PodnesiZahtevButtonFrame.grid(row=1,column=3)
-        self.PodnesiZahtevButton = tk.Button(self.PodnesiZahtevButtonFrame,state="disabled",text="Podnesi Zahtev",height=3,width=10,command=self.podnesiZahtev)
+        self.PodnesiZahtevButton = tk.Button(self.PodnesiZahtevButtonFrame,state="disabled",text="Podnesi Zahtev",height=2,width=10,command=self.podnesiZahtev)
+        self.PrikazIstorijuButton = tk.Button(self.PodnesiZahtevButtonFrame,state="disabled",text="Prikaz Istorije",height=2,width=10,command=self.prikaziIstoriju)        
         self.PodnesiZahtevButton.grid(row=0,column=0)
+        self.PrikazIstorijuButton.grid(row=1,column=0)
 
 
     def dodajRobuFrameWidgets(self):
@@ -185,6 +187,7 @@ class PotraziteljPanel(tk.Frame):
             status = Login(None,None).checkID(ID)
             if status == True:
                 self.PodnesiZahtevButton.configure(state="normal")
+                self.PrikazIstorijuButton.configure(state="normal")
             elif status == False:
                 self.PodnesiZahtevButton.configure(state="disabled")
         else:
@@ -216,6 +219,7 @@ class PotraziteljPanel(tk.Frame):
             self.BrojTelefonaInput.configure(state="normal")
             self.EmailInput.configure(state="normal")
             self.PodnesiZahtevButton.configure(state="normal")
+            self.PrikazIstorijuButton.configure(state="disabled")
         elif self.CheckBoxNemamIDState.get() == 0:
             self.IDInput.configure(state="normal")
             self.ProveriIDButton.configure(state="normal")
@@ -224,6 +228,10 @@ class PotraziteljPanel(tk.Frame):
             self.BrojTelefonaInput.configure(state="disabled")
             self.EmailInput.configure(state="disabled")
             self.PodnesiZahtevButton.configure(state="disabled")
+            self.PrikazIstorijuButton.configure(state="disabled")
 
     def podnesiZahtev(self):
         print("click...")
+
+    def prikaziIstoriju(self):
+        print("click")
