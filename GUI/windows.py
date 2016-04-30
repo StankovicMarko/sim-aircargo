@@ -24,27 +24,29 @@ class Glavna(tk.Tk):
 
 
 
-
-
 class LoginWindow(tk.Frame):
     def __init__(self, parent, controler):
         tk.Frame.__init__(self,parent)
+        self.grid_rowconfigure(0,weight=1)
+        self.grid_columnconfigure(0, weight=1)
         self.grid()
         self.createWidgets()
         self.controler = controler
         self.controler.title("Aplikacija")
 
     def createWidgets(self):
-        self.usernameLabel = tk.Label(self,text="Username:")
-        self.passwordLabel = tk.Label(self,text="Password:")
+        self.loginFrame = tk.Frame(self)
+        self.loginFrame.grid()
+        self.usernameLabel = tk.Label(self.loginFrame,text="Username:")
+        self.passwordLabel = tk.Label(self.loginFrame,text="Password:")
 
-        self.usernameInput = tk.Entry(self)
-        self.passwordInput = tk.Entry(self,show="*")
+        self.usernameInput = tk.Entry(self.loginFrame)
+        self.passwordInput = tk.Entry(self.loginFrame,show="*")
 
-        self.loginButton = tk.Button(self,text="Login",command=self.login)
+        self.loginButton = tk.Button(self.loginFrame,text="Login",command=self.login)
 
         self.checkBoxState = tk.IntVar()
-        self.checkBox = tk.Checkbutton(self,text="Ulogujte se kao potrazitelj.",command=self.disableUsernamePasswordInputs,variable=self.checkBoxState)
+        self.checkBox = tk.Checkbutton(self.loginFrame,text="Ulogujte se kao potrazitelj.",command=self.disableUsernamePasswordInputs,variable=self.checkBoxState)
 
         self.usernameLabel.grid(row=1,column=0)
         self.passwordLabel.grid(row=1,column=1)
@@ -107,5 +109,50 @@ class RadnikPanel(tk.Frame):
 class PotraziteljPanel(tk.Frame):
     def __init__(self,parent,controler):
         tk.Frame.__init__(self,parent)
-        nekiLabel = tk.Label(self, text="Ulogovani ste kao potrazitelj")
-        nekiLabel.grid()
+
+        self.checkIDFrame = tk.Frame(self)
+        self.checkIDFrame.grid(row=0,column=0)
+        self.IDLabel = tk.Label(self.checkIDFrame,text="Unesite ID:")
+        self.IDInput = tk.Entry(self.checkIDFrame)
+        self.ProveriIDButton = tk.Button(self.checkIDFrame,text="Proveri")
+        self.CheckBoxNemamIDState = tk.IntVar()
+        self.CheckBoxNemamID = tk.Checkbutton(self.checkIDFrame,text="Nemam ID",command=self.disableIDInput,variable=self.CheckBoxNemamIDState)
+        self.IDLabel.grid(row=0,column=0)
+        self.IDInput.grid(row=0,column=1)
+        self.ProveriIDButton.grid(row=0,column=2)
+        self.CheckBoxNemamID.grid(row=1,columnspan=3)
+
+        self.PodaciFrame = tk.Frame(self)
+        self.PodaciFrame.grid(row=1,column=0)
+        self.ImeLabel = tk.Label(self.PodaciFrame,text="Ime:")
+        self.ImeInput = tk.Entry(self.PodaciFrame)
+        self.PrezimeLabel = tk.Label(self.PodaciFrame,text="Prezime:")
+        self.PrezimeInput = tk.Entry(self.PodaciFrame)
+        self.BrojTelefonaLabel = tk.Label(self.PodaciFrame,text="Broj Telefona:")
+        self.BrojTelefonaInput = tk.Entry(self.PodaciFrame)
+        self.EmailLabel = tk.Label(self.PodaciFrame,text="Email:")
+        self.EmailInput = tk.Entry(self.PodaciFrame)
+        self.ImeLabel.grid(row=3,column=0)
+        self.ImeInput.grid(row=3,column=1)
+        self.PrezimeLabel.grid(row=4,column=0)
+        self.PrezimeInput.grid(row=4,column=1)
+        self.BrojTelefonaLabel.grid(row=5,column=0)
+        self.BrojTelefonaInput.grid(row=5,column=1)
+        self.EmailLabel.grid(row=6,column=0)
+        self.EmailInput.grid(row=6,column=1)
+
+
+        self.DodajRobuFrame = tk.Frame(self)
+        self.DodajRobuFrame.grid(row=0,column=3)
+        self.RobaListBox = tk.Listbox(self.DodajRobuFrame,height=5)
+        self.RobaListBox.grid(row=0,column=0)
+        self.RobaListBox.insert(1,"roba1:30")
+
+
+    def disableIDInput(self):
+        if self.CheckBoxNemamIDState.get() == 1:
+            self.IDInput.configure(state="disabled")
+            self.ProveriIDButton.configure(state="disabled")
+        elif self.CheckBoxNemamIDState.get() == 0:
+            self.IDInput.configure(state="normal")
+            self.ProveriIDButton.configure(state="normal")
