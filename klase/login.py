@@ -26,4 +26,15 @@ class Login(object):
         if x != 0:
             return None,None,None,None
 
+    def checkID(self,ID):
+        print("hello from klasa LOGIN!")
+        lines = self.__readFile()
+        for line in lines:
+            l = line.strip().split("|")
+
+            if ID == l[0] and l[4] == "potrazitelj":
+                return True
+
+        return False
+
 
