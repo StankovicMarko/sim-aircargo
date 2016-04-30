@@ -156,6 +156,7 @@ class PotraziteljPanel(tk.Frame):
         self.robaInput = tk.Entry(self.DodajRobuFrame,width=15)
         self.kolicinaRobeInput = tk.Entry(self.DodajRobuFrame,width=5)
         self.dodajRobuButton = tk.Button(self.DodajRobuFrame,text="+",width=1,height=1,command=self.dodajRobu)
+        self.ocistiRobuButton = tk.Button(self.DodajRobuFrame,text="X",width=1,height=1,command=self.ocistiRobu)
 
         self.robaLabel.grid(row=0,column=0)
         self.kolicinaRobeLabel.grid(row=0,column=1)
@@ -164,9 +165,9 @@ class PotraziteljPanel(tk.Frame):
         self.dodajRobuButton.grid(row=1,column=2)
 
 
-
         self.RobaListBox = tk.Listbox(self.DodajRobuFrame,height=5)
         self.RobaListBox.grid(row=2,columnspan=2)
+        self.ocistiRobuButton.grid(row=3,column=2)
 
     def dodajRobu(self):
         if self.robaInput.get() == "" or self.kolicinaRobeInput.get() == "":
@@ -174,6 +175,17 @@ class PotraziteljPanel(tk.Frame):
         else:
             self.robaIKolicina = self.robaInput.get() + ":" + self.kolicinaRobeInput.get()
             self.RobaListBox.insert("end",self.robaIKolicina)
+            self.robaInput.delete(0,len(self.robaInput.get()))
+            self.kolicinaRobeInput.delete(0,self.kolicinaRobeInput.get())
+
+    def ocistiRobu(self):
+        self.selektovanaRoba = self.RobaListBox.curselection()
+        if self.selektovanaRoba == ():
+            self.velicinaListBoxa = self.RobaListBox.size()
+            self.RobaListBox.delete(0,self.velicinaListBoxa)
+        else:
+            self.RobaListBox.delete(self.selektovanaRoba)
+
 
     def disableIDInput(self):
         if self.CheckBoxNemamIDState.get() == 1:
