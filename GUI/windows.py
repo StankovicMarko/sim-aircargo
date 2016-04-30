@@ -109,7 +109,11 @@ class RadnikPanel(tk.Frame):
 class PotraziteljPanel(tk.Frame):
     def __init__(self,parent,controler):
         tk.Frame.__init__(self,parent)
+        self.proveriIDFrameWidgets()
+        self.podaciFrameWidgets()
+        self.dodajRobuFrameWidgets()
 
+    def proveriIDFrameWidgets(self):
         self.checkIDFrame = tk.Frame(self)
         self.checkIDFrame.grid(row=0,column=0)
         self.IDLabel = tk.Label(self.checkIDFrame,text="Unesite ID:")
@@ -118,10 +122,11 @@ class PotraziteljPanel(tk.Frame):
         self.CheckBoxNemamIDState = tk.IntVar()
         self.CheckBoxNemamID = tk.Checkbutton(self.checkIDFrame,text="Nemam ID",command=self.disableIDInput,variable=self.CheckBoxNemamIDState)
         self.IDLabel.grid(row=0,column=0)
-        self.IDInput.grid(row=0,column=1)
-        self.ProveriIDButton.grid(row=0,column=2)
-        self.CheckBoxNemamID.grid(row=1,columnspan=3)
+        self.IDInput.grid(row=1,column=0)
+        self.ProveriIDButton.grid(row=1,column=2)
+        self.CheckBoxNemamID.grid(row=2,columnspan=2)
 
+    def podaciFrameWidgets(self):
         self.PodaciFrame = tk.Frame(self)
         self.PodaciFrame.grid(row=1,column=0)
         self.ImeLabel = tk.Label(self.PodaciFrame,text="Ime:")
@@ -142,12 +147,33 @@ class PotraziteljPanel(tk.Frame):
         self.EmailInput.grid(row=6,column=1)
 
 
+    def dodajRobuFrameWidgets(self):
         self.DodajRobuFrame = tk.Frame(self)
         self.DodajRobuFrame.grid(row=0,column=3)
-        self.RobaListBox = tk.Listbox(self.DodajRobuFrame,height=5)
-        self.RobaListBox.grid(row=0,column=0)
-        self.RobaListBox.insert(1,"roba1:30")
 
+        self.robaLabel = tk.Label(self.DodajRobuFrame,text="Roba:")
+        self.kolicinaRobeLabel = tk.Label(self.DodajRobuFrame,text="Kolicina:")
+        self.robaInput = tk.Entry(self.DodajRobuFrame,width=15)
+        self.kolicinaRobeInput = tk.Entry(self.DodajRobuFrame,width=5)
+        self.dodajRobuButton = tk.Button(self.DodajRobuFrame,text="+",width=1,height=1,command=self.dodajRobu)
+
+        self.robaLabel.grid(row=0,column=0)
+        self.kolicinaRobeLabel.grid(row=0,column=1)
+        self.robaInput.grid(row=1,column=0)
+        self.kolicinaRobeInput.grid(row=1,column=1)
+        self.dodajRobuButton.grid(row=1,column=2)
+
+
+
+        self.RobaListBox = tk.Listbox(self.DodajRobuFrame,height=5)
+        self.RobaListBox.grid(row=2,columnspan=2)
+
+    def dodajRobu(self):
+        if self.robaInput.get() == "" or self.kolicinaRobeInput.get() == "":
+            pass
+        else:
+            self.robaIKolicina = self.robaInput.get() + ":" + self.kolicinaRobeInput.get()
+            self.RobaListBox.insert("end",self.robaIKolicina)
 
     def disableIDInput(self):
         if self.CheckBoxNemamIDState.get() == 1:
