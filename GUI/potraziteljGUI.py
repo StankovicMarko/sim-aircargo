@@ -14,7 +14,7 @@ class PotraziteljPanel(tk.Frame):
 
     def proveriIDFrameWidgets(self):
         self.checkIDFrame = tk.Frame(self)
-        self.checkIDFrame.grid(row=0,column=0)
+        self.checkIDFrame.grid(row=0,column=0,sticky="nw")
         self.IDLabel = tk.Label(self.checkIDFrame,text="Unesite ID:")
         self.IDInput = tk.Entry(self.checkIDFrame)
         self.ProveriIDButton = tk.Button(self.checkIDFrame,text="Proveri",command=self.proveriID)
@@ -27,7 +27,7 @@ class PotraziteljPanel(tk.Frame):
 
     def podaciFrameWidgets(self):
         self.PodaciFrame = tk.Frame(self)
-        self.PodaciFrame.grid(row=1,column=0)
+        self.PodaciFrame.grid(row=0,column=0)
         self.ImeLabel = tk.Label(self.PodaciFrame,text="Ime:")
         self.ImeInput = tk.Entry(self.PodaciFrame,state="disabled")
         self.PrezimeLabel = tk.Label(self.PodaciFrame,text="Prezime:")
@@ -61,29 +61,48 @@ class PotraziteljPanel(tk.Frame):
         self.DodajRobuFrame.grid(row=0,column=3)
 
         self.robaLabel = tk.Label(self.DodajRobuFrame,text="Roba:")
-        self.kolicinaRobeLabel = tk.Label(self.DodajRobuFrame,text="Kolicina:")
+        self.opisRobaLabel = tk.Label(self.DodajRobuFrame,text="Opis:")
         self.robaInput = tk.Entry(self.DodajRobuFrame,width=15)
-        self.kolicinaRobeInput = tk.Entry(self.DodajRobuFrame,width=5)
+        self.opisRobeInput = tk.Entry(self.DodajRobuFrame,width=15)
+
+        self.duzinaRobeLabel = tk.Label(self.DodajRobuFrame,text="Duzina:")
+        self.duzinaRobeInput = tk.Entry(self.DodajRobuFrame,width=5)
+        self.sirinaRobeLabel = tk.Label(self.DodajRobuFrame,text="Sirina:")
+        self.sirinaRobeInput = tk.Entry(self.DodajRobuFrame,width=5)
+        self.visinaRobeLabel = tk.Label(self.DodajRobuFrame,text="Visina:")
+        self.visinaRobeInput = tk.Entry(self.DodajRobuFrame,width=5)
+        self.tezinaRobeLabel = tk.Label(self.DodajRobuFrame,text="Tezina:")
+        self.tezinaRobeInput = tk.Entry(self.DodajRobuFrame,width=5)
+
         self.dodajRobuButton = tk.Button(self.DodajRobuFrame,text="+",width=1,height=1,command=self.dodajRobu)
         self.ocistiRobuButton = tk.Button(self.DodajRobuFrame,text="X",width=1,height=1,command=self.ocistiRobu)
 
         self.robaLabel.grid(row=0,column=0)
-        self.kolicinaRobeLabel.grid(row=0,column=1)
         self.robaInput.grid(row=1,column=0)
-        self.kolicinaRobeInput.grid(row=1,column=1)
-        self.dodajRobuButton.grid(row=1,column=2)
+        self.opisRobaLabel.grid(row=0,column=1)
+        self.opisRobeInput.grid(row=1,column=1)
 
+        self.duzinaRobeLabel.grid(row=2,column=0)
+        self.duzinaRobeInput.grid(row=3,column=0)
+        self.sirinaRobeLabel.grid(row=2,column=1)
+        self.sirinaRobeInput.grid(row=3,column=1)
+        self.visinaRobeLabel.grid(row=4,column=0)
+        self.visinaRobeInput.grid(row=5,column=0)
+        self.tezinaRobeLabel.grid(row=4,column=1)
+        self.tezinaRobeInput.grid(row=5,column=1)
 
-        self.RobaListBox = tk.Listbox(self.DodajRobuFrame,height=5)
-        self.RobaListBox.grid(row=2,columnspan=2)
-        self.ocistiRobuButton.grid(row=2,column=2)
+        self.RobaListBox = tk.Listbox(self.DodajRobuFrame,height=10,width=25)
+        self.RobaListBox.grid(row=6,columnspan=2)
+
+        self.dodajRobuButton.grid(row=7,column=0)
+        self.ocistiRobuButton.grid(row=7,column=1)
 
     def odredisteFrameWidgets(self):
         self.odresiteFrame = tk.Frame(self)
-        self.odresiteFrame.grid(row=1,column=3)
+        self.odresiteFrame.grid(row=0,column=0,sticky="s")
 
         self.odredisteLabel = tk.Label(self.odresiteFrame,text="Odredista:")
-        self.odredisteListBox = tk.Listbox(self.odresiteFrame,height=3)
+        self.odredisteListBox = tk.Listbox(self.odresiteFrame,height=5)
 
         self.odredisteLabel.grid(row=0,columnspan=2)
         self.odredisteListBox.grid(row=1,columnspan=2)
@@ -108,6 +127,7 @@ class PotraziteljPanel(tk.Frame):
                 self.PodnesiZahtevButton.configure(state="normal")
                 self.PrikazIstorijuButton.configure(state="normal")
                 self.IDPotrazitelja = ID
+                self.CheckBoxNemamID.configure(state="disabled")
                 messagebox.showinfo("OK!","ID Pronadjen!")
             elif status == False:
                 self.IDPotrazitelja = ID
@@ -118,13 +138,27 @@ class PotraziteljPanel(tk.Frame):
             pass
 
     def dodajRobu(self):
-        if self.robaInput.get() == "" or self.kolicinaRobeInput.get() == "":
+        imeRobe = self.robaInput.get()
+        opisRobe = self.opisRobeInput.get()
+        duzinaRobe = self.duzinaRobeInput.get()
+        sirinaRobe = self.sirinaRobeInput.get()
+        visinaRobe = self.visinaRobeInput.get()
+        tezinaRobe = self.tezinaRobeInput.get()
+
+        if imeRobe == "" or opisRobe == "" or duzinaRobe == "" or sirinaRobe == "" or visinaRobe == "" or tezinaRobe == "":
             pass
         else:
-            self.robaIKolicina = self.robaInput.get() + ":" + self.kolicinaRobeInput.get()
-            self.RobaListBox.insert("end",self.robaIKolicina)
-            self.robaInput.delete(0,len(self.robaInput.get()))
-            self.kolicinaRobeInput.delete(0,self.kolicinaRobeInput.get())
+            linija = imeRobe+"|"+opisRobe+"|"+duzinaRobe+":"+sirinaRobe+":"+visinaRobe+"|"+tezinaRobe
+            self.RobaListBox.insert("end",linija)
+
+            # ciscenje input box-ova
+            self.robaInput.delete(0,len(imeRobe))
+            self.opisRobeInput.delete(0,len(opisRobe))
+            self.duzinaRobeInput.delete(0,len(duzinaRobe))
+            self.sirinaRobeInput.delete(0,len(sirinaRobe))
+            self.visinaRobeInput.delete(0,len(visinaRobe))
+            self.tezinaRobeInput.delete(0,len(tezinaRobe))
+
 
     def ocistiRobu(self):
         self.selektovanaRoba = self.RobaListBox.curselection()
