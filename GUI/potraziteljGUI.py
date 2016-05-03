@@ -8,6 +8,7 @@ class PotraziteljPanel(tk.Frame):
         self.proveriIDFrameWidgets()
         self.podaciFrameWidgets()
         self.dodajRobuFrameWidgets()
+        self.odredisteFrameWidgets()
         self.podnesiZahtevButtonFrameWidgets()
 
     def proveriIDFrameWidgets(self):
@@ -47,11 +48,11 @@ class PotraziteljPanel(tk.Frame):
 
     def podnesiZahtevButtonFrameWidgets(self):
         self.PodnesiZahtevButtonFrame = tk.Frame(self)
-        self.PodnesiZahtevButtonFrame.grid(row=1,column=3)
+        self.PodnesiZahtevButtonFrame.grid(row=3,columnspan=10)
         self.PodnesiZahtevButton = tk.Button(self.PodnesiZahtevButtonFrame,state="disabled",text="Podnesi Zahtev",height=2,width=10,command=self.podnesiZahtev)
         self.PrikazIstorijuButton = tk.Button(self.PodnesiZahtevButtonFrame,state="disabled",text="Prikaz Istorije",height=2,width=10,command=self.prikaziIstoriju)        
         self.PodnesiZahtevButton.grid(row=0,column=0)
-        self.PrikazIstorijuButton.grid(row=1,column=0)
+        self.PrikazIstorijuButton.grid(row=0,column=1)
 
 
     def dodajRobuFrameWidgets(self):
@@ -74,7 +75,28 @@ class PotraziteljPanel(tk.Frame):
 
         self.RobaListBox = tk.Listbox(self.DodajRobuFrame,height=5)
         self.RobaListBox.grid(row=2,columnspan=2)
-        self.ocistiRobuButton.grid(row=3,column=2)
+        self.ocistiRobuButton.grid(row=2,column=2)
+
+    def odredisteFrameWidgets(self):
+        self.odresiteFrame = tk.Frame(self)
+        self.odresiteFrame.grid(row=1,column=3)
+
+        self.odredisteLabel = tk.Label(self.odresiteFrame,text="Odredista:")
+        self.odredisteListBox = tk.Listbox(self.odresiteFrame,height=3)
+
+        self.odredisteLabel.grid(row=0,columnspan=2)
+        self.odredisteListBox.grid(row=1,columnspan=2)
+
+        odredistaLista = self.ucitajOdredista()
+        for odrediste in odredistaLista:
+            self.odredisteListBox.insert("end",odrediste.strip())
+
+    def ucitajOdredista(self):
+        filename = "files/odredista.txt"
+        f = open(filename,"r")
+        lines = f.readlines()
+        f.close()
+        return lines
 
     def proveriID(self):
         ID = self.IDInput.get()
@@ -136,13 +158,16 @@ class PotraziteljPanel(tk.Frame):
         l = lines[-1].split("|")
         return str(int(l[0])+1)
 
-
-
     def podnesiZahtev(self):
-        print("click...")
-        a = ZahtevZaTransport("London",self.IDPotrazitelja)
-        print(a.datumKreiranja,a.IDZahteva)
-        print(a.IDPotrazitelja)
+        self.selektovanoOdrediste = self.odredisteListBox.curselection() # Vraca tuple od selektovanog elementa
+
+        if self.selektovanoOdrediste == ():
+            print("Niste izabrali odrediste!")
+        else:
+            a = ZahtevZaTransport(self.odredisteListBox.get(self.selektovanoOdrediste[0]),self.IDPotrazitelja)
+            print(a.datumKreiranja,a.IDZahteva)
+            print(a.IDPotrazitelja)
+            print(a.odrediste)
 
     def prikaziIstoriju(self):
         print("click")
