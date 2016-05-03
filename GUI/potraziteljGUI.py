@@ -1,4 +1,5 @@
 import tkinter as tk
+from tkinter import messagebox
 from klase.login import *
 from klase.zahtevi import *
 
@@ -107,10 +108,12 @@ class PotraziteljPanel(tk.Frame):
                 self.PodnesiZahtevButton.configure(state="normal")
                 self.PrikazIstorijuButton.configure(state="normal")
                 self.IDPotrazitelja = ID
+                messagebox.showinfo("OK!","ID Pronadjen!")
             elif status == False:
                 self.IDPotrazitelja = ID
                 self.PodnesiZahtevButton.configure(state="disabled")
                 self.PrikazIstorijuButton.configure(state="disabled")
+                messagebox.showerror("Error!","Nepostoji ID!")
         else:
             pass
 
@@ -172,12 +175,15 @@ class PotraziteljPanel(tk.Frame):
         email = self.EmailInput.get()
 
         if self.selektovanoOdrediste == ():
-            print("Niste izabrali odrediste!")
-        elif ime == "" or prezime == "" or brojtelefona == "" or email == "":
-            print("Niste popunili podatke!")
+            messagebox.showerror("Error!","Niste izabrali odrediste!")
         else:
-            line = self.IDPotrazitelja+"|"+ime+" "+prezime+"|"+brojtelefona+"|"+email+"|potrazitelj"
-            self.sacuvajPodatkePotrazitelj(line)
+            if self.CheckBoxNemamIDState.get() == 1:
+                if ime == "" or prezime == "" or brojtelefona == "" or email == "":
+                    messagebox.showerror("Error!","Niste uneli podatke!")
+                else:
+                    line = self.IDPotrazitelja+"|"+ime+" "+prezime+"|"+brojtelefona+"|"+email+"|potrazitelj"
+                    self.sacuvajPodatkePotrazitelj(line)
+
             a = ZahtevZaTransport(self.odredisteListBox.get(self.selektovanoOdrediste[0]),self.IDPotrazitelja)
             print(a.datumKreiranja,a.IDZahteva)
             print(a.IDPotrazitelja)
