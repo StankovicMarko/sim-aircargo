@@ -3,3 +3,4 @@
 3|Marko Stankovic|admin|admin|mtransport
 4|Ime Prezime|radnik|password|radnik
 5|Marko Markovic|060123456|email@email.com|potrazitelj
+6|Pera Detlic|021332111|pera@detlic.com|potrazitelj

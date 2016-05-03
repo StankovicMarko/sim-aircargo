@@ -158,12 +158,26 @@ class PotraziteljPanel(tk.Frame):
         l = lines[-1].split("|")
         return str(int(l[0])+1)
 
+    def sacuvajPodatkePotrazitelj(self,line):
+        filename = "files/korisnici.txt"
+        f = open(filename,"a")
+        f.write(line+"\n")
+        f.close()
+
     def podnesiZahtev(self):
         self.selektovanoOdrediste = self.odredisteListBox.curselection() # Vraca tuple od selektovanog elementa
+        ime = self.ImeInput.get()
+        prezime = self.PrezimeInput.get()
+        brojtelefona = self.BrojTelefonaInput.get()
+        email = self.EmailInput.get()
 
         if self.selektovanoOdrediste == ():
             print("Niste izabrali odrediste!")
+        elif ime == "" or prezime == "" or brojtelefona == "" or email == "":
+            print("Niste popunili podatke!")
         else:
+            line = self.IDPotrazitelja+"|"+ime+" "+prezime+"|"+brojtelefona+"|"+email+"|potrazitelj"
+            self.sacuvajPodatkePotrazitelj(line)
             a = ZahtevZaTransport(self.odredisteListBox.get(self.selektovanoOdrediste[0]),self.IDPotrazitelja)
             print(a.datumKreiranja,a.IDZahteva)
             print(a.IDPotrazitelja)
