@@ -26,11 +26,19 @@ class Zahtev(object):
 class ZahtevZaTransport(Zahtev):
 	def __init__(self,odrediste,IDPotrazitelja):
 		Zahtev.__init__(self)
-		self.datumTransporta = None
+		self.datumTransporta = "None"
 		self.odrediste = odrediste
 		self.IDPotrazitelja = IDPotrazitelja
-		self.oznakaAviona = None
+		self.oznakaAviona = "None"
 		self.statusZahteva = "kreiran"
+		self.sacuvajZahtev()
+
+	def sacuvajZahtev(self):
+		filename = "files/zahteviZaTransport.txt"
+		f = open(filename,"a")
+		f.write(self.IDZahteva+"|"+self.datumKreiranja+"|"+self.datumTransporta+"|"+self.odrediste+"|"
+			+self.IDPotrazitelja+"|"+self.oznakaAviona+"|"+self.statusZahteva+"\n")
+		f.close()
 
 
 class ZahtevZaSmestanjeAviona(Zahtev):

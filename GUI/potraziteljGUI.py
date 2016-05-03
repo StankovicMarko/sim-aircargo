@@ -2,6 +2,7 @@ import tkinter as tk
 from tkinter import messagebox
 from klase.login import *
 from klase.zahtevi import *
+import klase.roba
 
 class PotraziteljPanel(tk.Frame):
     def __init__(self,parent,controler):
@@ -218,10 +219,15 @@ class PotraziteljPanel(tk.Frame):
                     line = self.IDPotrazitelja+"|"+ime+" "+prezime+"|"+brojtelefona+"|"+email+"|potrazitelj"
                     self.sacuvajPodatkePotrazitelj(line)
 
+
             a = ZahtevZaTransport(self.odredisteListBox.get(self.selektovanoOdrediste[0]),self.IDPotrazitelja)
+            messagebox.showinfo("OK!","Zahtev uspesno kreiran!")
             print(a.datumKreiranja,a.IDZahteva)
             print(a.IDPotrazitelja)
             print(a.odrediste)
+
+            for i in range(self.RobaListBox.size()):
+                print(self.RobaListBox.get(i)+"|"+self.IDPotrazitelja)
 
     def prikaziIstoriju(self):
         print("click")
