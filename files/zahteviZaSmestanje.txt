@@ -1,0 +1,3 @@
+1|datumKreiranja|vremeSmestanja|vremeNapustanja|oznakaHangara|oznakaAviona|IDMenadzera
+2|datumKreiranja|vremeSmestanja|vremeNapustanja|oznakaHangara|oznakaAviona|IDMenadzera
+3|datumKreiranja|vremeSmestanja|vremeNapustanja|oznakaHangara|oznakaAviona|IDMenadzera

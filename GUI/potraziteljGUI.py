@@ -1,5 +1,6 @@
 import tkinter as tk
 from klase.login import *
+from klase.zahtevi import *
 
 class PotraziteljPanel(tk.Frame):
     def __init__(self,parent,controler):
@@ -83,8 +84,11 @@ class PotraziteljPanel(tk.Frame):
             if status == True:
                 self.PodnesiZahtevButton.configure(state="normal")
                 self.PrikazIstorijuButton.configure(state="normal")
+                self.IDPotrazitelja = ID
             elif status == False:
+                self.IDPotrazitelja = ID
                 self.PodnesiZahtevButton.configure(state="disabled")
+                self.PrikazIstorijuButton.configure(state="disabled")
         else:
             pass
 
@@ -115,6 +119,7 @@ class PotraziteljPanel(tk.Frame):
             self.EmailInput.configure(state="normal")
             self.PodnesiZahtevButton.configure(state="normal")
             self.PrikazIstorijuButton.configure(state="disabled")
+            self.IDPotrazitelja = self.odrediIDPotrazitelja()
         elif self.CheckBoxNemamIDState.get() == 0:
             self.IDInput.configure(state="normal")
             self.ProveriIDButton.configure(state="normal")
@@ -124,9 +129,20 @@ class PotraziteljPanel(tk.Frame):
             self.EmailInput.configure(state="disabled")
             self.PodnesiZahtevButton.configure(state="disabled")
             self.PrikazIstorijuButton.configure(state="disabled")
+            self.IDPotrazitelja = None
+
+    def odrediIDPotrazitelja(self):
+        lines = Login(None,None).readFile()
+        l = lines[-1].split("|")
+        return str(int(l[0])+1)
+
+
 
     def podnesiZahtev(self):
         print("click...")
+        a = ZahtevZaTransport("London",self.IDPotrazitelja)
+        print(a.datumKreiranja,a.IDZahteva)
+        print(a.IDPotrazitelja)
 
     def prikaziIstoriju(self):
         print("click")

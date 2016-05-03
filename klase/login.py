@@ -3,7 +3,7 @@ class Login(object):
     def __init__(self,username,password):
         self.ID, self.username, self.imePrezime, self.uloga = self.__checkCreds(username,password)
 
-    def __readFile(self):
+    def readFile(self):
         fileName = "files/korisnici.txt"
         f = open(fileName,"r")
         lines = f.readlines()
@@ -11,7 +11,7 @@ class Login(object):
         return lines
 
     def __checkCreds(self,username,password):
-        lines = self.__readFile()
+        lines = self.readFile()
         for line in lines:
             l = line.strip().split("|")
             ID = l[0]
@@ -28,7 +28,7 @@ class Login(object):
 
     def checkID(self,ID):
         print("hello from klasa LOGIN!")
-        lines = self.__readFile()
+        lines = self.readFile()
         for line in lines:
             l = line.strip().split("|")
 

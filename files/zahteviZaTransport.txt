@@ -1,0 +1,6 @@
+1|datumKreiranja|datumTransporta|odrediste|IDPotrazitelja|oznakaAviona|status
+2|datumKreiranja|datumTransporta|odrediste|IDPotrazitelja|oznakaAviona|status
+3|datumKreiranja|datumTransporta|odrediste|IDPotrazitelja|oznakaAviona|status
+4|datumKreiranja|datumTransporta|odrediste|IDPotrazitelja|oznakaAviona|status
+5|datumKreiranja|datumTransporta|odrediste|IDPotrazitelja|oznakaAviona|status
+6|datumKreiranja|datumTransporta|odrediste|IDPotrazitelja|oznakaAviona|status

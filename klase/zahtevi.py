@@ -1,24 +1,41 @@
+from datetime import datetime
+
 class Zahtev(object):
-	def __init__(self, IDZahteva,datumKreiranja,oznakaAviona):
-		super(Zahtev, self).__init__()
-		self.IDZahteva = IDZahteva
-		self.datumKreiranja = datumKreiranja
-		self.oznakaAviona = oznakaAviona
+	def __init__(self):
+		self.IDZahteva = self.odrediIDZahteva()
+		self.datumKreiranja = self.odrediDatum()
+
+
+	def __readFile(self):
+		filename = "files/zahteviZaTransport.txt"
+		f = open(filename,"r")
+		lines = f.readlines()
+		f.close()
+		return lines
+
+	def odrediDatum(self):
+		return datetime.now().strftime("%d/%m/%Y")
+
+	def odrediIDZahteva(self):
+		lines = self.__readFile()
+		l = lines[-1].split("|")
+		return str(int(l[0])+1)
 		
 
 
 class ZahtevZaTransport(Zahtev):
-	def __init__(self, IDZahteva,datumKreiranja,datumTransporta,odrediste,IDPotrazitelja,oznakaAviona,statusZahteva):
-		Zahtev.__init__(self,IDZahteva,datumKreiranja,oznakaAviona)
-		self.datumTransporta = datumTransporta
+	def __init__(self,odrediste,IDPotrazitelja):
+		Zahtev.__init__(self)
+		self.datumTransporta = None
 		self.odrediste = odrediste
 		self.IDPotrazitelja = IDPotrazitelja
-		self.statusZahteva = statusZahteva
-		
+		self.oznakaAviona = None
+		self.statusZahteva = "kreiran"
+
 
 class ZahtevZaSmestanjeAviona(Zahtev):
-	def __init__(self,IDZahteva,datumKreiranja,vremeSmestanjaUHangar,vremeNapustanjaHangara,oznakaHangara,oznakaAviona,IDMenadzeraHangara):
-		Zahtev.__init__(self,IDZahteva,datumKreiranja,oznakaAviona)
+	def __init__(self,vremeSmestanjaUHangar,vremeNapustanjaHangara,oznakaHangara,oznakaAviona,IDMenadzeraHangara):
+		Zahtev.__init__(self,oznakaAviona)
 		self.vremeSmestanjaUHangar = vremeSmestanjaUHangar
 		self.vremeNapustanjaHangara = vremeNapustanjaHangara
 		self.oznakaHangara = oznakaHangara
