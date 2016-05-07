@@ -149,8 +149,8 @@ class PotraziteljPanel(tk.Frame):
         if imeRobe == "" or opisRobe == "" or duzinaRobe == "" or sirinaRobe == "" or visinaRobe == "" or tezinaRobe == "":
             pass
         else:
-            linija = imeRobe+"|"+opisRobe+"|"+duzinaRobe+":"+sirinaRobe+":"+visinaRobe+"|"+tezinaRobe
-            self.RobaListBox.insert("end",linija)
+            linija = imeRobe+"|"+opisRobe+"|"+duzinaRobe+"|"+sirinaRobe+"|"+visinaRobe+"|"+tezinaRobe
+            self.RobaListBox.insert("end",linija)   
 
             # ciscenje input box-ova
             self.robaInput.delete(0,len(imeRobe))
@@ -227,7 +227,10 @@ class PotraziteljPanel(tk.Frame):
             print(a.odrediste)
 
             for i in range(self.RobaListBox.size()):
-                print(self.RobaListBox.get(i)+"|"+self.IDPotrazitelja)
+                # print(self.RobaListBox.get(i)+"|"+self.IDPotrazitelja)
+                l = self.RobaListBox.get(i).split("|")
+
+                klase.roba.Roba(l[0],l[1],l[2],l[3],l[4],l[5],self.IDPotrazitelja)
 
     def prikaziIstoriju(self):
         print("click")

@@ -1,0 +1,5 @@
+1|naziv|opis|duzina|sirina|visina|tezina|IDPotrazitelja
+2|Rob1|ovo je opis rob1|2|5|3|2|5
+2|roba1|opis1|1|2|3|4|5
+3|roab2|opis2|32|32|3|3|5
+4|roba3|opis3|23|2|23|3|5
