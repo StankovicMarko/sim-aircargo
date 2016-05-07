@@ -1,23 +1,16 @@
 from datetime import datetime
+import klase.util_klase as util
 
 class Zahtev(object):
 	def __init__(self):
 		self.IDZahteva = self.odrediIDZahteva()
 		self.datumKreiranja = self.odrediDatum()
 
-
-	def __readFile(self):
-		filename = "files/zahteviZaTransport.txt"
-		f = open(filename,"r")
-		lines = f.readlines()
-		f.close()
-		return lines
-
 	def odrediDatum(self):
 		return datetime.now().strftime("%d/%m/%Y")
 
 	def odrediIDZahteva(self):
-		lines = self.__readFile()
+		lines = util.readFile("files/zahteviZaTransport.txt")
 		l = lines[-1].split("|")
 		return str(int(l[0])+1)
 		
@@ -31,14 +24,15 @@ class ZahtevZaTransport(Zahtev):
 		self.IDPotrazitelja = IDPotrazitelja
 		self.oznakaAviona = "None"
 		self.statusZahteva = "kreiran"
-		self.sacuvajZahtev()
+		util.saveFile("files/zahteviZaTransport.txt",self.IDZahteva+"|"+self.datumKreiranja+"|"+self.datumTransporta+
+			"|"+self.odrediste+"|"+self.IDPotrazitelja+"|"+self.oznakaAviona+"|"+self.statusZahteva+"\n")
 
-	def sacuvajZahtev(self):
-		filename = "files/zahteviZaTransport.txt"
-		f = open(filename,"a")
-		f.write(self.IDZahteva+"|"+self.datumKreiranja+"|"+self.datumTransporta+"|"+self.odrediste+"|"
-			+self.IDPotrazitelja+"|"+self.oznakaAviona+"|"+self.statusZahteva+"\n")
-		f.close()
+	# def sacuvajZahtev(self):
+	# 	filename = "files/zahteviZaTransport.txt"
+	# 	f = open(filename,"a")
+	# 	f.write(self.IDZahteva+"|"+self.datumKreiranja+"|"+self.datumTransporta+"|"+self.odrediste+"|"
+	# 		+self.IDPotrazitelja+"|"+self.oznakaAviona+"|"+self.statusZahteva+"\n")
+	# 	f.close()
 
 
 class ZahtevZaSmestanjeAviona(Zahtev):

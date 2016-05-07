@@ -3,6 +3,7 @@ from tkinter import messagebox
 from klase.login import *
 from klase.zahtevi import *
 import klase.roba
+import klase.util_klase as util
 
 class PotraziteljPanel(tk.Frame):
     def __init__(self,parent,controler):
@@ -108,16 +109,9 @@ class PotraziteljPanel(tk.Frame):
         self.odredisteLabel.grid(row=0,columnspan=2)
         self.odredisteListBox.grid(row=1,columnspan=2)
 
-        odredistaLista = self.ucitajOdredista()
+        odredistaLista = util.readFile("files/odredista.txt")
         for odrediste in odredistaLista:
             self.odredisteListBox.insert("end",odrediste.strip())
-
-    def ucitajOdredista(self):
-        filename = "files/odredista.txt"
-        f = open(filename,"r")
-        lines = f.readlines()
-        f.close()
-        return lines
 
     def proveriID(self):
         ID = self.IDInput.get()
@@ -192,15 +186,10 @@ class PotraziteljPanel(tk.Frame):
             self.IDPotrazitelja = None
 
     def odrediIDPotrazitelja(self):
-        lines = Login(None,None).readFile()
+        lines = util.readFile("files/korisnici.txt")
         l = lines[-1].split("|")
         return str(int(l[0])+1)
 
-    def sacuvajPodatkePotrazitelj(self,line):
-        filename = "files/korisnici.txt"
-        f = open(filename,"a")
-        f.write(line+"\n")
-        f.close()
 
     def podnesiZahtev(self):
         self.selektovanoOdrediste = self.odredisteListBox.curselection() # Vraca tuple od selektovanog elementa
@@ -217,7 +206,8 @@ class PotraziteljPanel(tk.Frame):
                     messagebox.showerror("Error!","Niste uneli podatke!")
                 else:
                     line = self.IDPotrazitelja+"|"+ime+" "+prezime+"|"+brojtelefona+"|"+email+"|potrazitelj"
-                    self.sacuvajPodatkePotrazitelj(line)
+                    # self.sacuvajPodatkePotrazitelj(line)
+                    util.saveFile("files/korisnici.txt",line)
 
 
             a = ZahtevZaTransport(self.odredisteListBox.get(self.selektovanoOdrediste[0]),self.IDPotrazitelja)

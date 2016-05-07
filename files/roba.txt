@@ -3,3 +3,13 @@
 2|roba1|opis1|1|2|3|4|5
 3|roab2|opis2|32|32|3|3|5
 4|roba3|opis3|23|2|23|3|5
+5|roba1|opis1|1|1|12|2|7
+6|roba2|opis2|1|32|2|3|7
+7|roba3|opis3|3|2|2|11|7
+8|roba1|opis1|1|2|23|3|7
+9|roab2|opis2|23|3|3|3|7
+10|roba1|opis1|1|1|1|1|5
+11|roba2|opis|2|2|2|2|5
+12|roba|opis|1|32|3|3|8
+13|roba3|fkafklj|2|23|3|3|8
+14|flajk|lk2|23|3|1|2|8
