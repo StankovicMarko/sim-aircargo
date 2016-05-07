@@ -17,5 +17,6 @@ class Roba(object):
 
 	def odrediIDRobe(self):
 		lines = util.readFile("files/roba.txt")
-		l = lines[-1].split("|")
-		return str(int(l[0])+1)
+		lastLine = lines[-1].split("|")
+		l = lastLine[0].split("#")
+		return "R#"+str(int(l[1])+1)

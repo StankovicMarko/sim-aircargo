@@ -1,8 +1,7 @@
-1|Marko Jokic|marko|jokic|mhangar
-2|Petar Petrovic|pera|petrovic|mtransport
-3|Marko Stankovic|admin|admin|mtransport
-4|Ime Prezime|radnik|password|radnik
-5|Marko Markovic|060123456|email@email.com|potrazitelj
-6|Pera Detlic|021332111|pera@detlic.com|potrazitelj
-7|Marko Joikic|19301|email@lkgal.com|potrazitelj
-8|Jelena Jokic|01231|ema@mgal.com|potrazitelj
+K#1|Marko Jokic|marko|jokic|mhangar
+K#2|Petar Petrovic|pera|petrovic|mtransport
+K#3|Marko Stankovic|admin|admin|mtransport
+K#4|Ime Prezime|radnik|password|radnik
+K#5|Marko Markovic|060123456|email@email.com|potrazitelj
+K#6|Pera Detlic|021332111|pera@detlic.com|potrazitelj
+K#7|Marko Joikic|19301|email@lkgal.com|potrazitelj

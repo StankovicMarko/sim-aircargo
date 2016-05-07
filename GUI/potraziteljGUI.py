@@ -187,8 +187,9 @@ class PotraziteljPanel(tk.Frame):
 
     def odrediIDPotrazitelja(self):
         lines = util.readFile("files/korisnici.txt")
-        l = lines[-1].split("|")
-        return str(int(l[0])+1)
+        lastLine = lines[-1].split("|")
+        l = lastLine[0].split("#")
+        return "K#"+str(int(l[1])+1)
 
 
     def podnesiZahtev(self):
@@ -205,8 +206,7 @@ class PotraziteljPanel(tk.Frame):
                 if ime == "" or prezime == "" or brojtelefona == "" or email == "":
                     messagebox.showerror("Error!","Niste uneli podatke!")
                 else:
-                    line = self.IDPotrazitelja+"|"+ime+" "+prezime+"|"+brojtelefona+"|"+email+"|potrazitelj"
-                    # self.sacuvajPodatkePotrazitelj(line)
+                    line = self.IDPotrazitelja+"|"+ime+" "+prezime+"|"+brojtelefona+"|"+email+"|potrazitelj"+"\n"
                     util.saveFile("files/korisnici.txt",line)
 
 
@@ -217,7 +217,6 @@ class PotraziteljPanel(tk.Frame):
             print(a.odrediste)
 
             for i in range(self.RobaListBox.size()):
-                # print(self.RobaListBox.get(i)+"|"+self.IDPotrazitelja)
                 l = self.RobaListBox.get(i).split("|")
 
                 klase.roba.Roba(l[0],l[1],l[2],l[3],l[4],l[5],self.IDPotrazitelja)

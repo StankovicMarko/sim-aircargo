@@ -11,8 +11,9 @@ class Zahtev(object):
 
 	def odrediIDZahteva(self):
 		lines = util.readFile("files/zahteviZaTransport.txt")
-		l = lines[-1].split("|")
-		return str(int(l[0])+1)
+		lastLine = lines[-1].split("|")
+		l = lastLine[0].split("#")
+		return "ZT#"+str(int(l[1])+1)
 		
 
 
@@ -26,13 +27,6 @@ class ZahtevZaTransport(Zahtev):
 		self.statusZahteva = "kreiran"
 		util.saveFile("files/zahteviZaTransport.txt",self.IDZahteva+"|"+self.datumKreiranja+"|"+self.datumTransporta+
 			"|"+self.odrediste+"|"+self.IDPotrazitelja+"|"+self.oznakaAviona+"|"+self.statusZahteva+"\n")
-
-	# def sacuvajZahtev(self):
-	# 	filename = "files/zahteviZaTransport.txt"
-	# 	f = open(filename,"a")
-	# 	f.write(self.IDZahteva+"|"+self.datumKreiranja+"|"+self.datumTransporta+"|"+self.odrediste+"|"
-	# 		+self.IDPotrazitelja+"|"+self.oznakaAviona+"|"+self.statusZahteva+"\n")
-	# 	f.close()
 
 
 class ZahtevZaSmestanjeAviona(Zahtev):
