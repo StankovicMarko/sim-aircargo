@@ -25,8 +25,16 @@ class ZahtevZaTransport(Zahtev):
 		self.IDPotrazitelja = IDPotrazitelja
 		self.oznakaAviona = "None"
 		self.statusZahteva = "kreiran"
+		
 		util.saveFile("files/zahteviZaTransport.txt",self.IDZahteva+"|"+self.datumKreiranja+"|"+self.datumTransporta+
 			"|"+self.odrediste+"|"+self.IDPotrazitelja+"|"+self.oznakaAviona+"|"+self.statusZahteva+"\n")
+
+	def prikazZahteva(self,IDPotrazitelja):
+		lines = util.readFile("files/zahteviZaTransport.txt")
+		for line in lines:
+			l = line.strip().split("|")
+			if l[4] == IDPotrazitelja:
+				print(l)
 
 
 class ZahtevZaSmestanjeAviona(Zahtev):

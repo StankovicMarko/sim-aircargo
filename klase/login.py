@@ -22,14 +22,13 @@ class Login(object):
             return None,None,None,None
 
     def checkID(self,ID):
-        print("hello from klasa LOGIN!")
         lines = util.readFile("files/korisnici.txt")
         for line in lines:
             l = line.strip().split("|")
 
             if ID == l[0] and l[4] == "potrazitelj":
-                return True
+                return True,l
 
-        return False
+        return False,None
 
 

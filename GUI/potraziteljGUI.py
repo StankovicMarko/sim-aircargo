@@ -2,12 +2,14 @@ import tkinter as tk
 from tkinter import messagebox
 from klase.login import *
 from klase.zahtevi import *
+import klase.korisnik
 import klase.roba
 import klase.util_klase as util
 
 class PotraziteljPanel(tk.Frame):
     def __init__(self,parent,controler):
         tk.Frame.__init__(self,parent)
+        self.controler = controler
         self.proveriIDFrameWidgets()
         self.podaciFrameWidgets()
         self.dodajRobuFrameWidgets()
@@ -116,14 +118,14 @@ class PotraziteljPanel(tk.Frame):
     def proveriID(self):
         ID = self.IDInput.get()
         if ID != "":
-            print(ID)
-            status = Login(None,None).checkID(ID)
+            status,lista = Login(None,None).checkID(ID)
             if status == True:
                 self.PodnesiZahtevButton.configure(state="normal")
                 self.PrikazIstorijuButton.configure(state="normal")
                 self.IDPotrazitelja = ID
                 self.CheckBoxNemamID.configure(state="disabled")
                 messagebox.showinfo("OK!","ID Pronadjen!")
+                self.p = klase.korisnik.Potrazitelj(lista[0],lista[1],lista[2],lista[3],lista[4])
             elif status == False:
                 self.IDPotrazitelja = ID
                 self.PodnesiZahtevButton.configure(state="disabled")
@@ -201,6 +203,8 @@ class PotraziteljPanel(tk.Frame):
 
         if self.selektovanoOdrediste == ():
             messagebox.showerror("Error!","Niste izabrali odrediste!")
+        elif self.RobaListBox.size() == 0:
+            messagebox.showerror("Error!","Niste dodali robu!")
         else:
             if self.CheckBoxNemamIDState.get() == 1:
                 if ime == "" or prezime == "" or brojtelefona == "" or email == "":
@@ -208,13 +212,15 @@ class PotraziteljPanel(tk.Frame):
                 else:
                     line = self.IDPotrazitelja+"|"+ime+" "+prezime+"|"+brojtelefona+"|"+email+"|potrazitelj"+"\n"
                     util.saveFile("files/korisnici.txt",line)
-
-
+            
             a = ZahtevZaTransport(self.odredisteListBox.get(self.selektovanoOdrediste[0]),self.IDPotrazitelja)
+            # self.p = klase.korisnik.Potrazitelj(self.IDPotrazitelja,ime,prezime,brojtelefona,email)
             messagebox.showinfo("OK!","Zahtev uspesno kreiran!")
-            print(a.datumKreiranja,a.IDZahteva)
-            print(a.IDPotrazitelja)
-            print(a.odrediste)
+            # print(a.datumKreiranja,a.IDZahteva)
+            # print(a.IDPotrazitelja)
+            # print(a.odrediste)
+
+            
 
             for i in range(self.RobaListBox.size()):
                 l = self.RobaListBox.get(i).split("|")
@@ -222,4 +228,26 @@ class PotraziteljPanel(tk.Frame):
                 klase.roba.Roba(l[0],l[1],l[2],l[3],l[4],l[5],self.IDPotrazitelja)
 
     def prikaziIstoriju(self):
-        print("click")
+        self.controler.show_frame(PrikazIstorijePanel)
+        self.p.prikazZahteva()
+        
+
+
+
+class PrikazIstorijePanel(tk.Frame):
+    def __init__(self,parent,controler):
+        tk.Frame.__init__(self,parent)
+        self.controler = controler
+        self.createWidgets()
+
+    def createWidgets(self):
+        self.textL = tk.Label(self,text="Hello to prikaz istorije")
+        self.textL.grid()
+
+        self.nazadButton = tk.Button(self,text="Nazad",command=self.nazad)
+        self.nazadButton.grid(row=0,column=1)
+
+    def nazad(self):
+        self.controler.show_frame(PotraziteljPanel)
+
+        

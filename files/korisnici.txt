@@ -5,3 +5,4 @@ K#4|Ime Prezime|radnik|password|radnik
 K#5|Marko Markovic|060123456|email@email.com|potrazitelj
 K#6|Pera Detlic|021332111|pera@detlic.com|potrazitelj
 K#7|Marko Joikic|19301|email@lkgal.com|potrazitelj
+K#8|pero test|tes|342|potrazitelj

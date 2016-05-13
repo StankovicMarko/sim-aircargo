@@ -11,7 +11,7 @@ class Glavna(tk.Tk):
 
         self.frames = {}
 
-        for i in (ManagerTransportaPanel, ManagerHangaraPanel, RadnikPanel, PotraziteljPanel, LoginWindow):
+        for i in (ManagerTransportaPanel, ManagerHangaraPanel, RadnikPanel, PotraziteljPanel, LoginWindow,PrikazIstorijePanel):
             frame = i(container,self)
             self.frames[i] = frame
             frame.grid(row=0,column=0,sticky="nsew")
