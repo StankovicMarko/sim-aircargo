@@ -1,10 +1,3 @@
-ZT#1|datumKreiranja|datumTransporta|odrediste|IDPotrazitelja|oznakaAviona|status
-ZT#2|datumKreiranja|datumTransporta|odrediste|IDPotrazitelja|oznakaAviona|status
-ZT#3|datumKreiranja|datumTransporta|odrediste|IDPotrazitelja|oznakaAviona|status
-ZT#4|datumKreiranja|datumTransporta|odrediste|IDPotrazitelja|oznakaAviona|status
-ZT#5|datumKreiranja|datumTransporta|odrediste|IDPotrazitelja|oznakaAviona|status
-ZT#6|datumKreiranja|datumTransporta|odrediste|IDPotrazitelja|oznakaAviona|status
-ZT#7|datumKreiranja|datumTransporta|odrediste|IDPotrazitelja|oznakaAviona|status
 ZT#8|03/05/2016|None|London|K#5|None|kreiran
 ZT#9|03/05/2016|None|Dubai|K#5|None|kreiran
 ZT#10|07/05/2016|None|London|K#9|None|kreiran

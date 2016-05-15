@@ -6,7 +6,20 @@ class User(object):
 		self.ID = ID
 		self.ime = ime
 		self.prezime = prezime
-	
+
+	'''
+	Prikazuje zahteve za transport, ako je parametar "sve"=True
+	prikazuje sve zahteve, ako je False, prikaz samo od ulogovanog potrazitelja
+	'''
+	def prikazZahteva(self,sve=False):
+		lines = util.readFile("files/zahteviZaTransport.txt")
+		for line in lines:
+			l = line.strip().split("|")
+			if sve == True:
+				print(l)
+			else:
+				if l[4] == self.ID:
+					print(l)
 
 
 class Potrazitelj(User):
@@ -19,12 +32,6 @@ class Potrazitelj(User):
 		self.email = email
 
 
-	def prikazZahteva(self):
-		lines = util.readFile("files/zahteviZaTransport.txt")
-		for line in lines:
-			l = line.strip().split("|")
-			if l[4] == self.ID:
-				print(l)
 
 class ManagerTransport(User):
 		def __init__(self,ID,ime,prezime,username,password):

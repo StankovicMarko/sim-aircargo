@@ -13,7 +13,9 @@ class Glavna(tk.Tk):
 
         self.frames = {}
 
-        for i in (ManagerTransportaPanel, ManagerHangaraPanel, RadnikPanel, PotraziteljPanel, LoginWindow,PrikazIstorijePanel):
+        allFrames = [ManagerTransportaPanel, ManagerHangaraPanel, RadnikPanel, PotraziteljPanel, LoginWindow,PrikazIstorijePanel]
+
+        for i in allFrames:
             frame = i(container,self)
             self.frames[i] = frame
             frame.grid(row=0,column=0,sticky="nsew")
@@ -84,6 +86,8 @@ class LoginWindow(tk.Frame):
                     self.controler.show_frame(ManagerHangaraPanel)
                 elif a.uloga == "mtransport":
                     self.controler.show_frame(ManagerTransportaPanel)
+                    m = klase.korisnik.ManagerTransport("1","ime","prezime","user","pass")
+                    m.prikazZahteva(sve=True)
                 elif a.uloga == "radnik":
                     self.controler.show_frame(RadnikPanel)
         elif self.checkBoxState.get() == 1:
