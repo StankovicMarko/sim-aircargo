@@ -1,6 +1,8 @@
 import tkinter as tk
+from tkinter import messagebox
 from klase.login import *
 from GUI.potraziteljGUI import *
+from GUI.managersGUI import *
 
 class Glavna(tk.Tk):
     def __init__(self, *args,**kwargs):
@@ -70,11 +72,10 @@ class LoginWindow(tk.Frame):
         passw = self.passwordInput.get()
 
         if self.checkBoxState.get() == 0:
-            print(uname,passw)
             a = Login(uname,passw)
 
             if a.uloga == None:
-                print("Pogresan Username/Password")
+                messagebox.showerror("Error!","Pogresan Username/Password")
             else:
                 print("Uspesno ste se ulogovali!")
                 print("Vi ste",a.imePrezime,"a uloga",a.uloga)
@@ -88,17 +89,6 @@ class LoginWindow(tk.Frame):
         elif self.checkBoxState.get() == 1:
             self.controler.show_frame(PotraziteljPanel)
 
-class ManagerTransportaPanel(tk.Frame):
-    def __init__(self, parent,controler):
-        tk.Frame.__init__(self,parent)
-        nekiLabel = tk.Label(self, text="Ulogavani ste kao manager transporta")
-        nekiLabel.grid()
-
-class ManagerHangaraPanel(tk.Frame):
-    def __init__(self, parent,controler):
-        tk.Frame.__init__(self,parent)
-        nekiLabel = tk.Label(self, text="Ulogovani ste kao manager hangara")
-        nekiLabel.grid()
 
 class RadnikPanel(tk.Frame):
     def __init__(self, parent,controler):
