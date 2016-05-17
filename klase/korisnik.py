@@ -7,19 +7,22 @@ class User(object):
 		self.ime = ime
 		self.prezime = prezime
 
-	'''
-	Prikazuje zahteve za transport, ako je parametar "sve"=True
-	prikazuje sve zahteve, ako je False, prikaz samo od ulogovanog potrazitelja
-	'''
+
 	def prikazZahteva(self,sve=False):
+		'''
+		Vraca zahteve za transport, ako je parametar "sve"=True
+		vraca sve zahteve, ako je False, vraca samo od ulogovanog potrazitelja
+		'''
+		zahtevi = []
 		lines = util.readFile("files/zahteviZaTransport.txt")
 		for line in lines:
 			l = line.strip().split("|")
 			if sve == True:
-				print(l)
+				zahtevi.append(l)
 			else:
 				if l[4] == self.ID:
-					print(l)
+					zahtevi.append(l)
+		return zahtevi
 
 
 class Potrazitelj(User):

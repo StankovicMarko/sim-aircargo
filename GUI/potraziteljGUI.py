@@ -125,7 +125,7 @@ class PotraziteljPanel(tk.Frame):
                 self.IDPotrazitelja = ID
                 self.CheckBoxNemamID.configure(state="disabled")
                 messagebox.showinfo("OK!","ID Pronadjen!")
-                self.p = klase.korisnik.Potrazitelj(lista[0],lista[1],lista[2],lista[3],lista[4])
+                self.controler.p = klase.korisnik.Potrazitelj(lista[0],lista[1],lista[2],lista[3],lista[4])
             elif status == False:
                 self.IDPotrazitelja = ID
                 self.PodnesiZahtevButton.configure(state="disabled")
@@ -206,7 +206,7 @@ class PotraziteljPanel(tk.Frame):
         elif self.RobaListBox.size() == 0:
             messagebox.showerror("Error!","Niste dodali robu!")
         else:
-            if self.CheckBoxNemamIDState.get() == 1:
+            if self.CheckBoxNemamIDState.get() == 1: # Ako je 'nemam ID' obelezeno
                 if ime == "" or prezime == "" or brojtelefona == "" or email == "":
                     messagebox.showerror("Error!","Niste uneli podatke!")
                 else:
@@ -214,11 +214,7 @@ class PotraziteljPanel(tk.Frame):
                     util.saveFile("files/korisnici.txt",line)
             
             a = ZahtevZaTransport(self.odredisteListBox.get(self.selektovanoOdrediste[0]),self.IDPotrazitelja)
-            # self.p = klase.korisnik.Potrazitelj(self.IDPotrazitelja,ime,prezime,brojtelefona,email)
             messagebox.showinfo("OK!","Zahtev uspesno kreiran!")
-            # print(a.datumKreiranja,a.IDZahteva)
-            # print(a.IDPotrazitelja)
-            # print(a.odrediste)
 
             
 
@@ -229,8 +225,19 @@ class PotraziteljPanel(tk.Frame):
 
     def prikaziIstoriju(self):
         self.controler.show_frame(PrikazIstorijePanel)
-        self.p.prikazZahteva()
-        
+        self.controler.p.prikazZahteva()
+
+
+        r = 0
+        for i in self.controler.p.prikazZahteva(): # za svaki zahtev
+            r+=1
+            lblIDZahteva = tk.Label(self.controler.frames[PrikazIstorijePanel].tabela,text=i[0]).grid(row=r,column=0) # pravi se labela na tabela frejmu na 'PrikazIstorijePanel' frejmu
+            lblDatumKreiranja = tk.Label(self.controler.frames[PrikazIstorijePanel].tabela,text=i[1]).grid(row=r,column=1)
+            lblDatumTransporta = tk.Label(self.controler.frames[PrikazIstorijePanel].tabela,text=i[2]).grid(row=r,column=2)
+            lblOdrediste = tk.Label(self.controler.frames[PrikazIstorijePanel].tabela,text=i[3]).grid(row=r,column=3)
+            lblIDPotrazitelja = tk.Label(self.controler.frames[PrikazIstorijePanel].tabela,text=i[4]).grid(row=r,column=4)
+            lblOznakaAviona = tk.Label(self.controler.frames[PrikazIstorijePanel].tabela,text=i[5]).grid(row=r,column=5)
+            lblStatus = tk.Label(self.controler.frames[PrikazIstorijePanel].tabela,text=i[6]).grid(row=r,column=6)
 
 
 
@@ -239,6 +246,9 @@ class PrikazIstorijePanel(tk.Frame):
         tk.Frame.__init__(self,parent)
         self.controler = controler
         self.createWidgets()
+
+        self.tabela = tk.Frame(self)
+        self.tabela.grid()
 
     def createWidgets(self):
         self.textL = tk.Label(self,text="Hello to prikaz istorije")
