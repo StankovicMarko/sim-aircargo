@@ -14,3 +14,6 @@ R#26|kafa|ovo je crna kafa|10|1|10|1|K#5
 R#27|roba|opi|1|2|23|3|K#8
 R#28|roba3|falfkj|3|2|23|3|K#8
 R#29|test1|test12|1|2|3|3|K#8
+R#30|cokolada|ovo je cokolada|1|2|1|22|K#9
+R#31|pasulj|ovo je pasulj|12|2|2|22|K#9
+R#32|voda|ovo je hladna voda|2|23|3|33|K#9

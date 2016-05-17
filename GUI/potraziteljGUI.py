@@ -224,20 +224,13 @@ class PotraziteljPanel(tk.Frame):
                 klase.roba.Roba(l[0],l[1],l[2],l[3],l[4],l[5],self.IDPotrazitelja)
 
     def prikaziIstoriju(self):
+        '''
+        Prikaz 'Istorije Panel' i poziv inicijalizacije tabele
+        '''
         self.controler.show_frame(PrikazIstorijePanel)
-        self.controler.p.prikazZahteva()
+        self.controler.frames[PrikazIstorijePanel].tabelaFrameWidgets() # Inicijalizacija tabele tek kad se klikne dugme
 
 
-        r = 0
-        for i in self.controler.p.prikazZahteva(): # za svaki zahtev
-            r+=1
-            lblIDZahteva = tk.Label(self.controler.frames[PrikazIstorijePanel].tabela,text=i[0]).grid(row=r,column=0) # pravi se labela na tabela frejmu na 'PrikazIstorijePanel' frejmu
-            lblDatumKreiranja = tk.Label(self.controler.frames[PrikazIstorijePanel].tabela,text=i[1]).grid(row=r,column=1)
-            lblDatumTransporta = tk.Label(self.controler.frames[PrikazIstorijePanel].tabela,text=i[2]).grid(row=r,column=2)
-            lblOdrediste = tk.Label(self.controler.frames[PrikazIstorijePanel].tabela,text=i[3]).grid(row=r,column=3)
-            lblIDPotrazitelja = tk.Label(self.controler.frames[PrikazIstorijePanel].tabela,text=i[4]).grid(row=r,column=4)
-            lblOznakaAviona = tk.Label(self.controler.frames[PrikazIstorijePanel].tabela,text=i[5]).grid(row=r,column=5)
-            lblStatus = tk.Label(self.controler.frames[PrikazIstorijePanel].tabela,text=i[6]).grid(row=r,column=6)
 
 
 
@@ -247,17 +240,70 @@ class PrikazIstorijePanel(tk.Frame):
         self.controler = controler
         self.createWidgets()
 
-        self.tabela = tk.Frame(self)
-        self.tabela.grid()
-
     def createWidgets(self):
         self.textL = tk.Label(self,text="Hello to prikaz istorije")
         self.textL.grid()
 
         self.nazadButton = tk.Button(self,text="Nazad",command=self.nazad)
-        self.nazadButton.grid(row=0,column=1)
+        self.nazadButton.grid(row=3,columnspan=5)
+
+
+    def tabelaFrameWidgets(self):
+        '''
+        Inicijalizacija tabela frejma, widget-sa na njoj i poziv header-a
+        '''
+        self.tabela = tk.Frame(self)
+        self.tabela.grid(row=1,column=0,sticky="nsew")
+        self.tabelaHeaderWidgets()
+
+        r = 1
+        for i in self.controler.p.prikazZahteva(): # za svaki zahtev
+            r+=1
+            lblIDZahteva = tk.Label(self.tabela,text=i[0]).grid(row=r,column=0) # pravi se labela na 'tabela' frejmu
+            spliter = tk.Label(self.tabela,text="|").grid(row=r,column=1)
+            lblDatumKreiranja = tk.Label(self.tabela,text=i[1]).grid(row=r,column=2)
+            spliter = tk.Label(self.tabela,text="|").grid(row=r,column=3)
+            lblDatumTransporta = tk.Label(self.tabela,text=i[2]).grid(row=r,column=4)
+            spliter = tk.Label(self.tabela,text="|").grid(row=r,column=5)
+            lblOdrediste = tk.Label(self.tabela,text=i[3]).grid(row=r,column=6)
+            spliter = tk.Label(self.tabela,text="|").grid(row=r,column=7)
+            lblIDPotrazitelja = tk.Label(self.tabela,text=i[4]).grid(row=r,column=8)
+            spliter = tk.Label(self.tabela,text="|").grid(row=r,column=9)
+            lblOznakaAviona = tk.Label(self.tabela,text=i[5]).grid(row=r,column=10)
+            spliter = tk.Label(self.tabela,text="|").grid(row=r,column=11)
+            lblStatus = tk.Label(self.tabela,text=i[6]).grid(row=r,column=12)
+
+
+    def tabelaHeaderWidgets(self):
+        '''
+        Inicijalizacija headera tabele
+        ID | Datum Kreiranja | Datum Transporta | Odrediste | Potrazitelj | Avion | Status
+        '''
+        r = 0
+        hID = tk.Label(self.tabela,text="ID").grid(row=r,column=0)
+        spliter = tk.Label(self.tabela,text="|").grid(row=r,column=1)
+        hDatumKreiranja = tk.Label(self.tabela,text="Daum Kreiranja").grid(row=r,column=2)
+        spliter = tk.Label(self.tabela,text="|").grid(row=r,column=3)
+        hDatumTransporta = tk.Label(self.tabela,text="Datum Transporta").grid(row=r,column=4)
+        spliter = tk.Label(self.tabela,text="|").grid(row=r,column=5)
+        hOdrediste = tk.Label(self.tabela,text="Odrediste").grid(row=r,column=6)
+        spliter = tk.Label(self.tabela,text="|").grid(row=r,column=7)
+        hIDPotrazitelja = tk.Label(self.tabela,text="Potrazitelj").grid(row=r,column=8)
+        spliter = tk.Label(self.tabela,text="|").grid(row=r,column=9)
+        hOznakaAviona = tk.Label(self.tabela,text="Avion").grid(row=r,column=10)
+        spliter = tk.Label(self.tabela,text="|").grid(row=r,column=11)
+        hStatus = tk.Label(self.tabela,text="Status").grid(row=r,column=12)
+
+
+
 
     def nazad(self):
+        '''
+        Vraca se nazad na 'Potrazitelj Panel' i brise 'tabela' frejm.
+        Samim brisanjem 'tabela' frejma, brisu se svi widgeti na njemu,
+        pa ne dolazi do dupliranja prikaza prilikom poziva tabele iznova i iznova
+        '''
         self.controler.show_frame(PotraziteljPanel)
+        self.tabela.destroy()
 
         
