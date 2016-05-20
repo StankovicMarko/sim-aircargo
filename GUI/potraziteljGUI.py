@@ -221,7 +221,7 @@ class PotraziteljPanel(tk.Frame):
             for i in range(self.RobaListBox.size()):
                 l = self.RobaListBox.get(i).split("|")
 
-                klase.roba.Roba(l[0],l[1],l[2],l[3],l[4],l[5],self.IDPotrazitelja)
+                klase.roba.Roba(l[0],l[1],l[2],l[3],l[4],l[5],a.IDZahteva)
 
     def prikaziIstoriju(self):
         '''
@@ -247,7 +247,6 @@ class PrikazIstorijePanel(tk.Frame):
         self.nazadButton = tk.Button(self,text="Nazad",command=self.nazad)
         self.nazadButton.grid(row=3,columnspan=5)
 
-
     def tabelaFrameWidgets(self):
         '''
         Inicijalizacija tabela frejma, widget-sa na njoj i poziv header-a
@@ -256,9 +255,16 @@ class PrikazIstorijePanel(tk.Frame):
         self.tabela.grid(row=1,column=0,sticky="nsew")
         self.tabelaHeaderWidgets()
 
-        r = 1
+        self.expandImage = tk.PhotoImage(file="files/expand.png")
+        self.collapseImage = tk.PhotoImage(file="files/collapse.png")
+
+        self.recnik_frejmsa = {} # ovde se cuvaju 'buttonId':'frejm', tako da znamo kad koji frejm da se prikaze i sakrije
+        self.lista_buttona = [] # ovde se cuvaju sva kreirani buttoni
+        counter = -1 # a preko ove promenljive posle znamo koji je button pritisnut
+        r = -1
         for i in self.controler.p.prikazZahteva(): # za svaki zahtev
-            r+=1
+            r+=2
+            counter+=1
             lblIDZahteva = tk.Label(self.tabela,text=i[0]).grid(row=r,column=0) # pravi se labela na 'tabela' frejmu
             spliter = tk.Label(self.tabela,text="|").grid(row=r,column=1)
             lblDatumKreiranja = tk.Label(self.tabela,text=i[1]).grid(row=r,column=2)
@@ -272,7 +278,54 @@ class PrikazIstorijePanel(tk.Frame):
             lblOznakaAviona = tk.Label(self.tabela,text=i[5]).grid(row=r,column=10)
             spliter = tk.Label(self.tabela,text="|").grid(row=r,column=11)
             lblStatus = tk.Label(self.tabela,text=i[6]).grid(row=r,column=12)
+            self.b = tk.Button(self.tabela,image=self.expandImage,command= lambda i=i,counter=counter: self.expand(i,counter))
+            self.b.grid(row=r,column=13)
+            self.b.row = r # saljemo vrednost r da bi mogao frejm da se iscrta na dobrom mestu
+            self.b.state = 0 # Ako je 0 = expand / 1 = collapse
 
+            self.lista_buttona.append(self.b) # dodajemo button u listu
+
+
+    def expand(self,zahtev,buttonId):
+        '''
+        Mogucnost prosirenja linije u zahtevu tako da se prikazu sve robe tog zahteva
+        '''
+        self.lista_buttona[buttonId].configure(image=self.collapseImage)
+        r = self.lista_buttona[buttonId].row
+
+        lines = util.readFile("files/roba.txt")
+
+        # Ako je state = 0, onda je extend / ako je state = 1 onda je collapse
+        if self.lista_buttona[buttonId].state == 0:
+            self.lista_buttona[buttonId].state = 1
+
+            self.robeFrejm = tk.Frame(self.tabela,width=100,height=50,bd=1,relief="solid")
+            self.robeFrejm.grid(row=r+1,columnspan=10)
+
+            self.recnik_frejmsa[buttonId] = self.robeFrejm # za buttonId dodeljuje odgovarajuci frejm
+
+
+            self.prikazRobaHeaderWidgets()
+
+            red = 0
+            # nalazi sve robe koje imaju odgovarajuci id zahteva
+            for line in lines:
+                red+=1
+                l = line.strip().split("|")
+                if l[7] == zahtev[0]:
+                    tk.Label(self.robeFrejm,text=l[0]).grid(row=red,column=0,sticky="w")
+                    tk.Label(self.robeFrejm,text=l[1]).grid(row=red,column=1,sticky="w")
+                    tk.Label(self.robeFrejm,text=l[2]).grid(row=red,column=2,sticky="w")
+                    tk.Label(self.robeFrejm,text=l[3]).grid(row=red,column=3,sticky="s")
+                    tk.Label(self.robeFrejm,text=l[4]).grid(row=red,column=4,sticky="s")
+                    tk.Label(self.robeFrejm,text=l[5]).grid(row=red,column=5,sticky="s")
+                    tk.Label(self.robeFrejm,text=l[6]).grid(row=red,column=6,sticky="s")
+                    tk.Label(self.robeFrejm,text=l[7]).grid(row=red,column=7,sticky="w")
+
+        elif self.lista_buttona[buttonId].state == 1:
+            self.lista_buttona[buttonId].state = 0
+            self.lista_buttona[buttonId].configure(image=self.expandImage)
+            self.recnik_frejmsa[buttonId].destroy() # brise(krije) odgovarajuci frejm
 
     def tabelaHeaderWidgets(self):
         '''
@@ -295,7 +348,15 @@ class PrikazIstorijePanel(tk.Frame):
         hStatus = tk.Label(self.tabela,text="Status").grid(row=r,column=12)
 
 
-
+    def prikazRobaHeaderWidgets(self):
+        tk.Label(self.robeFrejm,text="ID").grid(row=0,column=0)
+        tk.Label(self.robeFrejm,text="Naziv").grid(row=0,column=1)
+        tk.Label(self.robeFrejm,text="Opis").grid(row=0,column=2)
+        tk.Label(self.robeFrejm,text="D").grid(row=0,column=3)
+        tk.Label(self.robeFrejm,text="S").grid(row=0,column=4)
+        tk.Label(self.robeFrejm,text="V").grid(row=0,column=5)
+        tk.Label(self.robeFrejm,text="T").grid(row=0,column=6)
+        tk.Label(self.robeFrejm,text="Zahtev").grid(row=0,column=7)
 
     def nazad(self):
         '''

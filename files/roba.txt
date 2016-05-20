@@ -1,19 +1,26 @@
 R#1|naziv|opis|duzina|sirina|visina|tezina|IDPotrazitelja
-R#15|roba1|opis1|1|2|23|3|K#5
-R#16|roba2|opis2|2|3|2|22|K#5
-R#17|roba2|fkaljf|3|2|2|2|K#9
-R#18|flakj|aklfj|2|22|2|2|K#9
-R#19|roba2|fkaljf|3|2|2|2|K#9
-R#20|flakj|aklfj|2|22|2|2|K#9
-R#21|roba2|fkaljf|3|2|2|2|K#9
-R#22|flakj|aklfj|2|22|2|2|K#9
-R#23|afkjha|kjha|22|2|2|2|K#10
-R#24|roba1|roba2|123|3|3|3|K#5
-R#25|roba1|opis1|1|1|3|22|K#7
-R#26|kafa|ovo je crna kafa|10|1|10|1|K#5
-R#27|roba|opi|1|2|23|3|K#8
-R#28|roba3|falfkj|3|2|23|3|K#8
-R#29|test1|test12|1|2|3|3|K#8
-R#30|cokolada|ovo je cokolada|1|2|1|22|K#9
-R#31|pasulj|ovo je pasulj|12|2|2|22|K#9
-R#32|voda|ovo je hladna voda|2|23|3|33|K#9
+R#15|roba1|opis1|1|2|23|3|ZT#8
+R#16|roba2|opis2|2|3|2|22|ZT#9
+R#17|roba2|fkaljf|3|2|2|2|ZT#10
+R#18|flakj|aklfj|2|22|2|2|ZT#10
+R#19|roba2|fkaljf|3|2|2|2|ZT#11
+R#20|flakj|aklfj|2|22|2|2|ZT#11
+R#21|roba2|fkaljf|3|2|2|2|ZT#12
+R#22|flakj|aklfj|2|22|2|2|ZT#12
+R#23|afkjha|kjha|22|2|2|2|ZT#13
+R#24|roba1|roba2|123|3|3|3|ZT#14
+R#25|roba1|opis1|1|1|3|22|ZT#15
+R#26|kafa|ovo je crna kafa|10|1|10|1|ZT#19
+R#27|roba|opi|1|2|23|3|ZT#16
+R#28|roba3|falfkj|3|2|23|3|ZT#17
+R#29|test1|test12|1|2|3|3|ZT#18
+R#30|cokolada|ovo je cokolada|1|2|1|22|ZT#22
+R#31|pasulj|ovo je pasulj|12|2|2|22|ZT#22
+R#32|voda|ovo je hladna voda|2|23|3|33|ZT#22
+R#33|robatest|opistest|131|3|3|3|ZT#23
+R#34|roba2|opis|2|22|2|23|ZT#23
+R#35|cokolada1|ovo je bela cokolada|1|1|2|10|ZT#24
+R#36|cokolada2|ovo je crna cokolada|2|2|1|10|ZT#24
+R#37|kafa1|ovo je bela kafa|1|2|1|20|ZT#25
+R#38|kafa2|ovo je crna kafa|2|2|2|22|ZT#25
+R#39|kafa3|ovo je neka treca|2|3|3|23|ZT#25

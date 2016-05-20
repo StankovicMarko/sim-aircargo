@@ -13,3 +13,6 @@ ZT#19|08/05/2016|None|None|K#6|None|kreiran
 ZT#20|11/05/2016|None|Dubai|K#5|None|kreiran
 ZT#21|13/05/2016|None|Dubai|K#8|None|kreiran
 ZT#22|17/05/2016|None|London|K#9|None|kreiran
+ZT#23|20/05/2016|None|Pariz|K#6|None|kreiran
+ZT#24|20/05/2016|None|Dubai|K#8|None|kreiran
+ZT#25|20/05/2016|None|London|K#8|None|kreiran

@@ -1,7 +1,7 @@
 import klase.util_klase as util
 
 class Roba(object):
-	def __init__(self,naziv,opis,duzina,sirina,visina,tezina,IDPotrazitelja):
+	def __init__(self,naziv,opis,duzina,sirina,visina,tezina,IDZahteva):
 		self.oznaka = self.odrediIDRobe()
 		self.naziv = naziv
 		self.opis = opis
@@ -9,10 +9,10 @@ class Roba(object):
 		self.sirina = sirina
 		self.visina = visina
 		self.tezina = tezina
-		self.IDPotrazitelja = IDPotrazitelja
+		self.IDZahteva = IDZahteva
 
 		util.saveFile("files/roba.txt",self.oznaka+"|"+self.naziv+"|"+self.opis+"|"+
-			self.duzina+"|"+self.sirina+"|"+self.visina+"|"+self.tezina+"|"+self.IDPotrazitelja+"\n")
+			self.duzina+"|"+self.sirina+"|"+self.visina+"|"+self.tezina+"|"+self.IDZahteva+"\n")
 		
 
 	def odrediIDRobe(self):
