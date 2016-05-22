@@ -1,16 +1,16 @@
 import klase.util_funk as util
+from klase.entiteti import OznakaINaziv
 
 
-class Osoba(object):
-    def __init__(self, ID, ime, prezime):
-        self.id = ID
-        self.ime = ime
+class Osoba(OznakaINaziv):
+    def __init__(self, ID, naziv, prezime):
+        OznakaINaziv.__init__(self, ID, naziv)
         self.prezime = prezime
 
 
 class Zaposlen(Osoba):
-    def __init__(self, ID, ime, prezime, usn, psw):
-        Osoba.__init__(self, ID, ime, prezime)
+    def __init__(self, ID, naziv, prezime, usn, psw):
+        Osoba.__init__(self, ID, naziv, prezime)
         self.username = usn
         self.password = psw
 
