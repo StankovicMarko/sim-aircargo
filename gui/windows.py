@@ -73,6 +73,9 @@ class LoginWindow(tk.Frame):
         uname = self.usernameInput.get()
         passw = self.passwordInput.get()
 
+        self.usernameInput.delete(0,len(self.usernameInput.get()))
+        self.passwordInput.delete(0,len(self.passwordInput.get()))
+
         if self.checkBoxState.get() == 0:
             a = klase.login.Login(uname,passw)
 
