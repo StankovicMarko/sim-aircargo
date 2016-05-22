@@ -87,12 +87,15 @@ class LoginWindow(tk.Frame):
 
                 if a.uloga == "mhangar":
                     self.controler.show_frame(ManagerHangaraPanel)
+
                 elif a.uloga == "mtransport":
                     self.controler.show_frame(ManagerTransportaPanel)
                     m = klase.korisnici.ManagerTransport("1", "ime", "prezime", "user", "pass")
-                    m.prikazZahteva(sve=True)
+                    print(m.prikazZahteva(sve=True))
+
                 elif a.uloga == "radnik":
                     self.controler.show_frame(RadnikPanel)
+
         elif self.checkBoxState.get() == 1:
             self.controler.show_frame(PotraziteljPanel)
 

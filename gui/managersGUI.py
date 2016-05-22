@@ -6,22 +6,36 @@ class ManagerTransportaPanel(tk.Frame):
     def __init__(self, parent,controler):
         tk.Frame.__init__(self,parent)
         self.controler = controler
+        self.controler.resizable(0,0)
 
-        nekiLabel = tk.Label(self, text="Ulogavani ste kao manager transporta")
-        nekiLabel.grid(row=0,columnspan=3)
+        welcomeLabel = tk.Label(self, text="Ulogavani ste kao manager transporta")
+        welcomeLabel.grid(row=0,column=1)
 
-        self.prikazTransport = tk.Button(self,text="Transport Robe")
-        self.prikazSmestanje = tk.Button(self,text="Smestanje Aviona")
+        self.prikazTransportButton = tk.Button(self,text="Transport Robe",command=self.prikazZahtevaTransportWidgets)
+        self.prikazSmestanjeButton = tk.Button(self,text="Smestanje Aviona",command=self.prikazZahtevaSmestanjeWidgets)
 
-        self.prikazTransport.grid(row=1,column=0)
-        self.prikazSmestanje.grid(row=1,column=2)
+        self.prikazTransportButton.grid(row=1,column=0)
+        self.prikazSmestanjeButton.grid(row=1,column=2)
 
-        self.frejm = tk.Frame(self,bd=1,relief="solid",width=500,height=200)
-        self.frejm.grid(columnspan=3,sticky="nsew")
+        self.frejmZahtevi = tk.Frame(self,bd=1,relief="solid")
+        self.frejmZahtevi.grid(columnspan=3,sticky="nsew")
 
         self.logoutButton = tk.Button(self,text="Log Out!",command=self.logout)
         self.logoutButton.grid(column=1)
 
+    def prikazZahtevaTransportWidgets(self):
+    	self.prikazTransportButton.config(state="disabled")
+    	self.prikazSmestanjeButton.config(state="normal")
+    	self.znj = tk.Label(self.frejmZahtevi,text="hello")
+    	self.znj.grid(sticky="nsew")
+
+
+
+    def prikazZahtevaSmestanjeWidgets(self):
+    	self.prikazTransportButton.config(state="normal")
+    	self.prikazSmestanjeButton.config(state="disabled")
+    	self.znj1 = tk.Label(self.frejmZahtevi,text="hello1")
+    	self.znj1.grid(sticky="nsew")
 
 
     def logout(self):
