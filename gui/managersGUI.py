@@ -1,5 +1,5 @@
 import tkinter as tk
-import klase.korisnik
+import klase.korisnici
 
 class ManagerTransportaPanel(tk.Frame):
     def __init__(self, parent,controler):

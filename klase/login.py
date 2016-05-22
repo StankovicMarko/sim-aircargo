@@ -1,4 +1,4 @@
-import klase.util_klase as util
+import klase.util_funk as util
 
 class Login(object):
 

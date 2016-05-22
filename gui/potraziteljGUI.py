@@ -2,9 +2,9 @@ import tkinter as tk
 from tkinter import messagebox
 from klase.login import *
 from klase.zahtevi import *
-import klase.korisnik
+import klase.korisnici
 import klase.roba
-import klase.util_klase as util
+import klase.util_funk as util
 
 class PotraziteljPanel(tk.Frame):
     def __init__(self,parent,controler):
@@ -125,7 +125,7 @@ class PotraziteljPanel(tk.Frame):
                 self.IDPotrazitelja = ID
                 self.CheckBoxNemamID.configure(state="disabled")
                 messagebox.showinfo("OK!","ID Pronadjen!")
-                self.controler.p = klase.korisnik.Potrazitelj(lista[0],lista[1],lista[2],lista[3],lista[4])
+                self.controler.p = klase.korisnici.Potrazitelj(lista[0], lista[1], lista[2], lista[3], lista[4])
             elif status == False:
                 self.IDPotrazitelja = ID
                 self.PodnesiZahtevButton.configure(state="disabled")

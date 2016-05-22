@@ -1,8 +1,8 @@
 import tkinter as tk
 from tkinter import messagebox
 from klase.login import *
-from GUI.potraziteljGUI import *
-from GUI.managersGUI import *
+from gui.potraziteljGUI import *
+from gui.managersGUI import *
 
 class Glavna(tk.Tk):
     def __init__(self, *args,**kwargs):
@@ -86,7 +86,7 @@ class LoginWindow(tk.Frame):
                     self.controler.show_frame(ManagerHangaraPanel)
                 elif a.uloga == "mtransport":
                     self.controler.show_frame(ManagerTransportaPanel)
-                    m = klase.korisnik.ManagerTransport("1","ime","prezime","user","pass")
+                    m = klase.korisnici.ManagerTransport("1", "ime", "prezime", "user", "pass")
                     m.prikazZahteva(sve=True)
                 elif a.uloga == "radnik":
                     self.controler.show_frame(RadnikPanel)
