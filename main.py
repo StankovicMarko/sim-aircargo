@@ -6,12 +6,12 @@ def main():
 
 
 
-    menHangara= MenadzerHangara("1","petar","peric", 'aaaa', 12345, )
+    # menHangara= MenadzerHangara("1","petar","peric", 'aaaa', 12345, )
 
-    print(menHangara)
+    # print(menHangara)
 
-    # application = Glavna()
-    # application.mainloop()
+    application = Glavna()
+    application.mainloop()
 
 
 if __name__ == "__main__":
