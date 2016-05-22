@@ -210,7 +210,7 @@ class PotraziteljPanel(tk.Frame):
                 if ime == "" or prezime == "" or brojtelefona == "" or email == "":
                     messagebox.showerror("Error!","Niste uneli podatke!")
                 else:
-                    line = self.IDPotrazitelja+"|"+ime+" "+prezime+"|"+brojtelefona+"|"+email+"|potrazitelj"+"\n"
+                    line = self.IDPotrazitelja+"|"+ime+"|"+prezime+"|"+brojtelefona+"|"+email+"|potrazitelj"+"\n"
                     util.saveFile("files/korisnici.txt",line)
             
             a = klase.zahtevi.ZahtevZaTransport(self.odredisteListBox.get(self.selektovanoOdrediste[0]),self.IDPotrazitelja)

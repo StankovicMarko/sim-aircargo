@@ -83,7 +83,7 @@ class LoginWindow(tk.Frame):
                 messagebox.showerror("Error!","Pogresan Username/Password")
             else:
                 print("Uspesno ste se ulogovali!")
-                print("Vi ste",a.imePrezime,"a uloga",a.uloga)
+                print("Vi ste",a.ime,a.prezime,"a uloga",a.uloga)
 
                 if a.uloga == "mhangar":
                     self.controler.show_frame(ManagerHangaraPanel)

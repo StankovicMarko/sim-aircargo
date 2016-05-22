@@ -31,3 +31,6 @@ R#43|roba4|opis4|4|2|2|2|ZT#26
 R#44|krompir|ovo je krompir|2|2|2|20|ZT#27
 R#45|paradajz|ovo je paradajz|1|2|22|111|ZT#27
 R#46|vic1|vic1|2|2|2|2|ZT#28
+R#47|test|test|2|2|2|23|ZT#29
+R#48|test3|test3|3|3|3|33|ZT#30
+R#49|test123|test123|12|3|3|321|ZT#31
