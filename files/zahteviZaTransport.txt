@@ -16,3 +16,6 @@ ZT#22|17/05/2016|None|London|K#9|None|kreiran
 ZT#23|20/05/2016|None|Pariz|K#6|None|kreiran
 ZT#24|20/05/2016|None|Dubai|K#8|None|kreiran
 ZT#25|20/05/2016|None|London|K#8|None|kreiran
+ZT#26|22/05/2016|None|Dubai|K#10|None|kreiran
+ZT#27|22/05/2016|None|Pariz|K#10|None|kreiran
+ZT#28|22/05/2016|None|Dubai|K#11|None|kreiran

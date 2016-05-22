@@ -1,6 +1,6 @@
 import tkinter as tk
 from tkinter import messagebox
-from klase.login import *
+import klase.login
 from gui.potraziteljGUI import *
 from gui.managersGUI import *
 
@@ -74,7 +74,7 @@ class LoginWindow(tk.Frame):
         passw = self.passwordInput.get()
 
         if self.checkBoxState.get() == 0:
-            a = Login(uname,passw)
+            a = klase.login.Login(uname,passw)
 
             if a.uloga == None:
                 messagebox.showerror("Error!","Pogresan Username/Password")

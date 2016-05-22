@@ -7,3 +7,5 @@ K#6|Pera Detlic|021332111|pera@detlic.com|potrazitelj
 K#7|Marko Joikic|19301|email@lkgal.com|potrazitelj
 K#8|pero test|tes|342|potrazitelj
 K#9|Aleksandar Vucic|011223221|avucic@gmail.com|potrazitelj
+K#10|Ivan Ivanovic|02144343|ivani@email.com|potrazitelj
+K#11|Perica Peric|011232433|pericap@email.com|potrazitelj

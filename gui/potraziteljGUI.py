@@ -1,7 +1,7 @@
 import tkinter as tk
 from tkinter import messagebox
-from klase.login import *
-from klase.zahtevi import *
+import klase.login
+import klase.zahtevi
 import klase.korisnici
 import klase.roba
 import klase.util_funk as util
@@ -118,7 +118,7 @@ class PotraziteljPanel(tk.Frame):
     def proveriID(self):
         ID = self.IDInput.get()
         if ID != "":
-            status,lista = Login(None,None).checkID(ID)
+            status,lista = klase.login.Login(None,None).checkID(ID)
             if status == True:
                 self.PodnesiZahtevButton.configure(state="normal")
                 self.PrikazIstorijuButton.configure(state="normal")
@@ -213,8 +213,8 @@ class PotraziteljPanel(tk.Frame):
                     line = self.IDPotrazitelja+"|"+ime+" "+prezime+"|"+brojtelefona+"|"+email+"|potrazitelj"+"\n"
                     util.saveFile("files/korisnici.txt",line)
             
-            a = ZahtevZaTransport(self.odredisteListBox.get(self.selektovanoOdrediste[0]),self.IDPotrazitelja)
-            messagebox.showinfo("OK!","Zahtev uspesno kreiran!")
+            a = klase.zahtevi.ZahtevZaTransport(self.odredisteListBox.get(self.selektovanoOdrediste[0]),self.IDPotrazitelja)
+            messagebox.showinfo("OK!","Zahtev uspesno kreiran!\nVas ID:"+self.IDPotrazitelja)
 
             
 

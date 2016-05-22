@@ -24,3 +24,10 @@ R#36|cokolada2|ovo je crna cokolada|2|2|1|10|ZT#24
 R#37|kafa1|ovo je bela kafa|1|2|1|20|ZT#25
 R#38|kafa2|ovo je crna kafa|2|2|2|22|ZT#25
 R#39|kafa3|ovo je neka treca|2|3|3|23|ZT#25
+R#40|roba1|opis1|1|1|2|32|ZT#26
+R#41|roba2|opis2|3|2|2|3|ZT#26
+R#42|roba3|opis3|3|3|3|33|ZT#26
+R#43|roba4|opis4|4|2|2|2|ZT#26
+R#44|krompir|ovo je krompir|2|2|2|20|ZT#27
+R#45|paradajz|ovo je paradajz|1|2|22|111|ZT#27
+R#46|vic1|vic1|2|2|2|2|ZT#28
