@@ -46,12 +46,12 @@ class Zaposlen(Osoba):
 class MenadzerHangara(Zaposlen):
     uloga = "Menadzer Hangara"
 
-    def __int__(self, ID, ime, prezime, username, password):
-        Zaposlen.__init__(self, ID, ime, prezime, username, password)
+    def __int__(self, ID, naziv, prezime, username, password):
+        Zaposlen.__init__(self, ID, naziv, prezime, username, password)
 
     def __str__(self):
-        return ('Uloga: '+ self.uloga + ' ID: '+self.id+' Ime: '+ self.ime+ ' Prezime: '+self.prezime
-                + ' Username: '+ self.username)
+        return ('Uloga: '+ self.uloga + OznakaINaziv.__str__(self)+ 'Prezime: '+self.prezime
+                + ', Username: '+ self.username)
 
         #
         #

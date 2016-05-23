@@ -255,8 +255,8 @@ class PrikazIstorijePanel(tk.Frame):
         self.tabela.grid(row=1,column=0,sticky="nsew")
         self.tabelaHeaderWidgets()
 
-        self.expandImage = tk.PhotoImage(file="files/expand.png")
-        self.collapseImage = tk.PhotoImage(file="files/collapse.png")
+        self.expandImage = tk.PhotoImage(file="files/slike/expand.png")
+        self.collapseImage = tk.PhotoImage(file="files/slike/collapse.png")
 
         self.recnik_frejmsa = {} # ovde se cuvaju 'buttonId':'frejm', tako da znamo kad koji frejm da se prikaze i sakrije
         self.lista_buttona = [] # ovde se cuvaju sva kreirani buttoni
