@@ -8,7 +8,6 @@ class OznakaINaziv(object):
 
 
 class Dimenzije:
-
     def __int__(self, duzina, sirina, visina):
         self.duzina = duzina
         self.sirina = sirina
@@ -64,10 +63,13 @@ class Dimenzije:
         return self.duzina > other.duzina and self.sirina > other.sirina and self.visina > other.visina
 
 
-            # poredjenja za sve objekte koji imaju dimenzije
+        # poredjenja za sve objekte koji imaju dimenzije
 
 
 class Kolekcija(list):
+    def __init__(self):
+        super().__init__(self)
+
     def append(self, p_object):
         raise NotImplementedError
 
@@ -96,13 +98,13 @@ class Kolekcija(list):
 class Aerodrom(OznakaINaziv, Kolekcija):
     def __init__(self, naziv, adresa, mesto, ID=None):
         OznakaINaziv.__init__(self, ID, naziv)
+        Kolekcija.__init__(self)
         self.adresa = adresa
         self.mesto = mesto
-        self.hangari = Kolekcija()
 
     def __str__(self):
         hangari = ''
-        for hangar in self.hangari:
+        for hangar in self:
             hangari = hangari + hangar.naziv + ', '
         return 'Aerodrom - Naziv: ' + self.naziv + ', Adresa: ' + self.adresa + ', Mesto: ' + self.mesto \
                + ', Hangari: ' + hangari
@@ -112,35 +114,40 @@ class Hangar(OznakaINaziv, Dimenzije, Kolekcija):
     def __init__(self, ID, naziv, duzina, sirina, visina):
         OznakaINaziv.__init__(self, ID, naziv)
         Dimenzije.__int__(self, duzina, sirina, visina)
-        self.avioni = Kolekcija()
+        Kolekcija.__init__(self)
 
     def __str__(self):
         av = ''
-        for avion in self.avioni:
+        for avion in self:
             av = av + avion.naziv + ','
         return 'Hangar ' + OznakaINaziv.__str__(self) + ', Avioni: ' + av
 
 
 class Avion(OznakaINaziv, Dimenzije, Kolekcija):
-    def __init__(self, ID, naziv, duzina, sirina, visina, godiste, rasponKrila, nosivost):
+    def __init__(self, ID, naziv, duzina, sirina, visina, godiste, rasponKrila, nosivost, relacija):
         OznakaINaziv.__init__(self, ID, naziv)
         Dimenzije.__int__(self, duzina, sirina, visina)
+        Kolekcija.__init__(self)
         self.godiste = godiste
         self.rasponKrila = rasponKrila
         self.nosivost = nosivost
-        self.relacije = Kolekcija()
-        self.prostorZaTeret = Kolekcija()
+        self.relacija = relacija
 
     def __str__(self):
-        rel = ''
-        for relacija in self.relacije:
-            rel = rel + relacija + ','
-
         return 'Avion ' + OznakaINaziv.__str__(self) + ', Godiste: ' + str(self.godiste) + \
                ', Raspon Krila: ' + str(self.rasponKrila) + ', Nosivost: ' + str(self.nosivost) + \
-               ', Relacije: ' + rel
+               ', Relacije: ' + self.relacija
 
 
-class ProstorZaTeret(OznakaINaziv,Dimenzije,Kolekcija):
+class ProstorZaTeret(OznakaINaziv, Dimenzije, Kolekcija):
+    def __init__(self, naziv, duzina, sirina, visina, ID=None):
+        OznakaINaziv.__init__(self, ID, naziv)
+        Dimenzije.__int__(self, duzina, visina, sirina)
+        Kolekcija.__init__(self)
 
-    def __init__(self,):
+    def __str__(self):
+        roba=''
+        for r in self:
+            roba=roba+r+','
+
+        return OznakaINaziv.__str__(self) + ' Roba: ' + roba
