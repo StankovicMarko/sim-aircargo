@@ -148,6 +148,6 @@ class ProstorZaTeret(OznakaINaziv, Dimenzije, Kolekcija):
     def __str__(self):
         roba=''
         for r in self:
-            roba=roba+r+','
+            roba=roba+r+', '
 
         return OznakaINaziv.__str__(self) + ' Roba: ' + roba
