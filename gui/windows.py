@@ -73,8 +73,8 @@ class LoginWindow(tk.Frame):
         uname = self.usernameInput.get()
         passw = self.passwordInput.get()
 
-        self.usernameInput.delete(0,len(self.usernameInput.get()))
-        self.passwordInput.delete(0,len(self.passwordInput.get()))
+        self.usernameInput.delete(0,len(self.usernameInput.get())) # brise sve iz username box-a
+        self.passwordInput.delete(0,len(self.passwordInput.get())) # brise sve iz password box-a
 
         if self.checkBoxState.get() == 0:
             a = klase.login.Login(uname,passw)
@@ -87,14 +87,19 @@ class LoginWindow(tk.Frame):
 
                 if a.uloga == "mhangar":
                     self.controler.show_frame(ManagerHangaraPanel)
+                    m = klase.korisnici.MenadzerHangara("id","ime","prezime","user","pass")
+                    self.controler.m = m
+                    print(self.controler.m)
 
                 elif a.uloga == "mtransport":
+                    m = klase.korisnici.ManagerTransport(a.ID,a.ime,a.prezime)
+                    self.controler.m = m
                     self.controler.show_frame(ManagerTransportaPanel)
-                    m = klase.korisnici.ManagerTransport("1", "ime", "prezime", "user", "pass")
-                    print(m.prikazZahteva(sve=True))
+                    self.controler.frames[ManagerTransportaPanel].prikazZahtevaTransportWidgets()
 
                 elif a.uloga == "radnik":
                     self.controler.show_frame(RadnikPanel)
+
 
         elif self.checkBoxState.get() == 1:
             self.controler.show_frame(PotraziteljPanel)

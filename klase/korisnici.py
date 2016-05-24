@@ -84,7 +84,7 @@ class Potrazitelj(Osoba):
 
 
 class ManagerTransport(Osoba):
-    def __init__(self, ID, ime, prezime, username, password):
+    def __init__(self, ID, ime, prezime):
         Osoba.__init__(self, ID, ime, prezime)
-        self.username = username
-        self.password = password
+        # self.username = username
+        # self.password = password

@@ -1,4 +1,4 @@
-ZT#8|03/05/2016|None|London|K#5|None|kreiran
+ZT#8|03/05/2016|03/05/2016|London|K#5|AV#18|kreiran
 ZT#9|03/05/2016|None|Dubai|K#5|None|kreiran
 ZT#10|07/05/2016|None|London|K#9|None|kreiran
 ZT#11|07/05/2016|None|Dubai|K#9|None|kreiran
