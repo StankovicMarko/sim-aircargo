@@ -4,7 +4,7 @@ class OznakaINaziv(object):
         self.naziv = naziv
 
     def __str__(self):
-        return 'Oznaka: ' + str(self.id) + ', Naziv: ' + self.naziv
+        return ' Oznaka: ' + str(self.id) + ', Naziv: ' + self.naziv
 
 
 class Dimenzije:
@@ -14,7 +14,7 @@ class Dimenzije:
         self.visina = visina
 
     def __lt__(self, other):
-        '''self je manji ako je sigurno manji, odnosno other ne moze da stane u self'''
+        '''self je manji ako je manji po duzini i sirini i visini, odnosno other ne moze da stane u self'''
         if isinstance(self, Hangar) and isinstance(other, Avion):
             return self.duzina < other.duzina and self.sirina < other.rasponKrila and self.visina < other.visina
 
@@ -151,3 +151,6 @@ class ProstorZaTeret(OznakaINaziv, Dimenzije, Kolekcija):
             roba = roba + r + ', '
 
         return OznakaINaziv.__str__(self) + ' Roba: ' + roba
+
+
+

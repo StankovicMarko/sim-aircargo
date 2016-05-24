@@ -14,13 +14,13 @@ class ZahtevZaSmestanjeAviona(Zahtev):
         Zahtev.__init__(self, ID, naziv)
         self.vremeSmestanjaAviona = None
         self.vremeNapustanjaHangara = None
-        self.idHangara = hangar.id
-        self.idAviona = avion.id
-        self.idMenadzera = menadzerHangara.id
+        self.hangar = hangar
+        self.avion = avion
+        self.menadzer = menadzerHangara
 
     def __str__(self):
-        return 'Zahtev za smestanje aviona - Oznaka: '+self.id + ', ID hangara: '+ self.idHangara \
-                + ', ID Aviona: ' + self.idAviona + ', ID Menadzera: ' + self.idMenadzera
+        return 'Zahtev za smestanje aviona - Oznaka: '+self.id + ', ID hangara: '+ self.hangar.id \
+                + ', ID Aviona: ' + self.avion.id + ', ID Menadzera: ' + self.menadzer.id
 
 
 class ZahtevZaTransport(Zahtev):

@@ -50,7 +50,7 @@ class MenadzerHangara(Zaposlen):
         Zaposlen.__init__(self, ID, naziv, prezime, username, password)
 
     def __str__(self):
-        return ('Uloga: '+ self.uloga + OznakaINaziv.__str__(self)+ 'Prezime: '+self.prezime
+        return ('Uloga: '+ self.uloga + OznakaINaziv.__str__(self)+ ', Prezime: '+self.prezime
                 + ', Username: '+ self.username)
 
         #
