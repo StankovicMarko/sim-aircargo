@@ -1,6 +1,7 @@
 import tkinter as tk
 import klase.korisnici
 import gui.windows
+import klase.util_funk as util
 
 class ManagerTransportaPanel(tk.Frame):
     def __init__(self, parent,controler):
@@ -34,12 +35,12 @@ class ManagerTransportaPanel(tk.Frame):
         self.headerFrame.grid(row=0,column=0)
         self.zahtevID = tk.Label(self.headerFrame,text="ID").grid(row=0,column=0)
         tk.Label(self.headerFrame,text="      ").grid(row=0,column=1)
-        self.datumkreiranja = tk.Label(self.headerFrame,text="Datum Kreiranja").grid(row=0,column=2)
-        self.datumTransporta = tk.Label(self.headerFrame,text="Datum Transpota").grid(row=0,column=3)
+        self.datumkreiranja = tk.Button(self.headerFrame,text="Datum Kreiranja",relief="flat",command=lambda:self.sortedPrikaz(1)).grid(row=0,column=2)
+        self.datumTransporta = tk.Button(self.headerFrame,text="Datum Transpota",relief="flat",command=lambda:self.sortedPrikaz(2)).grid(row=0,column=3)
         self.odredite = tk.Label(self.headerFrame,text="  Odrediste  ").grid(row=0,column=4)
         self.idPotrazitelja = tk.Label(self.headerFrame,text="Potrazitelj").grid(row=0,column=5)
         self.oznakaAviona = tk.Label(self.headerFrame,text="  Avion  ").grid(row=0,column=6)
-        self.status = tk.Label(self.headerFrame,text="Status").grid(row=0,column=7)
+        self.status = tk.Button(self.headerFrame,text="Status",relief="flat",command=lambda:self.sortedPrikaz(3)).grid(row=0,column=7)
         self.odobirZahtev = tk.Label(self.headerFrame,text="Odobri").grid(row=0,column=8)
 
     def prikazZahtevaTransportWidgets(self):
@@ -62,24 +63,72 @@ class ManagerTransportaPanel(tk.Frame):
 #
         self.prikazTransportButton.config(state="disabled")
         self.prikazSmestanjeButton.config(state="normal")
+
+        self.prikaz(self.controler.m.prikazZahteva(sve=True))
+
         
+    def prikaz(self,lista):
+        self.priv = []
         r = -1
-        for i in self.controler.m.prikazZahteva(sve=True):
+        for i in lista:
             r+=1
-            tk.Label(self.newFrejm,text=i[0]).grid(row=r,column=0,sticky="w")
-            tk.Label(self.newFrejm,text="   ").grid(row=r,column=1)
-            tk.Label(self.newFrejm,text=i[1]).grid(row=r,column=2)
-            tk.Label(self.newFrejm,text="   ").grid(row=r,column=3)
-            tk.Label(self.newFrejm,text=i[2]).grid(row=r,column=4)
-            tk.Label(self.newFrejm,text="         ").grid(row=r,column=5)
-            tk.Label(self.newFrejm,text=i[3]).grid(row=r,column=6)
-            tk.Label(self.newFrejm,text="      ").grid(row=r,column=7)
-            tk.Label(self.newFrejm,text=i[4]).grid(row=r,column=8,sticky="w")
-            tk.Label(self.newFrejm,text="   ").grid(row=r,column=9)
-            tk.Label(self.newFrejm,text=i[5]).grid(row=r,column=10)
-            tk.Label(self.newFrejm,text=i[6]).grid(row=r,column=11)
-            tk.Label(self.newFrejm,text="   ").grid(row=r,column=12)
-            tk.Checkbutton(self.newFrejm,text="").grid(row=r,column=13)
+            a =tk.Label(self.newFrejm,text=i[0])
+            a.grid(row=r,column=0,sticky="w")
+            self.priv.append(a) # Dodaje svaki objekat u listu da bi kasnije znao sta da obrise
+            a1= tk.Label(self.newFrejm,text="   ")
+            a1.grid(row=r,column=1)
+            self.priv.append(a1)
+            a2=tk.Label(self.newFrejm,text=i[1])
+            a2.grid(row=r,column=2)
+            self.priv.append(a2)
+            a3=tk.Label(self.newFrejm,text="   ")
+            a3.grid(row=r,column=3)
+            self.priv.append(a3)
+            a4=tk.Label(self.newFrejm,text=i[2])
+            a4.grid(row=r,column=4)
+            self.priv.append(a4)
+            a5=tk.Label(self.newFrejm,text="         ")
+            a5.grid(row=r,column=5)
+            self.priv.append(a5)
+            a6=tk.Label(self.newFrejm,text=i[3])
+            a6.grid(row=r,column=6)
+            self.priv.append(a6)
+            a7=tk.Label(self.newFrejm,text="      ")
+            a7.grid(row=r,column=7)
+            self.priv.append(a7)
+            a8=tk.Label(self.newFrejm,text=i[4])
+            a8.grid(row=r,column=8,sticky="w")
+            self.priv.append(a8)
+            a9=tk.Label(self.newFrejm,text="   ")
+            a9.grid(row=r,column=9)
+            self.priv.append(a9)
+            a10=tk.Label(self.newFrejm,text=i[5])
+            a10.grid(row=r,column=10)
+            self.priv.append(a10)
+            a11=tk.Label(self.newFrejm,text=i[6])
+            a11.grid(row=r,column=11)
+            self.priv.append(a11)
+            a12=tk.Label(self.newFrejm,text="   ")
+            a12.grid(row=r,column=12)
+            self.priv.append(a12)
+            a13=tk.Checkbutton(self.newFrejm,text="")
+            a13.grid(row=r,column=13)
+            self.priv.append(a13)
+
+
+
+    def sortedPrikaz(self,broj):
+        for p in self.priv:
+            p.destroy()
+
+        if broj == 1:
+            self.prikaz(util.sortPoDatumuKreiranja(self.controler.m.prikazZahteva(sve=True)))
+        elif broj == 2:
+            self.prikaz(util.sortPoDatumuRealizacije(self.controler.m.prikazZahteva(sve=True)))
+        elif broj == 3:
+            self.prikaz(util.sortPoStatusu(self.controler.m.prikazZahteva(sve=True)))
+
+
 
 
     def prikazZahtevaSmestanjeWidgets(self):
