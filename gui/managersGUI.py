@@ -50,8 +50,7 @@ class ManagerTransportaPanel(tk.Frame):
             pass
 
         self.prikaZahtevaHeaderWidgets()
-#
-        self.canvas = tk.Canvas(self.frejmZahtevi)
+        self.canvas = tk.Canvas(self.frejmZahtevi,bg="red",width=619)
         self.scrollbar = tk.Scrollbar(self.frejmZahtevi,orient="vertical",command=self.canvas.yview)
         self.newFrejm = tk.Frame(self.canvas,bd=1,relief="solid")
         self.canvas.configure(yscrollcommand=self.scrollbar.set)
@@ -60,7 +59,7 @@ class ManagerTransportaPanel(tk.Frame):
         self.canvas.grid(row=1,columnspan=9,sticky="nsew")
         self.canvas.create_window((0,0),window=self.newFrejm,anchor='n')
         self.newFrejm.bind("<Configure>",self.function)
-#
+
         self.prikazTransportButton.config(state="disabled")
         self.prikazSmestanjeButton.config(state="normal")
 
@@ -81,13 +80,13 @@ class ManagerTransportaPanel(tk.Frame):
             a2=tk.Label(self.newFrejm,text=i[1])
             a2.grid(row=r,column=2)
             self.priv.append(a2)
-            a3=tk.Label(self.newFrejm,text="   ")
+            a3=tk.Label(self.newFrejm,text="              ")
             a3.grid(row=r,column=3)
             self.priv.append(a3)
             a4=tk.Label(self.newFrejm,text=i[2])
             a4.grid(row=r,column=4)
             self.priv.append(a4)
-            a5=tk.Label(self.newFrejm,text="         ")
+            a5=tk.Label(self.newFrejm,text="           ")
             a5.grid(row=r,column=5)
             self.priv.append(a5)
             a6=tk.Label(self.newFrejm,text=i[3])
@@ -99,21 +98,27 @@ class ManagerTransportaPanel(tk.Frame):
             a8=tk.Label(self.newFrejm,text=i[4])
             a8.grid(row=r,column=8,sticky="w")
             self.priv.append(a8)
-            a9=tk.Label(self.newFrejm,text="   ")
+            a9=tk.Label(self.newFrejm,text="  ")
             a9.grid(row=r,column=9)
             self.priv.append(a9)
             a10=tk.Label(self.newFrejm,text=i[5])
             a10.grid(row=r,column=10)
             self.priv.append(a10)
+            a14=tk.Label(self.newFrejm,text="   ")
+            a14.grid(row=r,column=11)
+            self.priv.append(a14)
             a11=tk.Label(self.newFrejm,text=i[6])
-            a11.grid(row=r,column=11)
+            a11.grid(row=r,column=12)
             self.priv.append(a11)
             a12=tk.Label(self.newFrejm,text="   ")
-            a12.grid(row=r,column=12)
+            a12.grid(row=r,column=13)
             self.priv.append(a12)
             a13=tk.Checkbutton(self.newFrejm,text="")
-            a13.grid(row=r,column=13)
+            a13.grid(row=r,column=14)
             self.priv.append(a13)
+            a15=tk.Label(self.newFrejm,text=" ")
+            a15.grid(row=r,column=15)
+            self.priv.append(a15)
 
 
 
