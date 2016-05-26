@@ -120,7 +120,7 @@ def _smesti(avion):
             hangar.dodaj(avion)
             avioniUHangarima.append(avion)
             break
-    raise NemaMesta as Warning
+    raise Warning
 
 
 def _napraviProstorZaTeret():
