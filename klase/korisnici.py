@@ -1,10 +1,10 @@
 import klase.util_funk as util
+from klase.entiteti import OznakaINaziv
 
 
-class Osoba(object):
-    def __init__(self, ID, ime, prezime):
-        self.id = ID
-        self.ime = ime
+class Osoba(OznakaINaziv):
+    def __init__(self, ID, naziv, prezime):
+        OznakaINaziv.__init__(self, ID, naziv)
         self.prezime = prezime
 
     
@@ -27,8 +27,8 @@ class Osoba(object):
 
 
 class Zaposlen(Osoba):
-    def __init__(self, ID, ime, prezime, usn, psw):
-        Osoba.__init__(self, ID, ime, prezime)
+    def __init__(self, ID, naziv, prezime, usn, psw):
+        Osoba.__init__(self, ID, naziv, prezime)
         self.username = usn
         self.password = psw
 
@@ -64,12 +64,12 @@ class Zaposlen(Osoba):
 class MenadzerHangara(Zaposlen):
     uloga = "Menadzer Hangara"
 
-    def __int__(self, ID, ime, prezime, username, password):
-        Zaposlen.__init__(self, ID, ime, prezime, username, password)
+    def __int__(self, ID, naziv, prezime, username, password):
+        Zaposlen.__init__(self, ID, naziv, prezime, username, password)
 
     def __str__(self):
-        return ('Uloga: '+ self.uloga + ' ID: '+self.id+' Ime: '+ self.ime+ ' Prezime: '+self.prezime
-                + ' Username: '+ self.username)
+        return ('Uloga: '+ self.uloga + OznakaINaziv.__str__(self)+ ', Prezime: '+self.prezime
+                + ', Username: '+ self.username)
 
 
 
