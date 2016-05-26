@@ -3,6 +3,7 @@ from tkinter import messagebox
 import klase.login
 from gui.potraziteljGUI import *
 from gui.managersGUI import *
+import gui.menibar
 
 class Glavna(tk.Tk):
     def __init__(self, *args,**kwargs):
@@ -77,6 +78,7 @@ class LoginWindow(tk.Frame):
         self.passwordInput.delete(0,len(self.passwordInput.get())) # brise sve iz password box-a
 
         if self.checkBoxState.get() == 0:
+            self.controler.meni = gui.menibar.Menibar(self.controler)
             a = klase.login.Login(uname,passw)
 
             if a.uloga == None:
@@ -90,15 +92,20 @@ class LoginWindow(tk.Frame):
                     m = klase.korisnici.MenadzerHangara("id","ime","prezime","user","pass")
                     self.controler.m = m
                     print(self.controler.m)
+                    self.controler.meni.grid()
+
 
                 elif a.uloga == "mtransport":
                     m = klase.korisnici.ManagerTransport(a.ID,a.ime,a.prezime)
                     self.controler.m = m
                     self.controler.show_frame(ManagerTransportaPanel)
                     self.controler.frames[ManagerTransportaPanel].prikazZahtevaTransportWidgets()
+                    self.controler.meni.grid()
 
                 elif a.uloga == "radnik":
                     self.controler.show_frame(RadnikPanel)
+                    self.contorler.meni.grid()
+
 
 
         elif self.checkBoxState.get() == 1:
