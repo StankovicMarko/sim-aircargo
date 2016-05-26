@@ -50,6 +50,9 @@ def main():
                 print(pzt)
 
 
+
+
+
 # ovo koristi menazder hangara (pitao sam profu kaze moze ovako a i meni je lakse zbog gui-a)
 
 def prikaziZahteveZaSmestanjeAviona():
@@ -144,17 +147,14 @@ def _napraviProstorZaTeret():
     #
     #         except:
 
-<<<<<<< HEAD
+
     # menHangara= MenadzerHangara("1","petar","peric", 'aaaa', 12345, )
 
     # print(menHangara)
-=======
 
->>>>>>> featAerodrom
-
-    application = Glavna()
-    application.mainloop()
 
 
 if __name__ == "__main__":
-    main()
+    # main()
+    application = Glavna()
+    application.mainloop()
