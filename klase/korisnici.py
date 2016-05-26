@@ -61,6 +61,28 @@ class Zaposlen(Osoba):
         pass
 
 
+    def pretraziRobuPoIDPotrazitelja(self,IDPotrazitelja):
+        sviZahtevi = []
+        zahteviTransport = util.readFile("files/zahteviZaTransport.txt")
+
+        for zahtev in zahteviTransport:
+            l = zahtev.split("|")
+            if l[4] == IDPotrazitelja:
+                sviZahtevi.append(l[0])
+
+
+        svaRoba = []
+        robaLines = util.readFile("files/roba.txt")
+
+        for roba in robaLines:
+            r = roba.strip().split("|")
+            if r[7] in sviZahtevi:
+                svaRoba.append(r)
+
+        print(svaRoba)
+
+
+
 class MenadzerHangara(Zaposlen):
     uloga = "Menadzer Hangara"
 
@@ -83,8 +105,8 @@ class Potrazitelj(Osoba):
         self.email = email
 
 
-class ManagerTransport(Osoba):
-    def __init__(self, ID, ime, prezime):
-        Osoba.__init__(self, ID, ime, prezime)
-        # self.username = username
-        # self.password = password
+class ManagerTransport(Zaposlen):
+    def __init__(self, ID, ime, prezime, username=None, password=None):
+        Zaposlen.__init__(self, ID, ime, prezime, username, password)
+        self.username = username
+        self.password = password

@@ -1,9 +1,11 @@
 import tkinter as tk
+from tkinter import simpledialog
 
 class Menibar(tk.Frame):
 
     def __init__(self, controler):
         tk.Frame.__init__(self, controler, relief="flat", bd=1)
+        self.controler = controler
         self.menubar = tk.Menu(self)
 
         fileMenu = tk.Menu(self.menubar, tearoff=0)
@@ -50,10 +52,20 @@ class Menibar(tk.Frame):
         pretragaRobe.add_command(label="Sirina")
         pretragaRobe.add_command(label="Visina")
         pretragaRobe.add_command(label="Tezina")
-        pretragaRobe.add_command(label="ID Potrazitelja")
+        pretragaRobe.add_command(label="ID Potrazitelja", command=self.inputDialog)
 
 
         controler.config(menu=self.menubar)
+
+
+    def inputDialog(self):
+        self.input = simpledialog.askstring("Pretraga!","Unesite Pojam za Pretragu")
+        self.pretragaPoIDPotrazitelja(self.input)
+
+
+
+    def pretragaPoIDPotrazitelja(self,ID):
+        z = self.controler.m.pretraziRobuPoIDPotrazitelja(ID)
 
     def exit(self):
         self.quit()
