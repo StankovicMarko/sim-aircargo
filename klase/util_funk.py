@@ -42,6 +42,9 @@ def sortPoStatusu(lista):
 	return sorted(lista,key=lambda x: x[6])
 
 def proveraInputa(string):
+	'''
+	Proverava se da li input sadrzi zabranjeni karakter
+	'''
 	bannedChars = ["`","~","!","@","#","$","%","^","&",
 	"*","(",")","_","+","-","=","[","]","{","}","'","|","\\","/","?",".","<",">",",",":",";",'"']
 
@@ -49,3 +52,13 @@ def proveraInputa(string):
 		if i in bannedChars:
 			return False
 	return True
+
+def proveraInputaBroj(broj):
+	'''
+	Provera da li je input broj
+	'''
+	try:
+		int(broj)
+		return True
+	except:
+		return False

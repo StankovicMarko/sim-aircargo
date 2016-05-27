@@ -144,6 +144,11 @@ class PotraziteljPanel(tk.Frame):
 
         if imeRobe == "" or opisRobe == "" or duzinaRobe == "" or sirinaRobe == "" or visinaRobe == "" or tezinaRobe == "":
             pass
+        elif util.proveraInputa(imeRobe) == False or util.proveraInputa(opisRobe) == False:
+            messagebox.showerror("Error!","Uneli ste zabranjen karatker!")
+        elif (util.proveraInputaBroj(duzinaRobe) == False or util.proveraInputaBroj(sirinaRobe) == False or
+            util.proveraInputaBroj(visinaRobe) == False or util.proveraInputaBroj(tezinaRobe) == False):
+            messagebox.showerror("Error!","Duzina/Sirina/Visina/Tezina\nmoraju biti broj!")
         else:
             linija = imeRobe+"|"+opisRobe+"|"+duzinaRobe+"|"+sirinaRobe+"|"+visinaRobe+"|"+tezinaRobe
             self.RobaListBox.insert("end",linija)   
@@ -206,10 +211,14 @@ class PotraziteljPanel(tk.Frame):
         brojtelefona = self.BrojTelefonaInput.get()
         email = self.EmailInput.get()
 
+
         if self.selektovanoOdrediste == ():
             messagebox.showerror("Error!","Niste izabrali odrediste!")
         elif self.RobaListBox.size() == 0:
             messagebox.showerror("Error!","Niste dodali robu!")
+        elif (util.proveraInputa(ime) == False or util.proveraInputa(prezime) == False 
+            or util.proveraInputa(brojtelefona) == False or util.proveraInputa(email) == False):
+            messagebox.showerror("Error!","Uneli ste zabranjen karatker!")
         else:
             if self.CheckBoxNemamIDState.get() == 1: # Ako je 'nemam ID' obelezeno
                 if ime == "" or prezime == "" or brojtelefona == "" or email == "":

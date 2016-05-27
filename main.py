@@ -153,6 +153,6 @@ def _napravi_prostor_za_teret():
 
 
 if __name__ == "__main__":
-    main()
-    # application = Glavna()
-    # application.mainloop()
+    # main()
+    application = Glavna()
+    application.mainloop()
