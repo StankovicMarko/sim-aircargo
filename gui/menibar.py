@@ -52,20 +52,24 @@ class Menibar(tk.Frame):
         pretragaRobe.add_command(label="Sirina")
         pretragaRobe.add_command(label="Visina")
         pretragaRobe.add_command(label="Tezina")
-        pretragaRobe.add_command(label="ID Potrazitelja", command=self.inputDialog)
+        pretragaRobe.add_command(label="ID Potrazitelja", command=self.pretragaPoIDPotrazitelja)
 
 
         controler.config(menu=self.menubar)
+        
+
+    def pretragaPoIDPotrazitelja(self):
+        pojam = simpledialog.askstring("Pretraga!","Unesite Pojam za Pretragu")
+        lista = self.controler.m.pretraziRobuPoIDPotrazitelja(pojam)
+        self.prikaz(lista)
 
 
-    def inputDialog(self):
-        self.input = simpledialog.askstring("Pretraga!","Unesite Pojam za Pretragu")
-        self.pretragaPoIDPotrazitelja(self.input)
+    def prikaz(self,lista):
+        window = tk.Toplevel(self)
 
+        for i in lista:
+            tk.Label(window,text=i).grid()
 
-
-    def pretragaPoIDPotrazitelja(self,ID):
-        z = self.controler.m.pretraziRobuPoIDPotrazitelja(ID)
 
     def exit(self):
         self.quit()
