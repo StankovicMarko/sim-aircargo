@@ -111,7 +111,7 @@ class PotraziteljPanel(tk.Frame):
         self.odredisteLabel.grid(row=0,columnspan=2)
         self.odredisteListBox.grid(row=1,columnspan=2)
 
-        odredistaLista = util.readFile("files/odredista.txt")
+        odredistaLista = util.readFile("odredista.txt")
         for odrediste in odredistaLista:
             self.odredisteListBox.insert("end",odrediste.strip())
 
@@ -188,7 +188,7 @@ class PotraziteljPanel(tk.Frame):
             self.IDPotrazitelja = None
 
     def odrediIDPotrazitelja(self):
-        lines = util.readFile("files/korisnici.txt")
+        lines = util.readFile("korisnici.txt")
         lastLine = lines[-1].split("|")
         l = lastLine[0].split("#")
         return "K#"+str(int(l[1])+1)
@@ -211,7 +211,7 @@ class PotraziteljPanel(tk.Frame):
                     messagebox.showerror("Error!","Niste uneli podatke!")
                 else:
                     line = self.IDPotrazitelja+"|"+ime+"|"+prezime+"|"+brojtelefona+"|"+email+"|potrazitelj"+"\n"
-                    util.saveFile("files/korisnici.txt",line)
+                    util.saveFile("korisnici.txt",line)
             
             a = klase.zahtevi.ZahtevZaTransport(self.odredisteListBox.get(self.selektovanoOdrediste[0]),self.IDPotrazitelja)
             messagebox.showinfo("OK!","Zahtev uspesno kreiran!\nVas ID:"+self.IDPotrazitelja)
@@ -293,7 +293,7 @@ class PrikazIstorijePanel(tk.Frame):
         self.lista_buttona[buttonId].configure(image=self.collapseImage)
         r = self.lista_buttona[buttonId].row
 
-        lines = util.readFile("files/roba.txt")
+        lines = util.readFile("roba.txt")
 
         # Ako je state = 0, onda je extend / ako je state = 1 onda je collapse
         if self.lista_buttona[buttonId].state == 0:

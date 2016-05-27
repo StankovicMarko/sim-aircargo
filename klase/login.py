@@ -6,7 +6,7 @@ class Login(object):
         self.ID, self.username, self.ime, self.prezime, self.uloga = self.__checkCreds(username,password)
 
     def __checkCreds(self,username,password):
-        lines = util.readFile("files/korisnici.txt")
+        lines = util.readFile("korisnici.txt")
         for line in lines:
             l = line.strip().split("|")
             ID = l[0]
@@ -23,7 +23,7 @@ class Login(object):
             return None,None,None,None,None
 
     def checkID(self,ID):
-        lines = util.readFile("files/korisnici.txt")
+        lines = util.readFile("korisnici.txt")
         for line in lines:
             l = line.strip().split("|")
 

@@ -32,12 +32,12 @@ class ZahtevZaTransport(Zahtev):
         self.oznakaAviona = "None"
         self.statusZahteva = "kreiran"
 
-        util.saveFile("files/zahteviZaTransport.txt",
+        util.saveFile("zahteviZaTransport.txt",
                       self.IDZahteva + "|" + self.datumKreiranja + "|" + self.datumTransporta +
                       "|" + self.odrediste + "|" + self.IDPotrazitelja + "|" + self.oznakaAviona + "|" + self.statusZahteva + "\n")
 
     def prikazZahteva(self, IDPotrazitelja):
-        lines = util.readFile("files/zahteviZaTransport.txt")
+        lines = util.readFile("zahteviZaTransport.txt")
         for line in lines:
             l = line.strip().split("|")
             if l[4] == IDPotrazitelja:
@@ -47,7 +47,7 @@ class ZahtevZaTransport(Zahtev):
         return datetime.now().strftime("%d/%m/%Y")
 
     def odrediIDZahteva(self):
-        lines = util.readFile("files/zahteviZaTransport.txt")
+        lines = util.readFile("zahteviZaTransport.txt")
         lastLine = lines[-1].split("|")
         l = lastLine[0].split("#")
         return "ZT#" + str(int(l[1]) + 1)
