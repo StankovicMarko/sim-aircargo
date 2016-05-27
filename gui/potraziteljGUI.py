@@ -158,10 +158,15 @@ class PotraziteljPanel(tk.Frame):
 
 
     def ocistiRobu(self):
+        '''
+        Brise robu iz listboxa gde se prikazuje roba
+        '''
         self.selektovanaRoba = self.RobaListBox.curselection()
         if self.selektovanaRoba == ():
-            self.velicinaListBoxa = self.RobaListBox.size()
-            self.RobaListBox.delete(0,self.velicinaListBoxa)
+            result = messagebox.askquestion("Da li ste sigurni?","Obrisacete svu robu?",icon="warning")
+            if result == "yes":
+                self.velicinaListBoxa = self.RobaListBox.size()
+                self.RobaListBox.delete(0,self.velicinaListBoxa)
         else:
             self.RobaListBox.delete(self.selektovanaRoba)
 
