@@ -8,9 +8,6 @@ class Osoba(OznakaINaziv):
         self.prezime = prezime
 
 
-
-
-
 class Zaposlen(Osoba):
     def __init__(self, ID, naziv, prezime, usn, psw):
         Osoba.__init__(self, ID, naziv, prezime)
