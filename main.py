@@ -3,10 +3,10 @@ from klase.korisnici import MenadzerHangara, Zaposlen, Osoba
 from klase.entiteti import Kolekcija, Aerodrom, Avion, Hangar, ProstorZaTeret
 from klase.zahtevi import ZahtevZaSmestanjeAviona
 
-zahteviZaSmestanjeAviona = []
-zahteviZaTransportRobe = {'kreiran': [], 'odobren': [], 'robaUtovarena': [], 'robaTransportovana': []}
-avioniUHangarima = []
-avioniVanHangara = []
+zahtevi_za_smestanje_aviona = []
+zahtevi_za_transport_robe = {'kreiran': [], 'odobren': [], 'robaUtovarena': [], 'robaTransportovana': []}
+avioni_u_hangarima = []
+avioni_van_hangara = []
 aerodrom = Aerodrom('Nikola Tesla', 'Futoski Put', 'Novi Sad')
 
 
@@ -21,26 +21,26 @@ def main():
     # hangar.avioni.dodaj(avion)
     # avioniUHangarima.extend(hangar.avioni)
 
-    menHangara = MenadzerHangara(1, 'Lepan', 'Lepavi', 'lepi', 12345)
+    men_hangara = MenadzerHangara(1, 'Lepan', 'Lepavi', 'lepi', 12345)
 
-    print(aerodrom, hangar, menHangara, len(aerodrom), sep='\n')
+    print(aerodrom, hangar, men_hangara, len(aerodrom), sep='\n')
     #
     # print(hangar < avion, hangar > avion, avion < hangar, avion > hangar)
     # print()
     # print(hangar >= avion, hangar <= avion, hangar == avion, avion >= hangar, avion <= hangar, avion == hangar,
     #       avion != hangar, hangar != avion)
 
-    dodajHangar()
+    dodaj_hangar()
 
     for hangar in aerodrom:
         print(hangar)
 
-    dodajAvion()
+    dodaj_avion()
 
     for hangar in aerodrom:
         print(hangar)
 
-    for avion in avioniUHangarima:
+    for avion in avioni_u_hangarima:
         print(avion)
 
     print('---------')
@@ -50,26 +50,21 @@ def main():
                 print(pzt)
 
 
-
-
-
-# ovo koristi menazder hangara (pitao sam profu kaze moze ovako a i meni je lakse zbog gui-a)
-
-def prikaziZahteveZaSmestanjeAviona():
+def prikazi_zahteve_za_smestanje_aviona():
     prikaz = ''
-    for zahtev in zahteviZaSmestanjeAviona:
+    for zahtev in zahtevi_za_smestanje_aviona:
         prikaz = prikaz + str(zahtev) + '\n'
     return prikaz
 
 
-def prikazZahtevaZaTransportRobe():
+def prikaz_zahteva_za_transport_robe():
     prikaz = ''
-    for zahtev['robaUtovarena'] in zahteviZaTransportRobe:
+    for zahtev in zahtevi_za_transport_robe['robaUtovarena']:
         prikaz = prikaz + str(zahtev) + '\n'
     return prikaz
 
 
-def uzmiInpute():
+def uzmi_inpute():
     inputi = []
     unos = ''
     while unos != 'q':
@@ -81,61 +76,61 @@ def uzmiInpute():
     return inputi
 
 
-def dodajHangar():
+def dodaj_hangar():
     # u gui-u ce ovo uzimati input
     ID = len(aerodrom) + 1
     print('unesite Hangar treba nam: naziv, duzinu, sirinu, visinu')
-    l = uzmiInpute()
+    l = uzmi_inpute()
     while len(l) < 4:
         print('premalo unesenih inputa')
         print('unesite Hangar treba nam: naziv, duzinu, sirinu, visinu')
-        l = uzmiInpute()
+        l = uzmi_inpute()
     hangar = Hangar(ID, naziv=l[0], duzina=int(l[1]), sirina=int(l[2]), visina=int(l[3]))
     aerodrom.dodaj(hangar)
 
 
-def dodajAvion():
-    ID = len(avioniUHangarima)
+def dodaj_avion():
+    ID = len(avioni_u_hangarima)
     print('unesite Avion treba nam: naziv,duzinu, sirinu, visinu, godiste, rasponKrila, nosivost, relacija')
-    l = uzmiInpute()
+    l = uzmi_inpute()
     while len(l) < 7:
         print('premalo unesenih inputa')
         print('unesite Avion treba nam: naziv,duzinu, sirinu, visinu, godiste, rasponKrila, nosivost, relacija')
-        l = uzmiInpute()
+        l = uzmi_inpute()
     avion = Avion(ID, naziv=l[0], duzina=int(l[1]), sirina=int(l[2]), visina=int(l[3]), godiste=l[4],
-                  rasponKrila=int(l[5]), nosivost=int(l[6]), relacija=l[7])
-    proZaTeret = _napraviProstorZaTeret()
-    while avion < proZaTeret:
-        proZaTeret = _napraviProstorZaTeret()
+                  raspon_krila=int(l[5]), nosivost=int(l[6]), relacija=l[7])
+    pr_za_ter = _napravi_prostor_za_teret()
+    while avion < pr_za_ter:
+        pr_za_ter = _napravi_prostor_za_teret()
 
-    avion.dodaj(proZaTeret)
+    avion.dodaj(pr_za_ter)
     try:
         _smesti(avion)
     except:
         print('Avion je prevelik i ne moze da stane ni u jedan hangar, molimo dodajte hangar,'
               ' ovaj avion ce biti u aerodromu poslovnog partnera')
-        avioniVanHangara.append(avion)
+        avioni_van_hangara.append(avion)
 
 
 def _smesti(avion):
     for hangar in aerodrom:
         if hangar > avion:
             hangar.dodaj(avion)
-            avioniUHangarima.append(avion)
+            avioni_u_hangarima.append(avion)
             break
     raise Warning
 
 
-def _napraviProstorZaTeret():
+def _napravi_prostor_za_teret():
     print('unesite Prostor Za Teret treba nam: naziv, duzinu, sirinu, visinu')
-    l = uzmiInpute()
+    l = uzmi_inpute()
     while len(l) < 4:
         print('premalo unesenih inputa')
         print('unesite Prostor Za Teret treba nam: naziv, duzinu, sirinu, visinu')
-        l = uzmiInpute()
-    proZaTer = ProstorZaTeret(naziv=l[0], duzina=int(l[1]), sirina=int(l[2]), visina=int(l[3]), ID=None)
+        l = uzmi_inpute()
+    pr_za_ter = ProstorZaTeret(naziv=l[0], duzina=int(l[1]), sirina=int(l[2]), visina=int(l[3]), ID=None)
 
-    return proZaTer
+    return pr_za_ter
 
     # def kreirajZahtevZaSmestanje():
     #

@@ -10,6 +10,7 @@ class Osoba(OznakaINaziv):
 
 
 
+
 class Zaposlen(Osoba):
     def __init__(self, ID, naziv, prezime, usn, psw):
         Osoba.__init__(self, ID, naziv, prezime)
@@ -44,8 +45,7 @@ class Zaposlen(Osoba):
         # Identifikacionom kodu potražitelja
         pass
 
-
-    def pretraziRobuPoIDPotrazitelja(self,IDPotrazitelja):
+    def pretraziRobuPoIDPotrazitelja(self, IDPotrazitelja):
         sviZahtevi = []
         zahteviTransport = util.readFile("files/zahteviZaTransport.txt")
 
@@ -53,7 +53,6 @@ class Zaposlen(Osoba):
             l = zahtev.split("|")
             if l[4] == IDPotrazitelja:
                 sviZahtevi.append(l[0])
-
 
         svaRoba = []
         robaLines = util.readFile("files/roba.txt")
@@ -66,7 +65,6 @@ class Zaposlen(Osoba):
         return svaRoba
 
 
-
 class MenadzerHangara(Zaposlen):
     uloga = "Menadzer Hangara"
 
@@ -74,9 +72,8 @@ class MenadzerHangara(Zaposlen):
         Zaposlen.__init__(self, ID, naziv, prezime, username, password)
 
     def __str__(self):
-        return ('Uloga: '+ self.uloga + OznakaINaziv.__str__(self)+ ', Prezime: '+self.prezime
-                + ', Username: '+ self.username)
-
+        return "Uloga: {}, ID: {}, Ime: {}, Prezime: {}, username: {}".format(self.uloga, self.id, self.naziv,
+                                                                              self.prezime, self.username)
 
 
 class Potrazitelj(Osoba):
