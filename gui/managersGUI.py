@@ -63,7 +63,7 @@ class ManagerTransportaPanel(tk.Frame):
         self.prikazTransportButton.config(state="disabled")
         self.prikazSmestanjeButton.config(state="normal")
 
-        self.prikaz(self.controler.m.prikazZahteva(sve=True))
+        self.prikaz(self.controler.m.prikazZahteva())
 
         
     def prikaz(self,lista):
@@ -127,11 +127,11 @@ class ManagerTransportaPanel(tk.Frame):
             p.destroy()
 
         if broj == 1:
-            self.prikaz(util.sortPoDatumuKreiranja(self.controler.m.prikazZahteva(sve=True)))
+            self.prikaz(util.sortPoDatumuKreiranja(self.controler.m.prikazZahteva()))
         elif broj == 2:
-            self.prikaz(util.sortPoDatumuRealizacije(self.controler.m.prikazZahteva(sve=True)))
+            self.prikaz(util.sortPoDatumuRealizacije(self.controler.m.prikazZahteva()))
         elif broj == 3:
-            self.prikaz(util.sortPoStatusu(self.controler.m.prikazZahteva(sve=True)))
+            self.prikaz(util.sortPoStatusu(self.controler.m.prikazZahteva()))
 
 
 
