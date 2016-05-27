@@ -11,8 +11,12 @@ aerodrom = Aerodrom('Nikola Tesla', 'Futoski Put', 'Novi Sad')
 
 
 def main():
-    hangar = Hangar(1, 'HANG1', 100, 100, 30)
-    aerodrom.dodaj(hangar)
+    h = Hangar(1, 'HANG1', 100, 100, 30)
+
+    han = Hangar(2, 'hang007', 100, 100, 300)
+
+    aerodrom.dodaj(han)
+    aerodrom.dodaj(h)
     # avion = Avion(1, 'Av1', 5, 5, 5, 2012, 10, 10)
     # avion.relacije.dodaj('Pariz')
     # avion.relacije.dodaj('London')
@@ -23,7 +27,7 @@ def main():
 
     men_hangara = MenadzerHangara(1, 'Lepan', 'Lepavi', 'lepi', 12345)
 
-    print(aerodrom, hangar, men_hangara, len(aerodrom), sep='\n')
+    print(aerodrom, h, han, men_hangara, len(aerodrom), sep='\n')
     #
     # print(hangar < avion, hangar > avion, avion < hangar, avion > hangar)
     # print()
@@ -148,8 +152,7 @@ def _napravi_prostor_za_teret():
     # print(menHangara)
 
 
-
 if __name__ == "__main__":
-    # main()
-    application = Glavna()
-    application.mainloop()
+    main()
+    # application = Glavna()
+    # application.mainloop()
