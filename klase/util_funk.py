@@ -14,7 +14,7 @@ def saveFile(filename,string):
     fullPath = os.path.dirname(os.path.abspath(__file__))
     path = os.path.join(fullPath,"..","files",filename)
     
-    f = open(filename,"a")
+    f = open(path,"a")
     f.write(string)
     f.close()
 

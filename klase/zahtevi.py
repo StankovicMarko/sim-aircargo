@@ -4,10 +4,19 @@ from klase.entiteti import OznakaINaziv
 
 
 class Zahtev(OznakaINaziv):
-    def __init__(self, ID, naziv=None):
+    def __init__(self, ID=None, naziv=None):
         OznakaINaziv.__init__(self, ID, naziv)
-        self.datumKreiranja = datetime.now()
+        self.IDZahteva = self.odrediIDZahteva()
+        self.datumKreiranja = self.odrediDatum()
 
+    def odrediDatum(self):
+        return datetime.now().strftime("%d/%m/%Y")
+
+    def odrediIDZahteva(self):
+        lines = util.readFile("zahteviZaTransport.txt")
+        lastLine = lines[-1].split("|")
+        l = lastLine[0].split("#")
+        return "ZT#" + str(int(l[1]) + 1)
 
 class ZahtevZaSmestanjeAviona(Zahtev):
     def __init__(self, ID, naziv, hangar, avion, menadzerHangara):
@@ -43,11 +52,4 @@ class ZahtevZaTransport(Zahtev):
             if l[4] == IDPotrazitelja:
                 print(l)
 
-    def odrediDatum(self):
-        return datetime.now().strftime("%d/%m/%Y")
 
-    def odrediIDZahteva(self):
-        lines = util.readFile("zahteviZaTransport.txt")
-        lastLine = lines[-1].split("|")
-        l = lastLine[0].split("#")
-        return "ZT#" + str(int(l[1]) + 1)

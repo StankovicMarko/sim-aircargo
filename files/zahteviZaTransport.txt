@@ -22,3 +22,6 @@ ZT#28|22/05/2016|None|Dubai|K#11|None|kreiran
 ZT#29|22/05/2016|None|Pariz|K#9|None|kreiran
 ZT#30|22/05/2016|None|London|K#12|None|kreiran
 ZT#31|22/05/2016|None|London|K#13|None|kreiran
+ZT#32|27/05/2016|None|Dubai|K#10|None|kreiran
+ZT#33|27/05/2016|None|Dubai|K#14|None|kreiran
+ZT#34|27/05/2016|None|Dubai|K#14|None|kreiran
