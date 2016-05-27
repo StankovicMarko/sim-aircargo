@@ -44,7 +44,7 @@ class Zaposlen(Osoba):
 
     def pretraziRobuPoIDPotrazitelja(self, IDPotrazitelja):
         sviZahtevi = []
-        zahteviTransport = util.readFile("files/zahteviZaTransport.txt")
+        zahteviTransport = util.readFile("zahteviZaTransport.txt")
 
         for zahtev in zahteviTransport:
             l = zahtev.split("|")
@@ -52,7 +52,7 @@ class Zaposlen(Osoba):
                 sviZahtevi.append(l[0])
 
         svaRoba = []
-        robaLines = util.readFile("files/roba.txt")
+        robaLines = util.readFile("roba.txt")
 
         for roba in robaLines:
             r = roba.strip().split("|")
@@ -88,7 +88,7 @@ class Potrazitelj(Osoba):
         vraca sve zahteve, ako je False, vraca samo od ulogovanog potrazitelja
         '''
         zahtevi = []
-        lines = util.readFile("files/zahteviZaTransport.txt")
+        lines = util.readFile("zahteviZaTransport.txt")
         for line in lines:
             l = line.strip().split("|")
             if l[4] == self.ID:
@@ -107,7 +107,7 @@ class ManagerTransport(Zaposlen):
         Vraca sve zahteve za transport
         '''
         zahtevi = []
-        lines = util.readFile("files/zahteviZaTransport.txt")
+        lines = util.readFile("zahteviZaTransport.txt")
         for line in lines:
             l = line.strip().split("|")
             zahtevi.append(l)

@@ -1,12 +1,19 @@
 from datetime import datetime
+import os
 
 def readFile(filename):
-    f = open(filename,"r")
+    fullPath = os.path.dirname(os.path.abspath(__file__))
+    path = os.path.join(fullPath,"..","files",filename)
+
+    f = open(path,"r")
     lines = f.readlines()
     f.close()
     return lines
 
 def saveFile(filename,string):
+    fullPath = os.path.dirname(os.path.abspath(__file__))
+    path = os.path.join(fullPath,"..","files",filename)
+    
     f = open(filename,"a")
     f.write(string)
     f.close()
