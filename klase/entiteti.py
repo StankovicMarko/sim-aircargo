@@ -114,7 +114,7 @@ class Hangar(OznakaINaziv, Dimenzije, Kolekcija):
         av = ''
         for avion in self:
             av = av + avion.naziv + ','
-        return 'Hangar ' + OznakaINaziv.__str__(self) + ', Avioni: ' + av
+        return 'Hangar - Oznaka: {}, Naziv: {}, Avioni: {}'.format(self.id, self.naziv, av)
 
 
 class Avion(OznakaINaziv, Dimenzije, Kolekcija):
