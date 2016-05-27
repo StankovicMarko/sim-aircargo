@@ -7,9 +7,7 @@ class Osoba(OznakaINaziv):
         OznakaINaziv.__init__(self, ID, naziv)
         self.prezime = prezime
 
-    
-    
-    def prikazZahteva(self,sve=False):
+    def prikazZahteva(self, sve=False):
         '''
         Vraca zahteve za transport, ako je parametar "sve"=True
         vraca sve zahteve, ako je False, vraca samo od ulogovanog potrazitelja
@@ -60,8 +58,7 @@ class Zaposlen(Osoba):
         # Identifikacionom kodu potražitelja
         pass
 
-
-    def pretraziRobuPoIDPotrazitelja(self,IDPotrazitelja):
+    def pretraziRobuPoIDPotrazitelja(self, IDPotrazitelja):
         sviZahtevi = []
         zahteviTransport = util.readFile("files/zahteviZaTransport.txt")
 
@@ -69,7 +66,6 @@ class Zaposlen(Osoba):
             l = zahtev.split("|")
             if l[4] == IDPotrazitelja:
                 sviZahtevi.append(l[0])
-
 
         svaRoba = []
         robaLines = util.readFile("files/roba.txt")
@@ -82,7 +78,6 @@ class Zaposlen(Osoba):
         print(svaRoba)
 
 
-
 class MenadzerHangara(Zaposlen):
     uloga = "Menadzer Hangara"
 
@@ -90,9 +85,8 @@ class MenadzerHangara(Zaposlen):
         Zaposlen.__init__(self, ID, naziv, prezime, username, password)
 
     def __str__(self):
-        return ('Uloga: '+ self.uloga + OznakaINaziv.__str__(self)+ ', Prezime: '+self.prezime
-                + ', Username: '+ self.username)
-
+        return "Uloga: {}, ID: {}, Ime: {}, Prezime: {}, username: {}".format(self.uloga, self.id, self.naziv,
+                                                                              self.prezime, self.username)
 
 
 class Potrazitelj(Osoba):

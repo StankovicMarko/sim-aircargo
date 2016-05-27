@@ -3,9 +3,6 @@ class OznakaINaziv(object):
         self.id = ID
         self.naziv = naziv
 
-    def __str__(self):
-        return ' Oznaka: ' + str(self.id) + ', Naziv: ' + self.naziv
-
 
 class Dimenzije:
     def __int__(self, duzina, sirina, visina):
@@ -16,28 +13,28 @@ class Dimenzije:
     def __lt__(self, other):
         '''self je manji ako je manji po duzini i sirini i visini, odnosno other ne moze da stane u self'''
         if isinstance(self, Hangar) and isinstance(other, Avion):
-            return self.duzina < other.duzina and self.sirina < other.rasponKrila and self.visina < other.visina
+            return self.duzina < other.duzina and self.sirina < other.raspon_krila and self.visina < other.visina
 
         elif isinstance(self, Avion) and isinstance(other, Hangar):
-            return self.duzina < other.duzina and self.rasponKrila < other.sirina and self.visina < other.visina
+            return self.duzina < other.duzina and self.raspon_krila < other.sirina and self.visina < other.visina
 
         return self.duzina < other.duzina and self.sirina and other.sirina and self.visina < other.visina
 
     def __le__(self, other):
         if isinstance(self, Hangar) and isinstance(other, Avion):
-            return self.duzina <= other.duzina and self.sirina <= other.rasponKrila and self.visina <= other.visina
+            return self.duzina <= other.duzina and self.sirina <= other.raspon_krila and self.visina <= other.visina
 
         elif isinstance(self, Avion) and isinstance(other, Hangar):
-            return self.duzina <= other.duzina and self.rasponKrila <= other.sirina and self.visina <= other.visina
+            return self.duzina <= other.duzina and self.raspon_krila <= other.sirina and self.visina <= other.visina
 
         return self.duzina <= other.duzina and self.sirina <= other.sirina and self.visina <= other.visina
 
     def __eq__(self, other):
         if isinstance(self, Hangar) and isinstance(other, Avion):
-            return self.duzina == other.duzina and self.sirina == other.rasponKrila and self.visina == other.visina
+            return self.duzina == other.duzina and self.sirina == other.raspon_krila and self.visina == other.visina
 
         elif isinstance(self, Avion) and isinstance(other, Hangar):
-            return self.duzina == other.duzina and self.rasponKrila == other.sirina and self.visina == other.visina
+            return self.duzina == other.duzina and self.raspon_krila == other.sirina and self.visina == other.visina
 
         return self.duzina == other.duzina and self.sirina == other.sirina and self.visina == other.visina
 
@@ -46,24 +43,21 @@ class Dimenzije:
 
     def __ge__(self, other):
         if isinstance(self, Hangar) and isinstance(other, Avion):
-            return self.duzina >= other.duzina and self.sirina >= other.rasponKrila and self.visina >= other.visina
+            return self.duzina >= other.duzina and self.sirina >= other.raspon_krila and self.visina >= other.visina
 
         elif isinstance(self, Avion) and isinstance(other, Hangar):
-            return self.duzina >= other.duzina and self.rasponKrila >= other.sirina and self.visina >= other.visina
+            return self.duzina >= other.duzina and self.raspon_krila >= other.sirina and self.visina >= other.visina
 
         return self.duzina >= other.duzina and self.sirina >= other.sirina and self.visina >= other.visina
 
     def __gt__(self, other):
         if isinstance(self, Hangar) and isinstance(other, Avion):
-            return self.duzina > other.duzina and self.sirina > other.rasponKrila and self.visina > other.visina
+            return self.duzina > other.duzina and self.sirina > other.raspon_krila and self.visina > other.visina
 
         elif isinstance(self, Avion) and isinstance(other, Hangar):
-            return self.duzina > other.duzina and self.rasponKrila > other.sirina and self.visina > other.visina
+            return self.duzina > other.duzina and self.raspon_krila > other.sirina and self.visina > other.visina
 
         return self.duzina > other.duzina and self.sirina > other.sirina and self.visina > other.visina
-
-
-        # poredjenja za sve objekte koji imaju dimenzije
 
 
 class Kolekcija(list):
@@ -106,8 +100,8 @@ class Aerodrom(OznakaINaziv, Kolekcija):
         hangari = ''
         for hangar in self:
             hangari = hangari + hangar.naziv + ', '
-        return 'Aerodrom - Naziv: ' + self.naziv + ', Adresa: ' + self.adresa + ', Mesto: ' + self.mesto \
-               + ', Hangari: ' + hangari
+        return "Aerodrom - Naziv: {}, Adresa: {}, Mesto: {}, Hangari: {}".format(self.naziv, self.adresa, self.mesto,
+                                                                                 hangari)
 
 
 class Hangar(OznakaINaziv, Dimenzije, Kolekcija):
@@ -124,19 +118,24 @@ class Hangar(OznakaINaziv, Dimenzije, Kolekcija):
 
 
 class Avion(OznakaINaziv, Dimenzije, Kolekcija):
-    def __init__(self, ID, naziv, duzina, sirina, visina, godiste, rasponKrila, nosivost, relacija):
+    def __init__(self, ID, naziv, duzina, sirina, visina, godiste, raspon_krila, nosivost, relacija):
         OznakaINaziv.__init__(self, ID, naziv)
         Dimenzije.__int__(self, duzina, sirina, visina)
         Kolekcija.__init__(self)
         self.godiste = godiste
-        self.rasponKrila = rasponKrila
+        self.raspon_krila = raspon_krila
         self.nosivost = nosivost
         self.relacija = relacija
 
     def __str__(self):
-        return 'Avion ' + OznakaINaziv.__str__(self) + ', Godiste: ' + str(self.godiste) + \
-               ', Raspon Krila: ' + str(self.rasponKrila) + ', Nosivost: ' + str(self.nosivost) + \
-               ', Relacije: ' + self.relacija
+        return 'Avion - Oznaka: {}, Godiste: {}, Raspon krila: {}, ' \
+            'Nosivost: {}, Relacija: {}'.format(self.id,
+                                                self.godiste,
+                                                str(
+                                                    self.raspon_krila),
+                                                str(
+                                                    self.nosivost),
+                                                self.relacija)
 
 
 class ProstorZaTeret(OznakaINaziv, Dimenzije, Kolekcija):
@@ -150,7 +149,4 @@ class ProstorZaTeret(OznakaINaziv, Dimenzije, Kolekcija):
         for r in self:
             roba = roba + r + ', '
 
-        return OznakaINaziv.__str__(self) + ' Roba: ' + roba
-
-
-
+        return 'Oznaka: {}, Naziv: {}, Roba: {}'.format(self.id, self.naziv, roba)
