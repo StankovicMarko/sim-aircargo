@@ -78,12 +78,12 @@ class LoginWindow(tk.Frame):
         self.passwordInput.delete(0,len(self.passwordInput.get())) # brise sve iz password box-a
 
         if self.checkBoxState.get() == 0:
-            self.controler.meni = gui.menibar.Menibar(self.controler)
             a = klase.login.Login(uname,passw)
 
             if a.uloga == None:
                 messagebox.showerror("Error!","Pogresan Username/Password")
             else:
+                self.controler.meni = gui.menibar.Menibar(self.controler)
                 print("Uspesno ste se ulogovali!")
                 print("Vi ste",a.ime,a.prezime,"a uloga",a.uloga)
 
