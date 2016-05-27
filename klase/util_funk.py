@@ -40,3 +40,12 @@ def sortPoStatusu(lista):
 	Sortiranje zahteva za transport po statusu
 	'''
 	return sorted(lista,key=lambda x: x[6])
+
+def proveraInputa(string):
+	bannedChars = ["`","~","!","@","#","$","%","^","&",
+	"*","(",")","_","+","-","=","[","]","{","}","'","|","\\","/","?",".","<",">",",",":",";",'"']
+
+	for i in string:
+		if i in bannedChars:
+			return False
+	return True
