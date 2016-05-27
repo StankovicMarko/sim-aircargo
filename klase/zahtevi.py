@@ -6,17 +6,8 @@ from klase.entiteti import OznakaINaziv
 class Zahtev(OznakaINaziv):
     def __init__(self, ID=None, naziv=None):
         OznakaINaziv.__init__(self, ID, naziv)
-        self.IDZahteva = self.odrediIDZahteva()
-        self.datumKreiranja = self.odrediDatum()
 
-    def odrediDatum(self):
-        return datetime.now().strftime("%d/%m/%Y")
 
-    def odrediIDZahteva(self):
-        lines = util.readFile("zahteviZaTransport.txt")
-        lastLine = lines[-1].split("|")
-        l = lastLine[0].split("#")
-        return "ZT#" + str(int(l[1]) + 1)
 
 class ZahtevZaSmestanjeAviona(Zahtev):
     def __init__(self, ID, naziv, hangar, avion, menadzerHangara):
@@ -35,6 +26,8 @@ class ZahtevZaSmestanjeAviona(Zahtev):
 class ZahtevZaTransport(Zahtev):
     def __init__(self, odrediste, IDPotrazitelja):
         Zahtev.__init__(self)
+        self.IDZahteva = self.odrediIDZahteva()
+        self.datumKreiranja = self.odrediDatum()
         self.datumTransporta = "None"
         self.odrediste = odrediste
         self.IDPotrazitelja = IDPotrazitelja
@@ -52,4 +45,13 @@ class ZahtevZaTransport(Zahtev):
             if l[4] == IDPotrazitelja:
                 print(l)
 
+
+    def odrediDatum(self):
+        return datetime.now().strftime("%d/%m/%Y")
+
+    def odrediIDZahteva(self):
+        lines = util.readFile("zahteviZaTransport.txt")
+        lastLine = lines[-1].split("|")
+        l = lastLine[0].split("#")
+        return "ZT#" + str(int(l[1]) + 1)
 
