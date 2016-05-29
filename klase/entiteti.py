@@ -114,7 +114,7 @@ class Kolekcija(Dimenzije, list):
 
     def dodaj(self, other):
         if isinstance(self, Aerodrom) and isinstance(other, Hangar) \
-                or isinstance(self,Avion) and isinstance(other, ProstorZaRobu):
+                or isinstance(self, Avion) and isinstance(other, ProstorZaRobu):
             list.append(self, other)
         else:
             list.append(self, other)
@@ -157,14 +157,15 @@ class Hangar(OznakaINaziv, Kolekcija):
 
 
 class Avion(OznakaINaziv, Kolekcija):
-    def __init__(self, ID, naziv, duzina, sirina, visina, godiste, raspon_krila, nosivost, relacija):
+    def __init__(self, ID, naziv, duzina, sirina, visina, raspon_krila, godiste, nosivost, relacija):
         OznakaINaziv.__init__(self, ID, naziv)
-        Kolekcija.__init__(self,duzina, sirina, visina)
+        Kolekcija.__init__(self, duzina, sirina, visina)
         self.raspon_krila = raspon_krila
         self.godiste = godiste
         self.nosivost = nosivost
         self.relacija = relacija
         self.se_nalazi = None
+        self.zahtev=None
 
     def __str__(self):
         return 'Avion - Oznaka: {}, Godiste: {}, Raspon krila: {}, ' \
@@ -180,7 +181,7 @@ class Avion(OznakaINaziv, Kolekcija):
 class ProstorZaRobu(OznakaINaziv, Kolekcija):
     def __init__(self, naziv, duzina, sirina, visina, ID=None):
         OznakaINaziv.__init__(self, ID, naziv)
-        Kolekcija.__init__(self,duzina, visina, sirina)
+        Kolekcija.__init__(self, duzina, visina, sirina)
 
     def __str__(self):
         roba = ''

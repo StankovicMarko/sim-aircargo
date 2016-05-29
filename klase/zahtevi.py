@@ -4,23 +4,37 @@ from klase.entiteti import OznakaINaziv
 
 
 class Zahtev(OznakaINaziv):
-    def __init__(self, ID, naziv=None):
+    def __init__(self, ID, naziv):
         OznakaINaziv.__init__(self, ID, naziv)
-        self.datumKreiranja = datetime.now()
+        self.vremeKreiranja = datetime.now()
 
 
 class ZahtevZaSmestanjeAviona(Zahtev):
-    def __init__(self, ID, naziv, hangar, avion, menadzerHangara):
+    def __init__(self, ID, avion, menadzer_hangara, naziv=None):
         Zahtev.__init__(self, ID, naziv)
-        self.vremeSmestanjaAviona = None
-        self.vremeNapustanjaHangara = None
-        self.hangar = hangar
+        self.vreme_smestanja_aviona = None
+        self.vreme_napustanja_hangara = None
+        self.hangar = None
         self.avion = avion
-        self.menadzer = menadzerHangara
+        self.menadzer = menadzer_hangara
 
     def __str__(self):
-        return 'Zahtev za smestanje aviona - Oznaka: '+self.id + ', ID hangara: '+ self.hangar.id \
-                + ', ID Aviona: ' + self.avion.id + ', ID Menadzera: ' + self.menadzer.id
+        if self.hangar is None:
+            return 'Zahtev za smestanje aviona - Oznaka: {}, Vreme kreiranja: {}, Vreme smestanja: {}, ' \
+               'Vreme napustanja: {}, ID Aviona: {}, ID Menadzera: {}'.format(
+                                                                        self.id, self.vremeKreiranja,
+                                                                        self.vreme_smestanja_aviona,
+                                                                        self.vreme_napustanja_hangara,
+                                                                        self.avion.id, self.menadzer.id)
+
+        else:
+            return 'Zahtev za smestanje aviona - Oznaka: {}, Vreme kreiranja: {}, Vreme smestanja: {}, ' \
+               'Vreme napustanja: {}, ID Hangara: {}, ID Aviona: {}, ID Menadzera: {}'.format(
+                                                                        self.id, self.vremeKreiranja,
+                                                                        self.vreme_smestanja_aviona,
+                                                                        self.vreme_napustanja_hangara,
+                                                                        self.hangar.id,
+                                                                        self.avion.id, self.menadzer.id)
 
 
 class ZahtevZaTransport(Zahtev):

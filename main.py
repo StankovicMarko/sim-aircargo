@@ -1,57 +1,69 @@
+import datetime as dt
+
 from gui.windows import Glavna
 from klase.korisnici import MenadzerHangara, Zaposlen, Osoba
-from klase.entiteti import Kolekcija, Aerodrom, Avion, Hangar, ProstorZaTeret
+from klase.entiteti import Kolekcija, Aerodrom, Avion, Hangar, ProstorZaRobu
 from klase.zahtevi import ZahtevZaSmestanjeAviona
 
 zahtevi_za_smestanje_aviona = []
 zahtevi_za_transport_robe = {'kreiran': [], 'odobren': [], 'robaUtovarena': [], 'robaTransportovana': []}
 avioni_u_hangarima = []
-avioni_van_hangara = []
+avioni_van_hangara = []  # deque
 aerodrom = Aerodrom('Nikola Tesla', 'Futoski Put', 'Novi Sad')
+menadzer_hangara = MenadzerHangara(1, 'Lepan', 'Lepavi', 'lepi', 12345)  # PROBA MEN HANGARA TREBA DA JE ULOGOVAN
 
 
 def main():
-    h = Hangar(1, 'HANG1', 100, 100, 30)
+    h1 = Hangar(1, 'HANG1', 100, 100, 30)
 
-    han = Hangar(2, 'hang007', 100, 100, 300)
+    h2 = Hangar(2, 'hang007', 100, 100, 300)
 
-    aerodrom.dodaj(han)
-    aerodrom.dodaj(h)
-    # avion = Avion(1, 'Av1', 5, 5, 5, 2012, 10, 10)
-    # avion.relacije.dodaj('Pariz')
-    # avion.relacije.dodaj('London')
-    # avion.relacije.dodaj('Lisabon')
-    #
-    # hangar.avioni.dodaj(avion)
-    # avioniUHangarima.extend(hangar.avioni)
+    aerodrom.dodaj(h1)
+    aerodrom.dodaj(h2)
+    a1 = Avion(1, 'Av1', 20, 10, 10, 20, 2012, 10, 'pariz')
+    a2 = Avion(2, 'Av2', 22, 12, 10, 30, 2010, 30, 'london')
+    a3 = Avion(3, 'Av3', 24, 10, 10, 30, 2005, 20, 'lisabon')
+    a4 = Avion(4, 'Av4', 25, 15, 8, 1500, 2006, 22, 'kijev')
+    a5 = Avion(5, 'Av5', 500, 500, 5, 10, 2008, 32, 'moskva')
+    a6 = Avion(6, 'Av6', 5, 5, 5, 2000, 2015, 42, 'kopenhagen')
 
-    men_hangara = MenadzerHangara(1, 'Lepan', 'Lepavi', 'lepi', 12345)
+    avioni_van_hangara.append(a1)
+    avioni_van_hangara.append(a2)
+    avioni_van_hangara.append(a3)
+    avioni_van_hangara.append(a4)
+    avioni_van_hangara.append(a5)
+    avioni_van_hangara.append(a6)
 
-    print(aerodrom, h, han, men_hangara, len(aerodrom), sep='\n')
-    #
-    # print(hangar < avion, hangar > avion, avion < hangar, avion > hangar)
-    # print()
-    # print(hangar >= avion, hangar <= avion, hangar == avion, avion >= hangar, avion <= hangar, avion == hangar,
-    #       avion != hangar, hangar != avion)
+    print(aerodrom, h1, h2, menadzer_hangara, len(aerodrom), sep='\n')
 
-    dodaj_hangar()
+    for i, avion in enumerate(avioni_van_hangara):
+        print(i,avion.zahtev)
 
-    for hangar in aerodrom:
-        print(hangar)
+    kreiraj_zahtev_za_smestanje_aviona()
 
-    dodaj_avion()
+    for i, avion in enumerate(avioni_van_hangara):
+        print(i,avion.zahtev)
 
-    for hangar in aerodrom:
-        print(hangar)
+    kreiraj_zahtev_za_smestanje_aviona()
 
-    for avion in avioni_u_hangarima:
+    for i, avion in enumerate(avioni_van_hangara):
+        print(i, avion.zahtev)
+
+    #print(avioni_u_hangarima[0].zahtev.menadzer.id)
+
+    for avion in avioni_van_hangara:
         print(avion)
 
-    print('---------')
-    for hangar in aerodrom:
-        for avion in hangar:
-            for pzt in avion:
-                print(pzt)
+    print('--------------')
+
+    smesti_avion_koji_ima_zahtev()
+
+    for avion in avioni_van_hangara:
+        print(avion)
+
+    print('****************')
+    for avion in avioni_u_hangarima:
+        print(avion)
 
 
 def prikazi_zahteve_za_smestanje_aviona():
@@ -80,7 +92,7 @@ def uzmi_inpute():
     return inputi
 
 
-def dodaj_hangar():
+def napravi_hangar():
     # u gui-u ce ovo uzimati input
     ID = len(aerodrom) + 1
     print('unesite Hangar treba nam: naziv, duzinu, sirinu, visinu')
@@ -93,63 +105,136 @@ def dodaj_hangar():
     aerodrom.dodaj(hangar)
 
 
-def dodaj_avion():
-    ID = len(avioni_u_hangarima)
-    print('unesite Avion treba nam: naziv,duzinu, sirinu, visinu, godiste, rasponKrila, nosivost, relacija')
+def napravi_avion():
+    ID = len(avioni_u_hangarima) + 1
+    print('unesite Avion treba nam: naziv,duzinu, sirinu, visinu, raspon_krila, godiste, nosivost, relacija')
     l = uzmi_inpute()
     while len(l) < 7:
         print('premalo unesenih inputa')
-        print('unesite Avion treba nam: naziv,duzinu, sirinu, visinu, godiste, rasponKrila, nosivost, relacija')
+        print('unesite Avion treba nam: naziv,duzinu, sirinu, visinu, raspon_krila, godiste, nosivost, relacija')
         l = uzmi_inpute()
-    avion = Avion(ID, naziv=l[0], duzina=int(l[1]), sirina=int(l[2]), visina=int(l[3]), godiste=l[4],
-                  raspon_krila=int(l[5]), nosivost=int(l[6]), relacija=l[7])
-    pr_za_ter = _napravi_prostor_za_teret()
+    avion = Avion(ID, naziv=l[0], duzina=int(l[1]), sirina=int(l[2]), visina=int(l[3]), raspon_krila=int(l[4]),
+                  godiste=l[5], nosivost=int(l[6]), relacija=l[7])
+    pr_za_ter = napravi_prostor_za_robu()
     while avion < pr_za_ter:
-        pr_za_ter = _napravi_prostor_za_teret()
+        pr_za_ter = napravi_prostor_za_robu()
 
     avion.dodaj(pr_za_ter)
     try:
-        _smesti(avion)
-    except:
-        print('Avion je prevelik i ne moze da stane ni u jedan hangar, molimo dodajte hangar,'
-              ' ovaj avion ce biti u aerodromu poslovnog partnera')
+        smesti_avion(avion)
+    except Exception as exc:
+        print(exc.args)
         avioni_van_hangara.append(avion)
 
 
-def _smesti(avion):
+def smesti_avion(avion):
+    smestio = False
     for hangar in aerodrom:
         if hangar > avion:
             hangar.dodaj(avion)
             avioni_u_hangarima.append(avion)
+            avion.se_nalazi = hangar
+            avion.zahtev.hangar = hangar
+            avion.zahtev.vreme_smestanja_aviona = dt.datetime.now()
+            smestio = True
             break
-    raise Warning
+    if smestio:
+        return
+    else:
+        raise Exception('Avion je prevelik', 'dodajte hangar ili oslobodite mesto', 'avion ce biti van aerodroma')
+#       ovo treba da bude notifikacija menadzeru hangara
 
 
-def _napravi_prostor_za_teret():
+def napravi_prostor_za_robu():
     print('unesite Prostor Za Teret treba nam: naziv, duzinu, sirinu, visinu')
     l = uzmi_inpute()
     while len(l) < 4:
         print('premalo unesenih inputa')
         print('unesite Prostor Za Teret treba nam: naziv, duzinu, sirinu, visinu')
         l = uzmi_inpute()
-    pr_za_ter = ProstorZaTeret(naziv=l[0], duzina=int(l[1]), sirina=int(l[2]), visina=int(l[3]), ID=None)
+    pr_za_ter = ProstorZaRobu(naziv=l[0], duzina=int(l[1]), sirina=int(l[2]), visina=int(l[3]), ID=None)
 
     return pr_za_ter
 
-    # def kreirajZahtevZaSmestanje():
-    #
-    #     for i, avion in enumerate(avioniVanHangara):
-    #         try:
-    #             _smesti(avion)
-    #             avionZaSmestanje=avioniVanHangara.pop(i)
-    #
-    #
-    #         except:
+
+def dodaj_prostor_za_robu(avion):
+    pzr = napravi_prostor_za_robu()
+    # ovde treba napraviti proveru postojeci prostor + ovaj sto sam napravio, ako moze dodaj, ako ne
+    # sugestiraj dimenzije koje su dozvoljene
+    while pzr > avion:
+        pzr = napravi_prostor_za_robu()
+    avion.dodaj(pzr)
 
 
-    # menHangara= MenadzerHangara("1","petar","peric", 'aaaa', 12345, )
+#   bez toga ne moze da se smesti avion
+def kreiraj_zahtev_za_smestanje_aviona():
+    prikazi_avione_koji_nemaju_zahtev()
+    dodaj_zahtev_avionu_van_hangara()
 
-    # print(menHangara)
+
+def prikazi_avione_koji_nemaju_zahtev():
+    for avion in avioni_van_hangara:
+        if avion.zahtev is None:
+            print(avion)
+
+
+def dodaj_zahtev_avionu_van_hangara():
+    id_aviona = None
+    while True:
+        try:
+            id_aviona = int(input('unesite ID aviona kojem zelite da napravite zahtev za smestanje: '))
+            break
+        except:
+            print('molimo unesite broj')
+    for i, avion in enumerate(avioni_van_hangara):
+        if avion.id == id_aviona:
+            id_zahteva = len(zahtevi_za_smestanje_aviona) + 1
+            zahtev = ZahtevZaSmestanjeAviona(id_zahteva, avion, menadzer_hangara)
+            zahtevi_za_smestanje_aviona.append(zahtev)
+            avion.zahtev = zahtev
+            break
+
+
+#   samo avoni sa zahtevom mogu da se smeste u hangar
+def smesti_avion_koji_ima_zahtev():
+    avioni = uzmi_avione_koji_imaju_zahtev_i_mogu_da_udju()
+    avion = uzmi_avion_van_hangara(avioni)
+    smesti_avion(avion)
+
+
+def uzmi_avione_koji_imaju_zahtev_i_mogu_da_udju():
+    avioni = []
+    for avion in avioni_van_hangara:
+        if avion.zahtev is not None:
+            for hangar in aerodrom:
+                if avion < hangar:
+                    if avion in avioni:
+                        continue
+                    else:
+                        avioni.append(avion)
+                        break
+
+    return avioni
+
+
+def uzmi_avion_van_hangara(avioni):
+    for avion in avioni:
+        print(avion)
+    id_aviona = None
+    while True:
+        try:
+            id_aviona = int(input('unesite ID aviona koji zelite da smestite: '))
+            break
+        except:
+            print('molimo unesite broj')
+    for i, avion in enumerate(avioni_van_hangara):
+        if avion.id == id_aviona:
+            return avioni_van_hangara.pop(i)
+
+
+
+
+#kad avion odleti treba zahtev da se obrise i da se doda novi
 
 
 if __name__ == "__main__":
