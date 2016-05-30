@@ -43,8 +43,9 @@ class ZahtevZaTransport(Zahtev):
         self.datumTransporta = "None"
         self.odrediste = odrediste
         self.IDPotrazitelja = IDPotrazitelja
-        self.oznakaAviona = "None"
+        self.avion = None #ovde ces napraviti referencu na avion koji moze da primi robu iz ovog zahteva
         self.statusZahteva = "kreiran"
+        self.roba=[]
 
         util.saveFile("zahteviZaTransport.txt",
                       self.IDZahteva + "|" + self.datumKreiranja + "|" + self.datumTransporta +

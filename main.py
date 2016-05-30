@@ -37,19 +37,19 @@ def main():
     print(aerodrom, h1, h2, menadzer_hangara, len(aerodrom), sep='\n')
 
     for i, avion in enumerate(avioni_van_hangara):
-        print(i,avion.zahtev)
+        print(i, avion.zahtev_smestanje)
 
     kreiraj_zahtev_za_smestanje_aviona()
 
     for i, avion in enumerate(avioni_van_hangara):
-        print(i,avion.zahtev)
+        print(i, avion.zahtev_smestanje)
 
     kreiraj_zahtev_za_smestanje_aviona()
 
     for i, avion in enumerate(avioni_van_hangara):
-        print(i, avion.zahtev)
+        print(i, avion.zahtev_smestanje)
 
-    #print(avioni_u_hangarima[0].zahtev.menadzer.id)
+    # print(avioni_u_hangarima[0].zahtev.menadzer.id)
 
     for avion in avioni_van_hangara:
         print(avion)
@@ -66,6 +66,7 @@ def main():
         print(avion)
 
 
+# menadzer hangara funkcionalnosti
 def prikazi_zahteve_za_smestanje_aviona():
     prikaz = ''
     for zahtev in zahtevi_za_smestanje_aviona:
@@ -134,15 +135,17 @@ def smesti_avion(avion):
             hangar.dodaj(avion)
             avioni_u_hangarima.append(avion)
             avion.se_nalazi = hangar
-            avion.zahtev.hangar = hangar
-            avion.zahtev.vreme_smestanja_aviona = dt.datetime.now()
+            avion.zahtev_smestanje.hangar = hangar
+            avion.zahtev_smestanje.vreme_smestanja_aviona = dt.datetime.now()
             smestio = True
             break
     if smestio:
         return
     else:
         raise Exception('Avion je prevelik', 'dodajte hangar ili oslobodite mesto', 'avion ce biti van aerodroma')
-#       ovo treba da bude notifikacija menadzeru hangara
+
+
+# ovo treba da bude notifikacija menadzeru hangara
 
 
 def napravi_prostor_za_robu():
@@ -174,7 +177,7 @@ def kreiraj_zahtev_za_smestanje_aviona():
 
 def prikazi_avione_koji_nemaju_zahtev():
     for avion in avioni_van_hangara:
-        if avion.zahtev is None:
+        if avion.zahtev_smestanje is None:
             print(avion)
 
 
@@ -191,11 +194,11 @@ def dodaj_zahtev_avionu_van_hangara():
             id_zahteva = len(zahtevi_za_smestanje_aviona) + 1
             zahtev = ZahtevZaSmestanjeAviona(id_zahteva, avion, menadzer_hangara)
             zahtevi_za_smestanje_aviona.append(zahtev)
-            avion.zahtev = zahtev
+            avion.zahtev_smestanje = zahtev
             break
 
 
-#   samo avoni sa zahtevom mogu da se smeste u hangar
+# samo avoni sa zahtevom mogu da se smeste u hangar
 def smesti_avion_koji_ima_zahtev():
     avioni = uzmi_avione_koji_imaju_zahtev_i_mogu_da_udju()
     avion = uzmi_avion_van_hangara(avioni)
@@ -205,7 +208,7 @@ def smesti_avion_koji_ima_zahtev():
 def uzmi_avione_koji_imaju_zahtev_i_mogu_da_udju():
     avioni = []
     for avion in avioni_van_hangara:
-        if avion.zahtev is not None:
+        if avion.zahtev_smestanje is not None:
             for hangar in aerodrom:
                 if avion < hangar:
                     if avion in avioni:
@@ -232,9 +235,61 @@ def uzmi_avion_van_hangara(avioni):
             return avioni_van_hangara.pop(i)
 
 
+def transportuj_robu():
+    for zahtev in zahtevi_za_transport_robe['robaUtovarena']:
+        for i, avion in enumerate(zahtev.avion.se_nalazi):
+            avion_koji_transportuje = zahtev.avion.se_nalazi.pop(i)
+            avion.se_nalazi = None
+            avion_koji_transportuje.zahtev_smetanja.vreme_napustanja_hangara=dt.datetime.now()
+            avion_koji_transportuje.zahtev_smetanja=None
+            avion_koji_transportuje.zahtev_transport=None
+            avioni_van_hangara.append(avion_koji_transportuje)
+            avioni_u_hangarima.remove(avion_koji_transportuje)
+            break
+    zahtevi_za_transport_robe['robaTransportovana'].extend(zahtevi_za_transport_robe['robaUtovarena'])
+    zahtevi_za_transport_robe['robaUtovarena'].clear()
+
+# kad avion odleti treba zahtev da se obrise i da se doda novi
 
 
-#kad avion odleti treba zahtev da se obrise i da se doda novi
+# radnik funkcionalnosti
+
+def radnik_vidi_zahteve():
+    prikaz = ''
+    for zahtev in zahtevi_za_transport_robe['odobren']:
+        prikaz = prikaz + zahtev + '\n'
+
+    return prikaz
+
+
+def radnik_utovari_robu():
+    radnik_vidi_zahteve()
+    id_zahteva = None
+    while True:
+        try:
+            id_zahteva = int(input('unesite ID aviona koji zelite da smestite: '))
+            break
+        except:
+            print('molimo unesite broj')
+
+#   ili iskoristi algoritam sto marko napravi
+    for i, zahtev in enumerate(zahtevi_za_transport_robe['odobren']):
+        if zahtev.id == id_zahteva:
+            for prostor in zahtev.avion:
+                for roba in zahtev.roba:
+                    prostor.dodaj(roba)
+                    #treba da se skine roba iz te liste
+                    #da ima indikator da je usla u avion ako ima vise prostora u avionu
+
+        zah_trans = zahtevi_za_transport_robe['odobren'].pop(i)
+        zahtevi_za_transport_robe['robaUtovarena'].append(zah_trans)
+        break
+
+
+# utovari robu u avion
+
+
+
 
 
 if __name__ == "__main__":
