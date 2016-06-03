@@ -39,10 +39,10 @@ class ZahtevZaSmestanjeAviona(Zahtev):
 
 
 class ZahtevZaTransport(Zahtev):
-    def __init__(self, odrediste, IDPotrazitelja):
-        Zahtev.__init__(self)
-        self.IDZahteva = self.odrediIDZahteva()
-        self.datumKreiranja = self.odrediDatum()
+    def __init__(self, odrediste, IDPotrazitelja, ID, naziv=None):
+        Zahtev.__init__(self, ID, naziv)
+        # self.IDZahteva = self.odrediIDZahteva()
+        # self.datumKreiranja = self.odrediDatum()
         self.datumTransporta = "None"
         self.odrediste = odrediste
         self.IDPotrazitelja = IDPotrazitelja
@@ -50,9 +50,9 @@ class ZahtevZaTransport(Zahtev):
         self.statusZahteva = "kreiran"
         self.roba=[]
 
-        util.saveFile("zahteviZaTransport.txt",
-                      self.IDZahteva + "|" + self.datumKreiranja + "|" + self.datumTransporta +
-                      "|" + self.odrediste + "|" + self.IDPotrazitelja + "|" + self.oznakaAviona + "|" + self.statusZahteva + "\n")
+        # util.saveFile("zahteviZaTransport.txt",
+        #               self.IDZahteva + "|" + self.datumKreiranja + "|" + self.datumTransporta +
+        #               "|" + self.odrediste + "|" + self.IDPotrazitelja + "|" + self.oznakaAviona + "|" + self.statusZahteva + "\n")
 
     def prikazZahteva(self, IDPotrazitelja):
         lines = util.readFile("zahteviZaTransport.txt")

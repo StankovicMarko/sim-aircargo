@@ -11,8 +11,8 @@ class Roba(object):
         self.tezina = tezina
         self.IDZahteva = IDZahteva
 
-        util.saveFile("roba.txt",self.oznaka+"|"+self.naziv+"|"+self.opis+"|"+
-            self.duzina+"|"+self.sirina+"|"+self.visina+"|"+self.tezina+"|"+self.IDZahteva+"\n")
+        # util.saveFile("roba.txt",self.oznaka+"|"+self.naziv+"|"+self.opis+"|"+
+        #     self.duzina+"|"+self.sirina+"|"+self.visina+"|"+self.tezina+"|"+self.IDZahteva+"\n")
 
 
     def odrediIDRobe(self):
