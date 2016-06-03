@@ -237,9 +237,9 @@ class PotraziteljPanel(tk.Frame):
 
                 zahtev.roba.append(klase.roba.Roba(l[0],l[1],l[2],l[3],l[4],l[5],zahtev.id))
 
-            main.zahtevi_za_transport_robe['kreiran'].append(zahtev)
-            for zahtev in main.zahtevi_za_transport_robe['kreiran']:
-                print(zahtev)
+            # main.zahtevi_za_transport_robe['kreiran'].append(zahtev)
+            # for zahtev in main.zahtevi_za_transport_robe['kreiran']:
+            #     print(zahtev)
 
     def prikaziIstoriju(self):
         '''

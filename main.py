@@ -293,13 +293,6 @@ from gui.windows import Glavna
 
 
 if __name__ == "__main__":
-<<<<<<< HEAD
-    # main()
-    application = Glavna()
-    application.mainloop()
-=======
     #main()
     application = Glavna()
     application.mainloop()
-
->>>>>>> featAerodrom

@@ -152,29 +152,43 @@ class ManagerTransportaPanel(tk.Frame):
 
 class ManagerHangaraPanel(tk.Frame):
     def __init__(self, parent, controler):
+        self.controler = controler
         tk.Frame.__init__(self, parent)
         nekiLabel = tk.Label(self, text="Ulogovani ste kao manager hangara")
         nekiLabel.grid()
-        self.listbox = tk.Listbox(self)
-        self.listbox.grid(row=2, columnspan=10, sticky='nsew')
+
         self.temp_duzina =0
         self.temp_sirina =0
         self.temp_visina =0
 
-        self.create_widgets()
+        # self.create_widgets()
 
     def create_widgets(self):
-        dug_smestanje = tk.Button(self, text="Zahtevi za smestanje aviona", command=self.zahtevi_smestanja)
+        self.frejm = tk.Frame(self)
+        self.frejm.grid()
+
+        self.listbox = tk.Listbox(self.frejm)
+        self.listbox.grid(row=2, columnspan=10, sticky='nsew')
+
+        dug_smestanje = tk.Button(self.frejm, text="Zahtevi za smestanje aviona", command=self.zahtevi_smestanja)
         dug_smestanje.grid(row=1, column=0)
 
-        dug_transport = tk.Button(self, text="Zahtevi za transport aviona", command=self.zahtevi_transport)
+        dug_transport = tk.Button(self.frejm, text="Zahtevi za transport aviona", command=self.zahtevi_transport)
         dug_transport.grid(row=1, column=1)
 
-        dug_dodaj_hangar = tk.Button(self, text='Dodaj hangar', command=self.add_hangar)
+        dug_dodaj_hangar = tk.Button(self.frejm, text='Dodaj hangar', command=self.add_hangar)
         dug_dodaj_hangar.grid(row=1, column=2)
 
-        dug_dodaj_avion = tk.Button(self, text='Napravi avion', command=self.add_avion)
+        dug_dodaj_avion = tk.Button(self.frejm, text='Napravi avion', command=self.add_avion)
         dug_dodaj_avion.grid(row=1, column=3)
+
+        self.logout_button = tk.Button(self.frejm,text="Log Out!",command=self.logout)
+        self.logout_button.grid()
+
+    def logout(self):
+        self.frejm.destroy()
+        self.controler.meni.destroy()
+        self.controler.show_frame(gui.windows.LoginWindow)
 
     def zahtevi_smestanja(self):
         zahtevi = hangar_funkcionalnosti.prikazi_zahteve_za_smestanje_aviona()

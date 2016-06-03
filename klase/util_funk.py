@@ -39,34 +39,6 @@ def sortPoDatumuRealizacije(lista):
 
 
 def sortPoStatusu(lista):
-<<<<<<< HEAD
-	'''
-	Sortiranje zahteva za transport po statusu
-	'''
-	return sorted(lista,key=lambda x: x[6])
-
-def proveraInputa(string):
-	'''
-	Proverava se da li input sadrzi zabranjeni karakter
-	'''
-	bannedChars = ["`","~","!","@","#","$","%","^","&",
-	"*","(",")","_","+","-","=","[","]","{","}","'","|","\\","/","?",".","<",">",",",":",";",'"']
-
-	for i in string:
-		if i in bannedChars:
-			return False
-	return True
-
-def proveraInputaBroj(broj):
-	'''
-	Provera da li je input broj
-	'''
-	try:
-		int(broj)
-		return True
-	except:
-		return False
-=======
     '''
     Sortiranje zahteva za transport po statusu
     '''
@@ -98,4 +70,3 @@ def proveraInputaBroj(broj):
         return True
     except:
         return False
->>>>>>> featAerodrom
