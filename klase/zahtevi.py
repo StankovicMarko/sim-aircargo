@@ -39,17 +39,25 @@ class ZahtevZaSmestanjeAviona(Zahtev):
 
 
 class ZahtevZaTransport(Zahtev):
-    def __init__(self, odrediste, IDPotrazitelja, ID=None, naziv=None):
-        Zahtev.__init__(self, ID, naziv)
-        self.IDZahteva = self.odrediIDZahteva()
-        self.datumKreiranja = self.odrediDatum()
+    def __init__(self,odrediste, IDPotrazitelja,IDZahteva=None, datumKreiranja=None,statusZahteva="kreiran", naziv=None):
+        Zahtev.__init__(self, IDZahteva, naziv)
+        if IDZahteva == None:
+            self.IDZahteva = self.odrediIDZahteva()
+        else:
+            self.IDZahteva = IDZahteva
+
+        if datumKreiranja == None:
+            self.datumKreiranja = self.odrediDatum()
+        else:
+            self.datumKreiranja = datumKreiranja
         self.datumTransporta = "None"
         self.odrediste = odrediste
         self.IDPotrazitelja = IDPotrazitelja
         self.avion = "None" #ovde ces napraviti referencu na avion koji moze da primi robu iz ovog zahteva
-        self.statusZahteva = "kreiran"
-        self.roba=[]
+        self.statusZahteva = statusZahteva
+        self.roba = []
 
+    def sacuvaj(self):
         util.saveFile("zahteviZaTransport.txt",
                       self.IDZahteva + "|" + self.datumKreiranja + "|" + self.datumTransporta +
                       "|" + self.odrediste + "|" + self.IDPotrazitelja + "|" + self.avion + "|" + self.statusZahteva + "\n")

@@ -229,6 +229,7 @@ class PotraziteljPanel(tk.Frame):
                     util.saveFile("korisnici.txt",line)
             
             zahtev = klase.zahtevi.ZahtevZaTransport(self.odredisteListBox.get(self.selektovanoOdrediste[0]),self.IDPotrazitelja)
+            zahtev.sacuvaj()
             messagebox.showinfo("OK!","Zahtev uspesno kreiran!\nVas ID:"+self.IDPotrazitelja)
 
             

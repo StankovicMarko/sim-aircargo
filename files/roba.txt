@@ -54,3 +54,4 @@ R#66|roba1|opis1|1|11|1|1|ZT#50
 R#67|roba2|opis2|2|2|2|2|ZT#50
 R#68|novi zah|novi zahtev|33|3|3|3|ZT#50
 R#69|jos jedan|jedan|3|3|3|3|ZT#50
+R#70|roba1|opis1|10|15|1|25|ZT#51
