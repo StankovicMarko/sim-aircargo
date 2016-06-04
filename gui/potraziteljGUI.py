@@ -5,6 +5,7 @@ import klase.zahtevi
 import klase.korisnici
 import klase.roba
 import klase.util_funk as util
+from klase import hangar_funkcionalnosti
 
 class PotraziteljPanel(tk.Frame):
     def __init__(self,parent,controler):
@@ -227,7 +228,7 @@ class PotraziteljPanel(tk.Frame):
                     line = self.IDPotrazitelja+"|"+ime+"|"+prezime+"|"+brojtelefona+"|"+email+"|potrazitelj"+"\n"
                     util.saveFile("korisnici.txt",line)
             
-            zahtev = klase.zahtevi.ZahtevZaTransport(self.odredisteListBox.get(self.selektovanoOdrediste[0]),self.IDPotrazitelja, 1)
+            zahtev = klase.zahtevi.ZahtevZaTransport(self.odredisteListBox.get(self.selektovanoOdrediste[0]),self.IDPotrazitelja)
             messagebox.showinfo("OK!","Zahtev uspesno kreiran!\nVas ID:"+self.IDPotrazitelja)
 
             
@@ -235,11 +236,11 @@ class PotraziteljPanel(tk.Frame):
             for i in range(self.RobaListBox.size()):
                 l = self.RobaListBox.get(i).split("|")
 
-                zahtev.roba.append(klase.roba.Roba(l[0],l[1],l[2],l[3],l[4],l[5],zahtev.id))
+                zahtev.roba.append(klase.roba.Roba(l[0],l[1],l[2],l[3],l[4],l[5],zahtev.IDZahteva))
 
-            # main.zahtevi_za_transport_robe['kreiran'].append(zahtev)
-            # for zahtev in main.zahtevi_za_transport_robe['kreiran']:
-            #     print(zahtev)
+            hangar_funkcionalnosti.zahtevi_za_transport_robe['kreiran'].append(zahtev)
+            for zahtev in hangar_funkcionalnosti.zahtevi_za_transport_robe['kreiran']:
+                print(zahtev)
 
     def prikaziIstoriju(self):
         '''

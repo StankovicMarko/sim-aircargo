@@ -11,8 +11,8 @@ class Roba(object):
         self.tezina = tezina
         self.IDZahteva = IDZahteva
 
-        # util.saveFile("roba.txt",self.oznaka+"|"+self.naziv+"|"+self.opis+"|"+
-        #     self.duzina+"|"+self.sirina+"|"+self.visina+"|"+self.tezina+"|"+self.IDZahteva+"\n")
+        util.saveFile("roba.txt",self.oznaka+"|"+self.naziv+"|"+self.opis+"|"+
+            self.duzina+"|"+self.sirina+"|"+self.visina+"|"+self.tezina+"|"+self.IDZahteva+"\n")
 
 
     def odrediIDRobe(self):
@@ -20,3 +20,6 @@ class Roba(object):
         lastLine = lines[-1].split("|")
         l = lastLine[0].split("#")
         return "R#"+str(int(l[1])+1)
+
+    def __str__(self):
+        return "Roba - {}".format(self.oznaka)

@@ -39,20 +39,20 @@ class ZahtevZaSmestanjeAviona(Zahtev):
 
 
 class ZahtevZaTransport(Zahtev):
-    def __init__(self, odrediste, IDPotrazitelja, ID, naziv=None):
+    def __init__(self, odrediste, IDPotrazitelja, ID=None, naziv=None):
         Zahtev.__init__(self, ID, naziv)
-        # self.IDZahteva = self.odrediIDZahteva()
-        # self.datumKreiranja = self.odrediDatum()
+        self.IDZahteva = self.odrediIDZahteva()
+        self.datumKreiranja = self.odrediDatum()
         self.datumTransporta = "None"
         self.odrediste = odrediste
         self.IDPotrazitelja = IDPotrazitelja
-        self.avion = None #ovde ces napraviti referencu na avion koji moze da primi robu iz ovog zahteva
+        self.avion = "None" #ovde ces napraviti referencu na avion koji moze da primi robu iz ovog zahteva
         self.statusZahteva = "kreiran"
         self.roba=[]
 
-        # util.saveFile("zahteviZaTransport.txt",
-        #               self.IDZahteva + "|" + self.datumKreiranja + "|" + self.datumTransporta +
-        #               "|" + self.odrediste + "|" + self.IDPotrazitelja + "|" + self.oznakaAviona + "|" + self.statusZahteva + "\n")
+        util.saveFile("zahteviZaTransport.txt",
+                      self.IDZahteva + "|" + self.datumKreiranja + "|" + self.datumTransporta +
+                      "|" + self.odrediste + "|" + self.IDPotrazitelja + "|" + self.avion + "|" + self.statusZahteva + "\n")
 
     def prikazZahteva(self, IDPotrazitelja):
         lines = util.readFile("zahteviZaTransport.txt")
@@ -70,4 +70,7 @@ class ZahtevZaTransport(Zahtev):
         lastLine = lines[-1].split("|")
         l = lastLine[0].split("#")
         return "ZT#" + str(int(l[1]) + 1)
+
+    def __str__(self):
+        return "Zahtev za transport - {}, Roba: {}".format(self.IDZahteva,self.roba)
 

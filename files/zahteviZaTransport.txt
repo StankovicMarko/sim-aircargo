@@ -25,3 +25,14 @@ ZT#31|22/05/2016|None|London|K#13|None|kreiran
 ZT#32|27/05/2016|None|Dubai|K#10|None|kreiran
 ZT#33|27/05/2016|None|Dubai|K#14|None|kreiran
 ZT#34|27/05/2016|None|Dubai|K#14|None|kreiran
+ZT#35|04/06/2016|None|Pariz|K#10|None|kreiran
+ZT#36|04/06/2016|None|Dubai|K#10|None|kreiran
+ZT#37|04/06/2016|None|London|K#10|None|kreiran
+ZT#38|04/06/2016|None|Pariz|K#10|None|kreiran
+ZT#39|04/06/2016|None|London|K#10|None|kreiran
+ZT#40|04/06/2016|None|Pariz|K#10|None|kreiran
+ZT#41|04/06/2016|None|Dubai|K#10|None|kreiran
+ZT#42|04/06/2016|None|Dubai|K#10|None|kreiran
+ZT#43|04/06/2016|None|Pariz|K#10|None|kreiran
+ZT#44|04/06/2016|None|Pariz|K#10|None|kreiran
+ZT#45|04/06/2016|None|London|K#10|None|kreiran
