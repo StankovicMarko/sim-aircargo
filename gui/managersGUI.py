@@ -11,6 +11,8 @@ class ManagerTransportaPanel(tk.Frame):
         tk.Frame.__init__(self, parent)
         self.controler = controler
         self.createWidgets()
+        self.priv = []
+
         # self.prikaZahtevaHeaderWidgets()
 
     def createWidgets(self):
@@ -71,9 +73,15 @@ class ManagerTransportaPanel(tk.Frame):
         self.prikaz(self.controler.m.prikazZahteva())
 
     def prikaz(self, lista):
-        self.priv = []
+        '''
+        Kreiramo jednu listu i stavljamo je u recnik pod kljuc counter, i tako joj posle pristupamo
+        '''
+        self.recnik = {} # ovde cuvamo sve checkbox-ove, "counter":"i"
+        self.checkboxovi = []
+        counter = -1 # izracunava koji je redni broj checkbox-a
         r = -1
         for i in lista:
+            counter += 1
             r += 1
             a = tk.Label(self.newFrejm, text=i[0])
             a.grid(row=r, column=0, sticky="w")
@@ -117,12 +125,14 @@ class ManagerTransportaPanel(tk.Frame):
             a12 = tk.Label(self.newFrejm, text="   ")
             a12.grid(row=r, column=13)
             self.priv.append(a12)
-            a13 = tk.Checkbutton(self.newFrejm, text="")
+            a13 = tk.Checkbutton(self.newFrejm, text="", command=lambda counter=counter: self.odobri(counter)) # svaki put kad se checkira dugme, salje se counter, pa se zna tacno koje dugme je kliknuto
             a13.grid(row=r, column=14)
             self.priv.append(a13)
             a15 = tk.Label(self.newFrejm, text=" ")
             a15.grid(row=r, column=15)
             self.priv.append(a15)
+            self.recnik[counter] = i # dodeljujemo i (jedna lista) pod kljuc counter
+
 
     def sortedPrikaz(self, broj):
         for p in self.priv:
@@ -148,6 +158,9 @@ class ManagerTransportaPanel(tk.Frame):
         self.canvas.destroy()
         self.controler.meni.destroy()
         self.controler.show_frame(gui.windows.LoginWindow)
+
+    def odobri(self,counter):
+        print(self.recnik[counter])
 
 
 class ManagerHangaraPanel(tk.Frame):
