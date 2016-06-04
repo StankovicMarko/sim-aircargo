@@ -237,7 +237,9 @@ class PotraziteljPanel(tk.Frame):
             for i in range(self.RobaListBox.size()):
                 l = self.RobaListBox.get(i).split("|")
 
-                zahtev.roba.append(klase.roba.Roba(l[0],l[1],l[2],l[3],l[4],l[5],zahtev.IDZahteva))
+                r = klase.roba.Roba(l[0],l[1],l[2],l[3],l[4],l[5],zahtev.IDZahteva)
+                r.sacuvaj()
+                zahtev.roba.append(r)
 
             hangar_funkcionalnosti.zahtevi_za_transport_robe['kreiran'].append(zahtev)
             for zahtev in hangar_funkcionalnosti.zahtevi_za_transport_robe['kreiran']:
