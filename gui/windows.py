@@ -39,6 +39,7 @@ class LoginWindow(tk.Frame):
         self.createWidgets()
         self.controler = controler
         self.controler.title("Aplikacija")
+        self.controler.bind("<Return>",lambda x: self.login())
 
     def createWidgets(self):
         self.loginFrame = tk.Frame(self)
