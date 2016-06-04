@@ -5,14 +5,13 @@ import klase.util_funk as util
 from klase import hangar_funkcionalnosti
 import tkinter.messagebox
 
+hangar_funkcionalnosti.ucitajZahteveIRobu()
 
 class ManagerTransportaPanel(tk.Frame):
     def __init__(self, parent, controler):
         tk.Frame.__init__(self, parent)
         self.controler = controler
         self.createWidgets()
-        self.priv = []
-
         # self.prikaZahtevaHeaderWidgets()
 
     def createWidgets(self):
@@ -79,6 +78,7 @@ class ManagerTransportaPanel(tk.Frame):
         self.recnik = {} # ovde cuvamo sve checkbox-ove, "counter":"i"
         self.checkboxovi = []
         counter = -1 # izracunava koji je redni broj checkbox-a
+        self.priv = []
         r = -1
         for i in lista:
             counter += 1
@@ -133,6 +133,9 @@ class ManagerTransportaPanel(tk.Frame):
             self.priv.append(a15)
             self.recnik[counter] = i # dodeljujemo i (jedna lista) pod kljuc counter
 
+            if i[6] != "kreiran":
+                a13.config(state="disabled")
+
 
     def sortedPrikaz(self, broj):
         for p in self.priv:
@@ -161,6 +164,31 @@ class ManagerTransportaPanel(tk.Frame):
 
     def odobri(self,counter):
         print(self.recnik[counter])
+
+        zahtev = None
+
+        for z in hangar_funkcionalnosti.zahtevi_za_transport_robe['kreiran']:
+            if z.IDZahteva == self.recnik[counter][0]:
+                zahtev = z
+                break
+
+
+        for avion in hangar_funkcionalnosti.avioni_u_hangarima:
+            if avion.relacija == zahtev.odrediste:
+                print("relacija pronadjena - ",avion.relacija)
+
+                for prostor in avion:
+                    print(prostor)
+
+                for r in zahtev.roba:
+                    print(r)
+
+                # for zah in hangar_funkcionalnosti.zahtevi_za_transport_robe['kreiran']:
+                #     for rnj in zah.roba:
+                #         print(rnj.duzina)
+
+            # else:
+            #     tkinter.messagebox.showerror("Error!","Ne postoji trazeno odrediste!")
 
 
 class ManagerHangaraPanel(tk.Frame):

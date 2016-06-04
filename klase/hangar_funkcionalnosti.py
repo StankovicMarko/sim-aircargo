@@ -2,9 +2,14 @@ from klase.korisnici import MenadzerHangara, Zaposlen, Osoba
 from klase.entiteti import Aerodrom, Avion, Hangar, ProstorZaRobu
 from klase.zahtevi import ZahtevZaSmestanjeAviona
 import datetime as dt
+# Marko J dodao:
+import klase.util_funk as util
+import klase.zahtevi
+import klase.roba
+
 
 zahtevi_za_smestanje_aviona = []
-zahtevi_za_transport_robe = {'kreiran': [], 'odobren': [], 'robaUtovarena': [], 'robaTransportovana': []}
+zahtevi_za_transport_robe = {'kreiran': [], 'odobren': [], 'utovaren': [], 'izvrsen': []}
 avioni_u_hangarima = []
 avioni_van_hangara = []  # deque
 aerodrom = Aerodrom('Nikola Tesla', 'Futoski Put', 'Novi Sad')
@@ -199,19 +204,32 @@ def transportuj_robu():
     zahtevi_za_transport_robe['robaTransportovana'].extend(zahtevi_za_transport_robe['robaUtovarena'])
     zahtevi_za_transport_robe['robaUtovarena'].clear()
 
-# h1 = Hangar(1, 'HANG1', 100, 100, 30)
+h1 = Hangar(1, 'HANG1', 100, 100, 30)
 #
 # h2 = Hangar(2, 'hang007', 100, 100, 300)
 #
-# aerodrom.dodaj(h1)
+aerodrom.dodaj(h1)
 # aerodrom.dodaj(h2)
-# a1 = Avion(1, 'Av1', 20, 10, 10, 20, 2012, 10, 'pariz')
-# a2 = Avion(2, 'Av2', 22, 12, 10, 30, 2010, 30, 'london')
+a1 = Avion(1, 'Av1', 20, 10, 10, 20, 2012, 10, 'Pariz')
+a2 = Avion(2, 'Av2', 22, 12, 10, 30, 2010, 30, 'London')
 # a3 = Avion(3, 'Av3', 24, 10, 10, 30, 2005, 20, 'lisabon')
 # a4 = Avion(4, 'Av4', 25, 15, 8, 1500, 2006, 22, 'kijev')
 # a5 = Avion(5, 'Av5', 500, 500, 5, 10, 2008, 32, 'moskva')
 # a6 = Avion(6, 'Av6', 5, 5, 5, 2000, 2015, 42, 'kopenhagen')
 #
+
+p1 = ProstorZaRobu("p1","10","10","10")
+a1.dodaj(p1)
+
+p2 = ProstorZaRobu("p2","12","15","8")
+a2.dodaj(p2)
+
+# h1.dodaj(a1)
+# h1.dodaj(a2)
+
+avioni_u_hangarima.append(a1)
+avioni_u_hangarima.append(a2)
+
 # avioni_van_hangara.append(a1)
 # avioni_van_hangara.append(a2)
 # avioni_van_hangara.append(a3)
@@ -249,3 +267,25 @@ def transportuj_robu():
 # print('****************')
 # for avion in avioni_u_hangarima:
 #     print(avion)
+
+
+# men transporta...
+
+def ucitajZahteveIRobu():
+    zahteviLines = util.readFile("zahteviZaTransport.txt")
+    robaLines = util.readFile("roba.txt")
+
+    for linija in zahteviLines:
+        z = linija.strip().split("|")
+        zahtev = klase.zahtevi.ZahtevZaTransport(z[3],z[4],z[0],z[2],z[6])
+        
+        for rlinija in robaLines:
+            r = rlinija.strip().split("|")
+            if r[7] == z[0]:
+                robaa = klase.roba.Roba(r[1],r[2],r[3],r[4],r[5],r[6],r[7],r[0])
+                zahtev.roba.append(robaa)
+
+        zahtevi_za_transport_robe[zahtev.statusZahteva].append(zahtev)
+
+    for znj in zahtevi_za_transport_robe['kreiran']: # ovo je samo za test, mos brisati kasnije..
+        print(znj)
