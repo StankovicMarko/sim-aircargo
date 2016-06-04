@@ -72,5 +72,8 @@ class ZahtevZaTransport(Zahtev):
         return "ZT#" + str(int(l[1]) + 1)
 
     def __str__(self):
-        return "Zahtev za transport - {}, Roba: {}".format(self.IDZahteva,self.roba)
+        robe = ""
+        for r in self.roba:
+            robe += r.oznaka+" "
+        return "Zahtev za transport - {}, Roba: {}".format(self.IDZahteva,robe)
 

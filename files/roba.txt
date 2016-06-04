@@ -41,3 +41,16 @@ R#53|test|test|3|32|2|2|ZT#34
 R#54|roba1|opis1|10|10|1|100|ZT#44
 R#55|roba2|opis2|2|1|1|10|ZT#44
 R#56|roba1|novi zahtev|10|10|2|100|ZT#45
+R#57|roba1|opis1|1|1|1|1|ZT#46
+R#58|roba2|opis2|2|2|2|2|ZT#46
+R#59|roba1|opis|1|2|2|22|ZT#47
+R#60|roba2|opis2|3|4|2|22|ZT#47
+R#61|roba1|opis|1|2|2|22|ZT#48
+R#62|roba2|opis2|3|4|2|22|ZT#48
+R#63|novo|nova roba|3|34|32|2|ZT#48
+R#64|roba1|opis1|1|11|1|1|ZT#49
+R#65|roba2|opis2|2|2|2|2|ZT#49
+R#66|roba1|opis1|1|11|1|1|ZT#50
+R#67|roba2|opis2|2|2|2|2|ZT#50
+R#68|novi zah|novi zahtev|33|3|3|3|ZT#50
+R#69|jos jedan|jedan|3|3|3|3|ZT#50
