@@ -112,3 +112,14 @@ class ManagerTransport(Zaposlen):
             l = line.strip().split("|")
             zahtevi.append(l)
         return zahtevi
+
+    def prikazZahtevaSmestanje(self):
+        '''
+        Vraca sve zahteve za smestanje
+        '''
+        zahtevi = []
+        lines = util.readFile("zahteviZaSmestanje.txt")
+        for line in lines:
+            l = line.strip().split("|")
+            zahtevi.append(l)
+        return zahtevi
