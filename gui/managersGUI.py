@@ -4,6 +4,7 @@ import gui.windows
 import klase.util_funk as util
 from klase import hangar_funkcionalnosti
 import tkinter.messagebox
+import copy
 
 hangar_funkcionalnosti.ucitajZahteveIRobu()
 
@@ -31,7 +32,10 @@ class ManagerTransportaPanel(tk.Frame):
         self.logoutButton.grid(column=1)
 
     def function(self, event):
-        self.canvas.configure(scrollregion=self.canvas.bbox("all"))
+        try:
+            self.canvas.configure(scrollregion=self.canvas.bbox("all"))
+        except:
+            self.canvas1.configure(scrollregion=self.canvas1.bbox("all"))
 
     def prikaZahtevaHeaderWidgets(self):
         self.headerFrame = tk.Frame(self.frejmZahtevi)
@@ -51,7 +55,8 @@ class ManagerTransportaPanel(tk.Frame):
 
     def prikazZahtevaTransportWidgets(self):
         try:
-            self.znj1.destroy()
+            # self.znj1.destroy()
+            self.canvas1.destroy()
         except:
             pass
 
@@ -132,6 +137,7 @@ class ManagerTransportaPanel(tk.Frame):
             a15.grid(row=r, column=15)
             self.priv.append(a15)
             self.recnik[counter] = i # dodeljujemo i (jedna lista) pod kljuc counter
+            self.checkboxovi.append(a13) # dodeljujemo u ovu listu da bi znali koji je checkbox kliknut
 
             if i[6] != "kreiran":
                 a13.config(state="disabled")
@@ -153,35 +159,70 @@ class ManagerTransportaPanel(tk.Frame):
         self.canvas.destroy()
         self.prikazTransportButton.config(state="normal")
         self.prikazSmestanjeButton.config(state="disabled")
-        self.znj1 = tk.Label(self.frejmZahtevi, text="hello1")
-        self.znj1.grid(sticky="nsew")
+
+        self.canvas1 = tk.Canvas(self.frejmZahtevi, bg="red", width=590)
+        self.scrollbar1 = tk.Scrollbar(self.frejmZahtevi, orient="vertical", command=self.canvas1.yview)
+        self.newFrejm1 = tk.Frame(self.canvas1, bd=1, relief="solid")
+        self.canvas1.configure(yscrollcommand=self.scrollbar1.set)
+
+        self.scrollbar1.grid(row=0, rowspan=2, column=9, sticky="ns")
+        self.canvas1.grid(row=1, columnspan=9, sticky="nsew")
+        self.canvas1.create_window((0, 0), window=self.newFrejm1, anchor='n')
+        self.newFrejm1.bind("<Configure>", self.function)
+
+        self.prikazTransportButton.config(state="normal")
+        self.prikazSmestanjeButton.config(state="disabled")
+
+        self.prikaz1(self.controler.m.prikazZahtevaSmestanje())
+
+
+
+    def prikaz1(self,lista):
+        for i in lista:
+            tk.Label(self.newFrejm1,text=i).grid()
 
     def logout(self):
         self.headerFrame.destroy()
         self.canvas.destroy()
+        self.canvas1.destroy()
         self.controler.meni.destroy()
         self.controler.show_frame(gui.windows.LoginWindow)
 
     def odobri(self,counter):
         print(self.recnik[counter])
+        self.checkboxovi[counter].config(state="disabled")
 
         zahtev = None
 
-        for z in hangar_funkcionalnosti.zahtevi_za_transport_robe['kreiran']:
+        for z in hangar_funkcionalnosti.zahtevi_za_transport_robe['kreiran']: # pronalazi sve 'kreiran' zahteve
             if z.IDZahteva == self.recnik[counter][0]:
                 zahtev = z
                 break
 
 
-        for avion in hangar_funkcionalnosti.avioni_u_hangarima:
+        for avion in hangar_funkcionalnosti.avioni_u_hangarima: # za svaki avion u hangaru trazi da li odgovara odrediste
             if avion.relacija == zahtev.odrediste:
                 print("relacija pronadjena - ",avion.relacija)
 
-                for prostor in avion:
-                    print(prostor)
+                avionCopy = copy.deepcopy(avion)
+                for prostor in avionCopy: # za svaki prostor u avion-kopiji proba da smesti robu
+                    print("Dimenzije prostora",prostor.duzina,prostor.visina,prostor.sirina)
+                    for r in zahtev.roba:
+                        print("Dimenzije robe",r.duzina,r.sirina,r.visina)
+                        if r < prostor:
+                            prostor.dodaj(r)
+                            print("naso :)")
+                            print(avion.naziv)
+                    if len(prostor) == len(zahtev.roba):
+                        # odobri?!
+                        print("odobren",zahtev.IDZahteva)
+                        pass
 
-                for r in zahtev.roba:
-                    print(r)
+                for prostor1 in avionCopy:
+                    for nesto in prostor1:
+                        print(nesto)
+                # print(r.duzina,r.sirina,r.visina)
+
 
                 # for zah in hangar_funkcionalnosti.zahtevi_za_transport_robe['kreiran']:
                 #     for rnj in zah.roba:

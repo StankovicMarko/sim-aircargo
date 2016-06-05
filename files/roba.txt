@@ -55,3 +55,7 @@ R#67|roba2|opis2|2|2|2|2|ZT#50
 R#68|novi zah|novi zahtev|33|3|3|3|ZT#50
 R#69|jos jedan|jedan|3|3|3|3|ZT#50
 R#70|roba1|opis1|10|15|1|25|ZT#51
+R#71|kafa|crna kafa|1|1|1|10|ZT#52
+R#72|paradajz|dzak paradajza|2|100|1|10|ZT#52
+R#73|metal|kutija metala|2|2|2|50|ZT#52
+R#74|roba1|opis1|2|2|2|2|ZT#53
