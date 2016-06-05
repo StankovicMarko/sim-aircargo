@@ -183,8 +183,14 @@ class ManagerTransportaPanel(tk.Frame):
 
     def logout(self):
         self.headerFrame.destroy()
-        self.canvas.destroy()
-        self.canvas1.destroy()
+        try:
+            self.canvas.destroy()
+            try:
+                self.canvas1.destroy()
+            except:
+                pass
+        except:
+            self.canvas1.destroy()
         self.controler.meni.destroy()
         self.controler.show_frame(gui.windows.LoginWindow)
 

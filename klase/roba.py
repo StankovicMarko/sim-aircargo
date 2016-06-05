@@ -26,4 +26,4 @@ class Roba(object):
         return "R#"+str(int(l[1])+1)
 
     def __str__(self):
-        return "Roba - {}".format(self.oznaka)
+        return "Roba - {}, Naziv {}, Opis - {}, Duzina:{},Sirina:{},Visina:{},Tezina:{}".format(self.oznaka,self.naziv,self.opis,self.duzina,self.sirina,self.visina,self.tezina)
