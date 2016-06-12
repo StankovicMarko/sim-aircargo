@@ -1,15 +1,41 @@
-from klase.korisnici import MenadzerHangara, Zaposlen, Osoba
+from klase.korisnici import MenadzerHangara
 from klase.entiteti import Aerodrom, Avion, Hangar, ProstorZaRobu
+from klase.util_funk import snimi_entitet, ucitaj_entitet
 from klase.zahtevi import ZahtevZaSmestanjeAviona
 import datetime as dt
 
-zahtevi_za_smestanje_aviona = []
-zahtevi_za_transport_robe = {'kreiran': [], 'odobren': [], 'robaUtovarena': [], 'robaTransportovana': []}
-avioni_u_hangarima = []
-avioni_van_hangara = []  # deque
-aerodrom = Aerodrom('Nikola Tesla', 'Futoski Put', 'Novi Sad')
+# zahtevi_za_smestanje_aviona = []
+# zahtevi_za_transport_robe = {'kreiran': [], 'odobren': [], 'robaUtovarena': [], 'robaTransportovana': []}
+# avioni_u_hangarima = []
+# avioni_van_hangara = []  # deque
+#aerodrom = Aerodrom('Nikola Tesla', 'Futoski Put', 'Novi Sad')
+# menadzer_hangara = MenadzerHangara(1, 'Lepan', 'Lepavi', 'lepi', 12345)  # PROBA MEN HANGARA TREBA DA JE ULOGOVAN
+# temp_prostor_za_robu = []
+
+zahtevi_za_smestanje_aviona = None
+zahtevi_za_transport_robe = None
+avioni_u_hangarima = None
+avioni_van_hangara = None
+aerodrom = None
 menadzer_hangara = MenadzerHangara(1, 'Lepan', 'Lepavi', 'lepi', 12345)  # PROBA MEN HANGARA TREBA DA JE ULOGOVAN
 temp_prostor_za_robu = []
+
+
+# def ucitaj_sve_entitete():
+#     zahtevi_za_smestanje_aviona=ucitaj_entitet('zahteviZaSmestanjeAviona.txt')
+#     zahtevi_za_transport_robe = ucitaj_entitet('zahteviZaTransportRobe.txt')
+#     avioni_u_hangarima = ucitaj_entitet('avioniUHangarima.txt')
+#     avioni_van_hangara = ucitaj_entitet('avioniVanHangara.txt')
+#     aerodrom = ucitaj_entitet('aerodrom.txt')
+
+
+
+def snimi_sve_entitete():
+    snimi_entitet(zahtevi_za_smestanje_aviona, 'zahteviZaSmestanjeAviona.txt')
+    snimi_entitet(zahtevi_za_transport_robe, 'zahteviZaTransportRobe.txt')
+    snimi_entitet(avioni_u_hangarima, 'avioniUHangarima.txt')
+    snimi_entitet(avioni_van_hangara, 'avioniVanHangara.txt')
+    snimi_entitet(aerodrom, 'aerodrom.txt')
 
 
 def prikazi_zahteve_za_smestanje_aviona():
@@ -53,7 +79,7 @@ def napravi_hangar(naziv, duzina, sirina, visina):
 
 
 def napravi_avion(naziv, duzina, sirina, visina, raspon_krila, godiste, nosivost, relacija):
-    ID = len(avioni_u_hangarima) +len(avioni_van_hangara) + 1
+    ID = len(avioni_u_hangarima) + len(avioni_van_hangara) + 1
     # print('unesite Avion treba nam: naziv,duzinu, sirinu, visinu, raspon_krila, godiste, nosivost, relacija')
     # l = uzmi_inpute()
     # while len(l) < 7:
@@ -69,7 +95,7 @@ def napravi_avion(naziv, duzina, sirina, visina, raspon_krila, godiste, nosivost
     avion.extend(temp_prostor_za_robu)
     temp_prostor_za_robu.clear()
 
-    #avion.dodaj(pr_za_ter)
+    # avion.dodaj(pr_za_ter)
     try:
         smesti_avion(avion)
     except Exception as exc:

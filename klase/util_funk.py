@@ -1,10 +1,17 @@
 from datetime import datetime
 import os
 
+import pickle
+
+
+def set_path(file_name):
+    fullPath = os.path.dirname(os.path.abspath(__file__))
+    path = os.path.join(fullPath, "..", "files", file_name)
+    return path
+
 
 def readFile(filename):
-    fullPath = os.path.dirname(os.path.abspath(__file__))
-    path = os.path.join(fullPath, "..", "files", filename)
+    path = set_path(filename)
 
     f = open(path, "r")
     lines = f.readlines()
@@ -13,8 +20,7 @@ def readFile(filename):
 
 
 def saveFile(filename, string):
-    fullPath = os.path.dirname(os.path.abspath(__file__))
-    path = os.path.join(fullPath, "..", "files", filename)
+    path = set_path(filename)
 
     f = open(filename, "a")
     f.write(string)
@@ -70,3 +76,15 @@ def proveraInputaBroj(broj):
         return True
     except:
         return False
+
+
+def ucitaj_entitet(file_name):
+    path = set_path(file_name)
+    with open(path, 'rb') as f:
+        return pickle.load(f)
+
+
+def snimi_entitet(data, file_name):
+    path = set_path(file_name)
+    with open(path, 'wb') as f:
+        pickle.dump(data, f, pickle.HIGHEST_PROTOCOL)

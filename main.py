@@ -1,5 +1,6 @@
 import datetime as dt
 
+from klase import hangar_funkcionalnosti
 from gui.windows import Glavna
 # from klase.korisnici import MenadzerHangara, Zaposlen, Osoba
 # from klase.entiteti import Kolekcija, Aerodrom, Avion, Hangar, ProstorZaRobu
@@ -287,13 +288,17 @@ from gui.windows import Glavna
 
 
 # utovari robu u avion
-
-
-
-
+from klase.util_funk import ucitaj_entitet
 
 if __name__ == "__main__":
     #main()
+    hangar_funkcionalnosti.zahtevi_za_smestanje_aviona = ucitaj_entitet('zahteviZaSmestanjeAviona.txt')
+    hangar_funkcionalnosti.zahtevi_za_transport_robe = ucitaj_entitet('zahteviZaTransportRobe.txt')
+    hangar_funkcionalnosti.avioni_u_hangarima = ucitaj_entitet('avioniUHangarima.txt')
+    hangar_funkcionalnosti.avioni_van_hangara = ucitaj_entitet('avioniVanHangara.txt')
+    hangar_funkcionalnosti.aerodrom = ucitaj_entitet('aerodrom.txt')
+
     application = Glavna()
     application.mainloop()
+    hangar_funkcionalnosti.snimi_sve_entitete()
 

@@ -373,3 +373,9 @@ class ManagerHangaraPanel(tk.Frame):
         else:
             tk.messagebox.showerror('Invalid inputs',
                                     'Molimo unesite validne inpute str/int/int/int ili manje dimenzije')
+
+
+    #dodaj zahtev
+            #list box u petlji insert str(avion)
+            #imam dugme dodaj zahtev
+            #salje id i kreira zahtev
