@@ -1,10 +1,12 @@
 class OznakaINaziv(object):
+    """Klasa sadrzi: Oznaku (id) i naziv (ime) svih entiteta u projektu"""
     def __init__(self, ID, naziv):
         self.id = ID
         self.naziv = naziv
 
 
 class Dimenzije:
+    """Ova klasa sadrzi podatke o dimenzijama, svaki objekat koji ima dimenziju nasledjuje ovu klasu"""
     def __int__(self, duzina, sirina, visina):
         self.duzina = duzina
         self.sirina = sirina
@@ -13,7 +15,44 @@ class Dimenzije:
     def smanji_dimenzije(self, other):
         """umanjuje dimenzije objekta self za dimenzije objekta other. Funkcija ce smanjiti onu dimenziju
         objekta self koja je suprotna vecoj. npr ako je sirina objekta other veca od njegove duzine, self-u
-        ce se smanjiti duzina"""
+        ce se smanjiti duzina. Graficki primer je
+
+                    HANGAR        sirina=60                 |              HANGAR        sirina=60
+        +------------------------------------------+        |  +------------------------------------------+
+        |                                          |        |  | +---------------+     X    X       X     |
+        |                                          |        |  | |               |  X      X    X      X  |
+        |                                          |        |  | |               |      zauzet prostor    |
+        |                                          |        |  | |               |   X                 X  |
+        |                                          |d       |  | |               |    X  X   X   X  X     |d
+        |                                          |u       |  | +---------------+      X      X     X  X |u
+        |                                          |z=40    |  +------------------------------------------+z=40
+        |                                          |i       |  |                                          |i
+        |                                          |n       |  |                                          |n
+        |                                          |a       |  |                                          |a
+        |                                          |        |  |                                          |
+        |                                          |        |  |                                          |
+        |                                          |        |  |                                          |
+        |                                          |        |  |                                          |
+        |                                          |        |  |                                          |
+        |                                          |        |  |                                          |
+        |                                          |        |  |                                          |
+        |                                          |        |  |                                          |
+        +------------------------------------------+        |  +------------------------------------------+
+                                                            |
+                                                            |       sirina AVIONA je veca od njegove duzine
+                AVION                                       |       stoga se smanjuje duzina hangara
+            +---------------+d                              |
+            |               |u                              |
+            |               |z=15                           |
+            |               |i                              |
+            |               |n                              |
+            +---------------+a                              |
+               sirina = 20                                  |
+
+        specijalni slucajevi:
+        -ako je duzina objekta other veca ili jednaka sirini (other.duzina >= other.sirina):
+            smanjuje se sirina objekta self
+        """
         if isinstance(self, Hangar) and isinstance(other, Avion):
             if other.duzina >= other.raspon_krila:
                 self.sirina -= other.raspon_krila
@@ -40,7 +79,11 @@ class Dimenzije:
                 self.duzina += other.duzina
 
     def __lt__(self, other):
-        """self je manji ako je manji po duzini i sirini i visini, odnosno other ne moze da stane u self"""
+        """objekat self je manji od objekta other ako je manji po duzini i sirini i visini.
+            Odnosno objekat other moze da stane u objekat self.
+            Specijalni slucajevi:
+                -ako se porede Hangar i Avion:
+                    u obzir se uzima raspon krila aviona, a ne njegova sirina"""
         if isinstance(self, Hangar) and isinstance(other, Avion):
             return self.duzina < other.duzina and self.sirina < other.raspon_krila and self.visina < other.visina
 
@@ -50,6 +93,10 @@ class Dimenzije:
         return self.duzina < other.duzina and self.sirina and other.sirina and self.visina < other.visina
 
     def __le__(self, other):
+        """objekat self je manji ili jednak objektu other ako je self manji ili jednak po duzini i sirini i visini.
+            Specijalni slucajevi:
+                -ako se porede Hangar i Avion:
+                    u obzir se uzima raspon krila aviona, a ne njegova sirina"""
         if isinstance(self, Hangar) and isinstance(other, Avion):
             return self.duzina <= other.duzina and self.sirina <= other.raspon_krila and self.visina <= other.visina
 
@@ -59,6 +106,10 @@ class Dimenzije:
         return self.duzina <= other.duzina and self.sirina <= other.sirina and self.visina <= other.visina
 
     def __eq__(self, other):
+        """objekat self je jednak objektu other ako su jednaki po duzini i sirini i visini.
+            Specijalni slucajevi:
+                -ako se porede Hangar i Avion:
+                    u obzir se uzima raspon krila aviona, a ne njegova sirina"""
         if isinstance(self, Hangar) and isinstance(other, Avion):
             return self.duzina == other.duzina and self.sirina == other.raspon_krila and self.visina == other.visina
 
@@ -68,9 +119,14 @@ class Dimenzije:
         return self.duzina == other.duzina and self.sirina == other.sirina and self.visina == other.visina
 
     def __ne__(self, other):
+        """operator !=, not ==, invertno od == (eq) funkcije"""
         return not self.__eq__(other)
 
     def __ge__(self, other):
+        """objekat self je veci ili jednak od objekta other ako je veci ili jednak po duzini i sirini i visini.
+            Specijalni slucajevi:
+                -ako se porede Hangar i Avion:
+                    u obzir se uzima raspon krila aviona, a ne njegova sirina"""
         if isinstance(self, Hangar) and isinstance(other, Avion):
             return self.duzina >= other.duzina and self.sirina >= other.raspon_krila and self.visina >= other.visina
 
@@ -80,6 +136,10 @@ class Dimenzije:
         return self.duzina >= other.duzina and self.sirina >= other.sirina and self.visina >= other.visina
 
     def __gt__(self, other):
+        """objekat self je veci od objekta other ako je veci po duzini i sirini i visini.
+            Specijalni slucajevi:
+                -ako se porede Hangar i Avion:
+                    u obzir se uzima raspon krila aviona, a ne njegova sirina"""
         if isinstance(self, Hangar) and isinstance(other, Avion):
             return self.duzina > other.duzina and self.sirina > other.raspon_krila and self.visina > other.visina
 
@@ -90,6 +150,8 @@ class Dimenzije:
 
 
 class Kolekcija(Dimenzije, list):
+    """Klasa koja nasledjuje listu, inicijalizuje se pri kreiranju objekata
+        Aerodroma, Hangara, Aviona, Prostora za teret."""
     def __init__(self, duzina, sirina, visina):
         Dimenzije.__int__(self, duzina, sirina, visina)
         list.__init__(self)
@@ -113,6 +175,13 @@ class Kolekcija(Dimenzije, list):
     #     raise NotImplementedError
 
     def dodaj(self, other):
+        """Dodaje objekat other u objekat self i pritom smanjuje dimenzije prema sablonu iz Klase Dimenzije
+            metoda: smanji_dimenzije.
+        Specijalni slucajevi:
+            -ako se u Aerodrom dodaje Hangar ne smanjuju se dimenzije jer Aerodrom nema definisane dimenzije
+            -ako se u Avion dodaje Prostor za robu ne smanjuju se dimenzije (ali pri stvaranju Prostora za robu
+                proverava da moze da stane u Avion)"""
+
         if isinstance(self, Aerodrom) and isinstance(other, Hangar) \
                 or isinstance(self, Avion) and isinstance(other, ProstorZaRobu):
             list.append(self, other)
@@ -121,6 +190,12 @@ class Kolekcija(Dimenzije, list):
             self.smanji_dimenzije(other)
 
     def ukloni(self, other):
+        """Izbacuje objekat other iz objekta self i pritom uvecava dimenzije prema sablonu iz Klase Dimenzije
+            metoda: povecaj_dimenzije(inverzno smanji_dimenzije).
+        Specijalni slucajevi:
+            -ako se u Aerodrom dodaje Hangar ne smanjuju se dimenzije jer Aerodrom nema definisane dimenzije
+            -ako se u Avion dodaje Prostor za robu ne smanjuju se dimenzije (ali pri stvaranju Prostora za robu
+                proverava da moze da stane u Avion)"""
         if isinstance(self, Aerodrom) and isinstance(other, Hangar) \
                 or isinstance(self, Avion) and isinstance(other, ProstorZaRobu):
             list.remove(self, other)
@@ -130,6 +205,8 @@ class Kolekcija(Dimenzije, list):
 
 
 class Aerodrom(OznakaINaziv, Kolekcija):
+    """Pravi objekat Aerodroma. Mogu da se dodaju Hangari (neogranicen broj jer nema definisanih dimenzija)
+        Aerodrom opisuju Naziv, Adresa, Mesto i Hangari koje sadrzi"""
     def __init__(self, naziv, adresa, mesto, ID=None, duzina=None, sirina=None, visina=None):
         OznakaINaziv.__init__(self, ID, naziv)
         Kolekcija.__init__(self, duzina, sirina, visina)
@@ -145,6 +222,8 @@ class Aerodrom(OznakaINaziv, Kolekcija):
 
 
 class Hangar(OznakaINaziv, Kolekcija):
+    """Pravi objekat Hangara. Mogu da se dodaju Avioni. Hangar opisuju ID, Naziv, Duzina, Sirina, Visina i Avioni
+    koje sadrzi"""
     def __init__(self, ID, naziv, duzina, sirina, visina):
         OznakaINaziv.__init__(self, ID, naziv)
         Kolekcija.__init__(self, duzina, sirina, visina)
@@ -157,6 +236,8 @@ class Hangar(OznakaINaziv, Kolekcija):
 
 
 class Avion(OznakaINaziv, Kolekcija):
+    """Pravi objekat Aviona. Mogu da se dodaju Prostori za robu. Avion opisuju
+        ID, Naziv, Duzina, Sirina, Visina i Prostori za robu koje sadrzi"""
     def __init__(self, ID, naziv, duzina, sirina, visina, raspon_krila, godiste, nosivost, relacija):
         OznakaINaziv.__init__(self, ID, naziv)
         Kolekcija.__init__(self, duzina, sirina, visina)
@@ -180,6 +261,8 @@ class Avion(OznakaINaziv, Kolekcija):
 
 
 class ProstorZaRobu(OznakaINaziv, Kolekcija):
+    """Pravi objekat Prostora za robu. Moze da se dodaje Roba.
+        Prostor za robu opisuju ID, Naziv, Duzina, Sirina, Visina i Roba koju sadrzi"""
     def __init__(self, naziv, duzina, sirina, visina, ID=None):
         OznakaINaziv.__init__(self, ID, naziv)
         Kolekcija.__init__(self, duzina, visina, sirina)

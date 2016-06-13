@@ -5,24 +5,26 @@ import klase
 
 
 class Osoba(OznakaINaziv):
+    """Svi korisnici aplikacije"""
     def __init__(self, ID, naziv, prezime):
         OznakaINaziv.__init__(self, ID, naziv)
         self.prezime = prezime
 
 
 class Zaposlen(Osoba):
+    """To su sve osobe koje rade sa aplikacijom, dakle Menadzeri Hangara, Transporta i Radnik"""
     def __init__(self, ID, naziv, prezime, usn, psw):
         Osoba.__init__(self, ID, naziv, prezime)
         self.username = usn
         self.password = psw
 
-    def pretraziHangarePo_(self):
-        # oznaka
-        # naziv
-        # duzina
-        # sirina
-        # visina
-        pass
+    # def pretraziHangarePo_(self):
+    #     # oznaka
+    #     # naziv
+    #     # duzina
+    #     # sirina
+    #     # visina
+    #     pass
 
     def pretraziHangarePoOznaci(self,oznaka):
         sviHang = []
@@ -74,14 +76,14 @@ class Zaposlen(Osoba):
                 sviHang.append(string)
         return sviHang
 
-    def pretraziAvionePo_(self):
-        # oznaka
-        # duzina
-        # sirina
-        # rasponKrila
-        # nosivost
-        # relacija
-        pass
+    # def pretraziAvionePo_(self):
+    #     # oznaka
+    #     # duzina
+    #     # sirina
+    #     # rasponKrila
+    #     # nosivost
+    #     # relacija
+    #     pass
 
     def pretraziAvionePoOznaci(self,oznaka):
         sviAvioni = []
@@ -145,16 +147,16 @@ class Zaposlen(Osoba):
                 sviAvioni.append(str(avion1))
         return sviAvioni
 
-    def pretraziRobuPo_(self):
-        # Oznaci
-        # Nazivu
-        # Opisu
-        # Dužini
-        # Širini
-        # Visini
-        # Težini robe
-        # Identifikacionom kodu potražitelja
-        pass
+    # def pretraziRobuPo_(self):
+    #     # Oznaci
+    #     # Nazivu
+    #     # Opisu
+    #     # Dužini
+    #     # Širini
+    #     # Visini
+    #     # Težini robe
+    #     # Identifikacionom kodu potražitelja
+    #     pass
 
     def pretraziRobuPoOznaci(self,oznaka):
         svaRoba = []
@@ -247,6 +249,13 @@ class Zaposlen(Osoba):
 
 
 class MenadzerHangara(Zaposlen):
+    """Menadzer hangara ima ovlascenje da:
+        -Vidi sve zahteve za smeštanje aviona u hangar
+        -Vidi zahteve za transport robe kojima je status postavljen na roba utovarena
+        -Dodaje nove hangare
+        -Dodaje nove avione i određuje koliki prostor za smeštanje robe postoji u avionu
+        -Kreira Zahtev za smestanje Aviona u Hangar
+        -Izvrsi transport robe (Avioni koji su utovareni i spremni za poletanje)"""
     uloga = "Menadzer Hangara"
 
     def __int__(self, ID, naziv, prezime, username, password):

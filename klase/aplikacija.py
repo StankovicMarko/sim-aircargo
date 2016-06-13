@@ -36,6 +36,7 @@ temp_prostor_za_robu = []
 
 
 def snimi_sve_entitete():
+    """Cuva stanje entiteta u memoriji prilikom izlaska iz aplikacije"""
     snimi_entitet(zahtevi_za_smestanje_aviona, 'zahteviZaSmestanjeAviona.txt')
     snimi_entitet(zahtevi_za_transport_robe, 'zahteviZaTransportRobe.txt')
     snimi_entitet(avioni_u_hangarima, 'avioniUHangarima.txt')

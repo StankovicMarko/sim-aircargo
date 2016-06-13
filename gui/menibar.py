@@ -164,8 +164,20 @@ class Menibar(tk.Frame):
             messagebox.showerror("Error!","Pojam nije pronadjen!")
         else:
             window = tk.Toplevel(self)
-            for i in lista:
-                tk.Label(window,text=i).grid()
+            scrollbary = tk.Scrollbar(window)
+            scrollbary.pack(side='right', fill='y')
+            scrollbarx= tk.Scrollbar(window,orient='horizontal')
+            scrollbarx.pack(side='bottom', fill='x')
+            lb=tk.Listbox(window)
+            lb.pack()
+            for index, element in enumerate(lista):
+               lb.insert(index,element)
+
+            lb.config(yscrollcommand=scrollbary.set)
+            scrollbary.config(command=lb.yview)
+
+            lb.config(xscrollcommand=scrollbarx.set)
+            scrollbarx.config(command=lb.xview)
 
 
     def exit(self):
