@@ -231,7 +231,7 @@ class Hangar(OznakaINaziv, Kolekcija):
     def __str__(self):
         av = ''
         for avion in self:
-            av = av + avion.naziv + ','
+            av += avion.naziv + ','
         return 'Hangar - Oznaka: {}, Naziv: {}, Avioni: {}'.format(self.id, self.naziv, av)
 
 

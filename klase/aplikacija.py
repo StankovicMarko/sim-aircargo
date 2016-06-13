@@ -115,17 +115,17 @@ def smesti_avion(avion):
     smestio = False
     for hangar in aerodrom:
         if hangar > avion:
+            avion.zahtev_smestanje.hangar = hangar
+            avion.zahtev_smestanje.vreme_smestanja_aviona = dt.datetime.now()
             hangar.dodaj(avion)
             avioni_u_hangarima.append(avion)
             avion.se_nalazi = hangar
-            avion.zahtev_smestanje.hangar = hangar
-            avion.zahtev_smestanje.vreme_smestanja_aviona = dt.datetime.now()
             smestio = True
             break
     if smestio:
         return
     else:
-        raise Exception('Avion je prevelik', 'dodajte hangar ili oslobodite mesto', 'avion ce biti van aerodroma')
+        return Exception('Avion je prevelik', 'dodajte hangar ili oslobodite mesto', 'avion ce biti van aerodroma')
 
 
 # ovo treba da bude notifikacija menadzeru hangara
@@ -327,3 +327,5 @@ def transportuj_robu():
 #
 #     for znj in zahtevi_za_transport_robe['kreiran']: # ovo je samo za test, mos brisati kasnije..
 #         print(znj)
+
+
