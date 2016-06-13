@@ -230,6 +230,9 @@ def transportuj_robu():
     zahtevi_za_transport_robe['robaTransportovana'].extend(zahtevi_za_transport_robe['robaUtovarena'])
     zahtevi_za_transport_robe['robaUtovarena'].clear()
 
+
+
+
 # h1 = Hangar(1, 'HANG1', 100, 100, 30)
 # #
 # # h2 = Hangar(2, 'hang007', 100, 100, 300)
@@ -305,21 +308,21 @@ def transportuj_robu():
 
 # men transporta...
 
-def ucitajZahteveIRobu():
-    zahteviLines = util.readFile("zahteviZaTransport.txt")
-    robaLines = util.readFile("roba.txt")
-
-    for linija in zahteviLines:
-        z = linija.strip().split("|")
-        zahtev = klase.zahtevi.ZahtevZaTransport(z[3],z[4],z[0],z[2],z[6])
-        
-        for rlinija in robaLines:
-            r = rlinija.strip().split("|")
-            if r[7] == z[0]:
-                robaa = klase.roba.Roba(r[1],r[2],int(r[3]),int(r[4]),int(r[5]),int(r[5]),r[7],r[0])
-                zahtev.roba.append(robaa)
-
-        zahtevi_za_transport_robe[zahtev.statusZahteva].append(zahtev)
-
-    for znj in zahtevi_za_transport_robe['kreiran']: # ovo je samo za test, mos brisati kasnije..
-        print(znj)
+# def ucitajZahteveIRobu():
+#     zahteviLines = util.readFile("zahteviZaTransport.txt")
+#     robaLines = util.readFile("roba.txt")
+#
+#     for linija in zahteviLines:
+#         z = linija.strip().split("|")
+#         zahtev = klase.zahtevi.ZahtevZaTransport(z[3],z[4],z[0],z[2],z[6])
+#
+#         for rlinija in robaLines:
+#             r = rlinija.strip().split("|")
+#             if r[7] == z[0]:
+#                 robaa = klase.roba.Roba(r[1],r[2],int(r[3]),int(r[4]),int(r[5]),int(r[5]),r[7],r[0])
+#                 zahtev.roba.append(robaa)
+#
+#         zahtevi_za_transport_robe[zahtev.statusZahteva].append(zahtev)
+#
+#     for znj in zahtevi_za_transport_robe['kreiran']: # ovo je samo za test, mos brisati kasnije..
+#         print(znj)

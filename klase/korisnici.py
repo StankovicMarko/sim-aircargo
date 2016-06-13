@@ -26,7 +26,7 @@ class Zaposlen(Osoba):
 
     def pretraziHangarePoOznaci(self,oznaka):
         sviHang = []
-        for hangar in klase.hangar_funkcionalnosti.aerodrom:
+        for hangar in klase.aplikacija.aerodrom:
             if str(hangar.id) == oznaka:
                 string = str(hangar) # prebacuje objekat hangar u string
                 for a in hangar:
@@ -36,7 +36,7 @@ class Zaposlen(Osoba):
 
     def pretraziHangarePoNazivu(self,naziv):
         sviHang = []
-        for hangar in klase.hangar_funkcionalnosti.aerodrom:
+        for hangar in klase.aplikacija.aerodrom:
             if hangar.naziv == naziv:
                 string = str(hangar) # prebacuje objekat hangar u string
                 for a in hangar:
@@ -46,7 +46,7 @@ class Zaposlen(Osoba):
 
     def pretraziHangarePoDuzini(self,duzina):
         sviHang = []
-        for hangar in klase.hangar_funkcionalnosti.aerodrom:
+        for hangar in klase.aplikacija.aerodrom:
             if hangar.duzina == int(duzina):
                 string = str(hangar) # prebacuje objekat hangar u string
                 for a in hangar:
@@ -56,7 +56,7 @@ class Zaposlen(Osoba):
 
     def pretraziHangarePoSirini(self,sirina):
         sviHang = []
-        for hangar in klase.hangar_funkcionalnosti.aerodrom:
+        for hangar in klase.aplikacija.aerodrom:
             if hangar.sirina == int(sirina):
                 string = str(hangar) # prebacuje objekat hangar u string
                 for a in hangar:
@@ -66,7 +66,7 @@ class Zaposlen(Osoba):
 
     def pretraziHangarePoVisini(self,visina):
         sviHang = []
-        for hangar in klase.hangar_funkcionalnosti.aerodrom:
+        for hangar in klase.aplikacija.aerodrom:
             if hangar.visina == int(visina):
                 string = str(hangar) # prebacuje objekat hangar u string
                 for a in hangar:
@@ -85,10 +85,10 @@ class Zaposlen(Osoba):
 
     def pretraziAvionePoOznaci(self,oznaka):
         sviAvioni = []
-        for avion in klase.hangar_funkcionalnosti.avioni_u_hangarima:
+        for avion in klase.aplikacija.avioni_u_hangarima:
             if str(avion.id) == oznaka:
                 sviAvioni.append(str(avion))
-        for avion1 in klase.hangar_funkcionalnosti.avioni_van_hangara:
+        for avion1 in klase.aplikacija.avioni_van_hangara:
             if str(avion1.id) == oznaka:
                 sviAvioni.append(str(avion1))
         return sviAvioni
@@ -96,10 +96,10 @@ class Zaposlen(Osoba):
 
     def pretraziAvionePoDuzini(self,duzina):
         sviAvioni = []
-        for avion in klase.hangar_funkcionalnosti.avioni_u_hangarima:
+        for avion in klase.aplikacija.avioni_u_hangarima:
             if avion.duzina == int(duzina):
                 sviAvioni.append(str(avion))
-        for avion1 in klase.hangar_funkcionalnosti.avioni_van_hangara:
+        for avion1 in klase.aplikacija.avioni_van_hangara:
             if avion1.duzina == int(duzina):
                 sviAvioni.append(str(avion1))
         return sviAvioni
@@ -107,40 +107,40 @@ class Zaposlen(Osoba):
 
     def pretraziAvionePoSirini(self,sirina):
         sviAvioni = []
-        for avion in klase.hangar_funkcionalnosti.avioni_u_hangarima:
+        for avion in klase.aplikacija.avioni_u_hangarima:
             if avion.sirina == int(sirina):
                 sviAvioni.append(str(avion))
-        for avion1 in klase.hangar_funkcionalnosti.avioni_van_hangara:
+        for avion1 in klase.aplikacija.avioni_van_hangara:
             if avion1.sirina == int(sirina):
                 sviAvioni.append(str(avion1))
         return sviAvioni
 
     def pretraziAvionePoRasponKrila(self,rasponKrila):
         sviAvioni = []
-        for avion in klase.hangar_funkcionalnosti.avioni_u_hangarima:
+        for avion in klase.aplikacija.avioni_u_hangarima:
             if avion.raspon_krila == int(rasponKrila):
                 sviAvioni.append(str(avion))
-        for avion1 in klase.hangar_funkcionalnosti.avioni_van_hangara:
+        for avion1 in klase.aplikacija.avioni_van_hangara:
             if avion1.raspon_krila == int(rasponKrila):
                 sviAvioni.append(str(avion1))
         return sviAvioni
 
     def pretraziAvionePoNosivosti(self,nosivost):
         sviAvioni = []
-        for avion in klase.hangar_funkcionalnosti.avioni_u_hangarima:
+        for avion in klase.aplikacija.avioni_u_hangarima:
             if avion.nosivost == int(nosivost):
                 sviAvioni.append(str(avion))
-        for avion1 in klase.hangar_funkcionalnosti.avioni_van_hangara:
+        for avion1 in klase.aplikacija.avioni_van_hangara:
             if avion1.nosivost == int(nosivost):
                 sviAvioni.append(str(avion1))
         return sviAvioni
 
     def pretraziAvionePoRelaciji(self,relacija):
         sviAvioni = []
-        for avion in klase.hangar_funkcionalnosti.avioni_u_hangarima:
+        for avion in klase.aplikacija.avioni_u_hangarima:
             if avion.relacija == relacija:
                 sviAvioni.append(str(avion))
-        for avion1 in klase.hangar_funkcionalnosti.avioni_van_hangara:
+        for avion1 in klase.aplikacija.avioni_van_hangara:
             if avion1.relacija == relacija:
                 sviAvioni.append(str(avion1))
         return sviAvioni
@@ -159,8 +159,8 @@ class Zaposlen(Osoba):
     def pretraziRobuPoOznaci(self,oznaka):
         svaRoba = []
 
-        for key in klase.hangar_funkcionalnosti.zahtevi_za_transport_robe.keys():
-            for zahtev in klase.hangar_funkcionalnosti.zahtevi_za_transport_robe[key]:
+        for key in klase.aplikacija.zahtevi_za_transport_robe.keys():
+            for zahtev in klase.aplikacija.zahtevi_za_transport_robe[key]:
                 for roba in zahtev.roba:
                     if roba.oznaka == oznaka:
                         svaRoba.append(str(roba))
@@ -169,8 +169,8 @@ class Zaposlen(Osoba):
     def pretraziRobuPoNazivu(self,naziv):
         svaRoba = []
 
-        for key in klase.hangar_funkcionalnosti.zahtevi_za_transport_robe.keys():
-            for zahtev in klase.hangar_funkcionalnosti.zahtevi_za_transport_robe[key]:
+        for key in klase.aplikacija.zahtevi_za_transport_robe.keys():
+            for zahtev in klase.aplikacija.zahtevi_za_transport_robe[key]:
                 for roba in zahtev.roba:
                     if roba.naziv == naziv:
                         svaRoba.append(str(roba))
@@ -179,8 +179,8 @@ class Zaposlen(Osoba):
     def pretraziRobuPoOpisu(self,opis):
         svaRoba = []
 
-        for key in klase.hangar_funkcionalnosti.zahtevi_za_transport_robe.keys():
-            for zahtev in klase.hangar_funkcionalnosti.zahtevi_za_transport_robe[key]:
+        for key in klase.aplikacija.zahtevi_za_transport_robe.keys():
+            for zahtev in klase.aplikacija.zahtevi_za_transport_robe[key]:
                 for roba in zahtev.roba:
                     if opis in roba.opis:
                         svaRoba.append(str(roba))
@@ -189,8 +189,8 @@ class Zaposlen(Osoba):
     def pretraziRobuPoDuzini(self,duzina):
         svaRoba = []
 
-        for key in klase.hangar_funkcionalnosti.zahtevi_za_transport_robe.keys():
-            for zahtev in klase.hangar_funkcionalnosti.zahtevi_za_transport_robe[key]:
+        for key in klase.aplikacija.zahtevi_za_transport_robe.keys():
+            for zahtev in klase.aplikacija.zahtevi_za_transport_robe[key]:
                 for roba in zahtev.roba:
                     if roba.duzina == int(duzina):
                         svaRoba.append(str(roba))
@@ -199,8 +199,8 @@ class Zaposlen(Osoba):
     def pretraziRobuPoSirini(self,sirina):
         svaRoba = []
 
-        for key in klase.hangar_funkcionalnosti.zahtevi_za_transport_robe.keys():
-            for zahtev in klase.hangar_funkcionalnosti.zahtevi_za_transport_robe[key]:
+        for key in klase.aplikacija.zahtevi_za_transport_robe.keys():
+            for zahtev in klase.aplikacija.zahtevi_za_transport_robe[key]:
                 for roba in zahtev.roba:
                     if roba.sirina == int(sirina):
                         svaRoba.append(str(roba))
@@ -209,8 +209,8 @@ class Zaposlen(Osoba):
     def pretraziRobuPoVisini(self,visina):
         svaRoba = []
 
-        for key in klase.hangar_funkcionalnosti.zahtevi_za_transport_robe.keys():
-            for zahtev in klase.hangar_funkcionalnosti.zahtevi_za_transport_robe[key]:
+        for key in klase.aplikacija.zahtevi_za_transport_robe.keys():
+            for zahtev in klase.aplikacija.zahtevi_za_transport_robe[key]:
                 for roba in zahtev.roba:
                     if roba.visina == int(visina):
                         svaRoba.append(str(roba))
@@ -219,8 +219,8 @@ class Zaposlen(Osoba):
     def pretraziRobuPoTezini(self,tezina):
         svaRoba = []
 
-        for key in klase.hangar_funkcionalnosti.zahtevi_za_transport_robe.keys():
-            for zahtev in klase.hangar_funkcionalnosti.zahtevi_za_transport_robe[key]:
+        for key in klase.aplikacija.zahtevi_za_transport_robe.keys():
+            for zahtev in klase.aplikacija.zahtevi_za_transport_robe[key]:
                 for roba in zahtev.roba:
                     if roba.tezina == int(tezina):
                         svaRoba.append(str(roba))

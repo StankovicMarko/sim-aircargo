@@ -2,11 +2,10 @@ import tkinter as tk
 import klase.korisnici
 import gui.windows
 import klase.util_funk as util
-from klase import hangar_funkcionalnosti
+from klase import aplikacija
 import tkinter.messagebox
 import copy
 
-hangar_funkcionalnosti.ucitajZahteveIRobu()
 
 class ManagerTransportaPanel(tk.Frame):
     def __init__(self, parent, controler):
@@ -54,6 +53,7 @@ class ManagerTransportaPanel(tk.Frame):
         self.odobirZahtev = tk.Label(self.headerFrame, text="Odobri").grid(row=0, column=8)
 
     def prikazZahtevaTransportWidgets(self):
+        # hangar_funkcionalnosti.ucitajZahteveIRobu()
         try:
             # self.znj1.destroy()
             self.canvas1.destroy()
@@ -80,9 +80,9 @@ class ManagerTransportaPanel(tk.Frame):
         '''
         Kreiramo jednu listu i stavljamo je u recnik pod kljuc counter, i tako joj posle pristupamo
         '''
-        self.recnik = {} # ovde cuvamo sve checkbox-ove, "counter":"i"
+        self.recnik = {}  # ovde cuvamo sve checkbox-ove, "counter":"i"
         self.checkboxovi = []
-        counter = -1 # izracunava koji je redni broj checkbox-a
+        counter = -1  # izracunava koji je redni broj checkbox-a
         self.priv = []
         r = -1
         for i in lista:
@@ -130,18 +130,18 @@ class ManagerTransportaPanel(tk.Frame):
             a12 = tk.Label(self.newFrejm, text="   ")
             a12.grid(row=r, column=13)
             self.priv.append(a12)
-            a13 = tk.Checkbutton(self.newFrejm, text="", command=lambda counter=counter: self.odobri(counter)) # svaki put kad se checkira dugme, salje se counter, pa se zna tacno koje dugme je kliknuto
+            a13 = tk.Checkbutton(self.newFrejm, text="", command=lambda counter=counter: self.odobri(
+                counter))  # svaki put kad se checkira dugme, salje se counter, pa se zna tacno koje dugme je kliknuto
             a13.grid(row=r, column=14)
             self.priv.append(a13)
             a15 = tk.Label(self.newFrejm, text=" ")
             a15.grid(row=r, column=15)
             self.priv.append(a15)
-            self.recnik[counter] = i # dodeljujemo i (jedna lista) pod kljuc counter
-            self.checkboxovi.append(a13) # dodeljujemo u ovu listu da bi znali koji je checkbox kliknut
+            self.recnik[counter] = i  # dodeljujemo i (jedna lista) pod kljuc counter
+            self.checkboxovi.append(a13)  # dodeljujemo u ovu listu da bi znali koji je checkbox kliknut
 
             if i[6] != "kreiran":
                 a13.config(state="disabled")
-
 
     def sortedPrikaz(self, broj):
         for p in self.priv:
@@ -175,11 +175,9 @@ class ManagerTransportaPanel(tk.Frame):
 
         self.prikaz1(self.controler.m.prikazZahtevaSmestanje())
 
-
-
-    def prikaz1(self,lista):
+    def prikaz1(self, lista):
         for i in lista:
-            tk.Label(self.newFrejm1,text=i).grid()
+            tk.Label(self.newFrejm1, text=i).grid()
 
     def logout(self):
         self.headerFrame.destroy()
@@ -194,48 +192,54 @@ class ManagerTransportaPanel(tk.Frame):
         self.controler.meni.destroy()
         self.controler.show_frame(gui.windows.LoginWindow)
 
-    def odobri(self,counter):
+    def odobri(self, counter):
         print(self.recnik[counter])
         self.checkboxovi[counter].config(state="disabled")
 
         zahtev = None
+        pozicija_zahteva = None
 
-        for z in hangar_funkcionalnosti.zahtevi_za_transport_robe['kreiran']: # pronalazi sve 'kreiran' zahteve
+        for pozicija_zahteva, z in enumerate(
+                aplikacija.zahtevi_za_transport_robe['kreiran']):  # pronalazi sve 'kreiran' zahteve
             if z.IDZahteva == self.recnik[counter][0]:
                 zahtev = z
                 break
 
-
-        for avion in hangar_funkcionalnosti.avioni_u_hangarima: # za svaki avion u hangaru trazi da li odgovara odrediste
+        for avion in aplikacija.avioni_u_hangarima:  # za svaki avion u hangaru trazi da li odgovara odrediste
             if avion.relacija == zahtev.odrediste:
-                print("relacija pronadjena - ",avion.relacija)
+                print("relacija pronadjena - ", avion.relacija)
 
                 avionCopy = copy.deepcopy(avion)
-                for prostor in avionCopy: # za svaki prostor u avion-kopiji proba da smesti robu
-                    print("Dimenzije prostora",prostor.duzina,prostor.visina,prostor.sirina)
-                    for r in zahtev.roba:
-                        print("Dimenzije robe",r.duzina,r.sirina,r.visina)
+                zahtevCopy = copy.deepcopy(zahtev)
+                for prostor in avionCopy:  # za svaki prostor u avion-kopiji proba da smesti robu
+                    print("Dimenzije prostora", prostor.duzina, prostor.visina, prostor.sirina)
+                    for r in zahtevCopy.roba:
+                        print("Dimenzije robe", r.duzina, r.sirina, r.visina)
                         if r < prostor:
-                            prostor.dodaj(r)
-                            print("naso :)")
-                            print(avion.naziv)
-                    if len(prostor) == len(zahtev.roba):
-                        # odobri?!
-                        print("odobren",zahtev.IDZahteva)
-                        pass
+                            prostor.dodaj(r)  # dodata roba u prostor
+                            zahtevCopy.roba.remove(r)  # skida robu iz zahteva ako je utovarena
 
-                for prostor1 in avionCopy:
-                    for nesto in prostor1:
-                        print(nesto)
-                # print(r.duzina,r.sirina,r.visina)
+                    if len(zahtevCopy.roba) == 0:
+                        zahtev.statusZahteva = 'odobren'
+                        zahtev.avion = avion
+                        #stavlja u listu odobrenih iz liste kreiranih
+                        aplikacija.zahtevi_za_transport_robe['odobren'].append(
+                            aplikacija.zahtevi_za_transport_robe['kreiran'].pop(pozicija_zahteva))
+                        print("odobren", zahtev.IDZahteva)
 
 
-                # for zah in hangar_funkcionalnosti.zahtevi_za_transport_robe['kreiran']:
-                #     for rnj in zah.roba:
-                #         print(rnj.duzina)
-
-            # else:
-            #     tkinter.messagebox.showerror("Error!","Ne postoji trazeno odrediste!")
+                # for prostor1 in avionCopy:
+                #     for nesto in prostor1:
+                #         print(nesto)
+                #         # print(r.duzina,r.sirina,r.visina)
+                #
+                #
+                #         # for zah in hangar_funkcionalnosti.zahtevi_za_transport_robe['kreiran']:
+                #         #     for rnj in zah.roba:
+                #         #         print(rnj.duzina)
+                #
+                #         # else:
+                #         #     tkinter.messagebox.showerror("Error!","Ne postoji trazeno odrediste!")
 
 
 class ManagerHangaraPanel(tk.Frame):
@@ -245,9 +249,9 @@ class ManagerHangaraPanel(tk.Frame):
         nekiLabel = tk.Label(self, text="Ulogovani ste kao manager hangara")
         nekiLabel.grid()
 
-        self.temp_duzina =0
-        self.temp_sirina =0
-        self.temp_visina =0
+        self.temp_duzina = 0
+        self.temp_sirina = 0
+        self.temp_visina = 0
 
         # self.create_widgets()
 
@@ -270,7 +274,7 @@ class ManagerHangaraPanel(tk.Frame):
         dug_dodaj_avion = tk.Button(self.frejm, text='Napravi avion', command=self.add_avion)
         dug_dodaj_avion.grid(row=1, column=3)
 
-        self.logout_button = tk.Button(self.frejm,text="Log Out!",command=self.logout)
+        self.logout_button = tk.Button(self.frejm, text="Log Out!", command=self.logout)
         self.logout_button.grid()
 
     def logout(self):
@@ -279,14 +283,14 @@ class ManagerHangaraPanel(tk.Frame):
         self.controler.show_frame(gui.windows.LoginWindow)
 
     def zahtevi_smestanja(self):
-        zahtevi = hangar_funkcionalnosti.prikazi_zahteve_za_smestanje_aviona()
+        zahtevi = aplikacija.prikazi_zahteve_za_smestanje_aviona()
         lista_zahteva = zahtevi.split('\n')
         self.listbox.delete(0, self.listbox.size())
         for i, zahtev in enumerate(lista_zahteva):
             self.listbox.insert(i, zahtev)
 
     def zahtevi_transport(self):
-        zahtevi = hangar_funkcionalnosti.prikaz_zahteva_za_transport_robe()
+        zahtevi = aplikacija.prikaz_zahteva_za_transport_robe()
         lista_zahteva = zahtevi.split('\n')
         self.listbox.delete(0, self.listbox.size())
         for i, zahtev in enumerate(lista_zahteva):
@@ -377,7 +381,7 @@ class ManagerHangaraPanel(tk.Frame):
         eg.config(state='disabled')
         eno.config(state='disabled')
         er.config(state='disabled')
-        if self.temp_duzina==0:
+        if self.temp_duzina == 0:
             self.temp_duzina = int(ed.get())
             self.temp_sirina = int(es.get())
             self.temp_visina = int(ev.get())
@@ -413,7 +417,7 @@ class ManagerHangaraPanel(tk.Frame):
 
         if util.proveraInputa(naziv) and util.proveraInputaBroj(duzina) and util.proveraInputaBroj(
                 sirina) and util.proveraInputaBroj(visina):
-            hangar_funkcionalnosti.napravi_hangar(naziv, int(duzina), int(sirina), int(visina))
+            aplikacija.napravi_hangar(naziv, int(duzina), int(sirina), int(visina))
             tk.messagebox.showinfo('Dodavanje hangara u aerodrom', 'Uspesno dodat hangar')
             top.destroy()
         else:
@@ -436,14 +440,14 @@ class ManagerHangaraPanel(tk.Frame):
                 and util.proveraInputa(godiste) \
                 and util.proveraInputa(nosivost) \
                 and util.proveraInputa(relacija):
-            hangar_funkcionalnosti.napravi_avion(naziv,
-                                                 int(duzina),
-                                                 int(sirina),
-                                                 int(visina),
-                                                 int(raspon_krila),
-                                                 int(godiste),
-                                                 int(nosivost),
-                                                 relacija)
+            aplikacija.napravi_avion(naziv,
+                                     int(duzina),
+                                     int(sirina),
+                                     int(visina),
+                                     int(raspon_krila),
+                                     int(godiste),
+                                     int(nosivost),
+                                     relacija)
             tk.messagebox.showinfo('Narucivanje aviona', 'Uspesno napravljen avion')
             top.destroy()
         else:
@@ -460,14 +464,14 @@ class ManagerHangaraPanel(tk.Frame):
                 sirina) and util.proveraInputaBroj(visina) \
                 and int(duzina) < self.temp_duzina and int(sirina) < self.temp_sirina \
                 and int(visina) < self.temp_visina:
-            hangar_funkcionalnosti.napravi_prostor_za_robu(naziv, int(duzina), int(sirina), int(visina))
+            aplikacija.napravi_prostor_za_robu(naziv, int(duzina), int(sirina), int(visina))
             self.temp_duzina -= int(duzina)
             tk.messagebox.showinfo('Dodavanje Prostora za Teret u Avion', 'Uspesno dodat Prostor za Teret')
             top.destroy()
 
-            imena_prostora=''
-            for prostor in hangar_funkcionalnosti.temp_prostor_za_robu:
-                imena_prostora+=prostor.naziv+' '
+            imena_prostora = ''
+            for prostor in aplikacija.temp_prostor_za_robu:
+                imena_prostora += prostor.naziv + ' '
             self.lbl_pzt.config(text=imena_prostora)
 
             self.btn_add_avion.grid(row=9, columnspan=2, sticky='nsew')
@@ -477,7 +481,7 @@ class ManagerHangaraPanel(tk.Frame):
                                     'Molimo unesite validne inpute str/int/int/int ili manje dimenzije')
 
 
-    #dodaj zahtev
-            #list box u petlji insert str(avion)
-            #imam dugme dodaj zahtev
-            #salje id i kreira zahtev
+            # dodaj zahtev
+            # list box u petlji insert str(avion)
+            # imam dugme dodaj zahtev
+            # salje id i kreira zahtev

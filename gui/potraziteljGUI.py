@@ -5,7 +5,7 @@ import klase.zahtevi
 import klase.korisnici
 import klase.roba
 import klase.util_funk as util
-from klase import hangar_funkcionalnosti
+from klase import aplikacija
 
 class PotraziteljPanel(tk.Frame):
     def __init__(self,parent,controler):
@@ -241,8 +241,8 @@ class PotraziteljPanel(tk.Frame):
                 r.sacuvaj()
                 zahtev.roba.append(r)
 
-            hangar_funkcionalnosti.zahtevi_za_transport_robe['kreiran'].append(zahtev)
-            for zahtev in hangar_funkcionalnosti.zahtevi_za_transport_robe['kreiran']:
+            aplikacija.zahtevi_za_transport_robe['kreiran'].append(zahtev)
+            for zahtev in aplikacija.zahtevi_za_transport_robe['kreiran']:
                 print(zahtev)
 
     def prikaziIstoriju(self):
