@@ -12,7 +12,6 @@ def set_path(file_name):
 
 def readFile(filename):
     path = set_path(filename)
-
     f = open(path, "r")
     lines = f.readlines()
     f.close()
@@ -21,8 +20,7 @@ def readFile(filename):
 
 def saveFile(filename, string):
     path = set_path(filename)
-
-    f = open(filename, "a")
+    f = open(path, "a")
     f.write(string)
     f.close()
 
@@ -77,7 +75,6 @@ def proveraInputaBroj(broj):
     except:
         return False
 
-
 def ucitaj_entitet(file_name):
     path = set_path(file_name)
     with open(path, 'rb') as f:
@@ -88,3 +85,4 @@ def snimi_entitet(data, file_name):
     path = set_path(file_name)
     with open(path, 'wb') as f:
         pickle.dump(data, f, pickle.HIGHEST_PROTOCOL)
+

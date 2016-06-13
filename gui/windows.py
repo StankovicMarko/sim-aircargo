@@ -39,6 +39,7 @@ class LoginWindow(tk.Frame):
         self.createWidgets()
         self.controler = controler
         self.controler.title("Aplikacija")
+        self.controler.bind("<Return>",lambda x: self.login())
 
     def createWidgets(self):
         self.loginFrame = tk.Frame(self)
@@ -78,17 +79,18 @@ class LoginWindow(tk.Frame):
         self.passwordInput.delete(0,len(self.passwordInput.get())) # brise sve iz password box-a
 
         if self.checkBoxState.get() == 0:
-            self.controler.meni = gui.menibar.Menibar(self.controler)
             a = klase.login.Login(uname,passw)
 
             if a.uloga == None:
                 messagebox.showerror("Error!","Pogresan Username/Password")
             else:
+                self.controler.meni = gui.menibar.Menibar(self.controler)
                 print("Uspesno ste se ulogovali!")
                 print("Vi ste",a.ime,a.prezime,"a uloga",a.uloga)
 
                 if a.uloga == "mhangar":
                     self.controler.show_frame(ManagerHangaraPanel)
+                    self.controler.frames[ManagerHangaraPanel].create_widgets()
                     m = klase.korisnici.MenadzerHangara("id","ime","prezime","user","pass")
                     self.controler.m = m
                     print(self.controler.m)

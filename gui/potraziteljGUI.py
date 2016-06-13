@@ -5,6 +5,7 @@ import klase.zahtevi
 import klase.korisnici
 import klase.roba
 import klase.util_funk as util
+from klase import hangar_funkcionalnosti
 
 class PotraziteljPanel(tk.Frame):
     def __init__(self,parent,controler):
@@ -144,6 +145,11 @@ class PotraziteljPanel(tk.Frame):
 
         if imeRobe == "" or opisRobe == "" or duzinaRobe == "" or sirinaRobe == "" or visinaRobe == "" or tezinaRobe == "":
             pass
+        elif util.proveraInputa(imeRobe) == False or util.proveraInputa(opisRobe) == False:
+            messagebox.showerror("Error!","Uneli ste zabranjen karatker!")
+        elif (util.proveraInputaBroj(duzinaRobe) == False or util.proveraInputaBroj(sirinaRobe) == False or
+            util.proveraInputaBroj(visinaRobe) == False or util.proveraInputaBroj(tezinaRobe) == False):
+            messagebox.showerror("Error!","Duzina/Sirina/Visina/Tezina\nmoraju biti broj!")
         else:
             linija = imeRobe+"|"+opisRobe+"|"+duzinaRobe+"|"+sirinaRobe+"|"+visinaRobe+"|"+tezinaRobe
             self.RobaListBox.insert("end",linija)   
@@ -206,10 +212,14 @@ class PotraziteljPanel(tk.Frame):
         brojtelefona = self.BrojTelefonaInput.get()
         email = self.EmailInput.get()
 
+
         if self.selektovanoOdrediste == ():
             messagebox.showerror("Error!","Niste izabrali odrediste!")
         elif self.RobaListBox.size() == 0:
             messagebox.showerror("Error!","Niste dodali robu!")
+        elif (util.proveraInputa(ime) == False or util.proveraInputa(prezime) == False 
+            or util.proveraInputa(brojtelefona) == False or util.proveraInputa(email) == False):
+            messagebox.showerror("Error!","Uneli ste zabranjen karatker!")
         else:
             if self.CheckBoxNemamIDState.get() == 1: # Ako je 'nemam ID' obelezeno
                 if ime == "" or prezime == "" or brojtelefona == "" or email == "":
@@ -218,7 +228,8 @@ class PotraziteljPanel(tk.Frame):
                     line = self.IDPotrazitelja+"|"+ime+"|"+prezime+"|"+brojtelefona+"|"+email+"|potrazitelj"+"\n"
                     util.saveFile("korisnici.txt",line)
             
-            a = klase.zahtevi.ZahtevZaTransport(self.odredisteListBox.get(self.selektovanoOdrediste[0]),self.IDPotrazitelja)
+            zahtev = klase.zahtevi.ZahtevZaTransport(self.odredisteListBox.get(self.selektovanoOdrediste[0]),self.IDPotrazitelja)
+            zahtev.sacuvaj()
             messagebox.showinfo("OK!","Zahtev uspesno kreiran!\nVas ID:"+self.IDPotrazitelja)
 
             
@@ -226,7 +237,13 @@ class PotraziteljPanel(tk.Frame):
             for i in range(self.RobaListBox.size()):
                 l = self.RobaListBox.get(i).split("|")
 
-                klase.roba.Roba(l[0],l[1],l[2],l[3],l[4],l[5],a.IDZahteva)
+                r = klase.roba.Roba(l[0],l[1],l[2],l[3],l[4],l[5],zahtev.IDZahteva)
+                r.sacuvaj()
+                zahtev.roba.append(r)
+
+            hangar_funkcionalnosti.zahtevi_za_transport_robe['kreiran'].append(zahtev)
+            for zahtev in hangar_funkcionalnosti.zahtevi_za_transport_robe['kreiran']:
+                print(zahtev)
 
     def prikaziIstoriju(self):
         '''

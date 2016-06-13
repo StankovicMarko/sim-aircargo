@@ -4,7 +4,9 @@ import gui.windows
 import klase.util_funk as util
 from klase import hangar_funkcionalnosti
 import tkinter.messagebox
+import copy
 
+hangar_funkcionalnosti.ucitajZahteveIRobu()
 
 class ManagerTransportaPanel(tk.Frame):
     def __init__(self, parent, controler):
@@ -30,7 +32,10 @@ class ManagerTransportaPanel(tk.Frame):
         self.logoutButton.grid(column=1)
 
     def function(self, event):
-        self.canvas.configure(scrollregion=self.canvas.bbox("all"))
+        try:
+            self.canvas.configure(scrollregion=self.canvas.bbox("all"))
+        except:
+            self.canvas1.configure(scrollregion=self.canvas1.bbox("all"))
 
     def prikaZahtevaHeaderWidgets(self):
         self.headerFrame = tk.Frame(self.frejmZahtevi)
@@ -50,7 +55,8 @@ class ManagerTransportaPanel(tk.Frame):
 
     def prikazZahtevaTransportWidgets(self):
         try:
-            self.znj1.destroy()
+            # self.znj1.destroy()
+            self.canvas1.destroy()
         except:
             pass
 
@@ -71,9 +77,16 @@ class ManagerTransportaPanel(tk.Frame):
         self.prikaz(self.controler.m.prikazZahteva())
 
     def prikaz(self, lista):
+        '''
+        Kreiramo jednu listu i stavljamo je u recnik pod kljuc counter, i tako joj posle pristupamo
+        '''
+        self.recnik = {} # ovde cuvamo sve checkbox-ove, "counter":"i"
+        self.checkboxovi = []
+        counter = -1 # izracunava koji je redni broj checkbox-a
         self.priv = []
         r = -1
         for i in lista:
+            counter += 1
             r += 1
             a = tk.Label(self.newFrejm, text=i[0])
             a.grid(row=r, column=0, sticky="w")
@@ -117,12 +130,18 @@ class ManagerTransportaPanel(tk.Frame):
             a12 = tk.Label(self.newFrejm, text="   ")
             a12.grid(row=r, column=13)
             self.priv.append(a12)
-            a13 = tk.Checkbutton(self.newFrejm, text="")
+            a13 = tk.Checkbutton(self.newFrejm, text="", command=lambda counter=counter: self.odobri(counter)) # svaki put kad se checkira dugme, salje se counter, pa se zna tacno koje dugme je kliknuto
             a13.grid(row=r, column=14)
             self.priv.append(a13)
             a15 = tk.Label(self.newFrejm, text=" ")
             a15.grid(row=r, column=15)
             self.priv.append(a15)
+            self.recnik[counter] = i # dodeljujemo i (jedna lista) pod kljuc counter
+            self.checkboxovi.append(a13) # dodeljujemo u ovu listu da bi znali koji je checkbox kliknut
+
+            if i[6] != "kreiran":
+                a13.config(state="disabled")
+
 
     def sortedPrikaz(self, broj):
         for p in self.priv:
@@ -140,41 +159,124 @@ class ManagerTransportaPanel(tk.Frame):
         self.canvas.destroy()
         self.prikazTransportButton.config(state="normal")
         self.prikazSmestanjeButton.config(state="disabled")
-        self.znj1 = tk.Label(self.frejmZahtevi, text="hello1")
-        self.znj1.grid(sticky="nsew")
+
+        self.canvas1 = tk.Canvas(self.frejmZahtevi, bg="red", width=590)
+        self.scrollbar1 = tk.Scrollbar(self.frejmZahtevi, orient="vertical", command=self.canvas1.yview)
+        self.newFrejm1 = tk.Frame(self.canvas1, bd=1, relief="solid")
+        self.canvas1.configure(yscrollcommand=self.scrollbar1.set)
+
+        self.scrollbar1.grid(row=0, rowspan=2, column=9, sticky="ns")
+        self.canvas1.grid(row=1, columnspan=9, sticky="nsew")
+        self.canvas1.create_window((0, 0), window=self.newFrejm1, anchor='n')
+        self.newFrejm1.bind("<Configure>", self.function)
+
+        self.prikazTransportButton.config(state="normal")
+        self.prikazSmestanjeButton.config(state="disabled")
+
+        self.prikaz1(self.controler.m.prikazZahtevaSmestanje())
+
+
+
+    def prikaz1(self,lista):
+        for i in lista:
+            tk.Label(self.newFrejm1,text=i).grid()
 
     def logout(self):
         self.headerFrame.destroy()
-        self.canvas.destroy()
+        try:
+            self.canvas.destroy()
+            try:
+                self.canvas1.destroy()
+            except:
+                pass
+        except:
+            self.canvas1.destroy()
         self.controler.meni.destroy()
         self.controler.show_frame(gui.windows.LoginWindow)
+
+    def odobri(self,counter):
+        print(self.recnik[counter])
+        self.checkboxovi[counter].config(state="disabled")
+
+        zahtev = None
+
+        for z in hangar_funkcionalnosti.zahtevi_za_transport_robe['kreiran']: # pronalazi sve 'kreiran' zahteve
+            if z.IDZahteva == self.recnik[counter][0]:
+                zahtev = z
+                break
+
+
+        for avion in hangar_funkcionalnosti.avioni_u_hangarima: # za svaki avion u hangaru trazi da li odgovara odrediste
+            if avion.relacija == zahtev.odrediste:
+                print("relacija pronadjena - ",avion.relacija)
+
+                avionCopy = copy.deepcopy(avion)
+                for prostor in avionCopy: # za svaki prostor u avion-kopiji proba da smesti robu
+                    print("Dimenzije prostora",prostor.duzina,prostor.visina,prostor.sirina)
+                    for r in zahtev.roba:
+                        print("Dimenzije robe",r.duzina,r.sirina,r.visina)
+                        if r < prostor:
+                            prostor.dodaj(r)
+                            print("naso :)")
+                            print(avion.naziv)
+                    if len(prostor) == len(zahtev.roba):
+                        # odobri?!
+                        print("odobren",zahtev.IDZahteva)
+                        pass
+
+                for prostor1 in avionCopy:
+                    for nesto in prostor1:
+                        print(nesto)
+                # print(r.duzina,r.sirina,r.visina)
+
+
+                # for zah in hangar_funkcionalnosti.zahtevi_za_transport_robe['kreiran']:
+                #     for rnj in zah.roba:
+                #         print(rnj.duzina)
+
+            # else:
+            #     tkinter.messagebox.showerror("Error!","Ne postoji trazeno odrediste!")
 
 
 class ManagerHangaraPanel(tk.Frame):
     def __init__(self, parent, controler):
+        self.controler = controler
         tk.Frame.__init__(self, parent)
         nekiLabel = tk.Label(self, text="Ulogovani ste kao manager hangara")
         nekiLabel.grid()
-        self.listbox = tk.Listbox(self)
-        self.listbox.grid(row=2, columnspan=10, sticky='nsew')
+
         self.temp_duzina =0
         self.temp_sirina =0
         self.temp_visina =0
 
-        self.create_widgets()
+        # self.create_widgets()
 
     def create_widgets(self):
-        dug_smestanje = tk.Button(self, text="Zahtevi za smestanje aviona", command=self.zahtevi_smestanja)
+        self.frejm = tk.Frame(self)
+        self.frejm.grid()
+
+        self.listbox = tk.Listbox(self.frejm)
+        self.listbox.grid(row=2, columnspan=10, sticky='nsew')
+
+        dug_smestanje = tk.Button(self.frejm, text="Zahtevi za smestanje aviona", command=self.zahtevi_smestanja)
         dug_smestanje.grid(row=1, column=0)
 
-        dug_transport = tk.Button(self, text="Zahtevi za transport aviona", command=self.zahtevi_transport)
+        dug_transport = tk.Button(self.frejm, text="Zahtevi za transport aviona", command=self.zahtevi_transport)
         dug_transport.grid(row=1, column=1)
 
-        dug_dodaj_hangar = tk.Button(self, text='Dodaj hangar', command=self.add_hangar)
+        dug_dodaj_hangar = tk.Button(self.frejm, text='Dodaj hangar', command=self.add_hangar)
         dug_dodaj_hangar.grid(row=1, column=2)
 
-        dug_dodaj_avion = tk.Button(self, text='Napravi avion', command=self.add_avion)
+        dug_dodaj_avion = tk.Button(self.frejm, text='Napravi avion', command=self.add_avion)
         dug_dodaj_avion.grid(row=1, column=3)
+
+        self.logout_button = tk.Button(self.frejm,text="Log Out!",command=self.logout)
+        self.logout_button.grid()
+
+    def logout(self):
+        self.frejm.destroy()
+        self.controler.meni.destroy()
+        self.controler.show_frame(gui.windows.LoginWindow)
 
     def zahtevi_smestanja(self):
         zahtevi = hangar_funkcionalnosti.prikazi_zahteve_za_smestanje_aviona()

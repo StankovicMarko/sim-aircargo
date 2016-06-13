@@ -34,3 +34,28 @@ R#46|vic1|vic1|2|2|2|2|ZT#28
 R#47|test|test|2|2|2|23|ZT#29
 R#48|test3|test3|3|3|3|33|ZT#30
 R#49|test123|test123|12|3|3|321|ZT#31
+R#50|fjafj|fak|3|33|3|3|ZT#32
+R#51|test|test|2|2|2|2|ZT#33
+R#52|fkja|lfkja|2|2|2|23|ZT#33
+R#53|test|test|3|32|2|2|ZT#34
+R#54|roba1|opis1|10|10|1|100|ZT#44
+R#55|roba2|opis2|2|1|1|10|ZT#44
+R#56|roba1|novi zahtev|10|10|2|100|ZT#45
+R#57|roba1|opis1|1|1|1|1|ZT#46
+R#58|roba2|opis2|2|2|2|2|ZT#46
+R#59|roba1|opis|1|2|2|22|ZT#47
+R#60|roba2|opis2|3|4|2|22|ZT#47
+R#61|roba1|opis|1|2|2|22|ZT#48
+R#62|roba2|opis2|3|4|2|22|ZT#48
+R#63|novo|nova roba|3|34|32|2|ZT#48
+R#64|roba1|opis1|1|11|1|1|ZT#49
+R#65|roba2|opis2|2|2|2|2|ZT#49
+R#66|roba1|opis1|1|11|1|1|ZT#50
+R#67|roba2|opis2|2|2|2|2|ZT#50
+R#68|novi zah|novi zahtev|33|3|3|3|ZT#50
+R#69|jos jedan|jedan|3|3|3|3|ZT#50
+R#70|roba1|opis1|10|15|1|25|ZT#51
+R#71|kafa|crna kafa|1|1|1|10|ZT#52
+R#72|paradajz|dzak paradajza|2|100|1|10|ZT#52
+R#73|metal|kutija metala|2|2|2|50|ZT#52
+R#74|roba1|opis1|2|2|2|2|ZT#53

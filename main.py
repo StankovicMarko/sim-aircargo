@@ -300,5 +300,5 @@ if __name__ == "__main__":
 
     application = Glavna()
     application.mainloop()
-    hangar_funkcionalnosti.snimi_sve_entitete()
 
+    hangar_funkcionalnosti.snimi_sve_entitete()
