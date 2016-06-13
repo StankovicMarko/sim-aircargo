@@ -198,6 +198,7 @@ class ManagerTransportaPanel(tk.Frame):
 
         zahtev = None
         pozicija_zahteva = None
+        smesten=False
 
         for pozicija_zahteva, z in enumerate(
                 aplikacija.zahtevi_za_transport_robe['kreiran']):  # pronalazi sve 'kreiran' zahteve
@@ -219,13 +220,20 @@ class ManagerTransportaPanel(tk.Frame):
                             prostor.dodaj(r)  # dodata roba u prostor
                             zahtevCopy.roba.remove(r)  # skida robu iz zahteva ako je utovarena
 
-                    if len(zahtevCopy.roba) == 0:
-                        zahtev.statusZahteva = 'odobren'
-                        zahtev.avion = avion
-                        #stavlja u listu odobrenih iz liste kreiranih
-                        aplikacija.zahtevi_za_transport_robe['odobren'].append(
-                            aplikacija.zahtevi_za_transport_robe['kreiran'].pop(pozicija_zahteva))
-                        print("odobren", zahtev.IDZahteva)
+                if len(zahtevCopy.roba) == 0:
+                    zahtev.statusZahteva = 'odobren'
+                    zahtev.avion = avion
+                    #stavlja u listu odobrenih iz liste kreiranih
+                    aplikacija.zahtevi_za_transport_robe['odobren'].append(
+                        aplikacija.zahtevi_za_transport_robe['kreiran'].pop(pozicija_zahteva))
+                    print("odobren", zahtev.IDZahteva)
+                    smesten=True
+                    break
+        if smesten:
+            tkinter.messagebox.showinfo('uspeh!', 'uspesno je odobren zahtev za transport')
+        else:
+            tkinter.messagebox.showerror('Greska', 'Nije odobren zahtev za transport '
+                                                   '(nema aviona sa dovoljno mesta)')
 
 
                 # for prostor1 in avionCopy:
@@ -234,12 +242,12 @@ class ManagerTransportaPanel(tk.Frame):
                 #         # print(r.duzina,r.sirina,r.visina)
                 #
                 #
-                #         # for zah in hangar_funkcionalnosti.zahtevi_za_transport_robe['kreiran']:
-                #         #     for rnj in zah.roba:
-                #         #         print(rnj.duzina)
+                #         for zah in hangar_funkcionalnosti.zahtevi_za_transport_robe['kreiran']:
+                #             for rnj in zah.roba:
+                #                 print(rnj.duzina)
                 #
-                #         # else:
-                #         #     tkinter.messagebox.showerror("Error!","Ne postoji trazeno odrediste!")
+                #         else:
+                #             tkinter.messagebox.showerror("Error!","Ne postoji trazeno odrediste!")
 
 
 class ManagerHangaraPanel(tk.Frame):
