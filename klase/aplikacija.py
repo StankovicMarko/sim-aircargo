@@ -1,6 +1,6 @@
 from klase.korisnici import MenadzerHangara
-from klase.entiteti import Aerodrom, Avion, Hangar, ProstorZaRobu
-from klase.util_funk import snimi_entitet, ucitaj_entitet
+from klase.entiteti import Avion, Hangar, ProstorZaRobu
+from klase.util_funk import snimi_entitet
 from klase.zahtevi import ZahtevZaSmestanjeAviona
 import datetime as dt
 # Marko J dodao:

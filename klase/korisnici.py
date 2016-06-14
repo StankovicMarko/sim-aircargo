@@ -18,231 +18,198 @@ class Zaposlen(Osoba):
         self.username = usn
         self.password = psw
 
-    # def pretraziHangarePo_(self):
-    #     # oznaka
-    #     # naziv
-    #     # duzina
-    #     # sirina
-    #     # visina
-    #     pass
-
-    def pretraziHangarePoOznaci(self,oznaka):
-        sviHang = []
+    def pretrazi_hangare_po_oznaci(self, oznaka):
+        """Vraca hangare cija je oznaka ista unetoj oznaci"""
+        rezultat_pretrage = []
         for hangar in klase.aplikacija.aerodrom:
             if str(hangar.id) == oznaka:
-                string = str(hangar) # prebacuje objekat hangar u string
-                for a in hangar:
-                    string+=str(a) # prikaz i aviona
-                sviHang.append(string)
-        return sviHang
+                rezultat_pretrage.append(hangar)
+        return rezultat_pretrage
 
-    def pretraziHangarePoNazivu(self,naziv):
-        sviHang = []
+    def pretrazi_hangare_po_nazivu(self, naziv):
+        """Vraca hangare ako se argument 'naziv' nalazi u imenu hangara.
+            Bez obzira sta je unet naziv i naziv hangara poredice se kao str.lower()"""
+        rezultat_pretrage = []
         for hangar in klase.aplikacija.aerodrom:
-            if hangar.naziv == naziv:
-                string = str(hangar) # prebacuje objekat hangar u string
-                for a in hangar:
-                    string+=str(a) # prikaz i aviona
-                sviHang.append(string)
-        return sviHang
+            if naziv.lower() in hangar.naziv.lower():
+                rezultat_pretrage.append(hangar)
+        return rezultat_pretrage
 
-    def pretraziHangarePoDuzini(self,duzina):
-        sviHang = []
+    def pretrazi_hangare_po_duzini(self, donja_granica, gornja_granica):
+        """Vraca sve hangare cija je duzina manja ili jednaka od unete duzine"""
+        rezultat_pretrage = []
         for hangar in klase.aplikacija.aerodrom:
-            if hangar.duzina == int(duzina):
-                string = str(hangar) # prebacuje objekat hangar u string
-                for a in hangar:
-                    string+=str(a) # prikaz i aviona
-                sviHang.append(string)
-        return sviHang
+            if donja_granica <= hangar.duzina <= gornja_granica:
+                rezultat_pretrage.append(hangar)
+        return rezultat_pretrage
 
-    def pretraziHangarePoSirini(self,sirina):
-        sviHang = []
+    def pretrazi_hangare_po_sirini(self, donja_granica, gornja_granica):
+        """Vraca sve hangare cija je sirina manja ili jednaka od unete sirina"""
+        rezultat_pretrage = []
         for hangar in klase.aplikacija.aerodrom:
-            if hangar.sirina == int(sirina):
-                string = str(hangar) # prebacuje objekat hangar u string
-                for a in hangar:
-                    string+=str(a) # prikaz i aviona
-                sviHang.append(string)
-        return sviHang
+            if donja_granica <= hangar.sirina <= gornja_granica:
+                rezultat_pretrage.append(hangar)
+        return rezultat_pretrage
 
-    def pretraziHangarePoVisini(self,visina):
-        sviHang = []
+    def pretrazi_hangare_po_visini(self, donja_granica, gornja_granica):
+        """Vraca sve hangare cija je visina manja ili jednaka od unete visina"""
+        rezultat_pretrage = []
         for hangar in klase.aplikacija.aerodrom:
-            if hangar.visina == int(visina):
-                string = str(hangar) # prebacuje objekat hangar u string
-                for a in hangar:
-                    string+=str(a) # prikaz i aviona
-                sviHang.append(string)
-        return sviHang
+            if donja_granica <= hangar.visina <= gornja_granica:
+                rezultat_pretrage.append(hangar)
+        return rezultat_pretrage
 
-    # def pretraziAvionePo_(self):
-    #     # oznaka
-    #     # duzina
-    #     # sirina
-    #     # rasponKrila
-    #     # nosivost
-    #     # relacija
-    #     pass
-
-    def pretraziAvionePoOznaci(self,oznaka):
-        sviAvioni = []
+    def pretrazi_avine_po_oznaci(self, oznaka):
+        """Vraca avione cija je oznaka ista unetoj oznaci"""
+        rezultat_pretrage = []
         for avion in klase.aplikacija.avioni_u_hangarima:
             if str(avion.id) == oznaka:
-                sviAvioni.append(str(avion))
-        for avion1 in klase.aplikacija.avioni_van_hangara:
-            if str(avion1.id) == oznaka:
-                sviAvioni.append(str(avion1))
-        return sviAvioni
+                rezultat_pretrage.append(avion)
+        for avion in klase.aplikacija.avioni_van_hangara:
+            if str(avion.id) == oznaka:
+                rezultat_pretrage.append(avion)
+        return rezultat_pretrage
 
-
-    def pretraziAvionePoDuzini(self,duzina):
-        sviAvioni = []
+    def pretrazi_avione_po_duzini(self, donja_granica, gornja_granica):
+        """Vraca sve avione cija je duzina manja ili jednaka od unete duzine"""
+        rezultat_pretrage = []
         for avion in klase.aplikacija.avioni_u_hangarima:
-            if avion.duzina == int(duzina):
-                sviAvioni.append(str(avion))
-        for avion1 in klase.aplikacija.avioni_van_hangara:
-            if avion1.duzina == int(duzina):
-                sviAvioni.append(str(avion1))
-        return sviAvioni
+            if donja_granica <= avion.duzina <= gornja_granica:
+                rezultat_pretrage.append(avion)
+        for avion in klase.aplikacija.avioni_van_hangara:
+            if donja_granica <= avion.duzina <= gornja_granica:
+                rezultat_pretrage.append(avion)
+        return rezultat_pretrage
 
-
-    def pretraziAvionePoSirini(self,sirina):
-        sviAvioni = []
+    def pretrazi_avione_po_sirini(self, donja_granica, gornja_granica):
+        """Vraca sve avione cija je sirina manja ili jednaka od unete sirine"""
+        rezultat_pretrage = []
         for avion in klase.aplikacija.avioni_u_hangarima:
-            if avion.sirina == int(sirina):
-                sviAvioni.append(str(avion))
-        for avion1 in klase.aplikacija.avioni_van_hangara:
-            if avion1.sirina == int(sirina):
-                sviAvioni.append(str(avion1))
-        return sviAvioni
+            if donja_granica <= avion.sirina <= gornja_granica:
+                rezultat_pretrage.append(avion)
+        for avion in klase.aplikacija.avioni_van_hangara:
+            if donja_granica <= avion.sirina <= gornja_granica:
+                rezultat_pretrage.append(avion)
+        return rezultat_pretrage
 
-    def pretraziAvionePoRasponKrila(self,rasponKrila):
-        sviAvioni = []
+    def pretrazi_avione_po_raspon_krila(self, donja_granica, gornja_granica):
+        """Vraca sve avione ciji je raspon krila manji ili jednak od unetog raspona krila"""
+        rezultat_pretrage = []
         for avion in klase.aplikacija.avioni_u_hangarima:
-            if avion.raspon_krila == int(rasponKrila):
-                sviAvioni.append(str(avion))
-        for avion1 in klase.aplikacija.avioni_van_hangara:
-            if avion1.raspon_krila == int(rasponKrila):
-                sviAvioni.append(str(avion1))
-        return sviAvioni
+            if donja_granica <= avion.raspon_krila <= gornja_granica:
+                rezultat_pretrage.append(avion)
+        for avion in klase.aplikacija.avioni_van_hangara:
+            if donja_granica <= avion.raspon_krila <= gornja_granica:
+                rezultat_pretrage.append(avion)
+        return rezultat_pretrage
 
-    def pretraziAvionePoNosivosti(self,nosivost):
-        sviAvioni = []
+    def pretrazi_avione_po_nosivosti(self, donja_granica, gornja_granica):
+        """Vraca sve avione cija je nosivost manja ili jednaka od unete nosivosti"""
+        rezultat_pretrage = []
         for avion in klase.aplikacija.avioni_u_hangarima:
-            if avion.nosivost == int(nosivost):
-                sviAvioni.append(str(avion))
-        for avion1 in klase.aplikacija.avioni_van_hangara:
-            if avion1.nosivost == int(nosivost):
-                sviAvioni.append(str(avion1))
-        return sviAvioni
+            if donja_granica <= avion.nosivost <= gornja_granica:
+                rezultat_pretrage.append(avion)
+        for avion in klase.aplikacija.avioni_van_hangara:
+            if donja_granica <= avion.nosivost <= gornja_granica:
+                rezultat_pretrage.append(avion)
+        return rezultat_pretrage
 
-    def pretraziAvionePoRelaciji(self,relacija):
-        sviAvioni = []
+    def pretrazi_avione_po_relaciji(self, relacija):
+        """Vraca sve avione koji lete na datoj relaciji. Relacije se porede kao str.lower()"""
+        rezultat_pretrage = []
         for avion in klase.aplikacija.avioni_u_hangarima:
-            if avion.relacija == relacija:
-                sviAvioni.append(str(avion))
-        for avion1 in klase.aplikacija.avioni_van_hangara:
-            if avion1.relacija == relacija:
-                sviAvioni.append(str(avion1))
-        return sviAvioni
+            if relacija.lower() in avion.relacija.lower():
+                rezultat_pretrage.append(avion)
+        for avion in klase.aplikacija.avioni_van_hangara:
+            if relacija.lower() in avion.relacija.lower():
+                rezultat_pretrage.append(avion)
+        return rezultat_pretrage
 
-    # def pretraziRobuPo_(self):
-    #     # Oznaci
-    #     # Nazivu
-    #     # Opisu
-    #     # Dužini
-    #     # Širini
-    #     # Visini
-    #     # Težini robe
-    #     # Identifikacionom kodu potražitelja
-    #     pass
-
-    def pretraziRobuPoOznaci(self,oznaka):
-        svaRoba = []
+    def pretraziRobuPoOznaci(self, oznaka):
+        rezultat_pretrage = []
 
         for key in klase.aplikacija.zahtevi_za_transport_robe.keys():
             for zahtev in klase.aplikacija.zahtevi_za_transport_robe[key]:
                 for roba in zahtev.roba:
-                    if roba.oznaka == oznaka:
-                        svaRoba.append(str(roba))
-        return svaRoba
+                    if str(roba.oznaka) == oznaka:
+                        rezultat_pretrage.append(roba)
+        return rezultat_pretrage
 
-    def pretraziRobuPoNazivu(self,naziv):
-        svaRoba = []
+    def pretraziRobuPoNazivu(self, naziv):
+        rezultat_pretrage = []
 
         for key in klase.aplikacija.zahtevi_za_transport_robe.keys():
             for zahtev in klase.aplikacija.zahtevi_za_transport_robe[key]:
                 for roba in zahtev.roba:
-                    if roba.naziv == naziv:
-                        svaRoba.append(str(roba))
-        return svaRoba
+                    if naziv in roba.naziv:
+                        rezultat_pretrage.append(roba)
+        return rezultat_pretrage
 
-    def pretraziRobuPoOpisu(self,opis):
-        svaRoba = []
+    def pretraziRobuPoOpisu(self, opis):
+        rezultat_pretrage = []
 
         for key in klase.aplikacija.zahtevi_za_transport_robe.keys():
             for zahtev in klase.aplikacija.zahtevi_za_transport_robe[key]:
                 for roba in zahtev.roba:
                     if opis in roba.opis:
-                        svaRoba.append(str(roba))
-        return svaRoba
+                        rezultat_pretrage.append(roba)
+        return rezultat_pretrage
 
-    def pretraziRobuPoDuzini(self,duzina):
-        svaRoba = []
-
-        for key in klase.aplikacija.zahtevi_za_transport_robe.keys():
-            for zahtev in klase.aplikacija.zahtevi_za_transport_robe[key]:
-                for roba in zahtev.roba:
-                    if roba.duzina == int(duzina):
-                        svaRoba.append(str(roba))
-        return svaRoba
-
-    def pretraziRobuPoSirini(self,sirina):
-        svaRoba = []
+    def pretraziRobuPoDuzini(self, donja_granica, gornja_granica):
+        rezultat_pretrage = []
 
         for key in klase.aplikacija.zahtevi_za_transport_robe.keys():
             for zahtev in klase.aplikacija.zahtevi_za_transport_robe[key]:
                 for roba in zahtev.roba:
-                    if roba.sirina == int(sirina):
-                        svaRoba.append(str(roba))
-        return svaRoba
+                    if donja_granica <= roba.duzina <= gornja_granica:
+                        rezultat_pretrage.append(roba)
+        return rezultat_pretrage
 
-    def pretraziRobuPoVisini(self,visina):
-        svaRoba = []
-
-        for key in klase.aplikacija.zahtevi_za_transport_robe.keys():
-            for zahtev in klase.aplikacija.zahtevi_za_transport_robe[key]:
-                for roba in zahtev.roba:
-                    if roba.visina == int(visina):
-                        svaRoba.append(str(roba))
-        return svaRoba
-
-    def pretraziRobuPoTezini(self,tezina):
-        svaRoba = []
+    def pretraziRobuPoSirini(self, donja_granica, gornja_granica):
+        rezultat_pretrage = []
 
         for key in klase.aplikacija.zahtevi_za_transport_robe.keys():
             for zahtev in klase.aplikacija.zahtevi_za_transport_robe[key]:
                 for roba in zahtev.roba:
-                    if roba.tezina == int(tezina):
-                        svaRoba.append(str(roba))
-        return svaRoba
+                    if donja_granica <= roba.sirina <= gornja_granica:
+                        rezultat_pretrage.append(roba)
+        return rezultat_pretrage
+
+    def pretraziRobuPoVisini(self, donja_granica, gornja_granica):
+        rezultat_pretrage = []
+
+        for key in klase.aplikacija.zahtevi_za_transport_robe.keys():
+            for zahtev in klase.aplikacija.zahtevi_za_transport_robe[key]:
+                for roba in zahtev.roba:
+                    if donja_granica <= roba.visina <= gornja_granica:
+                        rezultat_pretrage.append(roba)
+        return rezultat_pretrage
+
+    def pretraziRobuPoTezini(self, donja_granica, gornja_granica):
+        rezultat_pretrage = []
+
+        for key in klase.aplikacija.zahtevi_za_transport_robe.keys():
+            for zahtev in klase.aplikacija.zahtevi_za_transport_robe[key]:
+                for roba in zahtev.roba:
+                    if donja_granica <= roba.tezina <= gornja_granica:
+                        rezultat_pretrage.append(roba)
+        return rezultat_pretrage
 
     def pretraziRobuPoIDPotrazitelja(self, IDPotrazitelja):
-        sviZahtevi = []
+        rezultat_pretrage = []
         zahteviTransport = util.readFile("zahteviZaTransport.txt")
 
         for zahtev in zahteviTransport:
             l = zahtev.split("|")
             if l[4] == IDPotrazitelja:
-                sviZahtevi.append(l[0])
+                rezultat_pretrage.append(l[0])
 
         svaRoba = []
         robaLines = util.readFile("roba.txt")
 
         for roba in robaLines:
             r = roba.strip().split("|")
-            if r[7] in sviZahtevi:
+            if r[7] in rezultat_pretrage:
                 svaRoba.append(r)
 
         return svaRoba

@@ -20,21 +20,16 @@ class ZahtevZaSmestanjeAviona(Zahtev):
         self.menadzer = menadzer_hangara
 
     def __str__(self):
-        if self.hangar is None:
-            return 'Zahtev za smestanje aviona - Oznaka: {}, Vreme kreiranja: {}, Vreme smestanja: {}, ' \
-               'Vreme napustanja: {}, ID Aviona: {}, ID Menadzera: {}'.format(
-                                                                        self.id, self.vremeKreiranja,
-                                                                        self.vreme_smestanja_aviona,
-                                                                        self.vreme_napustanja_hangara,
-                                                                        self.avion.id, self.menadzer.id)
-
+        if self.hangar:
+            id_hangara=self.hangar.id
         else:
-            return 'Zahtev za smestanje aviona - Oznaka: {}, Vreme kreiranja: {}, Vreme smestanja: {}, ' \
+            id_hangara=None
+        return 'Zahtev za smestanje aviona - Oznaka: {}, Vreme kreiranja: {}, Vreme smestanja: {}, ' \
                'Vreme napustanja: {}, ID Hangara: {}, ID Aviona: {}, ID Menadzera: {}'.format(
                                                                         self.id, self.vremeKreiranja,
                                                                         self.vreme_smestanja_aviona,
                                                                         self.vreme_napustanja_hangara,
-                                                                        self.hangar.id,
+                                                                        id_hangara,
                                                                         self.avion.id, self.menadzer.id)
 
 

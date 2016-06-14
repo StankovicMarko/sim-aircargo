@@ -232,7 +232,8 @@ class Hangar(OznakaINaziv, Kolekcija):
         av = ''
         for avion in self:
             av += avion.naziv + ','
-        return 'Hangar - Oznaka: {}, Naziv: {}, Avioni: {}'.format(self.id, self.naziv, av)
+        return 'Hangar - Oznaka: {}, Naziv: {}, Duzina: {}, Sirina: {}, Visina: {}' \
+               ' Avioni: {}'.format(self.id, self.naziv, self.duzina, self.sirina, self.visina, av)
 
 
 class Avion(OznakaINaziv, Kolekcija):
@@ -250,14 +251,19 @@ class Avion(OznakaINaziv, Kolekcija):
         self.zahtev_transport = None
 
     def __str__(self):
+        if self.se_nalazi:
+            naziv_hangara=self.se_nalazi.naziv
+        else:
+            naziv_hangara='Van Aerodroma'
         return 'Avion - Oznaka: {}, Godiste: {}, Raspon krila: {}, ' \
-               'Nosivost: {}, Relacija: {}'.format(self.id,
-                                                   self.godiste,
-                                                   str(
-                                                       self.raspon_krila),
-                                                   str(
-                                                       self.nosivost),
-                                                   self.relacija)
+               'Nosivost: {}, Relacija: {}, Nalazi se: {}'.format(self.id,
+                                                                  self.godiste,
+                                                                  str(
+                                                                       self.raspon_krila),
+                                                                  str(
+                                                                       self.nosivost),
+                                                                  self.relacija,
+                                                                  naziv_hangara)
 
 
 class ProstorZaRobu(OznakaINaziv, Kolekcija):

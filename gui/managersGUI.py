@@ -1,5 +1,4 @@
 import tkinter as tk
-import klase.korisnici
 import gui.windows
 import klase.util_funk as util
 from klase import aplikacija
@@ -283,7 +282,7 @@ class ManagerHangaraPanel(tk.Frame):
         dug_dodaj_avion.grid(row=1, column=3)
 
         self.logout_button = tk.Button(self.frejm, text="Log Out!", command=self.logout)
-        self.logout_button.grid()
+        self.logout_button.grid(sticky='w')
 
     def logout(self):
         self.frejm.destroy()
