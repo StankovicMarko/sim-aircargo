@@ -236,15 +236,21 @@ class Menibar(tk.Frame):
     #     self.prikaz([hangar for hangar in aplikacija.aerodrom])
 
     def prikaz(self, lista):
-        if lista == []:
+        if not lista:
             messagebox.showerror("Error!", "Pojam nije pronadjen!")
         else:
             window = tk.Toplevel(self)
+            window.transient(self)
+            window.grab_set()
             scrollbary = tk.Scrollbar(window)
             scrollbary.pack(side='right', fill='y')
             scrollbarx = tk.Scrollbar(window, orient='horizontal')
             scrollbarx.pack(side='bottom', fill='x')
             lb = tk.Listbox(window, width=100)
+            b = tk.Button(window, text="Prikazi sadrzaj",
+                          command=lambda: prikaz_sadrzaja_entiteta(lb, lista))
+            b.pack()
+
             lb.pack(side="left", fill="both", expand=True)
             for index, element in enumerate(lista):
                 lb.insert(index, element)
@@ -254,6 +260,15 @@ class Menibar(tk.Frame):
 
             lb.config(xscrollcommand=scrollbarx.set)
             scrollbarx.config(command=lb.xview)
+
+        def prikaz_sadrzaja_entiteta(lb, lista):
+            index_entiteta=lb.curselection()[0]
+            lista_sadrzaja=[]
+
+            for sadrzaj in lista[index_entiteta]:
+                lista_sadrzaja.append(sadrzaj)
+
+            self.prikaz(lista_sadrzaja)
 
     def exit(self):
         self.quit()

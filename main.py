@@ -299,7 +299,7 @@ if __name__ == "__main__":
     aplikacija.aerodrom = ucitaj_entitet('aerodrom.txt')
 
     application = Glavna()
+    application.protocol('WM_DELETE_WINDOW', lambda: aplikacija.snimi_sve_entitete(application))
     application.mainloop()
 
 
-    aplikacija.snimi_sve_entitete()
