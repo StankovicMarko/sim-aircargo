@@ -12,17 +12,21 @@ def set_path(file_name):
 
 def readFile(filename):
     path = set_path(filename)
-    f = open(path, "r")
-    lines = f.readlines()
-    f.close()
+    with open(path, 'r') as f:
+        lines = f.readlines()
+    # f = open(path, "r")
+    # lines = f.readlines()
+    # f.close()
     return lines
 
 
-def saveFile(filename, string):
+def addToFile(filename, string):
     path = set_path(filename)
-    f = open(path, "a")
-    f.write(string)
-    f.close()
+    with open(path, 'a') as f:
+        f.write(string)
+    # f = open(path, "a")
+    # f.write(string)
+    # f.close()
 
 
 def sortPoDatumuKreiranja(lista):

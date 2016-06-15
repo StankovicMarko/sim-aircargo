@@ -10,9 +10,9 @@ class Menibar(tk.Frame):
         self.controler = controler
         self.menubar = tk.Menu(self)
 
-        fileMenu = tk.Menu(self.menubar, tearoff=0)
-        self.menubar.add_cascade(label="File", menu=fileMenu)
-        fileMenu.add_command(label="Exit", command=self.exit)
+        # fileMenu = tk.Menu(self.menubar, tearoff=0)
+        # self.menubar.add_cascade(label="File", menu=fileMenu)
+        # fileMenu.add_command(label="Exit", command=self.exit)
 
         pretragaMenu = tk.Menu(self.menubar, tearoff=0)
         # prikaz_meni=tk.Menu(self.menubar, tearoff=0)
@@ -236,6 +236,9 @@ class Menibar(tk.Frame):
     #     self.prikaz([hangar for hangar in aplikacija.aerodrom])
 
     def prikaz(self, lista):
+        """Pravi modalni prozor koji sadrzi tekst stvari koje se nalaze u listi, dugme prikazi
+            entitete prikazuje sadrzaj entiteta npr: prikazani su hangari, kliknemo na neki pa onda
+            dugme dobicemo sve avione koji se nalaze u tom hangaru."""
         if not lista:
             messagebox.showerror("Error!", "Pojam nije pronadjen!")
         else:
@@ -270,5 +273,5 @@ class Menibar(tk.Frame):
 
             self.prikaz(lista_sadrzaja)
 
-    def exit(self):
-        self.quit()
+    # def exit(self):
+    #     self.quit()

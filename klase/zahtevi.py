@@ -53,8 +53,8 @@ class ZahtevZaTransport(Zahtev):
         self.roba = []
 
     def sacuvaj(self):
-        util.saveFile("zahteviZaTransport.txt",
-                      self.IDZahteva + "|" + self.datumKreiranja + "|" + self.datumTransporta +
+        util.addToFile("zahteviZaTransport.txt",
+                       self.IDZahteva + "|" + self.datumKreiranja + "|" + self.datumTransporta +
                       "|" + self.odrediste + "|" + self.IDPotrazitelja + "|" + self.avion + "|" + self.statusZahteva + "\n")
 
     def prikazZahteva(self, IDPotrazitelja):

@@ -13,7 +13,7 @@ class Osoba(OznakaINaziv):
 
 class Zaposlen(Osoba):
     """To su sve osobe koje rade sa aplikacijom, dakle Menadzeri Hangara, Transporta i Radnik"""
-    def __init__(self, ID, naziv, prezime, usn, psw):
+    def __init__(self, ID, naziv, prezime, usn, psw=None):
         Osoba.__init__(self, ID, naziv, prezime)
         self.username = usn
         self.password = psw

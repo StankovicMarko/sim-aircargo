@@ -226,7 +226,7 @@ class PotraziteljPanel(tk.Frame):
                     messagebox.showerror("Error!","Niste uneli podatke!")
                 else:
                     line = self.IDPotrazitelja+"|"+ime+"|"+prezime+"|"+brojtelefona+"|"+email+"|potrazitelj"+"\n"
-                    util.saveFile("korisnici.txt",line)
+                    util.addToFile("korisnici.txt", line)
             
             zahtev = klase.zahtevi.ZahtevZaTransport(self.odredisteListBox.get(self.selektovanoOdrediste[0]),self.IDPotrazitelja)
             zahtev.sacuvaj()

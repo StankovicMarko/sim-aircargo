@@ -16,9 +16,9 @@ class Roba(object):
         self.IDZahteva = IDZahteva
 
     def sacuvaj(self):
-        util.saveFile("roba.txt", self.oznaka + "|" + self.naziv + "|" + self.opis + "|" +
-                      self.duzina + "|" + self.sirina + "|" + self.visina + "|" + self.tezina + "|" +
-                      self.IDZahteva + "\n")
+        util.addToFile("roba.txt", self.oznaka + "|" + self.naziv + "|" + self.opis + "|" +
+                       self.duzina + "|" + self.sirina + "|" + self.visina + "|" + self.tezina + "|" +
+                       self.IDZahteva + "\n")
 
     def odrediIDRobe(self):
         lines = util.readFile("roba.txt")

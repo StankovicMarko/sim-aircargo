@@ -158,27 +158,27 @@ def kreiraj_zahtev_za_smestanje_aviona():
     dodaj_zahtev_avionu_van_hangara()
 
 
-def prikazi_avione_koji_nemaju_zahtev():
-    for avion in avioni_van_hangara:
-        if avion.zahtev_smestanje is None:
-            print(avion)
-
-
-def dodaj_zahtev_avionu_van_hangara():
-    id_aviona = None
-    while True:
-        try:
-            id_aviona = int(input('unesite ID aviona kojem zelite da napravite zahtev za smestanje: '))
-            break
-        except:
-            print('molimo unesite broj')
-    for i, avion in enumerate(avioni_van_hangara):
-        if avion.id == id_aviona:
-            id_zahteva = len(zahtevi_za_smestanje_aviona) + 1
-            zahtev = ZahtevZaSmestanjeAviona(id_zahteva, avion, menadzer_hangara)
-            zahtevi_za_smestanje_aviona.append(zahtev)
-            avion.zahtev_smestanje = zahtev
-            break
+# def prikazi_avione_koji_nemaju_zahtev():
+#     for avion in avioni_van_hangara:
+#         if avion.zahtev_smestanje is None:
+#             print(avion)
+#
+#
+# def dodaj_zahtev_avionu_van_hangara():
+#     id_aviona = None
+#     while True:
+#         try:
+#             id_aviona = int(input('unesite ID aviona kojem zelite da napravite zahtev za smestanje: '))
+#             break
+#         except:
+#             print('molimo unesite broj')
+#     for i, avion in enumerate(avioni_van_hangara):
+#         if avion.id == id_aviona:
+#             id_zahteva = len(zahtevi_za_smestanje_aviona) + 1
+#             zahtev = ZahtevZaSmestanjeAviona(id_zahteva, avion, menadzer_hangara)
+#             zahtevi_za_smestanje_aviona.append(zahtev)
+#             avion.zahtev_smestanje = zahtev
+#             break
 
 
 # samo avoni sa zahtevom mogu da se smeste u hangar

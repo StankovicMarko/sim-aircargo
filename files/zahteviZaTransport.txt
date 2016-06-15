@@ -44,3 +44,4 @@ ZT#50|04/06/2016|None|London|K#11|None|kreiran
 ZT#51|04/06/2016|None|Pariz|K#5|None|kreiran
 ZT#52|04/06/2016|None|Pariz|K#8|None|kreiran
 ZT#53|04/06/2016|None|Pariz|K#12|None|kreiran
+ZT#54|15/06/2016|None|London|K#5|None|kreiran

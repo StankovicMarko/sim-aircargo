@@ -5,6 +5,9 @@ from klase import aplikacija
 import tkinter.messagebox
 import copy
 
+from klase.util_funk import set_path, addToFile
+from klase.zahtevi import ZahtevZaSmestanjeAviona
+
 
 class ManagerTransportaPanel(tk.Frame):
     def __init__(self, parent, controler):
@@ -197,7 +200,7 @@ class ManagerTransportaPanel(tk.Frame):
 
         zahtev = None
         pozicija_zahteva = None
-        smesten=False
+        smesten = False
 
         for pozicija_zahteva, z in enumerate(
                 aplikacija.zahtevi_za_transport_robe['kreiran']):  # pronalazi sve 'kreiran' zahteve
@@ -222,11 +225,11 @@ class ManagerTransportaPanel(tk.Frame):
                 if len(zahtevCopy.roba) == 0:
                     zahtev.statusZahteva = 'odobren'
                     zahtev.avion = avion
-                    #stavlja u listu odobrenih iz liste kreiranih
+                    # stavlja u listu odobrenih iz liste kreiranih
                     aplikacija.zahtevi_za_transport_robe['odobren'].append(
                         aplikacija.zahtevi_za_transport_robe['kreiran'].pop(pozicija_zahteva))
                     print("odobren", zahtev.IDZahteva)
-                    smesten=True
+                    smesten = True
                     break
         if smesten:
             tkinter.messagebox.showinfo('uspeh!', 'uspesno je odobren zahtev za transport')
@@ -235,18 +238,18 @@ class ManagerTransportaPanel(tk.Frame):
                                                    '(nema aviona sa dovoljno mesta)')
 
 
-                # for prostor1 in avionCopy:
-                #     for nesto in prostor1:
-                #         print(nesto)
-                #         # print(r.duzina,r.sirina,r.visina)
-                #
-                #
-                #         for zah in hangar_funkcionalnosti.zahtevi_za_transport_robe['kreiran']:
-                #             for rnj in zah.roba:
-                #                 print(rnj.duzina)
-                #
-                #         else:
-                #             tkinter.messagebox.showerror("Error!","Ne postoji trazeno odrediste!")
+            # for prostor1 in avionCopy:
+            #     for nesto in prostor1:
+            #         print(nesto)
+            #         # print(r.duzina,r.sirina,r.visina)
+            #
+            #
+            #         for zah in hangar_funkcionalnosti.zahtevi_za_transport_robe['kreiran']:
+            #             for rnj in zah.roba:
+            #                 print(rnj.duzina)
+            #
+            #         else:
+            #             tkinter.messagebox.showerror("Error!","Ne postoji trazeno odrediste!")
 
 
 class ManagerHangaraPanel(tk.Frame):
@@ -280,6 +283,10 @@ class ManagerHangaraPanel(tk.Frame):
 
         dug_dodaj_avion = tk.Button(self.frejm, text='Napravi avion', command=self.add_avion)
         dug_dodaj_avion.grid(row=1, column=3)
+
+        dug_kreiraj_zahtev_za_smestanje = tk.Button(self.frejm, text='Prikaz Aviona bez zahteva',
+                                                    command=self.prikazi_avione_bez_zahteva)
+        dug_kreiraj_zahtev_za_smestanje.grid(row=1, column=4)
 
         self.logout_button = tk.Button(self.frejm, text="Log Out!", command=self.logout)
         self.logout_button.grid(sticky='w')
@@ -455,6 +462,8 @@ class ManagerHangaraPanel(tk.Frame):
                                      int(godiste),
                                      int(nosivost),
                                      relacija)
+            path = set_path('odredista.txt')
+            addToFile(path, relacija + '\n')
             tk.messagebox.showinfo('Narucivanje aviona', 'Uspesno napravljen avion')
             top.destroy()
         else:
@@ -487,8 +496,23 @@ class ManagerHangaraPanel(tk.Frame):
             tk.messagebox.showerror('Invalid inputs',
                                     'Molimo unesite validne inpute str/int/int/int ili manje dimenzije')
 
+    def prikazi_avione_bez_zahteva(self):
+        avioni_bez_zahteva = []
+        for i, avion in enumerate(aplikacija.avioni_van_hangara):
+            if avion.zahtev_smestanje is None:
+                avioni_bez_zahteva.append(avion)
+                self.listbox.insert(i, avion)
+        if avioni_bez_zahteva:
+            kreiraj_zah = tk.Button(self.frejm, text='Kreiraj Zah. za smestanje',
+                                    command=lambda: self._create_request(avioni_bez_zahteva, kreiraj_zah))
+            kreiraj_zah.grid(row=3, column=4)
 
-            # dodaj zahtev
-            # list box u petlji insert str(avion)
-            # imam dugme dodaj zahtev
-            # salje id i kreira zahtev
+    def _create_request(self, avioni_bez_zahteva, kreiraj_zah):
+        odabran_avion = avioni_bez_zahteva[self.listbox.curselection()[0]]
+        print(self.listbox.curselection()[0])
+        id_zahteva = len(aplikacija.zahtevi_za_smestanje_aviona) + 1
+        zahtev = ZahtevZaSmestanjeAviona(id_zahteva, odabran_avion, self.controler.m)
+        aplikacija.zahtevi_za_smestanje_aviona.append(zahtev)
+        odabran_avion.zahtev_smestanje = zahtev
+        self.listbox.delete(0, 'end')
+        kreiraj_zah.destroy()
