@@ -255,11 +255,14 @@ class Avion(OznakaINaziv, Kolekcija):
             naziv_hangara=self.se_nalazi.naziv
         else:
             naziv_hangara='Van Aerodroma'
-        return 'Avion - Oznaka: {}, Godiste: {}, Raspon krila: {}, ' \
+        return 'Avion - Oznaka: {}, Godiste: {}, ' \
+               'Duzina: {}, Raspon krila: {}, Visina: {}, ' \
                'Nosivost: {}, Relacija: {}, Nalazi se: {}'.format(self.id,
                                                                   self.godiste,
+                                                                  str(self.duzina),
                                                                   str(
                                                                        self.raspon_krila),
+                                                                  str(self.visina),
                                                                   str(
                                                                        self.nosivost),
                                                                   self.relacija,

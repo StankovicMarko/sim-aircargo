@@ -33,6 +33,7 @@ class Zaposlen(Osoba):
         for hangar in klase.aplikacija.aerodrom:
             if naziv.lower() in hangar.naziv.lower():
                 rezultat_pretrage.append(hangar)
+        rezultat_pretrage.sort(key=lambda x: x.naziv)
         return rezultat_pretrage
 
     def pretrazi_hangare_po_duzini(self, donja_granica, gornja_granica):
@@ -41,6 +42,7 @@ class Zaposlen(Osoba):
         for hangar in klase.aplikacija.aerodrom:
             if donja_granica <= hangar.duzina <= gornja_granica:
                 rezultat_pretrage.append(hangar)
+        rezultat_pretrage.sort(key=lambda x: x.duzina)
         return rezultat_pretrage
 
     def pretrazi_hangare_po_sirini(self, donja_granica, gornja_granica):
@@ -49,6 +51,7 @@ class Zaposlen(Osoba):
         for hangar in klase.aplikacija.aerodrom:
             if donja_granica <= hangar.sirina <= gornja_granica:
                 rezultat_pretrage.append(hangar)
+        rezultat_pretrage.sort(key=lambda x: x.sirina)
         return rezultat_pretrage
 
     def pretrazi_hangare_po_visini(self, donja_granica, gornja_granica):
@@ -57,6 +60,7 @@ class Zaposlen(Osoba):
         for hangar in klase.aplikacija.aerodrom:
             if donja_granica <= hangar.visina <= gornja_granica:
                 rezultat_pretrage.append(hangar)
+        rezultat_pretrage.sort(key=lambda x: x.visina)
         return rezultat_pretrage
 
     def pretrazi_avine_po_oznaci(self, oznaka):
@@ -79,6 +83,7 @@ class Zaposlen(Osoba):
         for avion in klase.aplikacija.avioni_van_hangara:
             if donja_granica <= avion.duzina <= gornja_granica:
                 rezultat_pretrage.append(avion)
+        rezultat_pretrage.sort(key=lambda x: x.duzina)
         return rezultat_pretrage
 
     def pretrazi_avione_po_sirini(self, donja_granica, gornja_granica):
@@ -90,6 +95,7 @@ class Zaposlen(Osoba):
         for avion in klase.aplikacija.avioni_van_hangara:
             if donja_granica <= avion.sirina <= gornja_granica:
                 rezultat_pretrage.append(avion)
+        rezultat_pretrage.sort(key=lambda x: x.sirina)
         return rezultat_pretrage
 
     def pretrazi_avione_po_raspon_krila(self, donja_granica, gornja_granica):
@@ -101,6 +107,7 @@ class Zaposlen(Osoba):
         for avion in klase.aplikacija.avioni_van_hangara:
             if donja_granica <= avion.raspon_krila <= gornja_granica:
                 rezultat_pretrage.append(avion)
+        rezultat_pretrage.sort(key=lambda x: x.raspon_krila)
         return rezultat_pretrage
 
     def pretrazi_avione_po_nosivosti(self, donja_granica, gornja_granica):
@@ -112,6 +119,7 @@ class Zaposlen(Osoba):
         for avion in klase.aplikacija.avioni_van_hangara:
             if donja_granica <= avion.nosivost <= gornja_granica:
                 rezultat_pretrage.append(avion)
+        rezultat_pretrage.sort(key=lambda x: x.nosivost)
         return rezultat_pretrage
 
     def pretrazi_avione_po_relaciji(self, relacija):
@@ -123,6 +131,7 @@ class Zaposlen(Osoba):
         for avion in klase.aplikacija.avioni_van_hangara:
             if relacija.lower() in avion.relacija.lower():
                 rezultat_pretrage.append(avion)
+        rezultat_pretrage.sort(key=lambda x: x.relacija)
         return rezultat_pretrage
 
     def pretraziRobuPoOznaci(self, oznaka):
@@ -143,6 +152,7 @@ class Zaposlen(Osoba):
                 for roba in zahtev.roba:
                     if naziv in roba.naziv:
                         rezultat_pretrage.append(roba)
+        rezultat_pretrage.sort(key=lambda x: x.naziv)
         return rezultat_pretrage
 
     def pretraziRobuPoOpisu(self, opis):
@@ -163,6 +173,7 @@ class Zaposlen(Osoba):
                 for roba in zahtev.roba:
                     if donja_granica <= roba.duzina <= gornja_granica:
                         rezultat_pretrage.append(roba)
+        rezultat_pretrage.sort(key=lambda x: x.duzina)
         return rezultat_pretrage
 
     def pretraziRobuPoSirini(self, donja_granica, gornja_granica):
@@ -173,6 +184,7 @@ class Zaposlen(Osoba):
                 for roba in zahtev.roba:
                     if donja_granica <= roba.sirina <= gornja_granica:
                         rezultat_pretrage.append(roba)
+        rezultat_pretrage.sort(key=lambda x: x.sirina)
         return rezultat_pretrage
 
     def pretraziRobuPoVisini(self, donja_granica, gornja_granica):
@@ -183,6 +195,7 @@ class Zaposlen(Osoba):
                 for roba in zahtev.roba:
                     if donja_granica <= roba.visina <= gornja_granica:
                         rezultat_pretrage.append(roba)
+        rezultat_pretrage.sort(key=lambda x: x.visina)
         return rezultat_pretrage
 
     def pretraziRobuPoTezini(self, donja_granica, gornja_granica):
@@ -193,6 +206,8 @@ class Zaposlen(Osoba):
                 for roba in zahtev.roba:
                     if donja_granica <= roba.tezina <= gornja_granica:
                         rezultat_pretrage.append(roba)
+
+        rezultat_pretrage.sort(key=lambda x: x.tezina)
         return rezultat_pretrage
 
     def pretraziRobuPoIDPotrazitelja(self, IDPotrazitelja):
