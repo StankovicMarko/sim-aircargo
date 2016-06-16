@@ -1,3 +1,5 @@
+import copy
+
 from klase.korisnici import MenadzerHangara
 from klase.entiteti import Avion, Hangar, ProstorZaRobu
 from klase.util_funk import snimi_entitet
@@ -51,7 +53,7 @@ def prikazi_zahteve_za_smestanje_aviona():
     return prikaz
 
 
-def prikaz_zahteva_za_transport_robe():
+def prikaz_zahteva_za_transport_utovarene_robe():
     prikaz = []
     for zahtev in zahtevi_za_transport_robe['robaUtovarena']:
         prikaz.append(zahtev)
@@ -232,106 +234,124 @@ def transportuj_robu():
     zahtevi_za_transport_robe['robaUtovarena'].clear()
 
 
+def prikazi_zahteve_za_transport_odobrene_robe():
+    prikaz = []
+    for zahtev in zahtevi_za_transport_robe['odobren']:
+        prikaz.append(zahtev)
+    return prikaz
 
 
-    # h1 = Hangar(1, 'HANG1', 100, 100, 30)
-    # #
-    # # h2 = Hangar(2, 'hang007', 100, 100, 300)
-    # #
-    # aerodrom.dodaj(h1)
-    # # aerodrom.dodaj(h2)
-    # a1 = Avion(1, 'Av1', 20, 10, 10, 20, 2012, 10, 'Pariz')
-    # a2 = Avion(2, 'Av2', 22, 20, 10, 30, 2011, 30, 'London')
-    # a3 = Avion(3, 'Av3', 23, 20, 10, 50, 2014, 20, 'London')
-    # a4 = Avion(4, 'Av4', 25, 20, 10, 40, 2005, 40, 'London')
-    #
-    # # a3 = Avion(3, 'Av3', 24, 10, 10, 30, 2005, 20, 'lisabon')
-    # # a4 = Avion(4, 'Av4', 25, 15, 8, 1500, 2006, 22, 'kijev')
-    # # a5 = Avion(5, 'Av5', 500, 500, 5, 10, 2008, 32, 'moskva')
-    # # a6 = Avion(6, 'Av6', 5, 5, 5, 2000, 2015, 42, 'kopenhagen')
-    # #
-    #
-    # p1 = ProstorZaRobu("p1",10,10,10)
-    # p2 = ProstorZaRobu("p1",20,20,20)
-    # a1.dodaj(p1)
-    # a1.dodaj(p2)
-    #
-    # p3 = ProstorZaRobu("p2",12,15,8)
-    # a2.dodaj(p3)
-    #
-    # # h1.dodaj(a1)
-    # # h1.dodaj(a2)
-    #
-    # avioni_u_hangarima.append(a1)
-    # avioni_u_hangarima.append(a2)
-    # avioni_u_hangarima.append(a3)
-    # avioni_u_hangarima.append(a4)
+def utovari_robu(zahtev):
+    for prostor in zahtev.avion:
+        for roba in zahtev.roba:
+            prostor.dodaj(roba)
+
+    zahtev.statusZahteva = 'robaUtovarena'
+    for i, zah in enumerate(zahtevi_za_transport_robe['odobren']):
+        if zah == zahtev:
+            zahtevi_za_transport_robe['robaUtovarena'].append(zahtevi_za_transport_robe['odobren'].pop(i))
+            break
+            # moracu i avion u hangaru da promenim
 
 
-    # avioni_van_hangara.append(a1)
-    # avioni_van_hangara.append(a2)
-    # avioni_van_hangara.append(a3)
-    # avioni_van_hangara.append(a4)
-    # avioni_van_hangara.append(a5)
-    # avioni_van_hangara.append(a6)
-    #
-    # print(aerodrom, h1, h2, menadzer_hangara, len(aerodrom), sep='\n')
-    #
-    # for i, avion in enumerate(avioni_van_hangara):
-    #     print(i, avion.zahtev_smestanje)
-    #
-    # kreiraj_zahtev_za_smestanje_aviona()
-    #
-    # for i, avion in enumerate(avioni_van_hangara):
-    #     print(i, avion.zahtev_smestanje)
-    #
-    # kreiraj_zahtev_za_smestanje_aviona()
-    #
-    # for i, avion in enumerate(avioni_van_hangara):
-    #     print(i, avion.zahtev_smestanje)
-    #
-    # # print(avioni_u_hangarima[0].zahtev.menadzer.id)
-    #
-    # for avion in avioni_van_hangara:
-    #     print(avion)
-    #
-    # print('--------------')
-    #
-    # smesti_avion_koji_ima_zahtev()
-    #
-    # for avion in avioni_van_hangara:
-    #     print(avion)
-    #
-    # print('****************')
-    # for avion in avioni_u_hangarima:
-    #     print(avion)
+            # h1 = Hangar(1, 'HANG1', 100, 100, 30)
+            # #
+            # # h2 = Hangar(2, 'hang007', 100, 100, 300)
+            # #
+            # aerodrom.dodaj(h1)
+            # # aerodrom.dodaj(h2)
+            # a1 = Avion(1, 'Av1', 20, 10, 10, 20, 2012, 10, 'Pariz')
+            # a2 = Avion(2, 'Av2', 22, 20, 10, 30, 2011, 30, 'London')
+            # a3 = Avion(3, 'Av3', 23, 20, 10, 50, 2014, 20, 'London')
+            # a4 = Avion(4, 'Av4', 25, 20, 10, 40, 2005, 40, 'London')
+            #
+            # # a3 = Avion(3, 'Av3', 24, 10, 10, 30, 2005, 20, 'lisabon')
+            # # a4 = Avion(4, 'Av4', 25, 15, 8, 1500, 2006, 22, 'kijev')
+            # # a5 = Avion(5, 'Av5', 500, 500, 5, 10, 2008, 32, 'moskva')
+            # # a6 = Avion(6, 'Av6', 5, 5, 5, 2000, 2015, 42, 'kopenhagen')
+            # #
+            #
+            # p1 = ProstorZaRobu("p1",10,10,10)
+            # p2 = ProstorZaRobu("p1",20,20,20)
+            # a1.dodaj(p1)
+            # a1.dodaj(p2)
+            #
+            # p3 = ProstorZaRobu("p2",12,15,8)
+            # a2.dodaj(p3)
+            #
+            # # h1.dodaj(a1)
+            # # h1.dodaj(a2)
+            #
+            # avioni_u_hangarima.append(a1)
+            # avioni_u_hangarima.append(a2)
+            # avioni_u_hangarima.append(a3)
+            # avioni_u_hangarima.append(a4)
 
 
-    # men transporta...
+            # avioni_van_hangara.append(a1)
+            # avioni_van_hangara.append(a2)
+            # avioni_van_hangara.append(a3)
+            # avioni_van_hangara.append(a4)
+            # avioni_van_hangara.append(a5)
+            # avioni_van_hangara.append(a6)
+            #
+            # print(aerodrom, h1, h2, menadzer_hangara, len(aerodrom), sep='\n')
+            #
+            # for i, avion in enumerate(avioni_van_hangara):
+            #     print(i, avion.zahtev_smestanje)
+            #
+            # kreiraj_zahtev_za_smestanje_aviona()
+            #
+            # for i, avion in enumerate(avioni_van_hangara):
+            #     print(i, avion.zahtev_smestanje)
+            #
+            # kreiraj_zahtev_za_smestanje_aviona()
+            #
+            # for i, avion in enumerate(avioni_van_hangara):
+            #     print(i, avion.zahtev_smestanje)
+            #
+            # # print(avioni_u_hangarima[0].zahtev.menadzer.id)
+            #
+            # for avion in avioni_van_hangara:
+            #     print(avion)
+            #
+            # print('--------------')
+            #
+            # smesti_avion_koji_ima_zahtev()
+            #
+            # for avion in avioni_van_hangara:
+            #     print(avion)
+            #
+            # print('****************')
+            # for avion in avioni_u_hangarima:
+            #     print(avion)
 
-    # def ucitajZahteveIRobu():
-    #     zahteviLines = util.readFile("zahteviZaTransport.txt")
-    #     robaLines = util.readFile("roba.txt")
-    #
-    #     for linija in zahteviLines:
-    #         z = linija.strip().split("|")
-    #         zahtev = klase.zahtevi.ZahtevZaTransport(z[3],z[4],z[0],z[2],z[6])
-    #
-    #         for rlinija in robaLines:
-    #             r = rlinija.strip().split("|")
-    #             if r[7] == z[0]:
-    #                 robaa = klase.roba.Roba(r[1],r[2],int(r[3]),int(r[4]),int(r[5]),int(r[5]),r[7],r[0])
-    #                 zahtev.roba.append(robaa)
-    #
-    #         zahtevi_za_transport_robe[zahtev.statusZahteva].append(zahtev)
-    #
-    #     for znj in zahtevi_za_transport_robe['kreiran']: # ovo je samo za test, mos brisati kasnije..
-    #         print(znj)
+
+            # men transporta...
+
+            # def ucitajZahteveIRobu():
+            #     zahteviLines = util.readFile("zahteviZaTransport.txt")
+            #     robaLines = util.readFile("roba.txt")
+            #
+            #     for linija in zahteviLines:
+            #         z = linija.strip().split("|")
+            #         zahtev = klase.zahtevi.ZahtevZaTransport(z[3],z[4],z[0],z[2],z[6])
+            #
+            #         for rlinija in robaLines:
+            #             r = rlinija.strip().split("|")
+            #             if r[7] == z[0]:
+            #                 robaa = klase.roba.Roba(r[1],r[2],int(r[3]),int(r[4]),int(r[5]),int(r[5]),r[7],r[0])
+            #                 zahtev.roba.append(robaa)
+            #
+            #         zahtevi_za_transport_robe[zahtev.statusZahteva].append(zahtev)
+            #
+            #     for znj in zahtevi_za_transport_robe['kreiran']: # ovo je samo za test, mos brisati kasnije..
+            #         print(znj)
 
 
-    # hangar1=Hangar(1,'h1',100,100,20)
-    # avion1=Avion(1,'a1', 40, 10, 10, 30, 2012, 21000, 'London')
-    #
-    # print(hangar1)
-    # hangar1.dodaj(avion1)
-    # print(hangar1)
+            # hangar1=Hangar(1,'h1',100,100,20)
+            # avion1=Avion(1,'a1', 40, 10, 10, 30, 2012, 21000, 'London')
+            #
+            # print(hangar1)
+            # hangar1.dodaj(avion1)
+            # print(hangar1)

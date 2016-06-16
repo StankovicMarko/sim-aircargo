@@ -119,3 +119,43 @@ class RadnikPanel(tk.Frame):
         tk.Frame.__init__(self, parent)
         nekiLabel = tk.Label(self, text="Ulogovani ste kao radnik")
         nekiLabel.grid()
+
+        self.create_widgets()
+
+    def create_widgets(self):
+        self.frejm = tk.Frame(self)
+        self.frejm.grid()
+        self.listbox = tk.Listbox(self.frejm)
+        self.listbox.grid(row=2, columnspan=10, sticky='nsew')
+        scrollbary = tk.Scrollbar(self.frejm)
+        scrollbarx = tk.Scrollbar(self.frejm, orient='horizontal')
+        self.listbox.config(yscrollcommand=scrollbary.set)
+        scrollbary.config(command=self.listbox.yview)
+        self.listbox.config(xscrollcommand=scrollbarx.set)
+        scrollbarx.config(command=self.listbox.xview)
+        scrollbarx.grid(row=3, columnspan=10, sticky='nsew')
+        scrollbary.grid(row=2, column=2, sticky='nse')
+
+        self.dug_smestanje = tk.Button(self.frejm, text="Odobreni zahtevi", command=self.odobreni_zahtevi)
+        self.dug_smestanje.grid(row=1, column=0)
+
+        self.dug_utovari_robu = tk.Button(self.frejm, text='Utovari Robu')
+        self.dug_utovari_robu.grid(row=1, column=2)
+
+    def odobreni_zahtevi(self):
+        zahtevi = aplikacija.prikazi_zahteve_za_transport_odobrene_robe()
+        self.dug_utovari_robu.config(command=lambda: self._utovari_robu(zahtevi))
+        self.listbox.delete(0, 'end')
+        for i, zahtev in enumerate(zahtevi):
+            self.listbox.insert(i, zahtev)
+
+    def _utovari_robu(self, zahtevi):
+        try:
+            odabran_zahtev = zahtevi[self.listbox.curselection()[0]]
+            aplikacija.utovari_robu(odabran_zahtev)
+            self.dug_utovari_robu.destroy()
+            tk.messagebox.showinfo('', 'Roba uspesno utovarena')
+            self.listbox.delete(0, 'end')
+        except:
+            tk.messagebox.showinfo('', 'Molimo izaberite zahtev ciju robu zelite da utovarite')
+

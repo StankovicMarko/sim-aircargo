@@ -113,8 +113,6 @@ class Menibar(tk.Frame):
             return
         elif oznaka == 'all':
             lista = [avion for avion in aplikacija.avioni_u_hangarima]
-            for avion in lista:
-                print(avion)
             lista.extend([avion for avion in aplikacija.avioni_van_hangara])
         else:
             lista = self.controler.m.pretrazi_avine_po_oznaci(oznaka)

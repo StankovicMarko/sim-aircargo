@@ -4,7 +4,6 @@ from klase.entiteti import OznakaINaziv
 
 
 class Zahtev(OznakaINaziv):
-
     def __init__(self, ID, naziv):
         OznakaINaziv.__init__(self, ID, naziv)
         self.vremeKreiranja = datetime.now()
@@ -21,20 +20,21 @@ class ZahtevZaSmestanjeAviona(Zahtev):
 
     def __str__(self):
         if self.hangar:
-            id_hangara=self.hangar.id
+            id_hangara = self.hangar.id
         else:
-            id_hangara=None
+            id_hangara = None
         return 'Zahtev za smestanje aviona - Oznaka: {}, Vreme kreiranja: {}, Vreme smestanja: {}, ' \
                'Vreme napustanja: {}, ID Hangara: {}, ID Aviona: {}, ID Menadzera: {}'.format(
-                                                                        self.id, self.vremeKreiranja,
-                                                                        self.vreme_smestanja_aviona,
-                                                                        self.vreme_napustanja_hangara,
-                                                                        id_hangara,
-                                                                        self.avion.id, self.menadzer.id)
+            self.id, self.vremeKreiranja,
+            self.vreme_smestanja_aviona,
+            self.vreme_napustanja_hangara,
+            id_hangara,
+            self.avion.id, self.menadzer.id)
 
 
 class ZahtevZaTransport(Zahtev):
-    def __init__(self,odrediste, IDPotrazitelja,IDZahteva=None, datumKreiranja=None,statusZahteva="kreiran", naziv=None):
+    def __init__(self, odrediste, IDPotrazitelja, IDZahteva=None,
+                 datumKreiranja=None, statusZahteva="kreiran", naziv=None):
         Zahtev.__init__(self, IDZahteva, naziv)
         if IDZahteva == None:
             self.IDZahteva = self.odrediIDZahteva()
@@ -48,14 +48,15 @@ class ZahtevZaTransport(Zahtev):
         self.datumTransporta = "None"
         self.odrediste = odrediste
         self.IDPotrazitelja = IDPotrazitelja
-        self.avion = "None" #ovde ces napraviti referencu na avion koji moze da primi robu iz ovog zahteva
+        self.avion = "None"  # ovde ces napraviti referencu na avion koji moze da primi robu iz ovog zahteva
         self.statusZahteva = statusZahteva
         self.roba = []
 
     def sacuvaj(self):
         util.addToFile("zahteviZaTransport.txt",
                        self.IDZahteva + "|" + self.datumKreiranja + "|" + self.datumTransporta +
-                      "|" + self.odrediste + "|" + self.IDPotrazitelja + "|" + self.avion + "|" + self.statusZahteva + "\n")
+                       "|" + self.odrediste + "|" + self.IDPotrazitelja + "|" + self.avion +
+                       "|" + self.statusZahteva + "\n")
 
     def prikazZahteva(self, IDPotrazitelja):
         lines = util.readFile("zahteviZaTransport.txt")
@@ -63,7 +64,6 @@ class ZahtevZaTransport(Zahtev):
             l = line.strip().split("|")
             if l[4] == IDPotrazitelja:
                 print(l)
-
 
     def odrediDatum(self):
         return datetime.now().strftime("%d/%m/%Y")
@@ -77,6 +77,5 @@ class ZahtevZaTransport(Zahtev):
     def __str__(self):
         robe = ""
         for r in self.roba:
-            robe += r.oznaka+" "
-        return "Zahtev za transport - {}, Roba: {}".format(self.IDZahteva,robe)
-
+            robe += r.oznaka + " "
+        return "Zahtev za transport - {}, Roba: {}".format(self.IDZahteva, robe)

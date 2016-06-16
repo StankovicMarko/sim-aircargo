@@ -209,22 +209,25 @@ class ManagerTransportaPanel(tk.Frame):
                 break
 
         for avion in aplikacija.avioni_u_hangarima:  # za svaki avion u hangaru trazi da li odgovara odrediste
-            if avion.relacija == zahtev.odrediste:
+            if avion.relacija == zahtev.odrediste and avion.zahtev_transport is None:
                 print("relacija pronadjena - ", avion.relacija)
 
                 avionCopy = copy.deepcopy(avion)
                 zahtevCopy = copy.deepcopy(zahtev)
+                kol_robe = len(zahtevCopy.roba)
                 for prostor in avionCopy:  # za svaki prostor u avion-kopiji proba da smesti robu
                     print("Dimenzije prostora", prostor.duzina, prostor.visina, prostor.sirina)
                     for r in zahtevCopy.roba:
                         print("Dimenzije robe", r.duzina, r.sirina, r.visina)
                         if r < prostor:
                             prostor.dodaj(r)  # dodata roba u prostor
-                            zahtevCopy.roba.remove(r)  # skida robu iz zahteva ako je utovarena
+                            kol_robe -= 1
+                            # zahtevCopy.roba.remove(r)  # skida robu iz zahteva ako je utovarena
 
-                if len(zahtevCopy.roba) == 0:
+                if kol_robe == 0:
                     zahtev.statusZahteva = 'odobren'
                     zahtev.avion = avion
+                    avion.zahtev_transport=zahtev
                     # stavlja u listu odobrenih iz liste kreiranih
                     aplikacija.zahtevi_za_transport_robe['odobren'].append(
                         aplikacija.zahtevi_za_transport_robe['kreiran'].pop(pozicija_zahteva))
@@ -274,7 +277,7 @@ class ManagerHangaraPanel(tk.Frame):
         # aplikacija.avioni_u_hangarima.clear()
 
 
-        #print(aplikacija.aerodrom[0])
+        # print(aplikacija.aerodrom[0])
         # aplikacija.aerodrom[0].duzina = 100
         # aplikacija.aerodrom[0].sirina = 200
         # aplikacija.aerodrom[0].visina = 30
@@ -289,10 +292,14 @@ class ManagerHangaraPanel(tk.Frame):
 
         self.listbox = tk.Listbox(self.frejm)
         self.listbox.grid(row=3, columnspan=10, sticky='nsew')
+        scrollbary = tk.Scrollbar(self.frejm)
         scrollbarx = tk.Scrollbar(self.frejm, orient='horizontal')
+        self.listbox.config(yscrollcommand=scrollbary.set)
+        scrollbary.config(command=self.listbox.yview)
         self.listbox.config(xscrollcommand=scrollbarx.set)
         scrollbarx.config(command=self.listbox.xview)
         scrollbarx.grid(row=4, columnspan=10, sticky='nsew')
+        scrollbary.grid(row=3, column=4, sticky='nse')
 
         dug_smestanje = tk.Button(self.frejm, text="Zahtevi za smestanje aviona", command=self.zahtevi_smestanja)
         dug_smestanje.grid(row=1, column=0)
@@ -338,12 +345,12 @@ class ManagerHangaraPanel(tk.Frame):
     def zahtevi_transport(self):
         try:
             self.iskljuci_dugmad()
-            zahtevi = aplikacija.prikaz_zahteva_za_transport_robe()
+            zahtevi = aplikacija.prikaz_zahteva_za_transport_utovarene_robe()
             self.listbox.delete(0, 'end')
             for i, zahtev in enumerate(zahtevi):
                 self.listbox.insert(i, zahtev)
         except:
-            zahtevi = aplikacija.prikaz_zahteva_za_transport_robe()
+            zahtevi = aplikacija.prikaz_zahteva_za_transport_utovarene_robe()
             self.listbox.delete(0, 'end')
             for i, zahtev in enumerate(zahtevi):
                 self.listbox.insert(i, zahtev)
