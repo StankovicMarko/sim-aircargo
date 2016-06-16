@@ -231,7 +231,7 @@ class Hangar(OznakaINaziv, Kolekcija):
     def __str__(self):
         av = ''
         for avion in self:
-            av += avion.naziv + ','
+            av += avion.naziv + ', '
         return 'Hangar - Oznaka: {}, Naziv: {}, Duzina: {}, Sirina: {}, Visina: {}' \
                ' Avioni: {}'.format(self.id, self.naziv, self.duzina, self.sirina, self.visina, av)
 
@@ -255,9 +255,10 @@ class Avion(OznakaINaziv, Kolekcija):
             naziv_hangara=self.se_nalazi.naziv
         else:
             naziv_hangara='Van Aerodroma'
-        return 'Avion - Oznaka: {}, Godiste: {}, ' \
+        return 'Avion - Oznaka: {}, Naziv: {}, Godiste: {}, ' \
                'Duzina: {}, Raspon krila: {}, Visina: {}, ' \
                'Nosivost: {}, Relacija: {}, Nalazi se: {}'.format(self.id,
+                                                                  self.naziv,
                                                                   self.godiste,
                                                                   str(self.duzina),
                                                                   str(

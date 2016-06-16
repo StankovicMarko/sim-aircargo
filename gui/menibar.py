@@ -113,6 +113,8 @@ class Menibar(tk.Frame):
             return
         elif oznaka == 'all':
             lista = [avion for avion in aplikacija.avioni_u_hangarima]
+            for avion in lista:
+                print(avion)
             lista.extend([avion for avion in aplikacija.avioni_van_hangara])
         else:
             lista = self.controler.m.pretrazi_avine_po_oznaci(oznaka)
@@ -265,13 +267,16 @@ class Menibar(tk.Frame):
             scrollbarx.config(command=lb.xview)
 
         def prikaz_sadrzaja_entiteta(lb, lista):
-            index_entiteta=lb.curselection()[0]
-            lista_sadrzaja=[]
+            try:
+                index_entiteta=lb.curselection()[0]
+                lista_sadrzaja=[]
 
-            for sadrzaj in lista[index_entiteta]:
-                lista_sadrzaja.append(sadrzaj)
+                for sadrzaj in lista[index_entiteta]:
+                    lista_sadrzaja.append(sadrzaj)
 
-            self.prikaz(lista_sadrzaja)
+                self.prikaz(lista_sadrzaja)
+            except:
+                tk.messagebox.showerror('Greska', 'Morate odabrati u sta zelite da pogledate')
 
     # def exit(self):
     #     self.quit()
