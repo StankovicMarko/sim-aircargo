@@ -117,10 +117,18 @@ class LoginWindow(tk.Frame):
 class RadnikPanel(tk.Frame):
     def __init__(self, parent, controler):
         tk.Frame.__init__(self, parent)
+        self.controler=controler
         nekiLabel = tk.Label(self, text="Ulogovani ste kao radnik")
         nekiLabel.grid()
 
         self.create_widgets()
+        self.logout_button = tk.Button(self.frejm, text="Log Out!", command=self.logout)
+        self.logout_button.grid(sticky='w')
+
+    def logout(self):
+        self.frejm.destroy()
+        self.controler.meni.destroy()
+        self.controler.show_frame(gui.windows.LoginWindow)
 
     def create_widgets(self):
         self.frejm = tk.Frame(self)
@@ -153,7 +161,6 @@ class RadnikPanel(tk.Frame):
         try:
             odabran_zahtev = zahtevi[self.listbox.curselection()[0]]
             aplikacija.utovari_robu(odabran_zahtev)
-            self.dug_utovari_robu.destroy()
             tk.messagebox.showinfo('', 'Roba uspesno utovarena')
             self.listbox.delete(0, 'end')
         except:

@@ -17,8 +17,8 @@ class Roba(object):
 
     def sacuvaj(self):
         util.addToFile("roba.txt", self.oznaka + "|" + self.naziv + "|" + self.opis + "|" +
-                       self.duzina + "|" + self.sirina + "|" + self.visina + "|" + self.tezina + "|" +
-                       self.IDZahteva + "\n")
+                       str(self.duzina) + "|" + str(self.sirina) + "|" + str(self.visina) + "|" + str(self.tezina)
+                       + "|" + self.IDZahteva + "\n")
 
     def odrediIDRobe(self):
         lines = util.readFile("roba.txt")
@@ -30,7 +30,7 @@ class Roba(object):
         return "Roba - {}, Naziv {}, Opis - {}, Duzina:{},Sirina:{},Visina:{},Tezina:{}".format(self.oznaka,
                                                                                                 self.naziv,
                                                                                                 self.opis,
-                                                                                                self.duzina,
-                                                                                                self.sirina,
-                                                                                                self.visina,
-                                                                                                self.tezina)
+                                                                                                str(self.duzina),
+                                                                                                str(self.sirina),
+                                                                                                str(self.visina),
+                                                                                                str(self.tezina))

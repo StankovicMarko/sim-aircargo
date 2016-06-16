@@ -6,7 +6,7 @@ import tkinter.messagebox
 import copy
 
 from klase.util_funk import set_path, addToFile, readFile
-from klase.zahtevi import ZahtevZaSmestanjeAviona
+from klase.zahtevi import ZahtevZaSmestanjeAviona, ZahtevZaTransport
 
 
 class ManagerTransportaPanel(tk.Frame):
@@ -219,6 +219,7 @@ class ManagerTransportaPanel(tk.Frame):
                     print("Dimenzije prostora", prostor.duzina, prostor.visina, prostor.sirina)
                     for r in zahtevCopy.roba:
                         print("Dimenzije robe", r.duzina, r.sirina, r.visina)
+                        print(isinstance(r.duzina, int))
                         if r < prostor:
                             prostor.dodaj(r)  # dodata roba u prostor
                             kol_robe -= 1
@@ -227,7 +228,7 @@ class ManagerTransportaPanel(tk.Frame):
                 if kol_robe == 0:
                     zahtev.statusZahteva = 'odobren'
                     zahtev.avion = avion
-                    avion.zahtev_transport=zahtev
+                    avion.zahtev_transport = zahtev
                     # stavlja u listu odobrenih iz liste kreiranih
                     aplikacija.zahtevi_za_transport_robe['odobren'].append(
                         aplikacija.zahtevi_za_transport_robe['kreiran'].pop(pozicija_zahteva))
@@ -276,8 +277,7 @@ class ManagerHangaraPanel(tk.Frame):
         #
         # aplikacija.avioni_u_hangarima.clear()
 
-
-        # print(aplikacija.aerodrom[0])
+                # print(aplikacija.aerodrom[0])
         # aplikacija.aerodrom[0].duzina = 100
         # aplikacija.aerodrom[0].sirina = 200
         # aplikacija.aerodrom[0].visina = 30
@@ -304,7 +304,8 @@ class ManagerHangaraPanel(tk.Frame):
         dug_smestanje = tk.Button(self.frejm, text="Zahtevi za smestanje aviona", command=self.zahtevi_smestanja)
         dug_smestanje.grid(row=1, column=0)
 
-        dug_transport = tk.Button(self.frejm, text="Zahtevi za transport aviona", command=self.zahtevi_transport)
+        dug_transport = tk.Button(self.frejm, text="Zahtevi za transport (utovarena roba)",
+                                  command=self.zahtevi_transport)
         dug_transport.grid(row=1, column=1)
 
         dug_dodaj_hangar = tk.Button(self.frejm, text='Dodaj hangar', command=self.add_hangar)
@@ -694,5 +695,10 @@ class ManagerHangaraPanel(tk.Frame):
             tk.messagebox.showinfo('', 'Nije smesten Avion (nema mesta)')
 
     def iskljuci_dugmad(self):
-        self.dug_smesti_avion.config(state='disabled')
-        self.dug_kreiraj_zah.config(state='disabled')
+        try:
+            self.dug_smesti_avion.config(state='disabled')
+        except:
+            self.dug_kreiraj_zah.config(state='disabled')
+        finally:
+            self.dug_smesti_avion.config(state='disabled')
+            self.dug_kreiraj_zah.config(state='disabled')

@@ -45,3 +45,10 @@ ZT#51|04/06/2016|None|Pariz|K#5|None|kreiran
 ZT#52|04/06/2016|None|Pariz|K#8|None|kreiran
 ZT#53|04/06/2016|None|Pariz|K#12|None|kreiran
 ZT#54|15/06/2016|None|London|K#5|None|kreiran
+ZT#55|16/06/2016|None|London|K#5|None|kreiran
+ZT#56|16/06/2016|None|London|K#15|None|kreiran
+ZT#57|16/06/2016|None|London|K#15|None|kreiran
+ZT#58|16/06/2016|None|London|K#15|None|kreiran
+ZT#59|16/06/2016|None|London|K#16|None|kreiran
+ZT#60|16/06/2016|None|Dizeldorf|K#17|None|kreiran
+ZT#61|16/06/2016|None|Dizeldorf|K#18|None|kreiran

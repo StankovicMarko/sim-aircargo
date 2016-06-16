@@ -12,3 +12,7 @@ K#11|Perica|Peric|011232433|pericap@email.com|potrazitelj
 K#12|Test|Test|TestFon|TestMail|potrazitelj
 K#13|TestIme|TestPrezi|TestFon|TestMail|potrazitelj
 K#14|user|pass|user|pass|mhangar
+K#15|lepi|lepan|523253235|lepanlepicom|potrazitelj
+K#16|jokar|joki|51351|jokic|potrazitelj
+K#17|joj|joj|32532532|jokic|potrazitelj
+K#18|rsgs|ssgs|15356|affff|potrazitelj

@@ -280,6 +280,11 @@ class ProstorZaRobu(OznakaINaziv, Kolekcija):
     def __str__(self):
         roba = ''
         for r in self:
-            roba = roba + r + ', '
+            roba += r.naziv + ', '
 
-        return 'Oznaka: {}, Naziv: {}, Roba: {}'.format(self.id, self.naziv, roba)
+        return 'Oznaka: {}, Naziv: {}, Duzina: {}, Sirina: {}, Visina: {}, Roba: {}'.format(self.id,
+                                                                                            self.naziv,
+                                                                                            self.duzina,
+                                                                                            self.sirina,
+                                                                                            self.visina,
+                                                                                            roba)

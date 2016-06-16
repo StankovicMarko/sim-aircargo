@@ -242,9 +242,13 @@ def prikazi_zahteve_za_transport_odobrene_robe():
 
 
 def utovari_robu(zahtev):
-    for prostor in zahtev.avion:
-        for roba in zahtev.roba:
-            prostor.dodaj(roba)
+    for hangar in aerodrom:
+        for avion in hangar:
+            if avion == zahtev.avion:
+                for prostor in avion:
+                    for roba in zahtev.roba:
+                        prostor.dodaj(roba)
+            return
 
     zahtev.statusZahteva = 'robaUtovarena'
     for i, zah in enumerate(zahtevi_za_transport_robe['odobren']):
@@ -252,6 +256,7 @@ def utovari_robu(zahtev):
             zahtevi_za_transport_robe['robaUtovarena'].append(zahtevi_za_transport_robe['odobren'].pop(i))
             break
             # moracu i avion u hangaru da promenim
+
 
 
             # h1 = Hangar(1, 'HANG1', 100, 100, 30)
