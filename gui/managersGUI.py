@@ -33,10 +33,7 @@ class ManagerTransportaPanel(tk.Frame):
         self.logoutButton.grid(row=4,column=1)
 
     def function(self, event):
-        try:
-            self.canvas.configure(scrollregion=self.canvas.bbox("all"))
-        except:
-            self.canvas1.configure(scrollregion=self.canvas1.bbox("all"))
+        self.canvas.configure(scrollregion=self.canvas.bbox("all"))
 
     def prikaZahtevaHeaderWidgets(self):
         self.headerFrame = tk.Frame(self.frejmZahtevi)
@@ -58,7 +55,6 @@ class ManagerTransportaPanel(tk.Frame):
         # hangar_funkcionalnosti.ucitajZahteveIRobu()
         try:
             # self.znj1.destroy()
-            # self.canvas1.destroy()
             self.listboxZahteviZaSmestanje.destroy()
             self.scrollbarx.destroy()
             self.scrollbary.destroy()
@@ -163,7 +159,6 @@ class ManagerTransportaPanel(tk.Frame):
     def prikazZahtevaSmestanjeWidgets(self):
         self.headerFrame.destroy()
         self.canvas.destroy()
-        self.scrollbar.destroy()
 
         self.prikazTransportButton.config(state="normal")
         self.prikazSmestanjeButton.config(state="disabled")
@@ -172,7 +167,7 @@ class ManagerTransportaPanel(tk.Frame):
         self.prikazSmestanjeButton.config(state="disabled")
 
         self.listboxZahteviZaSmestanje = tk.Listbox(self.frejmZahtevi,width=70,height=20)
-        self.listboxZahteviZaSmestanje.grid(row=3, columnspan=10, sticky='nsew')
+        self.listboxZahteviZaSmestanje.grid(row=1, columnspan=10, sticky='nsew')
         self.scrollbary = tk.Scrollbar(self)
         self.scrollbarx = tk.Scrollbar(self, orient='horizontal')
         self.listboxZahteviZaSmestanje.config(yscrollcommand=self.scrollbary.set)
@@ -185,32 +180,48 @@ class ManagerTransportaPanel(tk.Frame):
 
 
     def prikaz1(self):
-
         zahtevi = aplikacija.prikazi_zahteve_za_smestanje_aviona()
         for i, zahtev in enumerate(zahtevi):
             self.listboxZahteviZaSmestanje.insert(i, zahtev)
 
     def logout(self):
+        self.headerFrame.destroy()
+        self.canvas.destroy()
+        self.controler.meni.destroy()
+        print("hojhojhoj")
+
         try:
+            self.listboxZahteviZaSmestanje.destroy()
             self.scrollbarx.destroy()
             self.scrollbary.destroy()
-            self.scrollbar.destroy()
+            print("did it")
+
         except:
+            print('kurac')
             pass
 
-        self.listboxZahteviZaSmestanje.destroy()
-        self.headerFrame.destroy()
-        try:
-            self.canvas.destroy()
-            try:
-                self.canvas1.destroy()
-            except:
-                pass
-        except:
-            pass
-            # self.canvas1.destroy()
-        self.controler.meni.destroy()
         self.controler.show_frame(gui.windows.LoginWindow)
+
+
+
+        # try:
+        #     self.scrollbarx.destroy()
+        #     self.scrollbary.destroy()
+        #     self.listboxZahteviZaSmestanje.destroy()
+        # except:
+        #     pass
+
+        # self.scrollbar.destroy()
+        # self.headerFrame.destroy()
+
+        # self.canvas.destroy()
+
+        # try:
+        #     self.canvas.destroy()
+        # except:
+        #     pass
+        # self.controler.meni.destroy()
+        # self.controler.show_frame(gui.windows.LoginWindow)
 
     def odobri(self, counter):
         print(self.recnik[counter])
