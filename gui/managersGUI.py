@@ -30,7 +30,7 @@ class ManagerTransportaPanel(tk.Frame):
         self.frejmZahtevi = tk.Frame(self, bd=1, relief="solid")
         self.frejmZahtevi.grid(columnspan=3)
         self.logoutButton = tk.Button(self, text="Log Out!", command=self.logout)
-        self.logoutButton.grid(column=1)
+        self.logoutButton.grid(row=4,column=1)
 
     def function(self, event):
         try:
@@ -58,7 +58,11 @@ class ManagerTransportaPanel(tk.Frame):
         # hangar_funkcionalnosti.ucitajZahteveIRobu()
         try:
             # self.znj1.destroy()
-            self.canvas1.destroy()
+            # self.canvas1.destroy()
+            self.listboxZahteviZaSmestanje.destroy()
+            self.scrollbarx.destroy()
+            self.scrollbary.destroy()
+
         except:
             pass
 
@@ -159,29 +163,42 @@ class ManagerTransportaPanel(tk.Frame):
     def prikazZahtevaSmestanjeWidgets(self):
         self.headerFrame.destroy()
         self.canvas.destroy()
-        self.prikazTransportButton.config(state="normal")
-        self.prikazSmestanjeButton.config(state="disabled")
-
-        self.canvas1 = tk.Canvas(self.frejmZahtevi, bg="red", width=590)
-        self.scrollbar1 = tk.Scrollbar(self.frejmZahtevi, orient="vertical", command=self.canvas1.yview)
-        self.newFrejm1 = tk.Frame(self.canvas1, bd=1, relief="solid")
-        self.canvas1.configure(yscrollcommand=self.scrollbar1.set)
-
-        self.scrollbar1.grid(row=0, rowspan=2, column=9, sticky="ns")
-        self.canvas1.grid(row=1, columnspan=9, sticky="nsew")
-        self.canvas1.create_window((0, 0), window=self.newFrejm1, anchor='n')
-        self.newFrejm1.bind("<Configure>", self.function)
+        self.scrollbar.destroy()
 
         self.prikazTransportButton.config(state="normal")
         self.prikazSmestanjeButton.config(state="disabled")
 
-        self.prikaz1(self.controler.m.prikazZahtevaSmestanje())
+        self.prikazTransportButton.config(state="normal")
+        self.prikazSmestanjeButton.config(state="disabled")
 
-    def prikaz1(self, lista):
-        for i in lista:
-            tk.Label(self.newFrejm1, text=i).grid()
+        self.listboxZahteviZaSmestanje = tk.Listbox(self.frejmZahtevi,width=70,height=20)
+        self.listboxZahteviZaSmestanje.grid(row=3, columnspan=10, sticky='nsew')
+        self.scrollbary = tk.Scrollbar(self)
+        self.scrollbarx = tk.Scrollbar(self, orient='horizontal')
+        self.listboxZahteviZaSmestanje.config(yscrollcommand=self.scrollbary.set)
+        self.scrollbary.config(command=self.listboxZahteviZaSmestanje.yview)
+        self.listboxZahteviZaSmestanje.config(xscrollcommand=self.scrollbarx.set)
+        self.scrollbarx.config(command=self.listboxZahteviZaSmestanje.xview)
+        self.scrollbarx.grid(row=3, columnspan=10, sticky='nsew')
+        self.scrollbary.grid(row=2, column=4, sticky='nsew')
+        self.prikaz1()
+
+
+    def prikaz1(self):
+
+        zahtevi = aplikacija.prikazi_zahteve_za_smestanje_aviona()
+        for i, zahtev in enumerate(zahtevi):
+            self.listboxZahteviZaSmestanje.insert(i, zahtev)
 
     def logout(self):
+        try:
+            self.scrollbarx.destroy()
+            self.scrollbary.destroy()
+            self.scrollbar.destroy()
+        except:
+            pass
+
+        self.listboxZahteviZaSmestanje.destroy()
         self.headerFrame.destroy()
         try:
             self.canvas.destroy()
@@ -190,7 +207,8 @@ class ManagerTransportaPanel(tk.Frame):
             except:
                 pass
         except:
-            self.canvas1.destroy()
+            pass
+            # self.canvas1.destroy()
         self.controler.meni.destroy()
         self.controler.show_frame(gui.windows.LoginWindow)
 
