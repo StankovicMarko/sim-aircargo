@@ -292,12 +292,13 @@ from klase.util_funk import ucitaj_entitet
 
 if __name__ == "__main__":
     #main()
-    aplikacija.zahtevi_za_smestanje_aviona = ucitaj_entitet('zahteviZaSmestanjeAviona.txt')
-    aplikacija.zahtevi_za_transport_robe = ucitaj_entitet('zahteviZaTransportRobe.txt')
-    aplikacija.avioni_u_hangarima = ucitaj_entitet('avioniUHangarima.txt')
-    aplikacija.avioni_van_hangara = ucitaj_entitet('avioniVanHangara.txt')
-    aplikacija.aerodrom = ucitaj_entitet('aerodrom.txt')
+    # aplikacija.zahtevi_za_smestanje_aviona = ucitaj_entitet('zahteviZaSmestanjeAviona.txt')
+    # aplikacija.zahtevi_za_transport_robe = ucitaj_entitet('zahteviZaTransportRobe.txt')
+    # aplikacija.avioni_u_hangarima = ucitaj_entitet('avioniUHangarima.txt')
+    # aplikacija.avioni_van_hangara = ucitaj_entitet('avioniVanHangara.txt')
+    # aplikacija.aerodrom = ucitaj_entitet('aerodrom.txt')
 
+    aplikacija.ucitaj_sve_entitete()
     application = Glavna()
     application.protocol('WM_DELETE_WINDOW', lambda: aplikacija.snimi_sve_entitete(application))
     application.mainloop()

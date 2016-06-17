@@ -23,13 +23,14 @@ class ZahtevZaSmestanjeAviona(Zahtev):
             id_hangara = self.hangar.id
         else:
             id_hangara = None
-        return 'Zahtev za smestanje aviona - Oznaka: {}, Vreme kreiranja: {}, Vreme smestanja: {}, ' \
-               'Vreme napustanja: {}, ID Hangara: {}, ID Aviona: {}, ID Menadzera: {}'.format(
-            self.id, self.vremeKreiranja,
-            self.vreme_smestanja_aviona,
-            self.vreme_napustanja_hangara,
-            id_hangara,
-            self.avion.id, self.menadzer.id)
+        return 'Zahtev za smestanje aviona - Oznaka: {}, Vreme kreiranja: {}, ' \
+               'Vreme smestanja: {}, Vreme napustanja: {}, ' \
+               'ID Hangara: {}, ID Aviona: {}, ID Menadzera: {} '.format(
+                self.id, self.vremeKreiranja,
+                self.vreme_smestanja_aviona,
+                self.vreme_napustanja_hangara,
+                id_hangara,
+                self.avion.id, self.menadzer.id)
 
 
 class ZahtevZaTransport(Zahtev):

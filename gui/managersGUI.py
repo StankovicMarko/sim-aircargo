@@ -210,16 +210,12 @@ class ManagerTransportaPanel(tk.Frame):
 
         for avion in aplikacija.avioni_u_hangarima:  # za svaki avion u hangaru trazi da li odgovara odrediste
             if avion.relacija == zahtev.odrediste and avion.zahtev_transport is None:
-                print("relacija pronadjena - ", avion.relacija)
 
                 avionCopy = copy.deepcopy(avion)
                 zahtevCopy = copy.deepcopy(zahtev)
                 kol_robe = len(zahtevCopy.roba)
                 for prostor in avionCopy:  # za svaki prostor u avion-kopiji proba da smesti robu
-                    print("Dimenzije prostora", prostor.duzina, prostor.visina, prostor.sirina)
                     for r in zahtevCopy.roba:
-                        print("Dimenzije robe", r.duzina, r.sirina, r.visina)
-                        print(isinstance(r.duzina, int))
                         if r < prostor:
                             prostor.dodaj(r)  # dodata roba u prostor
                             kol_robe -= 1
@@ -277,7 +273,7 @@ class ManagerHangaraPanel(tk.Frame):
         #
         # aplikacija.avioni_u_hangarima.clear()
 
-                # print(aplikacija.aerodrom[0])
+        # print(aplikacija.aerodrom[0])
         # aplikacija.aerodrom[0].duzina = 100
         # aplikacija.aerodrom[0].sirina = 200
         # aplikacija.aerodrom[0].visina = 30
@@ -463,6 +459,7 @@ class ManagerHangaraPanel(tk.Frame):
             top = tk.Toplevel()
             top.transient(self)
             top.grab_set()
+            top.protocol('WM_DELETE_WINDOW', lambda: self._resetuj_temp(top))
             tk.Label(top, text='Naziv Aviona').grid(row=0, column=0)
             tk.Label(top, text='Duzina Aviona').grid(row=1, column=0)
             tk.Label(top, text='Sirina Aviona').grid(row=2, column=0)
@@ -587,15 +584,26 @@ class ManagerHangaraPanel(tk.Frame):
                                      int(godiste),
                                      int(nosivost),
                                      relacija)
-            path = set_path('odredista.txt')
-            odredista = readFile(path)
-            if relacija not in odredista:
-                addToFile(path, relacija + '\n')
+
+            aplikacija.dodaj_odrediste(relacija)
+            # path = set_path('odredista.txt')
+            # odredista = readFile(path)
+            # relacija += '\n'
+            # if relacija not in odredista:
+            #     addToFile(path, relacija)
             tk.messagebox.showinfo('Narucivanje aviona', 'Uspesno napravljen avion')
+            self._resetuj_temp(top)
             top.destroy()
         else:
             tk.messagebox.showerror('Invalid inputs',
                                     'Molimo unesite validne inpute str/int/int/int/int/int/int/str')
+
+    def _resetuj_temp(self, top):
+        self.temp_duzina = 0
+        self.temp_sirina = 0
+        self.temp_visina = 0
+        aplikacija.temp_prostor_za_robu.clear()
+        top.destroy()
 
     def _pokupi_inpute_pzt(self, en, ed, es, ev, top):
         naziv = en.get()
@@ -650,10 +658,11 @@ class ManagerHangaraPanel(tk.Frame):
 
     def _create_request(self, avioni_bez_zahteva):
         odabran_avion = avioni_bez_zahteva[self.listbox.curselection()[0]]
-        id_zahteva = len(aplikacija.zahtevi_za_smestanje_aviona) + 1
-        zahtev = ZahtevZaSmestanjeAviona(id_zahteva, odabran_avion, self.controler.m)
-        aplikacija.zahtevi_za_smestanje_aviona.append(zahtev)
-        odabran_avion.zahtev_smestanje = zahtev
+        # id_zahteva = len(aplikacija.zahtevi_za_smestanje_aviona) + 1
+        # zahtev = ZahtevZaSmestanjeAviona(id_zahteva, odabran_avion, self.controler.m)
+        # aplikacija.zahtevi_za_smestanje_aviona.append(zahtev)
+        # odabran_avion.zahtev_smestanje = zahtev
+        aplikacija.napravi_zahtev_za_smestanje(odabran_avion, self.controler.m)
         self.dug_kreiraj_zah.destroy()
         tk.messagebox.showinfo('', 'Zahtev uspesno kreiran')
         self.listbox.delete(0, 'end')

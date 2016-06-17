@@ -65,3 +65,4 @@ R#77|heftalice|metalno|5|5|5|500|ZT#58
 R#78|tegle|sa kupusom|5|5|5|1500|ZT#59
 R#79|tegle|sa kupusom|5|5|5|1500|ZT#60
 R#80|tegle|aaa|1|1|1|1500|ZT#61
+R#81|aa|aa|1|1|1|1|ZT#62

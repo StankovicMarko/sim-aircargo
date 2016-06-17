@@ -1,8 +1,8 @@
 import copy
 
 from klase.korisnici import MenadzerHangara
-from klase.entiteti import Avion, Hangar, ProstorZaRobu
-from klase.util_funk import snimi_entitet
+from klase.entiteti import Avion, Hangar, ProstorZaRobu, Aerodrom
+from klase.util_funk import snimi_entitet, ucitaj_entitet, set_path, readFile, addToFile
 from klase.zahtevi import ZahtevZaSmestanjeAviona
 import datetime as dt
 # Marko J dodao:
@@ -15,7 +15,7 @@ import klase.roba
 # avioni_u_hangarima = []
 # avioni_van_hangara = []  # deque
 # aerodrom = Aerodrom('Nikola Tesla', 'Futoski Put', 'Novi Sad')
-# menadzer_hangara = MenadzerHangara(1, 'Lepan', 'Lepavi', 'lepi', 12345)  # PROBA MEN HANGARA TREBA DA JE ULOGOVAN
+# #menadzer_hangara = MenadzerHangara(1, 'Lepan', 'Lepavi', 'lepi', 12345)  # PROBA MEN HANGARA TREBA DA JE ULOGOVAN
 # temp_prostor_za_robu = []
 
 zahtevi_za_smestanje_aviona = None
@@ -34,15 +34,21 @@ temp_prostor_za_robu = []
 #     avioni_van_hangara = ucitaj_entitet('avioniVanHangara.txt')
 #     aerodrom = ucitaj_entitet('aerodrom.txt')
 
+def ucitaj_sve_entitete():
+    globalni_entiteti = ucitaj_entitet('globalni_entiteti.txt')
+    global zahtevi_za_smestanje_aviona, zahtevi_za_transport_robe, avioni_u_hangarima, avioni_van_hangara, aerodrom
+    zahtevi_za_smestanje_aviona = globalni_entiteti[0]
+    zahtevi_za_transport_robe = globalni_entiteti[1]
+    avioni_u_hangarima = globalni_entiteti[2]
+    avioni_van_hangara = globalni_entiteti[3]
+    aerodrom = globalni_entiteti[4]
 
 
 def snimi_sve_entitete(application):
     """Cuva stanje entiteta u memoriji prilikom izlaska iz aplikacije"""
-    snimi_entitet(zahtevi_za_smestanje_aviona, 'zahteviZaSmestanjeAviona.txt')
-    snimi_entitet(zahtevi_za_transport_robe, 'zahteviZaTransportRobe.txt')
-    snimi_entitet(avioni_u_hangarima, 'avioniUHangarima.txt')
-    snimi_entitet(avioni_van_hangara, 'avioniVanHangara.txt')
-    snimi_entitet(aerodrom, 'aerodrom.txt')
+    globalni_entiteti = (zahtevi_za_smestanje_aviona, zahtevi_za_transport_robe,
+                         avioni_u_hangarima, avioni_van_hangara, aerodrom)
+    snimi_entitet(globalni_entiteti, 'globalni_entiteti.txt')
     application.destroy()
 
 
@@ -104,10 +110,13 @@ def napravi_avion(naziv, duzina, sirina, visina, raspon_krila, godiste, nosivost
     temp_prostor_za_robu.clear()
 
     # avion.dodaj(pr_za_ter)
-    try:
-        smesti_avion(avion)
-    except Exception as exc:
-        avioni_van_hangara.append(avion)
+    print(avion)
+    # try:
+    smesti_avion(avion)
+    #     print('a')
+    # except Exception as exc:
+    #     avioni_van_hangara.append(avion)
+    #     print('b')
 
 
 def smesti_avion(avion):
@@ -117,17 +126,23 @@ def smesti_avion(avion):
                 avion.zahtev_smestanje.hangar = hangar
                 vreme = dt.datetime.now()
                 avion.zahtev_smestanje.vreme_smestanja_aviona = vreme
-                for zahtev in zahtevi_za_smestanje_aviona:
-                    if zahtev.avion == avion:
-                        zahtev.vreme_smestanja_aviona = vreme
+                # for zahtev in zahtevi_za_smestanje_aviona:
+                #     if zahtev.avion == avion:
+                #         zahtev.vreme_smestanja_aviona = vreme
                 hangar.dodaj(avion)
                 avioni_u_hangarima.append(avion)
                 avion.se_nalazi = hangar
                 break
     except:
-        return Exception('Avion je prevelik', 'dodajte hangar ili oslobodite mesto', 'avion ce biti van aerodroma')
+        avioni_van_hangara.append(avion)
 
 
+def dodaj_odrediste(relacija):
+    path = set_path('odredista.txt')
+    odredista = readFile(path)
+    relacija += '\n'
+    if relacija not in odredista:
+        addToFile(path, relacija)
 # ovo treba da bude notifikacija menadzeru hangara
 
 
@@ -140,6 +155,13 @@ def napravi_prostor_za_robu(naziv, duzina, sirina, visina):
     #     l = uzmi_inpute()
     pr_za_ter = ProstorZaRobu(naziv, duzina, sirina, visina)
     temp_prostor_za_robu.append(pr_za_ter)
+
+
+def napravi_zahtev_za_smestanje(odabran_avion, menadzer):
+    id_zahteva = len(zahtevi_za_smestanje_aviona) + 1
+    zahtev = ZahtevZaSmestanjeAviona(id_zahteva, odabran_avion, menadzer)
+    zahtevi_za_smestanje_aviona.append(zahtev)
+    odabran_avion.zahtev_smestanje = zahtev
 
 
 # def dodaj_prostor_za_robu(avion):
@@ -204,19 +226,19 @@ def napravi_prostor_za_robu(naziv, duzina, sirina, visina):
 #     return avioni
 
 
-def uzmi_avion_van_hangara(avioni):
-    for avion in avioni:
-        print(avion)
-    id_aviona = None
-    while True:
-        try:
-            id_aviona = int(input('unesite ID aviona koji zelite da smestite: '))
-            break
-        except:
-            print('molimo unesite broj')
-    for i, avion in enumerate(avioni_van_hangara):
-        if avion.id == id_aviona:
-            return avioni_van_hangara.pop(i)
+# def uzmi_avion_van_hangara(avioni):
+#     for avion in avioni:
+#         print(avion)
+#     id_aviona = None
+#     while True:
+#         try:
+#             id_aviona = int(input('unesite ID aviona koji zelite da smestite: '))
+#             break
+#         except:
+#             print('molimo unesite broj')
+#     for i, avion in enumerate(avioni_van_hangara):
+#         if avion.id == id_aviona:
+#             return avioni_van_hangara.pop(i)
 
 
 def transportuj_robu():
@@ -242,20 +264,23 @@ def prikazi_zahteve_za_transport_odobrene_robe():
 
 
 def utovari_robu(zahtev):
-    for hangar in aerodrom:
-        for avion in hangar:
-            if avion == zahtev.avion:
-                for prostor in avion:
-                    for roba in zahtev.roba:
-                        prostor.dodaj(roba)
-            return
+    # for hangar in aerodrom:
+    #     for avion in hangar:
+    #         if avion == zahtev.avion:
+    #             for prostor in avion:
+    #                 for roba in zahtev.roba:
+    #                     prostor.dodaj(roba)
+    #         return
+    for prostor in zahtev.avion:
+        for roba in zahtev.roba:
+            prostor.dodaj(roba)
 
     zahtev.statusZahteva = 'robaUtovarena'
     for i, zah in enumerate(zahtevi_za_transport_robe['odobren']):
         if zah == zahtev:
             zahtevi_za_transport_robe['robaUtovarena'].append(zahtevi_za_transport_robe['odobren'].pop(i))
             break
-            # moracu i avion u hangaru da promenim
+
 
 
 
