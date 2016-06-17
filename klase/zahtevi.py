@@ -23,12 +23,40 @@ class ZahtevZaSmestanjeAviona(Zahtev):
             id_hangara = self.hangar.id
         else:
             id_hangara = None
+
+        if self.vremeKreiranja:
+            vreme_kreiranja = '{}.{}.{}, {}:{}'.format(self.vremeKreiranja.day,
+                                                       self.vremeKreiranja.month,
+                                                       self.vremeKreiranja.year,
+                                                       self.vremeKreiranja.hour,
+                                                       self.vremeKreiranja.minute)
+        else:
+            vreme_kreiranja = None
+
+        if self.vreme_smestanja_aviona:
+            vreme_smestanja = '{}.{}.{}, {}:{}'.format(self.vreme_smestanja_aviona.day,
+                                                       self.vreme_smestanja_aviona.month,
+                                                       self.vreme_smestanja_aviona.year,
+                                                       self.vreme_smestanja_aviona.hour,
+                                                       self.vreme_smestanja_aviona.minute)
+        else:
+            vreme_smestanja = None
+
+        if self.vreme_napustanja_hangara:
+            vreme_napustanja_hangara = '{}.{}.{}, {}:{}'.format(self.vreme_napustanja_hangara.day,
+                                                                self.vreme_napustanja_hangara.month,
+                                                                self.vreme_napustanja_hangara.year,
+                                                                self.vreme_napustanja_hangara.hour,
+                                                                self.vreme_napustanja_hangara.minute)
+        else:
+            vreme_napustanja_hangara = None
+
         return 'Zahtev za smestanje aviona - Oznaka: {}, Vreme kreiranja: {}, ' \
                'Vreme smestanja: {}, Vreme napustanja: {}, ' \
                'ID Hangara: {}, ID Aviona: {}, ID Menadzera: {} '.format(
-                self.id, self.vremeKreiranja,
-                self.vreme_smestanja_aviona,
-                self.vreme_napustanja_hangara,
+                self.id, vreme_kreiranja,
+                vreme_smestanja,
+                vreme_napustanja_hangara,
                 id_hangara,
                 self.avion.id, self.menadzer.id)
 

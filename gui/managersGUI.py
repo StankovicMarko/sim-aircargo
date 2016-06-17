@@ -327,186 +327,97 @@ class ManagerHangaraPanel(tk.Frame):
         self.controler.show_frame(gui.windows.LoginWindow)
 
     def zahtevi_smestanja(self):
-        try:
-            self.iskljuci_dugmad()
-            zahtevi = aplikacija.prikazi_zahteve_za_smestanje_aviona()
-            self.listbox.delete(0, 'end')
-            for i, zahtev in enumerate(zahtevi):
-                self.listbox.insert(i, zahtev)
-        except:
-            zahtevi = aplikacija.prikazi_zahteve_za_smestanje_aviona()
-            self.listbox.delete(0, 'end')
-            for i, zahtev in enumerate(zahtevi):
-                self.listbox.insert(i, zahtev)
+        self.iskljuci_dugmad()
+        zahtevi = aplikacija.prikazi_zahteve_za_smestanje_aviona()
+        self.listbox.delete(0, 'end')
+        for i, zahtev in enumerate(zahtevi):
+            self.listbox.insert(i, zahtev)
 
     def zahtevi_transport(self):
-        try:
-            self.iskljuci_dugmad()
-            zahtevi = aplikacija.prikaz_zahteva_za_transport_utovarene_robe()
-            self.listbox.delete(0, 'end')
-            for i, zahtev in enumerate(zahtevi):
-                self.listbox.insert(i, zahtev)
-        except:
-            zahtevi = aplikacija.prikaz_zahteva_za_transport_utovarene_robe()
-            self.listbox.delete(0, 'end')
-            for i, zahtev in enumerate(zahtevi):
-                self.listbox.insert(i, zahtev)
+
+        self.iskljuci_dugmad()
+        zahtevi = aplikacija.prikaz_zahteva_za_transport_utovarene_robe()
+        self.listbox.delete(0, 'end')
+        for i, zahtev in enumerate(zahtevi):
+            self.listbox.insert(i, zahtev)
 
     def add_hangar(self):
-        try:
-            self.iskljuci_dugmad()
-            top = tk.Toplevel()
-            top.transient(self)
-            top.grab_set()
-            tk.Label(top, text='Naziv Hangara').grid(row=0, column=0)
-            tk.Label(top, text='Duzina Hangara').grid(row=1, column=0)
-            tk.Label(top, text='Sirina Hangara').grid(row=2, column=0)
-            tk.Label(top, text='Visina Hangara').grid(row=3, column=0)
+        self.iskljuci_dugmad()
+        top = tk.Toplevel()
+        top.transient(self)
+        top.grab_set()
+        tk.Label(top, text='Naziv Hangara').grid(row=0, column=0)
+        tk.Label(top, text='Duzina Hangara').grid(row=1, column=0)
+        tk.Label(top, text='Sirina Hangara').grid(row=2, column=0)
+        tk.Label(top, text='Visina Hangara').grid(row=3, column=0)
 
-            entry_naziv = tk.Entry(top)
-            entry_duzina = tk.Entry(top)
-            entry_sirina = tk.Entry(top)
-            entry_visina = tk.Entry(top)
+        entry_naziv = tk.Entry(top)
+        entry_duzina = tk.Entry(top)
+        entry_sirina = tk.Entry(top)
+        entry_visina = tk.Entry(top)
 
-            entry_naziv.grid(row=0, column=1)
-            entry_duzina.grid(row=1, column=1)
-            entry_sirina.grid(row=2, column=1)
-            entry_visina.grid(row=3, column=1)
+        entry_naziv.grid(row=0, column=1)
+        entry_duzina.grid(row=1, column=1)
+        entry_sirina.grid(row=2, column=1)
+        entry_visina.grid(row=3, column=1)
 
-            dodaj_bnt = tk.Button(top, text='DODAJ',
-                                  command=lambda: self._pokupi_inpute_hangara(entry_naziv, entry_duzina, entry_sirina,
-                                                                              entry_visina, top))
-            dodaj_bnt.grid(row=4, columnspan=2, sticky='new')
-        except:
-
-            top = tk.Toplevel()
-            top.transient(self)
-            top.grab_set()
-            tk.Label(top, text='Naziv Hangara').grid(row=0, column=0)
-            tk.Label(top, text='Duzina Hangara').grid(row=1, column=0)
-            tk.Label(top, text='Sirina Hangara').grid(row=2, column=0)
-            tk.Label(top, text='Visina Hangara').grid(row=3, column=0)
-
-            entry_naziv = tk.Entry(top)
-            entry_duzina = tk.Entry(top)
-            entry_sirina = tk.Entry(top)
-            entry_visina = tk.Entry(top)
-
-            entry_naziv.grid(row=0, column=1)
-            entry_duzina.grid(row=1, column=1)
-            entry_sirina.grid(row=2, column=1)
-            entry_visina.grid(row=3, column=1)
-
-            dodaj_bnt = tk.Button(top, text='DODAJ',
-                                  command=lambda: self._pokupi_inpute_hangara(entry_naziv, entry_duzina, entry_sirina,
-                                                                              entry_visina, top))
-            dodaj_bnt.grid(row=4, columnspan=2, sticky='new')
+        dodaj_bnt = tk.Button(top, text='DODAJ',
+                              command=lambda: self._pokupi_inpute_hangara(entry_naziv, entry_duzina, entry_sirina,
+                                                                          entry_visina, top))
+        dodaj_bnt.grid(row=4, columnspan=2, sticky='new')
 
     def add_avion(self):
-        try:
-            self.iskljuci_dugmad()
-            top = tk.Toplevel()
-            top.transient(self)
-            top.grab_set()
-            tk.Label(top, text='Naziv Aviona').grid(row=0, column=0)
-            tk.Label(top, text='Duzina Aviona').grid(row=1, column=0)
-            tk.Label(top, text='Sirina Aviona').grid(row=2, column=0)
-            tk.Label(top, text='Visina Aviona').grid(row=3, column=0)
-            tk.Label(top, text='Raspon krila Aviona').grid(row=4, column=0)
-            tk.Label(top, text='Godiste Aviona').grid(row=5, column=0)
-            tk.Label(top, text='Nosivost Aviona').grid(row=6, column=0)
-            tk.Label(top, text='Relacija Avion').grid(row=7, column=0)
+        self.iskljuci_dugmad()
+        top = tk.Toplevel()
+        top.transient(self)
+        top.grab_set()
+        tk.Label(top, text='Naziv Aviona').grid(row=0, column=0)
+        tk.Label(top, text='Duzina Aviona').grid(row=1, column=0)
+        tk.Label(top, text='Sirina Aviona').grid(row=2, column=0)
+        tk.Label(top, text='Visina Aviona').grid(row=3, column=0)
+        tk.Label(top, text='Raspon krila Aviona').grid(row=4, column=0)
+        tk.Label(top, text='Godiste Aviona').grid(row=5, column=0)
+        tk.Label(top, text='Nosivost Aviona').grid(row=6, column=0)
+        tk.Label(top, text='Relacija Avion').grid(row=7, column=0)
 
-            entry_naziv = tk.Entry(top)
-            entry_duzina = tk.Entry(top)
-            entry_sirina = tk.Entry(top)
-            entry_visina = tk.Entry(top)
-            entry_raspon_krila = tk.Entry(top)
-            entry_godiste = tk.Entry(top)
-            entry_nosivost = tk.Entry(top)
-            entry_relacija = tk.Entry(top)
+        entry_naziv = tk.Entry(top)
+        entry_duzina = tk.Entry(top)
+        entry_sirina = tk.Entry(top)
+        entry_visina = tk.Entry(top)
+        entry_raspon_krila = tk.Entry(top)
+        entry_godiste = tk.Entry(top)
+        entry_nosivost = tk.Entry(top)
+        entry_relacija = tk.Entry(top)
 
-            entry_naziv.grid(row=0, column=1)
-            entry_duzina.grid(row=1, column=1)
-            entry_sirina.grid(row=2, column=1)
-            entry_visina.grid(row=3, column=1)
-            entry_raspon_krila.grid(row=4, column=1)
-            entry_godiste.grid(row=5, column=1)
-            entry_nosivost.grid(row=6, column=1)
-            entry_relacija.grid(row=7, column=1)
+        entry_naziv.grid(row=0, column=1)
+        entry_duzina.grid(row=1, column=1)
+        entry_sirina.grid(row=2, column=1)
+        entry_visina.grid(row=3, column=1)
+        entry_raspon_krila.grid(row=4, column=1)
+        entry_godiste.grid(row=5, column=1)
+        entry_nosivost.grid(row=6, column=1)
+        entry_relacija.grid(row=7, column=1)
 
-            self.lbl_pzt = tk.Label(top, text='(prazno)')
-            self.lbl_pzt.grid(row=8, column=1)
+        self.lbl_pzt = tk.Label(top, text='(prazno)')
+        self.lbl_pzt.grid(row=8, column=1)
 
-            self.btn_add_avion = tk.Button(top, text='Dodaj Avion',
-                                           command=lambda: self._prikupi_inpute_aviona(entry_naziv, entry_duzina,
-                                                                                       entry_sirina,
-                                                                                       entry_visina,
-                                                                                       entry_raspon_krila,
-                                                                                       entry_godiste,
-                                                                                       entry_nosivost,
-                                                                                       entry_relacija, top))
+        self.btn_add_avion = tk.Button(top, text='Dodaj Avion',
+                                       command=lambda: self._prikupi_inpute_aviona(entry_naziv, entry_duzina,
+                                                                                   entry_sirina,
+                                                                                   entry_visina,
+                                                                                   entry_raspon_krila,
+                                                                                   entry_godiste,
+                                                                                   entry_nosivost,
+                                                                                   entry_relacija, top))
 
-            tk.Button(top, text='Dodaj Prostor za Teret', command=lambda: self.add_pzt(entry_naziv, entry_duzina,
-                                                                                       entry_sirina,
-                                                                                       entry_visina,
-                                                                                       entry_raspon_krila,
-                                                                                       entry_godiste,
-                                                                                       entry_nosivost,
-                                                                                       entry_relacija)).grid(row=8,
-                                                                                                             column=0)
-        except:
-            top = tk.Toplevel()
-            top.transient(self)
-            top.grab_set()
-            top.protocol('WM_DELETE_WINDOW', lambda: self._resetuj_temp(top))
-            tk.Label(top, text='Naziv Aviona').grid(row=0, column=0)
-            tk.Label(top, text='Duzina Aviona').grid(row=1, column=0)
-            tk.Label(top, text='Sirina Aviona').grid(row=2, column=0)
-            tk.Label(top, text='Visina Aviona').grid(row=3, column=0)
-            tk.Label(top, text='Raspon krila Aviona').grid(row=4, column=0)
-            tk.Label(top, text='Godiste Aviona').grid(row=5, column=0)
-            tk.Label(top, text='Nosivost Aviona').grid(row=6, column=0)
-            tk.Label(top, text='Relacija Avion').grid(row=7, column=0)
-
-            entry_naziv = tk.Entry(top)
-            entry_duzina = tk.Entry(top)
-            entry_sirina = tk.Entry(top)
-            entry_visina = tk.Entry(top)
-            entry_raspon_krila = tk.Entry(top)
-            entry_godiste = tk.Entry(top)
-            entry_nosivost = tk.Entry(top)
-            entry_relacija = tk.Entry(top)
-
-            entry_naziv.grid(row=0, column=1)
-            entry_duzina.grid(row=1, column=1)
-            entry_sirina.grid(row=2, column=1)
-            entry_visina.grid(row=3, column=1)
-            entry_raspon_krila.grid(row=4, column=1)
-            entry_godiste.grid(row=5, column=1)
-            entry_nosivost.grid(row=6, column=1)
-            entry_relacija.grid(row=7, column=1)
-
-            self.lbl_pzt = tk.Label(top, text='(prazno)')
-            self.lbl_pzt.grid(row=8, column=1)
-
-            self.btn_add_avion = tk.Button(top, text='Dodaj Avion',
-                                           command=lambda: self._prikupi_inpute_aviona(entry_naziv, entry_duzina,
-                                                                                       entry_sirina,
-                                                                                       entry_visina,
-                                                                                       entry_raspon_krila,
-                                                                                       entry_godiste,
-                                                                                       entry_nosivost,
-                                                                                       entry_relacija, top))
-
-            tk.Button(top, text='Dodaj Prostor za Teret', command=lambda: self.add_pzt(entry_naziv, entry_duzina,
-                                                                                       entry_sirina,
-                                                                                       entry_visina,
-                                                                                       entry_raspon_krila,
-                                                                                       entry_godiste,
-                                                                                       entry_nosivost,
-                                                                                       entry_relacija)).grid(row=8,
-                                                                                                             column=0)
+        tk.Button(top, text='Dodaj Prostor za Teret', command=lambda: self.add_pzt(entry_naziv, entry_duzina,
+                                                                                   entry_sirina,
+                                                                                   entry_visina,
+                                                                                   entry_raspon_krila,
+                                                                                   entry_godiste,
+                                                                                   entry_nosivost,
+                                                                                   entry_relacija)).grid(row=8,
+                                                                                                         column=0)
 
     def add_pzt(self, en, ed, es, ev, erk, eg, eno, er):
         en.config(state='disabled')
@@ -632,29 +543,17 @@ class ManagerHangaraPanel(tk.Frame):
                                     'Molimo unesite validne inpute str/int/int/int ili manje dimenzije')
 
     def prikazi_avione_bez_zahteva(self):
-        try:
-            self.dug_smesti_avion.config(state='disabled')
-            self.listbox.delete(0, 'end')
-            avioni_bez_zahteva = []
-            for i, avion in enumerate(aplikacija.avioni_van_hangara):
-                if avion.zahtev_smestanje is None:
-                    avioni_bez_zahteva.append(avion)
-                    self.listbox.insert(i, avion)
-            if avioni_bez_zahteva:
-                self.dug_kreiraj_zah = tk.Button(self.frejm, text='Kreiraj Zah. za smestanje',
-                                                 command=lambda: self._create_request(avioni_bez_zahteva))
-                self.dug_kreiraj_zah.grid(row=5, column=4)
-        except:
-            self.listbox.delete(0, 'end')
-            avioni_bez_zahteva = []
-            for i, avion in enumerate(aplikacija.avioni_van_hangara):
-                if avion.zahtev_smestanje is None:
-                    avioni_bez_zahteva.append(avion)
-                    self.listbox.insert(i, avion)
-            if avioni_bez_zahteva:
-                self.dug_kreiraj_zah = tk.Button(self.frejm, text='Kreiraj Zah. za smestanje',
-                                                 command=lambda: self._create_request(avioni_bez_zahteva))
-                self.dug_kreiraj_zah.grid(row=5, column=4)
+        self.iskljuci_dugmad()
+        self.listbox.delete(0, 'end')
+        avioni_bez_zahteva = []
+        for i, avion in enumerate(aplikacija.avioni_van_hangara):
+            if avion.zahtev_smestanje is None:
+                avioni_bez_zahteva.append(avion)
+                self.listbox.insert(i, avion)
+        if avioni_bez_zahteva:
+            self.dug_kreiraj_zah = tk.Button(self.frejm, text='Kreiraj Zah. za smestanje',
+                                             command=lambda: self._create_request(avioni_bez_zahteva))
+            self.dug_kreiraj_zah.grid(row=5, column=4)
 
     def _create_request(self, avioni_bez_zahteva):
         odabran_avion = avioni_bez_zahteva[self.listbox.curselection()[0]]
@@ -668,29 +567,17 @@ class ManagerHangaraPanel(tk.Frame):
         self.listbox.delete(0, 'end')
 
     def prikazi_avione_sa_zahtevom(self):
-        try:
-            self.dug_kreiraj_zah.config(state='disabled')
-            self.listbox.delete(0, 'end')
-            avioni_sa_zahtevom = []
-            for i, avion in enumerate(aplikacija.avioni_van_hangara):
-                if avion.zahtev_smestanje is not None:
-                    avioni_sa_zahtevom.append(avion)
-                    self.listbox.insert(i, avion)
-            if avioni_sa_zahtevom:
-                self.dug_smesti_avion = tk.Button(self.frejm, text='Smesti Avion',
-                                                  command=lambda: self._smesti_avion(avioni_sa_zahtevom))
-                self.dug_smesti_avion.grid(row=6, column=4)
-        except:
-            self.listbox.delete(0, 'end')
-            avioni_sa_zahtevom = []
-            for i, avion in enumerate(aplikacija.avioni_van_hangara):
-                if avion.zahtev_smestanje is not None:
-                    avioni_sa_zahtevom.append(avion)
-                    self.listbox.insert(i, avion)
-            if avioni_sa_zahtevom:
-                self.dug_smesti_avion = tk.Button(self.frejm, text='Smesti Avion',
-                                                  command=lambda: self._smesti_avion(avioni_sa_zahtevom))
-                self.dug_smesti_avion.grid(row=6, column=4)
+        self.iskljuci_dugmad()
+        self.listbox.delete(0, 'end')
+        avioni_sa_zahtevom = []
+        for i, avion in enumerate(aplikacija.avioni_van_hangara):
+            if avion.zahtev_smestanje is not None:
+                avioni_sa_zahtevom.append(avion)
+                self.listbox.insert(i, avion)
+        if avioni_sa_zahtevom:
+            self.dug_smesti_avion = tk.Button(self.frejm, text='Smesti Avion',
+                                              command=lambda: self._smesti_avion(avioni_sa_zahtevom))
+            self.dug_smesti_avion.grid(row=6, column=4)
 
     def _smesti_avion(self, avioni_sa_zahtevom):
         odabran_avion = avioni_sa_zahtevom[self.listbox.curselection()[0]]
@@ -705,9 +592,15 @@ class ManagerHangaraPanel(tk.Frame):
 
     def iskljuci_dugmad(self):
         try:
-            self.dug_smesti_avion.config(state='disabled')
+            try:
+                try:
+                    self.dug_smesti_avion.config(state='disabled')
+                    self.dug_kreiraj_zah.config(state='disabled')
+                except:
+                    self.dug_kreiraj_zah.config(state='disabled')
+            except:
+                self.dug_smesti_avion.config(state='disabled')
         except:
-            self.dug_kreiraj_zah.config(state='disabled')
-        finally:
-            self.dug_smesti_avion.config(state='disabled')
-            self.dug_kreiraj_zah.config(state='disabled')
+            pass
+
+
