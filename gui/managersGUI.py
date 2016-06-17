@@ -188,40 +188,17 @@ class ManagerTransportaPanel(tk.Frame):
         self.headerFrame.destroy()
         self.canvas.destroy()
         self.controler.meni.destroy()
-        print("hojhojhoj")
 
         try:
             self.listboxZahteviZaSmestanje.destroy()
             self.scrollbarx.destroy()
             self.scrollbary.destroy()
-            print("did it")
 
         except:
-            print('kurac')
             pass
 
         self.controler.show_frame(gui.windows.LoginWindow)
 
-
-
-        # try:
-        #     self.scrollbarx.destroy()
-        #     self.scrollbary.destroy()
-        #     self.listboxZahteviZaSmestanje.destroy()
-        # except:
-        #     pass
-
-        # self.scrollbar.destroy()
-        # self.headerFrame.destroy()
-
-        # self.canvas.destroy()
-
-        # try:
-        #     self.canvas.destroy()
-        # except:
-        #     pass
-        # self.controler.meni.destroy()
-        # self.controler.show_frame(gui.windows.LoginWindow)
 
     def odobri(self, counter):
         print(self.recnik[counter])
