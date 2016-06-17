@@ -61,10 +61,9 @@ class ZahtevZaSmestanjeAviona(Zahtev):
                 self.avion.id, self.menadzer.id)
 
 
-class ZahtevZaTransport(Zahtev):
+class ZahtevZaTransport(object):
     def __init__(self, odrediste, IDPotrazitelja, IDZahteva=None,
                  datumKreiranja=None, statusZahteva="kreiran", naziv=None):
-        Zahtev.__init__(self, IDZahteva, naziv)
         if IDZahteva == None:
             self.IDZahteva = self.odrediIDZahteva()
         else:
@@ -74,6 +73,7 @@ class ZahtevZaTransport(Zahtev):
             self.datumKreiranja = self.odrediDatum()
         else:
             self.datumKreiranja = datumKreiranja
+        self.naziv = naziv
         self.datumTransporta = "None"
         self.odrediste = odrediste
         self.IDPotrazitelja = IDPotrazitelja
@@ -104,7 +104,22 @@ class ZahtevZaTransport(Zahtev):
         return "ZT#" + str(int(l[1]) + 1)
 
     def __str__(self):
+        if self.datumTransporta != 'None':
+            datumTransporta = '{}.{}.{}, {}:{}'.format(self.datumTransporta.day,
+                                                       self.datumTransporta.month,
+                                                       self.datumTransporta.year,
+                                                       self.datumTransporta.hour,
+                                                       self.datumTransporta.minute)
+        else:
+            datumTransporta = None
+
         robe = ""
         for r in self.roba:
-            robe += r.oznaka + " "
-        return "Zahtev za transport - {}, Roba: {}".format(self.IDZahteva, robe)
+            robe += r.naziv + ", "
+        return "Zahtev za transport - {}, Datum Kreiranja: {}, Odrediste: {}" \
+               ", Status: {}, Datum Transporta: {}, Roba: {}".format(self.IDZahteva,
+                                                                     self.datumKreiranja,
+                                                                     self.odrediste,
+                                                                     self.statusZahteva,
+                                                                     datumTransporta,
+                                                                     robe)

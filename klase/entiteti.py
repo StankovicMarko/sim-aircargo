@@ -1,5 +1,6 @@
 class OznakaINaziv(object):
     """Klasa sadrzi: Oznaku (id) i naziv (ime) svih entiteta u projektu"""
+
     def __init__(self, ID, naziv):
         self.id = ID
         self.naziv = naziv
@@ -7,6 +8,7 @@ class OznakaINaziv(object):
 
 class Dimenzije:
     """Ova klasa sadrzi podatke o dimenzijama, svaki objekat koji ima dimenziju nasledjuje ovu klasu"""
+
     def __int__(self, duzina, sirina, visina):
         self.duzina = duzina
         self.sirina = sirina
@@ -152,6 +154,7 @@ class Dimenzije:
 class Kolekcija(Dimenzije, list):
     """Klasa koja nasledjuje listu, inicijalizuje se pri kreiranju objekata
         Aerodroma, Hangara, Aviona, Prostora za teret."""
+
     def __init__(self, duzina, sirina, visina):
         Dimenzije.__int__(self, duzina, sirina, visina)
         list.__init__(self)
@@ -207,6 +210,7 @@ class Kolekcija(Dimenzije, list):
 class Aerodrom(OznakaINaziv, Kolekcija):
     """Pravi objekat Aerodroma. Mogu da se dodaju Hangari (neogranicen broj jer nema definisanih dimenzija)
         Aerodrom opisuju Naziv, Adresa, Mesto i Hangari koje sadrzi"""
+
     def __init__(self, naziv, adresa, mesto, ID=None, duzina=None, sirina=None, visina=None):
         OznakaINaziv.__init__(self, ID, naziv)
         Kolekcija.__init__(self, duzina, sirina, visina)
@@ -224,6 +228,7 @@ class Aerodrom(OznakaINaziv, Kolekcija):
 class Hangar(OznakaINaziv, Kolekcija):
     """Pravi objekat Hangara. Mogu da se dodaju Avioni. Hangar opisuju ID, Naziv, Duzina, Sirina, Visina i Avioni
     koje sadrzi"""
+
     def __init__(self, ID, naziv, duzina, sirina, visina):
         OznakaINaziv.__init__(self, ID, naziv)
         Kolekcija.__init__(self, duzina, sirina, visina)
@@ -239,6 +244,7 @@ class Hangar(OznakaINaziv, Kolekcija):
 class Avion(OznakaINaziv, Kolekcija):
     """Pravi objekat Aviona. Mogu da se dodaju Prostori za robu. Avion opisuju
         ID, Naziv, Duzina, Sirina, Visina i Prostori za robu koje sadrzi"""
+
     def __init__(self, ID, naziv, duzina, sirina, visina, raspon_krila, godiste, nosivost, relacija):
         OznakaINaziv.__init__(self, ID, naziv)
         Kolekcija.__init__(self, duzina, sirina, visina)
@@ -252,9 +258,9 @@ class Avion(OznakaINaziv, Kolekcija):
 
     def __str__(self):
         if self.se_nalazi:
-            naziv_hangara=self.se_nalazi.naziv
+            naziv_hangara = self.se_nalazi.naziv
         else:
-            naziv_hangara='Van Aerodroma'
+            naziv_hangara = 'Van Aerodroma'
         return 'Avion - Oznaka: {}, Naziv: {}, Godiste: {}, ' \
                'Duzina: {}, Raspon krila: {}, Visina: {}, ' \
                'Nosivost: {}, Relacija: {}, Nalazi se: {}'.format(self.id,
@@ -262,10 +268,10 @@ class Avion(OznakaINaziv, Kolekcija):
                                                                   self.godiste,
                                                                   str(self.duzina),
                                                                   str(
-                                                                       self.raspon_krila),
+                                                                      self.raspon_krila),
                                                                   str(self.visina),
                                                                   str(
-                                                                       self.nosivost),
+                                                                      self.nosivost),
                                                                   self.relacija,
                                                                   naziv_hangara)
 
@@ -273,6 +279,7 @@ class Avion(OznakaINaziv, Kolekcija):
 class ProstorZaRobu(OznakaINaziv, Kolekcija):
     """Pravi objekat Prostora za robu. Moze da se dodaje Roba.
         Prostor za robu opisuju ID, Naziv, Duzina, Sirina, Visina i Roba koju sadrzi"""
+
     def __init__(self, naziv, duzina, sirina, visina, ID=None):
         OznakaINaziv.__init__(self, ID, naziv)
         Kolekcija.__init__(self, duzina, visina, sirina)

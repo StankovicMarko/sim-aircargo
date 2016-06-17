@@ -143,6 +143,8 @@ def dodaj_odrediste(relacija):
     relacija += '\n'
     if relacija not in odredista:
         addToFile(path, relacija)
+
+
 # ovo treba da bude notifikacija menadzeru hangara
 
 
@@ -246,11 +248,13 @@ def transportuj_robu():
         for i, avion in enumerate(zahtev.avion.se_nalazi):
             avion_koji_transportuje = zahtev.avion.se_nalazi.pop(i)
             avion.se_nalazi = None
-            avion_koji_transportuje.zahtev_smetanja.vreme_napustanja_hangara = dt.datetime.now()
-            avion_koji_transportuje.zahtev_smetanja = None
+            avion_koji_transportuje.zahtev_smestanje.vreme_napustanja_hangara = dt.datetime.now()
+            avion_koji_transportuje.zahtev_smestanje = None
             avion_koji_transportuje.zahtev_transport = None
             avioni_van_hangara.append(avion_koji_transportuje)
             avioni_u_hangarima.remove(avion_koji_transportuje)
+            zahtev.datumTransporta = dt.datetime.now()
+            zahtev.statusZahteva = 'robaTransportovana'
             break
     zahtevi_za_transport_robe['robaTransportovana'].extend(zahtevi_za_transport_robe['robaUtovarena'])
     zahtevi_za_transport_robe['robaUtovarena'].clear()
