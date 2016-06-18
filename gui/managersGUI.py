@@ -88,6 +88,7 @@ class ManagerTransportaPanel(tk.Frame):
         self.priv = []
         r = -1
         for i in lista:
+            # print(i)
             counter += 1
             r += 1
             a = tk.Label(self.newFrejm, text="{:^10}".format(i[0][3:]))

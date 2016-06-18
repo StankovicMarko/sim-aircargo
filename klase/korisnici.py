@@ -1,5 +1,6 @@
 import klase.util_funk as util
 from klase.entiteti import OznakaINaziv
+from klase import aplikacija
 import klase
 # from klase import hangar_funkcionalnosti
 
@@ -282,11 +283,49 @@ class ManagerTransport(Zaposlen):
         Vraca sve zahteve za transport
         '''
         zahtevi = []
-        lines = util.readFile("zahteviZaTransport.txt")
-        for line in lines:
-            l = line.strip().split("|")
-            zahtevi.append(l)
+
+        kreiraniZahtevi = aplikacija.zahtevi_za_transport_robe['kreiran']
+        odobreniZahtevi = aplikacija.zahtevi_za_transport_robe['odobren']
+        utovareniZahtevi = aplikacija.zahtevi_za_transport_robe['robaUtovarena']       
+        transportovaniZahtevi = aplikacija.zahtevi_za_transport_robe['robaTransportovana']
+
+        for kZahtev in kreiraniZahtevi:
+            listaKZ = [kZahtev.IDZahteva,kZahtev.datumKreiranja,kZahtev.datumTransporta,kZahtev.odrediste,kZahtev.IDPotrazitelja,kZahtev.avion,kZahtev.statusZahteva]
+            
+            # print(listaKZ)
+            zahtevi.append(listaKZ)
+
+
+        for oZ in odobreniZahtevi:
+            print(oZ)
+            listaOZ = [oZ.IDZahteva,oZ.datumKreiranja,oZ.datumTransporta,oZ.odrediste,oZ.IDPotrazitelja,oZ.avion.naziv,oZ.statusZahteva]
+
+            # print(listaOZ)
+            zahtevi.append(listaOZ)
+
+
+        for uZ in utovareniZahtevi:
+            listaUZ = [uZ.IDZahteva,uZ.datumKreiranja,uZ.datumTransporta,uZ.odrediste,uZ.IDPotrazitelja,uZ.avion.naziv,uZ.statusZahteva]
+
+            # print(listaUZ)
+            zahtevi.append(listaUZ)
+
+        for tZ in transportovaniZahtevi:
+            listaTZ = [tZ.IDZahteva,tZ.datumKreiranja,tZ.datumTransporta,tZ.odrediste,tZ.IDPotrazitelja,tZ.avion.naziv,tZ.statusZahteva]
+
+            # print(listaTZ)
+            zahtevi.append(listaTZ)
+
+
+        print(zahtevi)
         return zahtevi
+
+        # prethodno sto je radilo:
+        # lines = util.readFile("zahteviZaTransport.txt")
+        # for line in lines:
+        #     l = line.strip().split("|")
+        #     zahtevi.append(l)
+        # return zahtevi
 
     def prikazZahtevaSmestanje(self):
         '''
