@@ -92,7 +92,7 @@ class LoginWindow(tk.Frame):
                 if a.uloga == "mhangar":
                     self.controler.show_frame(ManagerHangaraPanel)
                     self.controler.frames[ManagerHangaraPanel].create_widgets()
-                    m = MenadzerHangara(int(a.ID[-2:]), a.ime, a.prezime, a.username)
+                    m = MenadzerHangara(int(a.ID[2:]), a.ime, a.prezime, a.username)
                     self.controler.m = m
                     print(self.controler.m)
                     self.controler.meni.grid()
@@ -106,7 +106,9 @@ class LoginWindow(tk.Frame):
 
                 elif a.uloga == "radnik":
                     self.controler.show_frame(RadnikPanel)
+                    self.controler.frames[RadnikPanel].create_widgets()
                     self.controler.meni.grid()
+
 
 
 
@@ -117,13 +119,13 @@ class LoginWindow(tk.Frame):
 class RadnikPanel(tk.Frame):
     def __init__(self, parent, controler):
         tk.Frame.__init__(self, parent)
-        self.controler=controler
+        # self.frejm = tk.Frame(self)
+        # self.frejm.grid()
+        self.controler = controler
         nekiLabel = tk.Label(self, text="Ulogovani ste kao radnik")
         nekiLabel.grid()
 
-        self.create_widgets()
-        self.logout_button = tk.Button(self.frejm, text="Log Out!", command=self.logout)
-        self.logout_button.grid(sticky='w')
+        #self.create_widgets()
 
     def logout(self):
         self.frejm.destroy()
@@ -133,7 +135,7 @@ class RadnikPanel(tk.Frame):
     def create_widgets(self):
         self.frejm = tk.Frame(self)
         self.frejm.grid()
-        self.listbox = tk.Listbox(self.frejm)
+        self.listbox = tk.Listbox(self.frejm, width=50)
         self.listbox.grid(row=2, columnspan=10, sticky='nsew')
         scrollbary = tk.Scrollbar(self.frejm)
         scrollbarx = tk.Scrollbar(self.frejm, orient='horizontal')
@@ -142,13 +144,16 @@ class RadnikPanel(tk.Frame):
         self.listbox.config(xscrollcommand=scrollbarx.set)
         scrollbarx.config(command=self.listbox.xview)
         scrollbarx.grid(row=3, columnspan=10, sticky='nsew')
-        scrollbary.grid(row=2, column=2, sticky='nse')
+        scrollbary.grid(row=2, column=10, sticky='nse')
 
         self.dug_smestanje = tk.Button(self.frejm, text="Odobreni zahtevi", command=self.odobreni_zahtevi)
         self.dug_smestanje.grid(row=1, column=0)
 
         self.dug_utovari_robu = tk.Button(self.frejm, text='Utovari Robu')
         self.dug_utovari_robu.grid(row=1, column=2)
+
+        self.logout_button = tk.Button(self.frejm, text="Log Out!", command=self.logout)
+        self.logout_button.grid(sticky='w')
 
     def odobreni_zahtevi(self):
         zahtevi = aplikacija.prikazi_zahteve_za_transport_odobrene_robe()
@@ -165,4 +170,3 @@ class RadnikPanel(tk.Frame):
             self.listbox.delete(0, 'end')
         except:
             tk.messagebox.showinfo('', 'Molimo izaberite zahtev ciju robu zelite da utovarite')
-

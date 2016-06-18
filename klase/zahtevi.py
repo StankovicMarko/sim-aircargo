@@ -99,9 +99,8 @@ class ZahtevZaTransport(object):
 
     def odrediIDZahteva(self):
         lines = util.readFile("zahteviZaTransport.txt")
-        lastLine = lines[-1].split("|")
-        l = lastLine[0].split("#")
-        return "ZT#" + str(int(l[1]) + 1)
+        ID=len(lines)+1
+        return "ZT#" + str(ID)
 
     def __str__(self):
         if self.datumTransporta != 'None':

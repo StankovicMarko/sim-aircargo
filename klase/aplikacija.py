@@ -110,31 +110,21 @@ def napravi_avion(naziv, duzina, sirina, visina, raspon_krila, godiste, nosivost
     temp_prostor_za_robu.clear()
 
     # avion.dodaj(pr_za_ter)
-    print(avion)
-    # try:
-    smesti_avion(avion)
-    #     print('a')
-    # except Exception as exc:
-    #     avioni_van_hangara.append(avion)
-    #     print('b')
+    avioni_van_hangara.append(avion)
 
 
 def smesti_avion(avion):
-    try:
-        for hangar in aerodrom:
-            if hangar > avion:
-                avion.zahtev_smestanje.hangar = hangar
-                vreme = dt.datetime.now()
-                avion.zahtev_smestanje.vreme_smestanja_aviona = vreme
-                # for zahtev in zahtevi_za_smestanje_aviona:
-                #     if zahtev.avion == avion:
-                #         zahtev.vreme_smestanja_aviona = vreme
-                hangar.dodaj(avion)
-                avioni_u_hangarima.append(avion)
-                avion.se_nalazi = hangar
-                break
-    except:
-        avioni_van_hangara.append(avion)
+    smestio = False
+    for hangar in aerodrom:
+        if hangar > avion:
+            avion.zahtev_smestanje.hangar = hangar
+            avion.zahtev_smestanje.vreme_smestanja_aviona = dt.datetime.now()
+            hangar.dodaj(avion)
+            avioni_u_hangarima.append(avion)
+            avion.se_nalazi = hangar
+            smestio = True
+        if smestio:
+            return smestio
 
 
 def dodaj_odrediste(relacija):
@@ -243,21 +233,49 @@ def napravi_zahtev_za_smestanje(odabran_avion, menadzer):
 #             return avioni_van_hangara.pop(i)
 
 
-def transportuj_robu():
-    for zahtev in zahtevi_za_transport_robe['robaUtovarena']:
-        for i, avion in enumerate(zahtev.avion.se_nalazi):
-            avion_koji_transportuje = zahtev.avion.se_nalazi.pop(i)
-            avion.se_nalazi = None
-            avion_koji_transportuje.zahtev_smestanje.vreme_napustanja_hangara = dt.datetime.now()
-            avion_koji_transportuje.zahtev_smestanje = None
-            avion_koji_transportuje.zahtev_transport = None
-            avioni_van_hangara.append(avion_koji_transportuje)
-            avioni_u_hangarima.remove(avion_koji_transportuje)
-            zahtev.datumTransporta = dt.datetime.now()
-            zahtev.statusZahteva = 'robaTransportovana'
-            break
-    zahtevi_za_transport_robe['robaTransportovana'].extend(zahtevi_za_transport_robe['robaUtovarena'])
-    zahtevi_za_transport_robe['robaUtovarena'].clear()
+def transportuj_robu(odabran_avion):
+    # promeni transport
+    # dobijes avion
+    # izmenis zahteve u njemu
+    # i onda izbacis, uklonis zahteve i stavis van hangara
+    # for pozicija_zahteva, zahtev in enumerate(zahtevi_za_transport_robe['robaUtovarena']):
+    avioni_van_hangara.append(odabran_avion)
+    avioni_u_hangarima.remove(odabran_avion)
+    odabran_avion.se_nalazi.ukloni(odabran_avion)
+    odabran_avion.se_nalazi = None
+
+    odabran_avion.zahtev_smestanje.vreme_napustanja_hangara = dt.datetime.now()
+    odabran_avion.zahtev_smestanje = None
+    for zahtev in odabran_avion.zahtev_transport:
+        zahtev.statusZahteva = 'robaTransportovana'
+        zahtevi_za_transport_robe['robaTransportovana'].append(zahtev)
+        zahtevi_za_transport_robe['robaUtovarena'].remove(zahtev)
+        zahtev.datumTransporta = dt.datetime.now()
+        for roba in zahtev.roba:
+            for prostor in odabran_avion:
+                prostor.ukloni(roba)
+
+    odabran_avion.zahtev_transport.clear()
+
+    for prostor in odabran_avion:
+        prostor.clear()
+
+
+
+        # for zahtev in zahtevi_za_transport_robe['robaUtovarena']:
+        #     for i, avion in enumerate(zahtev.avion.se_nalazi):
+        #         avion_koji_transportuje = zahtev.avion.se_nalazi.pop(i)
+        #         avion.se_nalazi = None
+        #         avion_koji_transportuje.zahtev_smestanje.vreme_napustanja_hangara = dt.datetime.now()
+        #         avion_koji_transportuje.zahtev_smestanje = None
+        #         avion_koji_transportuje.zahtev_transport = None
+        #         avioni_van_hangara.append(avion_koji_transportuje)
+        #         avioni_u_hangarima.remove(avion_koji_transportuje)
+        #         zahtev.datumTransporta = dt.datetime.now()
+        #         zahtev.statusZahteva = 'robaTransportovana'
+        #         break
+        # zahtevi_za_transport_robe['robaTransportovana'].extend(zahtevi_za_transport_robe['robaUtovarena'])
+        # zahtevi_za_transport_robe['robaUtovarena'].clear()
 
 
 def prikazi_zahteve_za_transport_odobrene_robe():
@@ -275,9 +293,9 @@ def utovari_robu(zahtev):
     #                 for roba in zahtev.roba:
     #                     prostor.dodaj(roba)
     #         return
-    for prostor in zahtev.avion:
-        for roba in zahtev.roba:
-            prostor.dodaj(roba)
+    # for prostor in zahtev.avion:
+    #     for roba in zahtev.roba:
+    #         prostor.dodaj(roba)
 
     zahtev.statusZahteva = 'robaUtovarena'
     for i, zah in enumerate(zahtevi_za_transport_robe['odobren']):

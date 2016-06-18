@@ -254,7 +254,7 @@ class Avion(OznakaINaziv, Kolekcija):
         self.relacija = relacija
         self.se_nalazi = None
         self.zahtev_smestanje = None
-        self.zahtev_transport = None
+        self.zahtev_transport = []
 
     def __str__(self):
         if self.se_nalazi:
@@ -289,7 +289,7 @@ class ProstorZaRobu(OznakaINaziv, Kolekcija):
         for r in self:
             roba += r.naziv + ', '
 
-        return 'Oznaka: {}, Naziv: {}, Duzina: {}, Sirina: {}, Visina: {}, Roba: {}'.format(self.id,
+        return 'Prostor za Teret - Naziv: {}, Duzina: {}, Sirina: {}, Visina: {}, Roba: {}'.format(
                                                                                             self.naziv,
                                                                                             self.duzina,
                                                                                             self.sirina,

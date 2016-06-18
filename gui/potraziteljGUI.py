@@ -200,9 +200,8 @@ class PotraziteljPanel(tk.Frame):
 
     def odrediIDPotrazitelja(self):
         lines = util.readFile("korisnici.txt")
-        lastLine = lines[-1].split("|")
-        l = lastLine[0].split("#")
-        return "K#"+str(int(l[1])+1)
+        ID=len(lines)+1
+        return "K#"+str(int(ID))
 
 
     def podnesiZahtev(self):

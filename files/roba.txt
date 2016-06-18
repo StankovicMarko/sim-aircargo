@@ -1,68 +1,8 @@
-R#1|naziv|opis|duzina|sirina|visina|tezina|IDPotrazitelja
-R#15|roba1|opis1|1|2|23|3|ZT#8
-R#16|roba2|opis2|2|3|2|22|ZT#9
-R#17|roba2|fkaljf|3|2|2|2|ZT#10
-R#18|flakj|aklfj|2|22|2|2|ZT#10
-R#19|roba2|fkaljf|3|2|2|2|ZT#11
-R#20|flakj|aklfj|2|22|2|2|ZT#11
-R#21|roba2|fkaljf|3|2|2|2|ZT#12
-R#22|flakj|aklfj|2|22|2|2|ZT#12
-R#23|afkjha|kjha|22|2|2|2|ZT#13
-R#24|roba1|roba2|123|3|3|3|ZT#14
-R#25|roba1|opis1|1|1|3|22|ZT#15
-R#26|kafa|ovo je crna kafa|10|1|10|1|ZT#19
-R#27|roba|opi|1|2|23|3|ZT#16
-R#28|roba3|falfkj|3|2|23|3|ZT#17
-R#29|test1|test12|1|2|3|3|ZT#18
-R#30|cokolada|ovo je cokolada|1|2|1|22|ZT#22
-R#31|pasulj|ovo je pasulj|12|2|2|22|ZT#22
-R#32|voda|ovo je hladna voda|2|23|3|33|ZT#22
-R#33|robatest|opistest|131|3|3|3|ZT#23
-R#34|roba2|opis|2|22|2|23|ZT#23
-R#35|cokolada1|ovo je bela cokolada|1|1|2|10|ZT#24
-R#36|cokolada2|ovo je crna cokolada|2|2|1|10|ZT#24
-R#37|kafa1|ovo je bela kafa|1|2|1|20|ZT#25
-R#38|kafa2|ovo je crna kafa|2|2|2|22|ZT#25
-R#39|kafa3|ovo je neka treca|2|3|3|23|ZT#25
-R#40|roba1|opis1|1|1|2|32|ZT#26
-R#41|roba2|opis2|3|2|2|3|ZT#26
-R#42|roba3|opis3|3|3|3|33|ZT#26
-R#43|roba4|opis4|4|2|2|2|ZT#26
-R#44|krompir|ovo je krompir|2|2|2|20|ZT#27
-R#45|paradajz|ovo je paradajz|1|2|22|111|ZT#27
-R#46|vic1|vic1|2|2|2|2|ZT#28
-R#47|test|test|2|2|2|23|ZT#29
-R#48|test3|test3|3|3|3|33|ZT#30
-R#49|test123|test123|12|3|3|321|ZT#31
-R#50|fjafj|fak|3|33|3|3|ZT#32
-R#51|test|test|2|2|2|2|ZT#33
-R#52|fkja|lfkja|2|2|2|23|ZT#33
-R#53|test|test|3|32|2|2|ZT#34
-R#54|roba1|opis1|10|10|1|100|ZT#44
-R#55|roba2|opis2|2|1|1|10|ZT#44
-R#56|roba1|novi zahtev|10|10|2|100|ZT#45
-R#57|roba1|opis1|1|1|1|1|ZT#46
-R#58|roba2|opis2|2|2|2|2|ZT#46
-R#59|roba1|opis|1|2|2|22|ZT#47
-R#60|roba2|opis2|3|4|2|22|ZT#47
-R#61|roba1|opis|1|2|2|22|ZT#48
-R#62|roba2|opis2|3|4|2|22|ZT#48
-R#63|novo|nova roba|3|34|32|2|ZT#48
-R#64|roba1|opis1|1|11|1|1|ZT#49
-R#65|roba2|opis2|2|2|2|2|ZT#49
-R#66|roba1|opis1|1|11|1|1|ZT#50
-R#67|roba2|opis2|2|2|2|2|ZT#50
-R#68|novi zah|novi zahtev|33|3|3|3|ZT#50
-R#69|jos jedan|jedan|3|3|3|3|ZT#50
-R#70|roba1|opis1|10|15|1|25|ZT#51
-R#71|kafa|crna kafa|1|1|1|10|ZT#52
-R#72|paradajz|dzak paradajza|2|100|1|10|ZT#52
-R#73|metal|kutija metala|2|2|2|50|ZT#52
-R#74|roba1|opis1|2|2|2|2|ZT#53
-R#75|torba|plasticna lepa|2|2|2|10|ZT#54
-R#76|kiseli kupus|mmmm|5|5|5|1500|ZT#55
-R#77|heftalice|metalno|5|5|5|500|ZT#58
-R#78|tegle|sa kupusom|5|5|5|1500|ZT#59
-R#79|tegle|sa kupusom|5|5|5|1500|ZT#60
-R#80|tegle|aaa|1|1|1|1500|ZT#61
-R#81|aa|aa|1|1|1|1|ZT#62
+R#1|Gitare|Elektricne|20|10|10|15000|ZT#1
+R#2|aaaaa|aaaaa|10|10|10|1500|ZT#2
+R#3|aaaa|1111|10|10|10|1000|ZT#3
+R#4|bbbb|bbbbb|10|10|10|1000|ZT#4
+R#5|a1|aaaaaa|15|10|10|1000|ZT#5
+R#6|b1|bnbbbb|20|10|10|1000|ZT#5
+R#7|a1|a1|22|22|22|1500|ZT#6
+R#8|b1|b1|15|15|15|2500|ZT#6

@@ -2,18 +2,11 @@ K#1|Marko|Jokic|marko|jokic|mhangar
 K#2|Petar|Petrovic|pera|petrovic|mtransport
 K#3|Marko|Stankovic|admin|admin|mtransport
 K#4|Ime|Prezime|radnik|password|radnik
-K#5|Marko|Markovic|060123456|email@email.com|potrazitelj
-K#6|Pera|Detlic|021332111|pera@detlic.com|potrazitelj
-K#7|Marko|Joikic|19301|email@lkgal.com|potrazitelj
-K#8|pero|test|tes|342|potrazitelj
-K#9|Aleksandar|Vucic|011223221|avucic@gmail.com|potrazitelj
-K#10|Ivan|Ivanovic|02144343|ivani@email.com|potrazitelj
-K#11|Perica|Peric|011232433|pericap@email.com|potrazitelj
-K#12|Test|Test|TestFon|TestMail|potrazitelj
-K#13|TestIme|TestPrezi|TestFon|TestMail|potrazitelj
-K#14|user|pass|user|pass|mhangar
-K#15|lepi|lepan|523253235|lepanlepicom|potrazitelj
-K#16|jokar|joki|51351|jokic|potrazitelj
-K#17|joj|joj|32532532|jokic|potrazitelj
-K#18|rsgs|ssgs|15356|affff|potrazitelj
-K#19|a|a|a|a|potrazitelj
+K#5|user|pass|user|pass|mhangar
+K#7|Lepi|Stane|0565555655|lepi@stane.com|potrazitelj
+K#8|Lepi|Stane|055554545|lepi@proba.com|potrazitelj
+K#8|Lepi|st|25253|aaaa|potrazitelj
+K#9|aaaa|aaa|aaaa|aaaaa|potrazitelj
+K#10|aaaa|aaaaa|aaa|aaaaa|potrazitelj
+K#11|vise roba|aaa|aa|aaa|potrazitelj
+K#12|aaa|aa|aaa|aaa|potrazitelj

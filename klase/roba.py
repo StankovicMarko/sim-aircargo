@@ -22,9 +22,8 @@ class Roba(object):
 
     def odrediIDRobe(self):
         lines = util.readFile("roba.txt")
-        lastLine = lines[-1].split("|")
-        l = lastLine[0].split("#")
-        return "R#" + str(int(l[1]) + 1)
+        ID= len(lines)+1
+        return "R#" + str(int(ID))
 
     def __str__(self):
         return "Roba - {}, Naziv {}, Opis - {}, Duzina:{},Sirina:{},Visina:{},Tezina:{}".format(self.oznaka,

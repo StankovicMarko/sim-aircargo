@@ -30,7 +30,7 @@ class ManagerTransportaPanel(tk.Frame):
         self.frejmZahtevi = tk.Frame(self, bd=1, relief="solid")
         self.frejmZahtevi.grid(columnspan=3)
         self.logoutButton = tk.Button(self, text="Log Out!", command=self.logout)
-        self.logoutButton.grid(row=4,column=1)
+        self.logoutButton.grid(row=4, column=1)
 
     def function(self, event):
         self.canvas.configure(scrollregion=self.canvas.bbox("all"))
@@ -90,48 +90,48 @@ class ManagerTransportaPanel(tk.Frame):
         for i in lista:
             counter += 1
             r += 1
-            a = tk.Label(self.newFrejm, text=i[0])
+            a = tk.Label(self.newFrejm, text="{:^10}".format(i[0][3:]))
             a.grid(row=r, column=0, sticky="w")
             self.priv.append(a)  # Dodaje svaki objekat u listu da bi kasnije znao sta da obrise
-            a1 = tk.Label(self.newFrejm, text="   ")
-            a1.grid(row=r, column=1)
-            self.priv.append(a1)
-            a2 = tk.Label(self.newFrejm, text=i[1])
+            # a1 = tk.Label(self.newFrejm, text="   ")
+            # a1.grid(row=r, column=1)
+            # self.priv.append(a1)
+            a2 = tk.Label(self.newFrejm, text="{:^22}".format(i[1]))
             a2.grid(row=r, column=2)
-            self.priv.append(a2)
-            a3 = tk.Label(self.newFrejm, text="              ")
-            a3.grid(row=r, column=3)
-            self.priv.append(a3)
-            a4 = tk.Label(self.newFrejm, text=i[2])
+            # self.priv.append(a2)
+            # a3 = tk.Label(self.newFrejm, text="              ")
+            # a3.grid(row=r, column=3)
+            # self.priv.append(a3)
+            a4 = tk.Label(self.newFrejm, text="{:^29}".format(i[2]))
             a4.grid(row=r, column=4)
-            self.priv.append(a4)
-            a5 = tk.Label(self.newFrejm, text="           ")
-            a5.grid(row=r, column=5)
-            self.priv.append(a5)
-            a6 = tk.Label(self.newFrejm, text=i[3])
+            # self.priv.append(a4)
+            # a5 = tk.Label(self.newFrejm, text="           ")
+            # a5.grid(row=r, column=5)
+            # self.priv.append(a5)
+            a6 = tk.Label(self.newFrejm, text="{:^13}".format(i[3]))
             a6.grid(row=r, column=6)
-            self.priv.append(a6)
-            a7 = tk.Label(self.newFrejm, text="      ")
-            a7.grid(row=r, column=7)
-            self.priv.append(a7)
-            a8 = tk.Label(self.newFrejm, text=i[4])
+            # self.priv.append(a6)
+            # a7 = tk.Label(self.newFrejm, text="      ")
+            # a7.grid(row=r, column=7)
+            # self.priv.append(a7)
+            a8 = tk.Label(self.newFrejm, text="{:^12}".format(i[4]))
             a8.grid(row=r, column=8, sticky="w")
-            self.priv.append(a8)
-            a9 = tk.Label(self.newFrejm, text="  ")
-            a9.grid(row=r, column=9)
-            self.priv.append(a9)
-            a10 = tk.Label(self.newFrejm, text=i[5])
+            # self.priv.append(a8)
+            # a9 = tk.Label(self.newFrejm, text="  ")
+            # a9.grid(row=r, column=9)
+            # self.priv.append(a9)
+            a10 = tk.Label(self.newFrejm, text="{:^10}".format(i[5]))
             a10.grid(row=r, column=10)
-            self.priv.append(a10)
-            a14 = tk.Label(self.newFrejm, text="   ")
-            a14.grid(row=r, column=11)
-            self.priv.append(a14)
-            a11 = tk.Label(self.newFrejm, text=i[6])
+            # self.priv.append(a10)
+            # a14 = tk.Label(self.newFrejm, text="   ")
+            # a14.grid(row=r, column=11)
+            # self.priv.append(a14)
+            a11 = tk.Label(self.newFrejm, text="{:^16}".format(i[6]))
             a11.grid(row=r, column=12)
-            self.priv.append(a11)
-            a12 = tk.Label(self.newFrejm, text="   ")
-            a12.grid(row=r, column=13)
-            self.priv.append(a12)
+            # self.priv.append(a11)
+            # a12 = tk.Label(self.newFrejm, text="   ")
+            # a12.grid(row=r, column=13)
+            # self.priv.append(a12)
             a13 = tk.Checkbutton(self.newFrejm, text="", command=lambda counter=counter: self.odobri(
                 counter))  # svaki put kad se checkira dugme, salje se counter, pa se zna tacno koje dugme je kliknuto
             a13.grid(row=r, column=14)
@@ -166,7 +166,7 @@ class ManagerTransportaPanel(tk.Frame):
         self.prikazTransportButton.config(state="normal")
         self.prikazSmestanjeButton.config(state="disabled")
 
-        self.listboxZahteviZaSmestanje = tk.Listbox(self.frejmZahtevi,width=70,height=20)
+        self.listboxZahteviZaSmestanje = tk.Listbox(self.frejmZahtevi, width=70, height=20)
         self.listboxZahteviZaSmestanje.grid(row=1, columnspan=10, sticky='nsew')
         self.scrollbary = tk.Scrollbar(self)
         self.scrollbarx = tk.Scrollbar(self, orient='horizontal')
@@ -177,7 +177,6 @@ class ManagerTransportaPanel(tk.Frame):
         self.scrollbarx.grid(row=3, columnspan=10, sticky='nsew')
         self.scrollbary.grid(row=2, column=4, sticky='nsew')
         self.prikaz1()
-
 
     def prikaz1(self):
         zahtevi = aplikacija.prikazi_zahteve_za_smestanje_aviona()
@@ -199,7 +198,6 @@ class ManagerTransportaPanel(tk.Frame):
 
         self.controler.show_frame(gui.windows.LoginWindow)
 
-
     def odobri(self, counter):
         print(self.recnik[counter])
         self.checkboxovi[counter].config(state="disabled")
@@ -215,22 +213,23 @@ class ManagerTransportaPanel(tk.Frame):
                 break
 
         for avion in aplikacija.avioni_u_hangarima:  # za svaki avion u hangaru trazi da li odgovara odrediste
-            if avion.relacija == zahtev.odrediste and avion.zahtev_transport is None:
-
+            if avion.relacija == zahtev.odrediste:
                 avionCopy = copy.deepcopy(avion)
-                zahtevCopy = copy.deepcopy(zahtev)
-                kol_robe = len(zahtevCopy.roba)
-                for prostor in avionCopy:  # za svaki prostor u avion-kopiji proba da smesti robu
-                    for r in zahtevCopy.roba:
+                kol_robe = len(zahtev.roba)
+                for r in zahtev.roba:
+                    for prostor in avionCopy:  # za svaki prostor u avion-kopiji proba da smesti rob
                         if r < prostor:
                             prostor.dodaj(r)  # dodata roba u prostor
                             kol_robe -= 1
+                            break
                             # zahtevCopy.roba.remove(r)  # skida robu iz zahteva ako je utovarena
-
                 if kol_robe == 0:
+                    for r in zahtev.roba:
+                        for prostor in avion:  # za svaki prostor u avion-kopiji proba da smesti robu
+                            prostor.dodaj(r)  # dodata roba u prostor
                     zahtev.statusZahteva = 'odobren'
                     zahtev.avion = avion
-                    avion.zahtev_transport = zahtev
+                    avion.zahtev_transport.append(zahtev)
                     # stavlja u listu odobrenih iz liste kreiranih
                     aplikacija.zahtevi_za_transport_robe['odobren'].append(
                         aplikacija.zahtevi_za_transport_robe['kreiran'].pop(pozicija_zahteva))
@@ -272,44 +271,51 @@ class ManagerHangaraPanel(tk.Frame):
     def create_widgets(self):
         self.frejm = tk.Frame(self)
         self.frejm.grid()
-
         self.listbox = tk.Listbox(self.frejm)
-        self.listbox.grid(row=3, columnspan=10, sticky='nsew')
+        self.listbox.grid(row=3, columnspan=4, sticky='nsew')
         scrollbary = tk.Scrollbar(self.frejm)
         scrollbarx = tk.Scrollbar(self.frejm, orient='horizontal')
         self.listbox.config(yscrollcommand=scrollbary.set)
         scrollbary.config(command=self.listbox.yview)
         self.listbox.config(xscrollcommand=scrollbarx.set)
         scrollbarx.config(command=self.listbox.xview)
-        scrollbarx.grid(row=4, columnspan=10, sticky='nsew')
-        scrollbary.grid(row=3, column=4, sticky='nse')
+        scrollbarx.grid(row=4, columnspan=4, sticky='nsew')
+        scrollbary.grid(row=3, column=5, sticky='nse')
+
+        self.dug_smesti_avion = tk.Button(self.frejm, text='Smesti Avion', state='disabled')
+        self.dug_kreiraj_zah = tk.Button(self.frejm, text='Kreiraj Zah. za smestanje', state='disabled')
+        self.dug_transportuj_odobrene = tk.Button(self.frejm, text='Transportuj robu', state='disabled')
+        self.dug_prikazi_avione_za_transport = tk.Button(self.frejm, text='Prikazi Avione za Transport',
+                                                         command=self.prikazi_avione_za_transport)
+
+        self.dug_smesti_avion.grid(row=6, column=3, sticky='nsew')
+        self.dug_kreiraj_zah.grid(row=5, column=3, sticky='nsew')
+        self.dug_transportuj_odobrene.grid(row=2, column=1, sticky='nsew')
+        self.dug_prikazi_avione_za_transport.grid(row=1, column=1, sticky='nsew')
 
         dug_smestanje = tk.Button(self.frejm, text='Zahtevi za smestanje aviona', command=self.zahtevi_smestanja)
-        dug_smestanje.grid(row=1, column=0)
+        dug_smestanje.grid(row=1, column=0, sticky='nsew')
 
         dug_transport = tk.Button(self.frejm, text='Zahtevi za transport (utovarena roba)',
                                   command=self.zahtevi_transport)
-        dug_transport.grid(row=1, column=1)
-
-        dug_transportuj_odobrene = tk.Button(self.frejm, text='Transportuj robu', command=self.transportuj_odobrene)
-        dug_transportuj_odobrene.grid(row=2, column=1)
+        dug_transport.grid(row=2, column=0, sticky='nsew')
 
         dug_dodaj_hangar = tk.Button(self.frejm, text='Dodaj hangar', command=self.add_hangar)
-        dug_dodaj_hangar.grid(row=1, column=2)
+        dug_dodaj_hangar.grid(row=1, column=2, sticky='nsew')
 
-        dug_dodaj_avion = tk.Button(self.frejm, text='Napravi avion', command=self.add_avion)
-        dug_dodaj_avion.grid(row=1, column=3)
+        dug_dodaj_avion = tk.Button(self.frejm, text='Dodaj avion', command=self.add_avion)
+        dug_dodaj_avion.grid(row=2, column=2, sticky='nsew')
 
         dug_prikazi_avione_bez_zahteva = tk.Button(self.frejm, text='Prikaz Aviona bez zahteva',
                                                    command=self.prikazi_avione_bez_zahteva)
-        dug_prikazi_avione_bez_zahteva.grid(row=1, column=4)
+        dug_prikazi_avione_bez_zahteva.grid(row=1, column=3, sticky='nsew')
 
         dug_prikazi_avione_sa_zahtevom = tk.Button(self.frejm, text='Prikaz Aviona sa zahtevom',
                                                    command=self.prikazi_avione_sa_zahtevom)
-        dug_prikazi_avione_sa_zahtevom.grid(row=2, column=4)
+        dug_prikazi_avione_sa_zahtevom.grid(row=2, column=3, sticky='nsew')
 
         self.logout_button = tk.Button(self.frejm, text="Log Out!", command=self.logout)
-        self.logout_button.grid(sticky='w')
+        self.logout_button.grid(row=6, sticky='sw')
 
     def logout(self):
         self.frejm.destroy()
@@ -324,7 +330,6 @@ class ManagerHangaraPanel(tk.Frame):
             self.listbox.insert(i, zahtev)
 
     def zahtevi_transport(self):
-
         self.iskljuci_dugmad()
         zahtevi = aplikacija.prikaz_zahteva_za_transport_utovarene_robe()
         self.listbox.delete(0, 'end')
@@ -541,20 +546,23 @@ class ManagerHangaraPanel(tk.Frame):
                 avioni_bez_zahteva.append(avion)
                 self.listbox.insert(i, avion)
         if avioni_bez_zahteva:
-            self.dug_kreiraj_zah = tk.Button(self.frejm, text='Kreiraj Zah. za smestanje',
-                                             command=lambda: self._create_request(avioni_bez_zahteva))
-            self.dug_kreiraj_zah.grid(row=5, column=4)
+            # self.dug_kreiraj_zah = tk.Button(self.frejm, text='Kreiraj Zah. za smestanje',
+            #                                  command=lambda: self._create_request(avioni_bez_zahteva))
+            self.dug_kreiraj_zah.config(state='normal', command=lambda: self._create_request(avioni_bez_zahteva))
 
     def _create_request(self, avioni_bez_zahteva):
-        odabran_avion = avioni_bez_zahteva[self.listbox.curselection()[0]]
-        # id_zahteva = len(aplikacija.zahtevi_za_smestanje_aviona) + 1
-        # zahtev = ZahtevZaSmestanjeAviona(id_zahteva, odabran_avion, self.controler.m)
-        # aplikacija.zahtevi_za_smestanje_aviona.append(zahtev)
-        # odabran_avion.zahtev_smestanje = zahtev
-        aplikacija.napravi_zahtev_za_smestanje(odabran_avion, self.controler.m)
-        self.dug_kreiraj_zah.destroy()
-        tk.messagebox.showinfo('', 'Zahtev uspesno kreiran')
-        self.listbox.delete(0, 'end')
+        try:
+            odabran_avion = avioni_bez_zahteva[self.listbox.curselection()[0]]
+            # id_zahteva = len(aplikacija.zahtevi_za_smestanje_aviona) + 1
+            # zahtev = ZahtevZaSmestanjeAviona(id_zahteva, odabran_avion, self.controler.m)
+            # aplikacija.zahtevi_za_smestanje_aviona.append(zahtev)
+            # odabran_avion.zahtev_smestanje = zahtev
+            aplikacija.napravi_zahtev_za_smestanje(odabran_avion, self.controler.m)
+            self.dug_kreiraj_zah.config(state='disabled')
+            tk.messagebox.showinfo('', 'Zahtev uspesno kreiran')
+            self.listbox.delete(0, 'end')
+        except:
+            tk.messagebox.showinfo('', 'Molimo izaberite avion za koji zelite da napravite zahtev za smestanje')
 
     def prikazi_avione_sa_zahtevom(self):
         self.iskljuci_dugmad()
@@ -565,35 +573,61 @@ class ManagerHangaraPanel(tk.Frame):
                 avioni_sa_zahtevom.append(avion)
                 self.listbox.insert(i, avion)
         if avioni_sa_zahtevom:
-            self.dug_smesti_avion = tk.Button(self.frejm, text='Smesti Avion',
-                                              command=lambda: self._smesti_avion(avioni_sa_zahtevom))
-            self.dug_smesti_avion.grid(row=6, column=4)
+            # self.dug_smesti_avion = tk.Button(self.frejm, text='Smesti Avion',
+            #                                   command=lambda: self._smesti_avion(avioni_sa_zahtevom))
+            self.dug_smesti_avion.config(state='normal', command=lambda: self._smesti_avion(avioni_sa_zahtevom))
 
     def _smesti_avion(self, avioni_sa_zahtevom):
-        odabran_avion = avioni_sa_zahtevom[self.listbox.curselection()[0]]
         try:
-            aplikacija.smesti_avion(odabran_avion)
-            aplikacija.avioni_van_hangara.remove(odabran_avion)
-            tk.messagebox.showinfo('Uspeh!', 'Uspesno je smesten Avion')
-            self.dug_smesti_avion.destroy()
+            odabran_avion = avioni_sa_zahtevom[self.listbox.curselection()[0]]
+            if aplikacija.smesti_avion(odabran_avion):
+                aplikacija.avioni_van_hangara.remove(odabran_avion)
+                tk.messagebox.showinfo('Uspeh!', 'Uspesno je smesten Avion')
+                self.dug_smesti_avion.config(state='disabled')
+                self.listbox.delete(0, 'end')
+            else:
+                tk.messagebox.showinfo('', 'Nije smesten Avion (nema mesta)')
+        except:
+            tk.messagebox.showinfo('', 'Molimo izaberite avion koji zelite da smestite')
+
+    def prikazi_avione_za_transport(self):
+        # for avion in aplikacija.avioni_u_hangarima:
+        #     avion.zahtev_transport=[]
+        # for avion in aplikacija.avioni_van_hangara:
+        #     avion.zahtev_transport=[]
+        self.iskljuci_dugmad()
+        self.listbox.delete(0, 'end')
+        avioni_sa_zahtevom_trans = []
+        for i, avion in enumerate(aplikacija.avioni_u_hangarima):
+            if avion.zahtev_transport:
+                avioni_sa_zahtevom_trans.append(avion)
+                self.listbox.insert(i, avion)
+        if avioni_sa_zahtevom_trans:
+            self.dug_transportuj_odobrene.config(state='normal',
+                                                 command=lambda:
+                                                 self._transportuj_odobrene(avioni_sa_zahtevom_trans))
+
+    def _transportuj_odobrene(self, avioni_sa_zahtevom_trans):
+        try:
+            odabran_avion = avioni_sa_zahtevom_trans[self.listbox.curselection()[0]]
+            aplikacija.transportuj_robu(odabran_avion)
+            tk.messagebox.showinfo('', 'Uspesno je transportovana sva roba iz: ' + odabran_avion.naziv)
             self.listbox.delete(0, 'end')
         except:
-            tk.messagebox.showinfo('', 'Nije smesten Avion (nema mesta)')
-
-    def transportuj_odobrene(self):
-        self.iskljuci_dugmad()
-        aplikacija.transportuj_robu()
-        tk.messagebox.showinfo('', 'Uspesno je transportovana sva roba iz nasih hangara')
+            tk.messagebox.showinfo('', 'Molimo izaberite avion koji zelite da transportuje')
 
     def iskljuci_dugmad(self):
-        try:
-            try:
-                try:
-                    self.dug_smesti_avion.config(state='disabled')
-                    self.dug_kreiraj_zah.config(state='disabled')
-                except:
-                    self.dug_kreiraj_zah.config(state='disabled')
-            except:
-                self.dug_smesti_avion.config(state='disabled')
-        except:
-            pass
+        self.dug_smesti_avion.config(state='disabled')
+        self.dug_kreiraj_zah.config(state='disabled')
+        self.dug_transportuj_odobrene.config(state='disabled')
+        # try:
+        #     try:
+        #         try:
+        #             self.dug_smesti_avion.config(state='disabled')
+        #             self.dug_kreiraj_zah.config(state='disabled')
+        #         except:
+        #             self.dug_kreiraj_zah.config(state='disabled')
+        #     except:
+        #         self.dug_smesti_avion.config(state='disabled')
+        # except:
+        #     pass
