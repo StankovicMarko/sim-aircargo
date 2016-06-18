@@ -311,6 +311,7 @@ class ManagerTransport(Zaposlen):
             zahtevi.append(listaUZ)
 
         for tZ in transportovaniZahtevi:
+            # stringDatum = tZ.day+"/"+tZ.month+"/"+tZ.year
             listaTZ = [tZ.IDZahteva,tZ.datumKreiranja,tZ.datumTransporta,tZ.odrediste,tZ.IDPotrazitelja,tZ.avion.naziv,tZ.statusZahteva]
 
             # print(listaTZ)
