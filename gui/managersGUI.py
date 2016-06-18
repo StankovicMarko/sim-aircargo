@@ -218,15 +218,22 @@ class ManagerTransportaPanel(tk.Frame):
                 kol_robe = len(zahtev.roba)
                 for r in zahtev.roba:
                     for prostor in avionCopy:  # za svaki prostor u avion-kopiji proba da smesti rob
-                        if r < prostor:
+                        if r < prostor and r.tezina < avionCopy.nosivost:
                             prostor.dodaj(r)  # dodata roba u prostor
+                            avionCopy.nosivost -= int(r.tezina)
                             kol_robe -= 1
+                            if kol_robe == 0:
+                                break
                             break
                             # zahtevCopy.roba.remove(r)  # skida robu iz zahteva ako je utovarena
                 if kol_robe == 0:
-                    for r in zahtev.roba:
+                    for roba in zahtev.roba:
                         for prostor in avion:  # za svaki prostor u avion-kopiji proba da smesti robu
-                            prostor.dodaj(r)  # dodata roba u prostor
+                            if prostor > roba:
+                                prostor.dodaj(roba)
+                                avion.nosivost -= int(roba.tezina)
+                                break
+                                # dodata roba u prostor
                     zahtev.statusZahteva = 'odobren'
                     zahtev.avion = avion
                     avion.zahtev_transport.append(zahtev)
@@ -599,9 +606,15 @@ class ManagerHangaraPanel(tk.Frame):
         self.listbox.delete(0, 'end')
         avioni_sa_zahtevom_trans = []
         for i, avion in enumerate(aplikacija.avioni_u_hangarima):
-            if avion.zahtev_transport:
+            statusi = set()
+            for zahtev in avion.zahtev_transport:
+                statusi.add(zahtev.statusZahteva)
+            if len(statusi) != 1:
+                continue
+            elif len(statusi) == 1 and 'robaUtovarena' in statusi:
                 avioni_sa_zahtevom_trans.append(avion)
                 self.listbox.insert(i, avion)
+
         if avioni_sa_zahtevom_trans:
             self.dug_transportuj_odobrene.config(state='normal',
                                                  command=lambda:
@@ -611,8 +624,9 @@ class ManagerHangaraPanel(tk.Frame):
         try:
             odabran_avion = avioni_sa_zahtevom_trans[self.listbox.curselection()[0]]
             aplikacija.transportuj_robu(odabran_avion)
-            tk.messagebox.showinfo('', 'Uspesno je transportovana sva roba iz: ' + odabran_avion.naziv)
             self.listbox.delete(0, 'end')
+            tk.messagebox.showinfo('', 'Uspesno je transportovana sva roba iz: ' + odabran_avion.naziv)
+
         except:
             tk.messagebox.showinfo('', 'Molimo izaberite avion koji zelite da transportuje')
 

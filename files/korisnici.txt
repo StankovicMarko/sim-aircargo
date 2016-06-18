@@ -3,10 +3,19 @@ K#2|Petar|Petrovic|pera|petrovic|mtransport
 K#3|Marko|Stankovic|admin|admin|mtransport
 K#4|Ime|Prezime|radnik|password|radnik
 K#5|user|pass|user|pass|mhangar
-K#7|Lepi|Stane|0565555655|lepi@stane.com|potrazitelj
-K#8|Lepi|Stane|055554545|lepi@proba.com|potrazitelj
-K#8|Lepi|st|25253|aaaa|potrazitelj
-K#9|aaaa|aaa|aaaa|aaaaa|potrazitelj
-K#10|aaaa|aaaaa|aaa|aaaaa|potrazitelj
-K#11|vise roba|aaa|aa|aaa|potrazitelj
-K#12|aaa|aa|aaa|aaa|potrazitelj
+K#6|aaa|aa|aa|aa|potrazitelj
+K#7|bbb|bb|bb|bb|potrazitelj
+K#8|gaa|grgragr|grgr|grgr|potrazitelj
+K#8|kukuku|jjukjuuk|kuu|kuk|potrazitelj
+K#10|glupi|glupi|glupi|gluopup|potrazitelj
+K#11|aaaaaa|aaaaaaa|aaaaaaaa|aaaaaaa|potrazitelj
+K#12|afef|eafa|efa|aef|potrazitelj
+K#13|afe|faef|eaf|aefae|potrazitelj
+K#14|afefe|faefae|feafa|eaf|potrazitelj
+K#15|afefea|aefeaf|eafeaf|aefe|potrazitelj
+K#16|aefae|faefae|fefe|fef|potrazitelj
+K#17|feafe|fefae|faefaef|af|potrazitelj
+K#18|efae|fefef|efaef|aeff|potrazitelj
+K#19|rgsrg|rgrg|grgrg|rgrgr|potrazitelj
+K#20|aefef|afefe|fefefe|fefefe|potrazitelj
+K#21|faef|eafe|efef|afe|potrazitelj
