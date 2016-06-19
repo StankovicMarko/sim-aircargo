@@ -140,6 +140,7 @@ class Zaposlen(Osoba):
         return rezultat_pretrage
 
     def pretraziRobuPoOznaci(self, oznaka):
+        """Vraca sve robe cija je oznaka jednaka datoj oznaci."""
         rezultat_pretrage = []
 
         for key in klase.aplikacija.zahtevi_za_transport_robe.keys():
@@ -150,6 +151,7 @@ class Zaposlen(Osoba):
         return rezultat_pretrage
 
     def pretraziRobuPoNazivu(self, naziv):
+        """Vraca sve robe gde se naziv(argument) nalazi u nazivu robe."""
         rezultat_pretrage = []
 
         for key in klase.aplikacija.zahtevi_za_transport_robe.keys():
@@ -161,6 +163,7 @@ class Zaposlen(Osoba):
         return rezultat_pretrage
 
     def pretraziRobuPoOpisu(self, opis):
+        """Vraca sve robe gde se opis(argument) nalazi u opisu robe."""
         rezultat_pretrage = []
 
         for key in klase.aplikacija.zahtevi_za_transport_robe.keys():
@@ -171,6 +174,7 @@ class Zaposlen(Osoba):
         return rezultat_pretrage
 
     def pretraziRobuPoDuzini(self, donja_granica, gornja_granica):
+        """Vraca sve robe cija je duzina veca od donje, a manja od gornje granice."""
         rezultat_pretrage = []
 
         for key in klase.aplikacija.zahtevi_za_transport_robe.keys():
@@ -182,6 +186,7 @@ class Zaposlen(Osoba):
         return rezultat_pretrage
 
     def pretraziRobuPoSirini(self, donja_granica, gornja_granica):
+        """Vraca sve robe cija je sirina veca od donje, a manja od gornje granice."""
         rezultat_pretrage = []
 
         for key in klase.aplikacija.zahtevi_za_transport_robe.keys():
@@ -193,6 +198,7 @@ class Zaposlen(Osoba):
         return rezultat_pretrage
 
     def pretraziRobuPoVisini(self, donja_granica, gornja_granica):
+        """Vraca sve robe cija je visina veca od donje, a manja od gornje granice."""
         rezultat_pretrage = []
 
         for key in klase.aplikacija.zahtevi_za_transport_robe.keys():
@@ -204,6 +210,7 @@ class Zaposlen(Osoba):
         return rezultat_pretrage
 
     def pretraziRobuPoTezini(self, donja_granica, gornja_granica):
+        """Vraca sve robe cija je tezina veca od donje, a manja od gornje granice."""
         rezultat_pretrage = []
 
         for key in klase.aplikacija.zahtevi_za_transport_robe.keys():
@@ -216,6 +223,7 @@ class Zaposlen(Osoba):
         return rezultat_pretrage
 
     def pretraziRobuPoIDPotrazitelja(self, IDPotrazitelja):
+        """Vraca sve robe ciji je ID potrazitelja jedank ID-u potrazitelja(argumentu)."""
         rezultat_pretrage = []
         zahteviTransport = util.readFile("zahteviZaTransport.txt")
 

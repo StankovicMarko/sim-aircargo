@@ -2,6 +2,7 @@ import klase.util_funk as util
 
 
 class Login(object):
+    """Koristi se logovanje korisnika"""
     def __init__(self, username, password):
         self.ID, self.username, self.ime, self.prezime, self.uloga = self.__checkCreds(username, password)
 

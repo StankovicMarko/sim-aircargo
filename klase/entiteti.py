@@ -17,44 +17,10 @@ class Dimenzije:
     def smanji_dimenzije(self, other):
         """umanjuje dimenzije objekta self za dimenzije objekta other. Funkcija ce smanjiti onu dimenziju
         objekta self koja je suprotna vecoj. npr ako je sirina objekta other veca od njegove duzine, self-u
-        ce se smanjiti duzina. Graficki primer je
-
-                    HANGAR        sirina=60                 |              HANGAR        sirina=60
-        +------------------------------------------+        |  +------------------------------------------+
-        |                                          |        |  | +---------------+     X    X       X     |
-        |                                          |        |  | |               |  X      X    X      X  |
-        |                                          |        |  | |               |      zauzet prostor    |
-        |                                          |        |  | |               |   X                 X  |
-        |                                          |d       |  | |               |    X  X   X   X  X     |d
-        |                                          |u       |  | +---------------+      X      X     X  X |u
-        |                                          |z=40    |  +------------------------------------------+z=40
-        |                                          |i       |  |                                          |i
-        |                                          |n       |  |                                          |n
-        |                                          |a       |  |                                          |a
-        |                                          |        |  |                                          |
-        |                                          |        |  |                                          |
-        |                                          |        |  |                                          |
-        |                                          |        |  |                                          |
-        |                                          |        |  |                                          |
-        |                                          |        |  |                                          |
-        |                                          |        |  |                                          |
-        |                                          |        |  |                                          |
-        +------------------------------------------+        |  +------------------------------------------+
-                                                            |
-                                                            |       sirina AVIONA je veca od njegove duzine
-                AVION                                       |       stoga se smanjuje duzina hangara
-            +---------------+d                              |
-            |               |u                              |
-            |               |z=15                           |
-            |               |i                              |
-            |               |n                              |
-            +---------------+a                              |
-               sirina = 20                                  |
-
-        specijalni slucajevi:
+        ce se smanjiti duzina.
+        Specijalni slucajevi:
         -ako je duzina objekta other veca ili jednaka sirini (other.duzina >= other.sirina):
-            smanjuje se sirina objekta self
-        """
+        smanjuje se sirina objekta self"""
         if isinstance(self, Hangar) and isinstance(other, Avion):
             if other.duzina >= other.raspon_krila:
                 self.sirina -= other.raspon_krila
@@ -84,8 +50,8 @@ class Dimenzije:
         """objekat self je manji od objekta other ako je manji po duzini i sirini i visini.
             Odnosno objekat other moze da stane u objekat self.
             Specijalni slucajevi:
-                -ako se porede Hangar i Avion:
-                    u obzir se uzima raspon krila aviona, a ne njegova sirina"""
+            -ako se porede Hangar i Avion:
+            u obzir se uzima raspon krila aviona, a ne njegova sirina"""
         if isinstance(self, Hangar) and isinstance(other, Avion):
             return self.duzina < other.duzina and self.sirina < other.raspon_krila and self.visina < other.visina
 
@@ -97,8 +63,8 @@ class Dimenzije:
     def __le__(self, other):
         """objekat self je manji ili jednak objektu other ako je self manji ili jednak po duzini i sirini i visini.
             Specijalni slucajevi:
-                -ako se porede Hangar i Avion:
-                    u obzir se uzima raspon krila aviona, a ne njegova sirina"""
+            -ako se porede Hangar i Avion:
+            u obzir se uzima raspon krila aviona, a ne njegova sirina"""
         if isinstance(self, Hangar) and isinstance(other, Avion):
             return self.duzina <= other.duzina and self.sirina <= other.raspon_krila and self.visina <= other.visina
 
@@ -110,8 +76,8 @@ class Dimenzije:
     def __eq__(self, other):
         """objekat self je jednak objektu other ako su jednaki po duzini i sirini i visini.
             Specijalni slucajevi:
-                -ako se porede Hangar i Avion:
-                    u obzir se uzima raspon krila aviona, a ne njegova sirina"""
+            -ako se porede Hangar i Avion:
+            u obzir se uzima raspon krila aviona, a ne njegova sirina"""
         if isinstance(self, Hangar) and isinstance(other, Avion):
             return self.duzina == other.duzina and self.sirina == other.raspon_krila and self.visina == other.visina
 
@@ -127,8 +93,8 @@ class Dimenzije:
     def __ge__(self, other):
         """objekat self je veci ili jednak od objekta other ako je veci ili jednak po duzini i sirini i visini.
             Specijalni slucajevi:
-                -ako se porede Hangar i Avion:
-                    u obzir se uzima raspon krila aviona, a ne njegova sirina"""
+            -ako se porede Hangar i Avion:
+            u obzir se uzima raspon krila aviona, a ne njegova sirina"""
         if isinstance(self, Hangar) and isinstance(other, Avion):
             return self.duzina >= other.duzina and self.sirina >= other.raspon_krila and self.visina >= other.visina
 
@@ -140,8 +106,8 @@ class Dimenzije:
     def __gt__(self, other):
         """objekat self je veci od objekta other ako je veci po duzini i sirini i visini.
             Specijalni slucajevi:
-                -ako se porede Hangar i Avion:
-                    u obzir se uzima raspon krila aviona, a ne njegova sirina"""
+            -ako se porede Hangar i Avion:
+            u obzir se uzima raspon krila aviona, a ne njegova sirina"""
         if isinstance(self, Hangar) and isinstance(other, Avion):
             return self.duzina > other.duzina and self.sirina > other.raspon_krila and self.visina > other.visina
 
@@ -161,11 +127,11 @@ class Kolekcija(Dimenzije, list):
 
     def dodaj(self, other):
         """Dodaje objekat other u objekat self i pritom smanjuje dimenzije prema sablonu iz Klase Dimenzije
-            metoda: smanji_dimenzije.
+        metoda: smanji_dimenzije.
         Specijalni slucajevi:
-            -ako se u Aerodrom dodaje Hangar ne smanjuju se dimenzije jer Aerodrom nema definisane dimenzije
-            -ako se u Avion dodaje Prostor za robu ne smanjuju se dimenzije (ali pri stvaranju Prostora za robu
-                proverava da moze da stane u Avion)"""
+        -ako se u Aerodrom dodaje Hangar ne smanjuju se dimenzije jer Aerodrom nema definisane dimenzije
+        -ako se u Avion dodaje Prostor za robu ne smanjuju se dimenzije (ali pri stvaranju Prostora za robu
+        proverava da moze da stane u Avion)"""
 
         if isinstance(self, Aerodrom) and isinstance(other, Hangar) \
                 or isinstance(self, Avion) and isinstance(other, ProstorZaRobu):
@@ -176,11 +142,12 @@ class Kolekcija(Dimenzije, list):
 
     def ukloni(self, other):
         """Izbacuje objekat other iz objekta self i pritom uvecava dimenzije prema sablonu iz Klase Dimenzije
-            metoda: povecaj_dimenzije(inverzno smanji_dimenzije).
+        metoda: povecaj_dimenzije(inverzno smanji_dimenzije).
         Specijalni slucajevi:
-            -ako se u Aerodrom dodaje Hangar ne smanjuju se dimenzije jer Aerodrom nema definisane dimenzije
-            -ako se u Avion dodaje Prostor za robu ne smanjuju se dimenzije (ali pri stvaranju Prostora za robu
-                proverava da moze da stane u Avion)"""
+        -ako se u Aerodrom dodaje Hangar ne smanjuju se dimenzije jer Aerodrom nema definisane dimenzije
+        -ako se u Avion dodaje Prostor za robu ne smanjuju se dimenzije (ali pri stvaranju Prostora za robu
+        proverava da moze da stane u Avion)"""
+
         if isinstance(self, Aerodrom) and isinstance(other, Hangar) \
                 or isinstance(self, Avion) and isinstance(other, ProstorZaRobu):
             list.remove(self, other)

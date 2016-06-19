@@ -271,7 +271,7 @@ class ManagerHangaraPanel(tk.Frame):
         self.temp_visina = 0
 
     def create_widgets(self):
-        """kreira potrebne widget-e (dugmice, labele, listbox...) da bi prozor bio funkcionalan"""
+        """Kreira potrebne widget-e (dugmice, labele, listbox...) da bi prozor bio funkcionalan"""
         self.frejm = tk.Frame(self)
         self.frejm.grid()
         self.listbox = tk.Listbox(self.frejm)
