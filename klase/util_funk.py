@@ -1,10 +1,10 @@
 from datetime import datetime
 import os
-
 import pickle
 
 
 def set_path(file_name):
+    """Postavlja apsolutnu putanju do """
     fullPath = os.path.dirname(os.path.abspath(__file__))
     path = os.path.join(fullPath, "..", "files", file_name)
     return path
@@ -79,13 +79,16 @@ def proveraInputaBroj(broj):
     except:
         return False
 
+
 def ucitaj_entitet(file_name):
+    """Ucitava iz datog fajla podatke koristeci pickle modul"""
     path = set_path(file_name)
     with open(path, 'rb') as f:
         return pickle.load(f)
 
 
 def snimi_entitet(data, file_name):
+    """Cuva data argument koristeci pickle modul sa HIGHEST_PROTOCOL-om u fajl pod imenom file_name"""
     path = set_path(file_name)
     with open(path, 'wb') as f:
         pickle.dump(data, f, pickle.HIGHEST_PROTOCOL)

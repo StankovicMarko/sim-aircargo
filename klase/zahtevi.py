@@ -4,12 +4,16 @@ from klase.entiteti import OznakaINaziv
 
 
 class Zahtev(OznakaINaziv):
+    """Klasa koja sadrzi id, naziv i vreme kreiranja (zajednicko svim zahtevima) ostali ga nasledjuju"""
     def __init__(self, ID, naziv):
         OznakaINaziv.__init__(self, ID, naziv)
         self.vremeKreiranja = datetime.now()
 
 
 class ZahtevZaSmestanjeAviona(Zahtev):
+    """Klasa koja instancira objekat zahteva za smetanje aviona. Taj objkeat opisuju: vreme smestanja aviona,
+        vreme napustanja hangara, hangar(na koji se odnosi zahtev), avion(na koji se odnosi zahtev) i menazder
+        hangara koji je podneo zahtev"""
     def __init__(self, ID, avion, menadzer_hangara, naziv=None):
         Zahtev.__init__(self, ID, naziv)
         self.vreme_smestanja_aviona = None

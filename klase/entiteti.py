@@ -159,24 +159,6 @@ class Kolekcija(Dimenzije, list):
         Dimenzije.__int__(self, duzina, sirina, visina)
         list.__init__(self)
 
-    # def append(self, p_object):
-    #     raise NotImplementedError
-    #
-    # def clear(self):
-    #     raise NotImplementedError
-    #
-    # def copy(self):
-    #     raise NotImplementedError
-    #
-    # def extend(self, iterable):
-    #     raise NotImplementedError
-    #
-    # def insert(self, index, p_object):
-    #     raise NotImplementedError
-    #
-    # def remove(self, value):
-    #     raise NotImplementedError
-
     def dodaj(self, other):
         """Dodaje objekat other u objekat self i pritom smanjuje dimenzije prema sablonu iz Klase Dimenzije
             metoda: smanji_dimenzije.

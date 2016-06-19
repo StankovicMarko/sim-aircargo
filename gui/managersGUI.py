@@ -4,9 +4,6 @@ import klase.util_funk as util
 from klase import aplikacija
 import tkinter.messagebox
 import copy
-import datetime as dt
-from klase.util_funk import set_path, addToFile, readFile
-from klase.zahtevi import ZahtevZaSmestanjeAviona, ZahtevZaTransport
 
 
 class ManagerTransportaPanel(tk.Frame):
@@ -200,6 +197,9 @@ class ManagerTransportaPanel(tk.Frame):
         self.controler.show_frame(gui.windows.LoginWindow)
 
     def odobri(self, counter):
+        """Vrsi odobravanje zahteva za transport, ako roba moze da stane odmah je utovara (po sablonu iz
+            modula-entiteti.py, klasa-Dimenzije, metoda-self.dodaj(other)).
+            time se pri odobravanju drugog zahteva uzima u obzir roba iz zahteva koji je vec odobren"""
         print(self.recnik[counter])
         self.checkboxovi[counter].config(state="disabled")
 
@@ -241,7 +241,6 @@ class ManagerTransportaPanel(tk.Frame):
                     # stavlja u listu odobrenih iz liste kreiranih
                     aplikacija.zahtevi_za_transport_robe['odobren'].append(
                         aplikacija.zahtevi_za_transport_robe['kreiran'].pop(pozicija_zahteva))
-                    print("odobren", zahtev.IDZahteva)
                     smesten = True
                     break
         if smesten:
@@ -251,21 +250,9 @@ class ManagerTransportaPanel(tk.Frame):
                                                    '(nema aviona sa dovoljno mesta)')
 
 
-            # for prostor1 in avionCopy:
-            #     for nesto in prostor1:
-            #         print(nesto)
-            #         # print(r.duzina,r.sirina,r.visina)
-            #
-            #
-            #         for zah in hangar_funkcionalnosti.zahtevi_za_transport_robe['kreiran']:
-            #             for rnj in zah.roba:
-            #                 print(rnj.duzina)
-            #
-            #         else:
-            #             tkinter.messagebox.showerror("Error!","Ne postoji trazeno odrediste!")
-
-
 class ManagerHangaraPanel(tk.Frame):
+    """Predstavlja klasu koja se kreira pri logovanju korisnika, poziva funkije koje su locirane u
+        modulu aplikacija. Ova klasa sluzi samo za graficki prikaz onoga sto menadzer hangara moze da uradi"""
     def __init__(self, parent, controler):
         self.controler = controler
         tk.Frame.__init__(self, parent)
@@ -277,6 +264,7 @@ class ManagerHangaraPanel(tk.Frame):
         self.temp_visina = 0
 
     def create_widgets(self):
+        """kreira potrebne widget-e (dugmice, labele, listbox...) da bi prozor bio funkcionalan"""
         self.frejm = tk.Frame(self)
         self.frejm.grid()
         self.listbox = tk.Listbox(self.frejm)
@@ -326,11 +314,13 @@ class ManagerHangaraPanel(tk.Frame):
         self.logout_button.grid(row=6, sticky='sw')
 
     def logout(self):
+        """Izlazi iz menadzer hangara panel-a i vraaa na login screen"""
         self.frejm.destroy()
         self.controler.meni.destroy()
         self.controler.show_frame(gui.windows.LoginWindow)
 
     def zahtevi_smestanja(self):
+        """Prikazuje zahteve za smestanje"""
         self.iskljuci_dugmad()
         zahtevi = aplikacija.prikazi_zahteve_za_smestanje_aviona()
         self.listbox.delete(0, 'end')
@@ -338,6 +328,7 @@ class ManagerHangaraPanel(tk.Frame):
             self.listbox.insert(i, zahtev)
 
     def zahtevi_transport(self):
+        """Prikazuje zahteve za transport cija je roba utovarena"""
         self.iskljuci_dugmad()
         zahtevi = aplikacija.prikaz_zahteva_za_transport_utovarene_robe()
         self.listbox.delete(0, 'end')
@@ -345,6 +336,7 @@ class ManagerHangaraPanel(tk.Frame):
             self.listbox.insert(i, zahtev)
 
     def add_hangar(self):
+        """Prvi korak u dodavanju hangara, kreira prozor u koji se unose vrednosti"""
         self.iskljuci_dugmad()
         top = tk.Toplevel()
         top.transient(self)
@@ -370,6 +362,7 @@ class ManagerHangaraPanel(tk.Frame):
         dodaj_bnt.grid(row=4, columnspan=2, sticky='new')
 
     def add_avion(self):
+        """Prvi korak dodavanja aviona, kreira prozor u koji se unose vrednosti i prostori za teret"""
         self.iskljuci_dugmad()
         top = tk.Toplevel()
         top.transient(self)
@@ -423,6 +416,7 @@ class ManagerHangaraPanel(tk.Frame):
                                                                                                          column=0)
 
     def add_pzt(self, en, ed, es, ev, erk, eg, eno, er):
+        """Prvi korak u dodavanju prostora za teret, kreira prozor u koji se upisuju vrednosti"""
         en.config(state='disabled')
         ed.config(state='disabled')
         es.config(state='disabled')
@@ -460,6 +454,8 @@ class ManagerHangaraPanel(tk.Frame):
         dodaj_bnt.grid(row=4, columnspan=2, sticky='new')
 
     def _pokupi_inpute_hangara(self, en, ed, es, ev, top):
+        """Drugi korak u dodavanju hangara, prikuplja unesene vrednosti i pravi objekat hangara (koji ce biti
+            dodat u aerodrom)"""
         naziv = en.get()
         duzina = ed.get()
         sirina = es.get()
@@ -474,6 +470,7 @@ class ManagerHangaraPanel(tk.Frame):
             tk.messagebox.showerror('Invalid inputs', 'Molimo unesite validne inpute str/int/int/int')
 
     def _prikupi_inpute_aviona(self, en, ed, es, ev, erk, eg, eno, er, top):
+        """Drugi korak u dodavanju aviona, uzima unete vrednosti i stvara objekat aviona(koji dodaje van hangara)"""
         naziv = en.get()
         duzina = ed.get()
         sirina = es.get()
@@ -500,11 +497,6 @@ class ManagerHangaraPanel(tk.Frame):
                                      relacija)
 
             aplikacija.dodaj_odrediste(relacija)
-            # path = set_path('odredista.txt')
-            # odredista = readFile(path)
-            # relacija += '\n'
-            # if relacija not in odredista:
-            #     addToFile(path, relacija)
             tk.messagebox.showinfo('Narucivanje aviona', 'Uspesno napravljen avion')
             self._resetuj_temp(top)
             top.destroy()
@@ -513,6 +505,8 @@ class ManagerHangaraPanel(tk.Frame):
                                     'Molimo unesite validne inpute str/int/int/int/int/int/int/str')
 
     def _resetuj_temp(self, top):
+        """Pomocna funkcija koja resetuje pomocne dimenzije koje se koriste pri proveravanju da li su dimenzije
+            prostora odgovarajuce da bi mogle da udju u avion. Kada se napravi avion one se resetuju"""
         self.temp_duzina = 0
         self.temp_sirina = 0
         self.temp_visina = 0
@@ -520,6 +514,9 @@ class ManagerHangaraPanel(tk.Frame):
         top.destroy()
 
     def _pokupi_inpute_pzt(self, en, ed, es, ev, top):
+        """Drugi korak u dodavanju prostora za robe u avion pri kreiranju aviona, kupi unesene podatke
+            uporedjuje sa dimenzijama aviona, sve dok se ne unesu dobre dimenzije(prostor je dovoljno mali da
+            moze da udje u avion) prozor ce biti aktivan"""
         naziv = en.get()
         duzina = ed.get()
         sirina = es.get()
@@ -546,6 +543,7 @@ class ManagerHangaraPanel(tk.Frame):
                                     'Molimo unesite validne inpute str/int/int/int ili manje dimenzije')
 
     def prikazi_avione_bez_zahteva(self):
+        """Prikazuje sve avione koji su van aerodroma i nemaju zahtev za smestanje"""
         self.iskljuci_dugmad()
         self.listbox.delete(0, 'end')
         avioni_bez_zahteva = []
@@ -554,17 +552,14 @@ class ManagerHangaraPanel(tk.Frame):
                 avioni_bez_zahteva.append(avion)
                 self.listbox.insert(i, avion)
         if avioni_bez_zahteva:
-            # self.dug_kreiraj_zah = tk.Button(self.frejm, text='Kreiraj Zah. za smestanje',
-            #                                  command=lambda: self._create_request(avioni_bez_zahteva))
             self.dug_kreiraj_zah.config(state='normal', command=lambda: self._create_request(avioni_bez_zahteva))
 
     def _create_request(self, avioni_bez_zahteva):
+        """Stvara zahtev za smestanje za prosledjen avion bez zahteva. Ovo je moguce uraditi tek kada se prikazu
+            avioni bez zahteva i kada se odabere onaj za koji zelimo da kreiramo zahtev, uspesnost kreiranja
+            zahteva ce biti prikaza u vidu prozora sa porukom"""
         try:
             odabran_avion = avioni_bez_zahteva[self.listbox.curselection()[0]]
-            # id_zahteva = len(aplikacija.zahtevi_za_smestanje_aviona) + 1
-            # zahtev = ZahtevZaSmestanjeAviona(id_zahteva, odabran_avion, self.controler.m)
-            # aplikacija.zahtevi_za_smestanje_aviona.append(zahtev)
-            # odabran_avion.zahtev_smestanje = zahtev
             aplikacija.napravi_zahtev_za_smestanje(odabran_avion, self.controler.m)
             self.dug_kreiraj_zah.config(state='disabled')
             tk.messagebox.showinfo('', 'Zahtev uspesno kreiran')
@@ -573,6 +568,7 @@ class ManagerHangaraPanel(tk.Frame):
             tk.messagebox.showinfo('', 'Molimo izaberite avion za koji zelite da napravite zahtev za smestanje')
 
     def prikazi_avione_sa_zahtevom(self):
+        """Prikazuje sve avione koji imaju zahtev a nisu u aerodromu (spremni su za smestanje)"""
         self.iskljuci_dugmad()
         self.listbox.delete(0, 'end')
         avioni_sa_zahtevom = []
@@ -581,11 +577,11 @@ class ManagerHangaraPanel(tk.Frame):
                 avioni_sa_zahtevom.append(avion)
                 self.listbox.insert(i, avion)
         if avioni_sa_zahtevom:
-            # self.dug_smesti_avion = tk.Button(self.frejm, text='Smesti Avion',
-            #                                   command=lambda: self._smesti_avion(avioni_sa_zahtevom))
             self.dug_smesti_avion.config(state='normal', command=lambda: self._smesti_avion(avioni_sa_zahtevom))
 
     def _smesti_avion(self, avioni_sa_zahtevom):
+        """Smesta odabrani avion za zahtevom u aerodrom, uspesnost smestanja ce biti prikazana u vidu prozora
+            sa porukom"""
         try:
             odabran_avion = avioni_sa_zahtevom[self.listbox.curselection()[0]]
             if aplikacija.smesti_avion(odabran_avion):
@@ -599,10 +595,8 @@ class ManagerHangaraPanel(tk.Frame):
             tk.messagebox.showinfo('', 'Molimo izaberite avion koji zelite da smestite')
 
     def prikazi_avione_za_transport(self):
-        # for avion in aplikacija.avioni_u_hangarima:
-        #     avion.zahtev_transport=[]
-        # for avion in aplikacija.avioni_van_hangara:
-        #     avion.zahtev_transport=[]
+        """Prikazuje sve avione za transport. Sva roba iz svih zahteva koji su odobreni za taj avoion je
+            utovarena. Uspesnost transporta je izrazena prozorom sa porukom."""
         self.iskljuci_dugmad()
         self.listbox.delete(0, 'end')
         avioni_sa_zahtevom_trans = []
@@ -622,6 +616,7 @@ class ManagerHangaraPanel(tk.Frame):
                                                  self._transportuj_odobrene(avioni_sa_zahtevom_trans))
 
     def _transportuj_odobrene(self, avioni_sa_zahtevom_trans):
+        """Pomocna metoda koja transportuje robu za odabran avion"""
         try:
             odabran_avion = avioni_sa_zahtevom_trans[self.listbox.curselection()[0]]
             aplikacija.transportuj_robu(odabran_avion)
@@ -632,17 +627,8 @@ class ManagerHangaraPanel(tk.Frame):
             tk.messagebox.showinfo('', 'Molimo izaberite avion koji zelite da transportuje')
 
     def iskljuci_dugmad(self):
+        """Metoda koja iskljucuje dugmad koji treba da se pojave tek posle prikaza nekih funkcionalnosti."""
         self.dug_smesti_avion.config(state='disabled')
         self.dug_kreiraj_zah.config(state='disabled')
         self.dug_transportuj_odobrene.config(state='disabled')
-        # try:
-        #     try:
-        #         try:
-        #             self.dug_smesti_avion.config(state='disabled')
-        #             self.dug_kreiraj_zah.config(state='disabled')
-        #         except:
-        #             self.dug_kreiraj_zah.config(state='disabled')
-        #     except:
-        #         self.dug_smesti_avion.config(state='disabled')
-        # except:
-        #     pass
+

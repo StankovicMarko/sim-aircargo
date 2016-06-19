@@ -86,15 +86,11 @@ class LoginWindow(tk.Frame):
                 messagebox.showerror("Error!", "Pogresan Username/Password")
             else:
                 self.controler.meni = gui.menibar.Menibar(self.controler)
-                print("Uspesno ste se ulogovali!")
-                print("Vi ste", a.ime, a.prezime, "a uloga", a.uloga)
-
                 if a.uloga == "mhangar":
                     self.controler.show_frame(ManagerHangaraPanel)
                     self.controler.frames[ManagerHangaraPanel].create_widgets()
                     m = MenadzerHangara(int(a.ID[2:]), a.ime, a.prezime, a.username)
                     self.controler.m = m
-                    print(self.controler.m)
                     self.controler.meni.grid()
 
                 elif a.uloga == "mtransport":
