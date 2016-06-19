@@ -1,7 +1,0 @@
-ZT#1|18/06/2016|None|London|K#8|None|kreiran
-ZT#2|18/06/2016|None|London|K#8|None|kreiran
-ZT#3|18/06/2016|None|London|K#9|None|kreiran
-ZT#4|18/06/2016|None|London|K#10|None|kreiran
-ZT#5|18/06/2016|None|London|K#11|None|kreiran
-ZT#6|18/06/2016|None|London|K#12|None|kreiran
-ZT#7|18/06/2016|None|London|K#13|None|kreiran

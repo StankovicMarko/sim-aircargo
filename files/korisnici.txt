@@ -3,11 +3,3 @@ K#2|Petar|Petrovic|pera|petrovic|mtransport
 K#3|Marko|Stankovic|admin|admin|mtransport
 K#4|Ime|Prezime|radnik|password|radnik
 K#5|user|pass|user|pass|mhangar
-K#7|Lepi|Stane|0565555655|lepi@stane.com|potrazitelj
-K#8|Lepi|Stane|055554545|lepi@proba.com|potrazitelj
-K#8|Lepi|st|25253|aaaa|potrazitelj
-K#9|aaaa|aaa|aaaa|aaaaa|potrazitelj
-K#10|aaaa|aaaaa|aaa|aaaaa|potrazitelj
-K#11|vise roba|aaa|aa|aaa|potrazitelj
-K#12|aaa|aa|aaa|aaa|potrazitelj
-K#13|Pero|Peric|0123435|email@pera.com|potrazitelj

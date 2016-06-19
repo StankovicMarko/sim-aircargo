@@ -10,21 +10,21 @@ import klase.util_funk as util
 import klase.zahtevi
 import klase.roba
 
-# zahtevi_za_smestanje_aviona = []
-# zahtevi_za_transport_robe = {'kreiran': [], 'odobren': [], 'robaUtovarena': [], 'robaTransportovana': []}
-# avioni_u_hangarima = []
-# avioni_van_hangara = []  # deque
-# aerodrom = Aerodrom('Nikola Tesla', 'Futoski Put', 'Novi Sad')
-# #menadzer_hangara = MenadzerHangara(1, 'Lepan', 'Lepavi', 'lepi', 12345)  # PROBA MEN HANGARA TREBA DA JE ULOGOVAN
-# temp_prostor_za_robu = []
-
-zahtevi_za_smestanje_aviona = None
-zahtevi_za_transport_robe = None
-avioni_u_hangarima = None
-avioni_van_hangara = None
-aerodrom = None
-# menadzer_hangara = MenadzerHangara(1, 'Lepan', 'Lepavi', 'lepi', 12345)  # PROBA MEN HANGARA TREBA DA JE ULOGOVAN
+zahtevi_za_smestanje_aviona = []
+zahtevi_za_transport_robe = {'kreiran': [], 'odobren': [], 'robaUtovarena': [], 'robaTransportovana': []}
+avioni_u_hangarima = []
+avioni_van_hangara = []  # deque
+aerodrom = Aerodrom('Nikola Tesla', 'Futoski Put', 'Novi Sad')
+#menadzer_hangara = MenadzerHangara(1, 'Lepan', 'Lepavi', 'lepi', 12345)  # PROBA MEN HANGARA TREBA DA JE ULOGOVAN
 temp_prostor_za_robu = []
+
+# zahtevi_za_smestanje_aviona = None
+# zahtevi_za_transport_robe = None
+# avioni_u_hangarima = None
+# avioni_van_hangara = None
+# aerodrom = None
+# # menadzer_hangara = MenadzerHangara(1, 'Lepan', 'Lepavi', 'lepi', 12345)  # PROBA MEN HANGARA TREBA DA JE ULOGOVAN
+# temp_prostor_za_robu = []
 
 
 # def ucitaj_sve_entitete():
@@ -234,16 +234,10 @@ def napravi_zahtev_za_smestanje(odabran_avion, menadzer):
 
 
 def transportuj_robu(odabran_avion):
-    # promeni transport
-    # dobijes avion
-    # izmenis zahteve u njemu
-    # i onda izbacis, uklonis zahteve i stavis van hangara
-    # for pozicija_zahteva, zahtev in enumerate(zahtevi_za_transport_robe['robaUtovarena']):
     avioni_van_hangara.append(odabran_avion)
     avioni_u_hangarima.remove(odabran_avion)
     odabran_avion.se_nalazi.ukloni(odabran_avion)
     odabran_avion.se_nalazi = None
-
     odabran_avion.zahtev_smestanje.vreme_napustanja_hangara = dt.datetime.now()
     odabran_avion.zahtev_smestanje = None
     for zahtev in odabran_avion.zahtev_transport:
@@ -253,12 +247,13 @@ def transportuj_robu(odabran_avion):
         zahtev.datumTransporta = dt.datetime.now()
         for roba in zahtev.roba:
             for prostor in odabran_avion:
-                prostor.ukloni(roba)
+                if roba in prostor:
+                    prostor.ukloni(roba)
+                    odabran_avion.nosivost += roba.tezina
+                    break
 
     odabran_avion.zahtev_transport.clear()
 
-    for prostor in odabran_avion:
-        prostor.clear()
 
 
 
