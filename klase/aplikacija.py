@@ -10,21 +10,21 @@ import klase.util_funk as util
 import klase.zahtevi
 import klase.roba
 
-zahtevi_za_smestanje_aviona = []
-zahtevi_za_transport_robe = {'kreiran': [], 'odobren': [], 'robaUtovarena': [], 'robaTransportovana': []}
-avioni_u_hangarima = []
-avioni_van_hangara = []  # deque
-aerodrom = Aerodrom('Nikola Tesla', 'Futoski Put', 'Novi Sad')
-#menadzer_hangara = MenadzerHangara(1, 'Lepan', 'Lepavi', 'lepi', 12345)  # PROBA MEN HANGARA TREBA DA JE ULOGOVAN
-temp_prostor_za_robu = []
-
-# zahtevi_za_smestanje_aviona = None
-# zahtevi_za_transport_robe = None
-# avioni_u_hangarima = None
-# avioni_van_hangara = None
-# aerodrom = None
-# # menadzer_hangara = MenadzerHangara(1, 'Lepan', 'Lepavi', 'lepi', 12345)  # PROBA MEN HANGARA TREBA DA JE ULOGOVAN
+# zahtevi_za_smestanje_aviona = []
+# zahtevi_za_transport_robe = {'kreiran': [], 'odobren': [], 'robaUtovarena': [], 'robaTransportovana': []}
+# avioni_u_hangarima = []
+# avioni_van_hangara = []  # deque
+# aerodrom = Aerodrom('Nikola Tesla', 'Futoski Put', 'Novi Sad')
+# #menadzer_hangara = MenadzerHangara(1, 'Lepan', 'Lepavi', 'lepi', 12345)  # PROBA MEN HANGARA TREBA DA JE ULOGOVAN
 # temp_prostor_za_robu = []
+
+zahtevi_za_smestanje_aviona = None
+zahtevi_za_transport_robe = None
+avioni_u_hangarima = None
+avioni_van_hangara = None
+aerodrom = None
+# menadzer_hangara = MenadzerHangara(1, 'Lepan', 'Lepavi', 'lepi', 12345)  # PROBA MEN HANGARA TREBA DA JE ULOGOVAN
+temp_prostor_za_robu = []
 
 
 # def ucitaj_sve_entitete():

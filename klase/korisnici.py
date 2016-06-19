@@ -1,12 +1,15 @@
 import klase.util_funk as util
 from klase.entiteti import OznakaINaziv
-from klase import aplikacija
+# from klase import aplikacija
 import klase
+
+
 # from klase import hangar_funkcionalnosti
 
 
 class Osoba(OznakaINaziv):
     """Svi korisnici aplikacije"""
+
     def __init__(self, ID, naziv, prezime):
         OznakaINaziv.__init__(self, ID, naziv)
         self.prezime = prezime
@@ -14,6 +17,7 @@ class Osoba(OznakaINaziv):
 
 class Zaposlen(Osoba):
     """To su sve osobe koje rade sa aplikacijom, dakle Menadzeri Hangara, Transporta i Radnik"""
+
     def __init__(self, ID, naziv, prezime, usn, psw=None):
         Osoba.__init__(self, ID, naziv, prezime)
         self.username = usn
@@ -284,41 +288,34 @@ class ManagerTransport(Zaposlen):
         '''
         zahtevi = []
 
-        kreiraniZahtevi = aplikacija.zahtevi_za_transport_robe['kreiran']
-        odobreniZahtevi = aplikacija.zahtevi_za_transport_robe['odobren']
-        utovareniZahtevi = aplikacija.zahtevi_za_transport_robe['robaUtovarena']       
-        transportovaniZahtevi = aplikacija.zahtevi_za_transport_robe['robaTransportovana']
+        kreiraniZahtevi = klase.aplikacija.zahtevi_za_transport_robe['kreiran']
+        odobreniZahtevi = klase.aplikacija.zahtevi_za_transport_robe['odobren']
+        utovareniZahtevi = klase.aplikacija.zahtevi_za_transport_robe['robaUtovarena']
+        transportovaniZahtevi = klase.aplikacija.zahtevi_za_transport_robe['robaTransportovana']
 
         for kZahtev in kreiraniZahtevi:
-            listaKZ = [kZahtev.IDZahteva,kZahtev.datumKreiranja,kZahtev.datumTransporta,kZahtev.odrediste,kZahtev.IDPotrazitelja,kZahtev.avion,kZahtev.statusZahteva]
-            
-            # print(listaKZ)
+            listaKZ = [kZahtev.IDZahteva, kZahtev.datumKreiranja, kZahtev.datumTransporta, kZahtev.odrediste,
+                       kZahtev.IDPotrazitelja, kZahtev.avion, kZahtev.statusZahteva]
             zahtevi.append(listaKZ)
 
-
         for oZ in odobreniZahtevi:
-            print(oZ)
-            listaOZ = [oZ.IDZahteva,oZ.datumKreiranja,oZ.datumTransporta,oZ.odrediste,oZ.IDPotrazitelja,oZ.avion.naziv,oZ.statusZahteva]
-
-            # print(listaOZ)
+            listaOZ = [oZ.IDZahteva, oZ.datumKreiranja, oZ.datumTransporta, oZ.odrediste, oZ.IDPotrazitelja,
+                       oZ.avion.naziv, oZ.statusZahteva]
             zahtevi.append(listaOZ)
 
-
         for uZ in utovareniZahtevi:
-            listaUZ = [uZ.IDZahteva,uZ.datumKreiranja,uZ.datumTransporta,uZ.odrediste,uZ.IDPotrazitelja,uZ.avion.naziv,uZ.statusZahteva]
-
-            # print(listaUZ)
+            listaUZ = [uZ.IDZahteva, uZ.datumKreiranja, uZ.datumTransporta, uZ.odrediste, uZ.IDPotrazitelja,
+                       uZ.avion.naziv, uZ.statusZahteva]
             zahtevi.append(listaUZ)
 
         for tZ in transportovaniZahtevi:
-            # stringDatum = tZ.day+"/"+tZ.month+"/"+tZ.year
-            listaTZ = [tZ.IDZahteva,tZ.datumKreiranja,tZ.datumTransporta,tZ.odrediste,tZ.IDPotrazitelja,tZ.avion.naziv,tZ.statusZahteva]
+            stringDatum = str(tZ.datumTransporta.day)+"/"+str(
+                tZ.datumTransporta.month)+"/"+str(tZ.datumTransporta.year)
 
-            # print(listaTZ)
+            listaTZ = [tZ.IDZahteva, tZ.datumKreiranja, stringDatum, tZ.odrediste, tZ.IDPotrazitelja,
+                       tZ.avion.naziv, tZ.statusZahteva]
             zahtevi.append(listaTZ)
 
-
-        print(zahtevi)
         return zahtevi
 
         # prethodno sto je radilo:
@@ -328,13 +325,13 @@ class ManagerTransport(Zaposlen):
         #     zahtevi.append(l)
         # return zahtevi
 
-    def prikazZahtevaSmestanje(self):
-        '''
-        Vraca sve zahteve za smestanje
-        '''
-        zahtevi = []
-        lines = util.readFile("zahteviZaSmestanje.txt")
-        for line in lines:
-            l = line.strip().split("|")
-            zahtevi.append(l)
-        return zahtevi
+        # def prikazZahtevaSmestanje(self):
+        #     '''
+        #     Vraca sve zahteve za smestanje
+        #     '''
+        #     zahtevi = []
+        #     lines = util.readFile("zahteviZaSmestanje.txt")
+        #     for line in lines:
+        #         l = line.strip().split("|")
+        #         zahtevi.append(l)
+        #     return zahtevi

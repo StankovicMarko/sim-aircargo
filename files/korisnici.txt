@@ -3,3 +3,7 @@ K#2|Petar|Petrovic|pera|petrovic|mtransport
 K#3|Marko|Stankovic|admin|admin|mtransport
 K#4|Ime|Prezime|radnik|password|radnik
 K#5|user|pass|user|pass|mhangar
+K#6|afef|efe|faefe|fefe|potrazitelj
+K#7|jukuk|ukukuk|kukuk|ukuku|potrazitelj
+K#8|jyyjjy|jyjyjy|jyjy|jyyjjy|potrazitelj
+K#9|aefef|efefef|efeff|fffe|potrazitelj
