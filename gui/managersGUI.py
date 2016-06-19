@@ -557,7 +557,7 @@ class ManagerHangaraPanel(tk.Frame):
         for i, avion in enumerate(aplikacija.avioni_van_hangara):
             if avion.zahtev_smestanje is None:
                 avioni_bez_zahteva.append(avion)
-                self.listbox.insert(i, avion)
+                self.listbox.insert(i, str(avion))
         if avioni_bez_zahteva:
             self.dug_kreiraj_zah.config(state='normal', command=lambda: self._create_request(avioni_bez_zahteva))
 
@@ -567,6 +567,7 @@ class ManagerHangaraPanel(tk.Frame):
             zahteva ce biti prikaza u vidu prozora sa porukom"""
         try:
             odabran_avion = avioni_bez_zahteva[self.listbox.curselection()[0]]
+            print(odabran_avion)
             aplikacija.napravi_zahtev_za_smestanje(odabran_avion, self.controler.m)
             self.dug_kreiraj_zah.config(state='disabled')
             tk.messagebox.showinfo('', 'Zahtev uspesno kreiran')
@@ -582,7 +583,7 @@ class ManagerHangaraPanel(tk.Frame):
         for i, avion in enumerate(aplikacija.avioni_van_hangara):
             if avion.zahtev_smestanje is not None:
                 avioni_sa_zahtevom.append(avion)
-                self.listbox.insert(i, avion)
+                self.listbox.insert(i, str(avion))
         if avioni_sa_zahtevom:
             self.dug_smesti_avion.config(state='normal', command=lambda: self._smesti_avion(avioni_sa_zahtevom))
 
@@ -615,7 +616,7 @@ class ManagerHangaraPanel(tk.Frame):
                 continue
             elif len(statusi) == 1 and 'robaUtovarena' in statusi:
                 avioni_sa_zahtevom_trans.append(avion)
-                self.listbox.insert(i, avion)
+                self.listbox.insert(i, str(avion))
 
         if avioni_sa_zahtevom_trans:
             self.dug_transportuj_odobrene.config(state='normal',

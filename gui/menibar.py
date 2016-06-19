@@ -259,7 +259,7 @@ class Menibar(tk.Frame):
 
             lb.pack(side="left", fill="both", expand=True)
             for index, element in enumerate(lista):
-                lb.insert(index, element)
+                lb.insert(index, str(element))
 
             lb.config(yscrollcommand=scrollbary.set)
             scrollbary.config(command=lb.yview)
