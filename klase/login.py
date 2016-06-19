@@ -6,6 +6,9 @@ class Login(object):
         self.ID, self.username, self.ime, self.prezime, self.uloga = self.__checkCreds(username, password)
 
     def __checkCreds(self, username, password):
+        """
+        Provera korisnickog username/password-a
+        """
         lines = util.readFile("korisnici.txt")
         for line in lines:
             l = line.strip().split("|")
@@ -18,6 +21,9 @@ class Login(object):
         return None, None, None, None, None
 
     def checkID(self, ID):
+        """
+        Provera da li postoji korisnik sa zadanim ID
+        """
         lines = util.readFile("korisnici.txt")
         for line in lines:
             l = line.strip().split("|")

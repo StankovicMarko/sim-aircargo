@@ -8,6 +8,9 @@ import gui.menibar
 
 
 class Glavna(tk.Tk):
+    """
+    Glavna klasa za inicijalizaciju frejmova
+    """
     def __init__(self, *args, **kwargs):
         tk.Tk.__init__(self, *args, **kwargs)
 
@@ -32,6 +35,9 @@ class Glavna(tk.Tk):
 
 
 class LoginWindow(tk.Frame):
+    """
+    Inicijalizacija Login prozora koji se privi prikazuje prilikom startovanja aplikacije
+    """
     def __init__(self, parent, controler):
         tk.Frame.__init__(self, parent)
         self.grid_rowconfigure(0, weight=1)
@@ -43,6 +49,9 @@ class LoginWindow(tk.Frame):
         self.controler.bind("<Return>", lambda x: self.login())
 
     def createWidgets(self):
+        """
+        Kreiranje neophodnih widget-a za prikaz login prozora
+        """
         self.loginFrame = tk.Frame(self)
         self.loginFrame.grid()
         self.usernameLabel = tk.Label(self.loginFrame, text="Username:")
@@ -65,6 +74,10 @@ class LoginWindow(tk.Frame):
         self.loginButton.grid(row=4, columnspan=2)
 
     def disableUsernamePasswordInputs(self):
+        """
+        Ukoliko se cekira 'checkbox' za logovanje kao potrazitelj,
+        onemogucice se unos username-a i password-a
+        """
         if self.checkBoxState.get() == 1:
             self.usernameInput.configure(state="disabled")
             self.passwordInput.configure(state="disabled")
@@ -73,6 +86,9 @@ class LoginWindow(tk.Frame):
             self.passwordInput.configure(state="normal")
 
     def login(self):
+        """
+        Provera username-a i password-a i prikazivanje sledeceg odgovrajuceg frejma
+        """
         uname = self.usernameInput.get()
         passw = self.passwordInput.get()
 
@@ -113,22 +129,28 @@ class LoginWindow(tk.Frame):
 
 
 class RadnikPanel(tk.Frame):
+    """
+    Klasa za prikaz radnik panel-a
+    """
     def __init__(self, parent, controler):
         tk.Frame.__init__(self, parent)
-        # self.frejm = tk.Frame(self)
-        # self.frejm.grid()
         self.controler = controler
         nekiLabel = tk.Label(self, text="Ulogovani ste kao radnik")
         nekiLabel.grid()
 
-        #self.create_widgets()
 
     def logout(self):
+        """
+        Vraca se na login prozor
+        """
         self.frejm.destroy()
         self.controler.meni.destroy()
         self.controler.show_frame(gui.windows.LoginWindow)
 
     def create_widgets(self):
+        """
+        Inicijalizacija svih widget-a neophodnih za prikaz radnik panela
+        """
         self.frejm = tk.Frame(self)
         self.frejm.grid()
         self.listbox = tk.Listbox(self.frejm, width=50)
@@ -152,6 +174,9 @@ class RadnikPanel(tk.Frame):
         self.logout_button.grid(sticky='w')
 
     def odobreni_zahtevi(self):
+        """
+        Prikaz svih odobrenih zahteva
+        """
         zahtevi = aplikacija.prikazi_zahteve_za_transport_odobrene_robe()
         self.dug_utovari_robu.config(command=lambda: self._utovari_robu(zahtevi))
         self.listbox.delete(0, 'end')
@@ -159,6 +184,9 @@ class RadnikPanel(tk.Frame):
             self.listbox.insert(i, zahtev)
 
     def _utovari_robu(self, zahtevi):
+        """
+        Utovarivanje robe iz odgovarajuceg zahteva
+        """
         try:
             odabran_zahtev = zahtevi[self.listbox.curselection()[0]]
             aplikacija.utovari_robu(odabran_zahtev)

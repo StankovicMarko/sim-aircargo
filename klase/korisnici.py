@@ -254,6 +254,11 @@ class MenadzerHangara(Zaposlen):
 
 
 class Potrazitelj(Osoba):
+    """
+    Klasa koja instancira objekat potrazitelja. Objekat opisuje:
+    ID, ime, prezime, broj telefona, email
+    Potrazitelj moze da podnese novi zahtev i pregleda sve svoje zahteve.
+    """
     def __init__(self, ID, ime, prezime, brojTelefona, email):
         Osoba.__init__(self, ID, ime, prezime)
         self.ID = ID
@@ -263,10 +268,10 @@ class Potrazitelj(Osoba):
         self.email = email
 
     def prikazZahteva(self):
-        '''
+        """
         Vraca zahteve za transport, ako je parametar "sve"=True
         vraca sve zahteve, ako je False, vraca samo od ulogovanog potrazitelja
-        '''
+        """
         zahtevi = []
         lines = util.readFile("zahteviZaTransport.txt")
         for line in lines:
@@ -277,15 +282,20 @@ class Potrazitelj(Osoba):
 
 
 class ManagerTransport(Zaposlen):
+    """
+    Klasa koja instancira objekat menadzer za transport. Objekat opisuje:
+    ID, ime, prezime, username, password.
+    On moze da prikaze sve zahteve za transport i odobri kreirane zahteve.
+    """
     def __init__(self, ID, ime, prezime, username=None, password=None):
         Zaposlen.__init__(self, ID, ime, prezime, username, password)
         self.username = username
         self.password = password
 
     def prikazZahteva(self):
-        '''
+        """
         Vraca sve zahteve za transport
-        '''
+        """
         zahtevi = []
 
         kreiraniZahtevi = klase.aplikacija.zahtevi_za_transport_robe['kreiran']

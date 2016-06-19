@@ -5,6 +5,9 @@ from klase import aplikacija
 
 
 class Menibar(tk.Frame):
+    """
+    Ova klasa inicijalizuje menije
+    """
     def __init__(self, controler):
         tk.Frame.__init__(self, controler, relief="flat", bd=1)
         self.controler = controler

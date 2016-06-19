@@ -7,6 +7,10 @@ import copy
 
 
 class ManagerTransportaPanel(tk.Frame):
+    """
+    Predstavlja klasu koja se kreira pri logovanju korisnika, poziva funkije koje su locirane u
+    modulu aplikacija. Ova klasa sluzi samo za graficki prikaz onoga sto menadzer transporta moze da uradi
+    """
     def __init__(self, parent, controler):
         tk.Frame.__init__(self, parent)
         self.controler = controler
@@ -14,6 +18,9 @@ class ManagerTransportaPanel(tk.Frame):
         # self.prikaZahtevaHeaderWidgets()
 
     def createWidgets(self):
+        """
+        kreira potrebne widget-e (dugmice, labele, frejmove...) da bi prozor bio funkcionalan
+        """
         welcomeLabel = tk.Label(self, text="Ulogavani ste kao manager transporta")
         welcomeLabel.grid(row=0, column=1)
 
@@ -33,10 +40,12 @@ class ManagerTransportaPanel(tk.Frame):
         self.canvas.configure(scrollregion=self.canvas.bbox("all"))
 
     def prikaZahtevaHeaderWidgets(self):
+        """
+        Inicijalizuje potrebne widgete za prikaz header-a tabele
+        """
         self.headerFrame = tk.Frame(self.frejmZahtevi)
         self.headerFrame.grid(row=0, column=0)
         self.zahtevID = tk.Label(self.headerFrame, text="{:^10}".format("ID")).grid(row=0, column=0)
-        # tk.Label(self.headerFrame, text="      ").grid(row=0, column=1)
         self.datumkreiranja = tk.Button(self.headerFrame, text="{:^10}".format("Datum Kreiranja"), relief="flat",
                                         command=lambda: self.sortedPrikaz(1)).grid(row=0, column=2)
         self.datumTransporta = tk.Button(self.headerFrame, text="{:^10}".format("Datum Transporta"), relief="flat",
@@ -49,9 +58,10 @@ class ManagerTransportaPanel(tk.Frame):
         self.odobirZahtev = tk.Label(self.headerFrame, text="Odobri").grid(row=0, column=8)
 
     def prikazZahtevaTransportWidgets(self):
-        # hangar_funkcionalnosti.ucitajZahteveIRobu()
+        """
+        Inicijalizacija svih widgeta potrebnih za prikaz tabele zahteva za transport
+        """
         try:
-            # self.znj1.destroy()
             self.listboxZahteviZaSmestanje.destroy()
             self.scrollbarx.destroy()
             self.scrollbary.destroy()
@@ -76,60 +86,45 @@ class ManagerTransportaPanel(tk.Frame):
         self.prikaz(self.controler.m.prikazZahteva())
 
     def prikaz(self, lista):
-        '''
+        """
         Kreiramo jednu listu i stavljamo je u recnik pod kljuc counter, i tako joj posle pristupamo
-        '''
+        """
         self.recnik = {}  # ovde cuvamo sve checkbox-ove, "counter":"i"
         self.checkboxovi = []
         counter = -1  # izracunava koji je redni broj checkbox-a
         self.priv = []
         r = -1
         for i in lista:
-            # print(i)
             counter += 1
             r += 1
             a = tk.Label(self.newFrejm, text="{:^10}".format(i[0][3:]))
             a.grid(row=r, column=0, sticky="w")
             self.priv.append(a)  # Dodaje svaki objekat u listu da bi kasnije znao sta da obrise
-            # a1 = tk.Label(self.newFrejm, text="   ")
-            # a1.grid(row=r, column=1)
-            # self.priv.append(a1)
+
             a2 = tk.Label(self.newFrejm, text="{:^22}".format(i[1]))
             a2.grid(row=r, column=2)
             self.priv.append(a2)
-            # a3 = tk.Label(self.newFrejm, text="              ")
-            # a3.grid(row=r, column=3)
-            # self.priv.append(a3)
+
             a4 = tk.Label(self.newFrejm, text="{:^29}".format(i[2]))
             a4.grid(row=r, column=4)
             self.priv.append(a4)
-            # a5 = tk.Label(self.newFrejm, text="           ")
-            # a5.grid(row=r, column=5)
-            # self.priv.append(a5)
+
             a6 = tk.Label(self.newFrejm, text="{:^13}".format(i[3][:6]))
             a6.grid(row=r, column=6)
             self.priv.append(a6)
-            # a7 = tk.Label(self.newFrejm, text="      ")
-            # a7.grid(row=r, column=7)
-            # self.priv.append(a7)
+
             a8 = tk.Label(self.newFrejm, text="{:^12}".format(i[4]))
             a8.grid(row=r, column=8, sticky="w")
             self.priv.append(a8)
-            # a9 = tk.Label(self.newFrejm, text="  ")
-            # a9.grid(row=r, column=9)
-            # self.priv.append(a9)
+
             a10 = tk.Label(self.newFrejm, text="{:^10}".format(i[5][:9]))
             a10.grid(row=r, column=10)
             self.priv.append(a10)
-            # a14 = tk.Label(self.newFrejm, text="   ")
-            # a14.grid(row=r, column=11)
-            # self.priv.append(a14)
+
             a11 = tk.Label(self.newFrejm, text="{:^24}".format(i[6][:9]))
             a11.grid(row=r, column=12)
             self.priv.append(a11)
-            # a12 = tk.Label(self.newFrejm, text="   ")
-            # a12.grid(row=r, column=13)
-            # self.priv.append(a12)
+
             a13 = tk.Checkbutton(self.newFrejm, text="", command=lambda counter=counter: self.odobri(
                 counter))  # svaki put kad se checkira dugme, salje se counter, pa se zna tacno koje dugme je kliknuto
             a13.grid(row=r, column=14)
@@ -144,6 +139,9 @@ class ManagerTransportaPanel(tk.Frame):
                 a13.config(state="disabled")
 
     def sortedPrikaz(self, broj):
+        """
+        Poziva funkcije za sortiranje, i prikazuje se sortirani prikaz
+        """
         for p in self.priv:
             p.destroy()
 
@@ -155,6 +153,9 @@ class ManagerTransportaPanel(tk.Frame):
             self.prikaz(util.sortPoStatusu(self.controler.m.prikazZahteva()))
 
     def prikazZahtevaSmestanjeWidgets(self):
+        """
+        Inicijalizacija svih widget-a potrebnih za prikaz tabele zahteva za smestanje
+        """
         self.headerFrame.destroy()
         self.canvas.destroy()
 
@@ -177,11 +178,17 @@ class ManagerTransportaPanel(tk.Frame):
         self.prikaz1()
 
     def prikaz1(self):
+        """
+        Prikaz zahteva za smestanje
+        """
         zahtevi = aplikacija.prikazi_zahteve_za_smestanje_aviona()
         for i, zahtev in enumerate(zahtevi):
             self.listboxZahteviZaSmestanje.insert(i, zahtev)
 
     def logout(self):
+        """
+        Izlazi iz menadzer transporta panel-a i vraca na login prozor
+        """
         self.headerFrame.destroy()
         self.canvas.destroy()
         self.controler.meni.destroy()

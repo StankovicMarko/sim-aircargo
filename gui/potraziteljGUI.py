@@ -8,6 +8,10 @@ import klase.util_funk as util
 from klase import aplikacija
 
 class PotraziteljPanel(tk.Frame):
+    """
+    Predstavlja klasu koja se kreira startovanju aplikacije, poziva funkije koje su locirane u
+    modulu aplikacija. Ova klasa sluzi samo za graficki prikaz onoga sto potrazitelj moze da uradi
+    """
     def __init__(self,parent,controler):
         tk.Frame.__init__(self,parent)
         self.controler = controler
@@ -18,6 +22,9 @@ class PotraziteljPanel(tk.Frame):
         self.podnesiZahtevButtonFrameWidgets()
 
     def proveriIDFrameWidgets(self):
+        """
+        Inicijalizacija svih potrebnih widget-a za proveru ID-a potrazitelja
+        """
         self.checkIDFrame = tk.Frame(self)
         self.checkIDFrame.grid(row=0,column=0,sticky="nw")
         self.IDLabel = tk.Label(self.checkIDFrame,text="Unesite ID:")
@@ -31,6 +38,9 @@ class PotraziteljPanel(tk.Frame):
         self.CheckBoxNemamID.grid(row=2,columnspan=2)
 
     def podaciFrameWidgets(self):
+        """
+        Inicijalizacija svih potrebnih widget-a za unos podataka potrazitelja
+        """
         self.PodaciFrame = tk.Frame(self)
         self.PodaciFrame.grid(row=0,column=0)
         self.ImeLabel = tk.Label(self.PodaciFrame,text="Ime:")
@@ -53,6 +63,9 @@ class PotraziteljPanel(tk.Frame):
 
 
     def podnesiZahtevButtonFrameWidgets(self):
+        """
+        Inicijalizacija svih potrebnih widget-a za podnosenje zahteva
+        """
         self.PodnesiZahtevButtonFrame = tk.Frame(self)
         self.PodnesiZahtevButtonFrame.grid(row=3,columnspan=10)
         self.PodnesiZahtevButton = tk.Button(self.PodnesiZahtevButtonFrame,state="disabled",text="Podnesi Zahtev",height=2,width=10,command=self.podnesiZahtev)
@@ -62,6 +75,9 @@ class PotraziteljPanel(tk.Frame):
 
 
     def dodajRobuFrameWidgets(self):
+        """
+        Inicijalizacija svih potrebnih widget-a za unos robe
+        """
         self.DodajRobuFrame = tk.Frame(self)
         self.DodajRobuFrame.grid(row=0,column=3)
 
@@ -103,6 +119,9 @@ class PotraziteljPanel(tk.Frame):
         self.ocistiRobuButton.grid(row=7,column=1)
 
     def odredisteFrameWidgets(self):
+        """
+        Inicijalizacija svih potrebnih widget-a za izbor odredista
+        """
         self.odresiteFrame = tk.Frame(self)
         self.odresiteFrame.grid(row=0,column=0,sticky="s")
 
@@ -117,6 +136,9 @@ class PotraziteljPanel(tk.Frame):
             self.odredisteListBox.insert("end",odrediste.strip())
 
     def proveriID(self):
+        """
+        Provera ID-a potrazitelja
+        """
         ID = self.IDInput.get()
         if ID != "":
             status,lista = klase.login.Login(None,None).checkID(ID)
@@ -136,6 +158,10 @@ class PotraziteljPanel(tk.Frame):
             pass
 
     def dodajRobu(self):
+        """
+        Dodavanje robe koju potrazitelj unosi
+        i provera validnosti unosa
+        """
         imeRobe = self.robaInput.get()
         opisRobe = self.opisRobeInput.get()
         duzinaRobe = self.duzinaRobeInput.get()
@@ -164,9 +190,9 @@ class PotraziteljPanel(tk.Frame):
 
 
     def ocistiRobu(self):
-        '''
+        """
         Brise robu iz listboxa gde se prikazuje roba
-        '''
+        """
         self.selektovanaRoba = self.RobaListBox.curselection()
         if self.selektovanaRoba == ():
             result = messagebox.askquestion("Da li ste sigurni?","Obrisacete svu robu?",icon="warning")
@@ -177,6 +203,9 @@ class PotraziteljPanel(tk.Frame):
             self.RobaListBox.delete(self.selektovanaRoba)
 
     def disableIDInput(self):
+        """
+        Onemogucavanje koriscenja odredjenih widget-a u odredjenim uslovima
+        """
         if self.CheckBoxNemamIDState.get() == 1:
             self.IDInput.configure(state="disabled")
             self.ProveriIDButton.configure(state="disabled")
@@ -199,12 +228,18 @@ class PotraziteljPanel(tk.Frame):
             self.IDPotrazitelja = None
 
     def odrediIDPotrazitelja(self):
+        """
+        Odredjivanje ID-a novog potrazitelja
+        """
         lines = util.readFile("korisnici.txt")
         ID=len(lines)+1
         return "K#"+str(int(ID))
 
 
     def podnesiZahtev(self):
+        """
+        Podnosenje zahteva za transport i provera validnosti podataka
+        """
         self.selektovanoOdrediste = self.odredisteListBox.curselection() # Vraca tuple od selektovanog elementa
         ime = self.ImeInput.get()
         prezime = self.PrezimeInput.get()
@@ -245,9 +280,9 @@ class PotraziteljPanel(tk.Frame):
                 print(zahtev)
 
     def prikaziIstoriju(self):
-        '''
+        """
         Prikaz 'Istorije Panel' i poziv inicijalizacije tabele
-        '''
+        """
         self.controler.show_frame(PrikazIstorijePanel)
         self.controler.frames[PrikazIstorijePanel].tabelaFrameWidgets() # Inicijalizacija tabele tek kad se klikne dugme
 
@@ -256,12 +291,18 @@ class PotraziteljPanel(tk.Frame):
 
 
 class PrikazIstorijePanel(tk.Frame):
+    """
+    Ova klasa kreira novi frejm na kojem prikazuje sve zahteve za transport jednog potrazitelja
+    """
     def __init__(self,parent,controler):
         tk.Frame.__init__(self,parent)
         self.controler = controler
         self.createWidgets()
 
     def createWidgets(self):
+        """
+        Inicijalizacija widget-a neophodnih za prikaz
+        """
         self.textL = tk.Label(self,text="Hello to prikaz istorije")
         self.textL.grid()
 
@@ -269,9 +310,9 @@ class PrikazIstorijePanel(tk.Frame):
         self.nazadButton.grid(row=3,columnspan=5)
 
     def tabelaFrameWidgets(self):
-        '''
+        """
         Inicijalizacija tabela frejma, widget-sa na njoj i poziv header-a
-        '''
+        """
         self.tabela = tk.Frame(self)
         self.tabela.grid(row=1,column=0,sticky="nsew")
         self.tabelaHeaderWidgets()
@@ -308,9 +349,9 @@ class PrikazIstorijePanel(tk.Frame):
 
 
     def expand(self,zahtev,buttonId):
-        '''
+        """
         Mogucnost prosirenja linije u zahtevu tako da se prikazu sve robe tog zahteva
-        '''
+        """
         self.lista_buttona[buttonId].configure(image=self.collapseImage)
         r = self.lista_buttona[buttonId].row
 
@@ -349,10 +390,10 @@ class PrikazIstorijePanel(tk.Frame):
             self.recnik_frejmsa[buttonId].destroy() # brise(krije) odgovarajuci frejm
 
     def tabelaHeaderWidgets(self):
-        '''
+        """
         Inicijalizacija headera tabele
         ID | Datum Kreiranja | Datum Transporta | Odrediste | Potrazitelj | Avion | Status
-        '''
+        """
         r = 0
         hID = tk.Label(self.tabela,text="ID").grid(row=r,column=0)
         spliter = tk.Label(self.tabela,text="|").grid(row=r,column=1)
@@ -370,6 +411,9 @@ class PrikazIstorijePanel(tk.Frame):
 
 
     def prikazRobaHeaderWidgets(self):
+        """
+        Inicijalizacija svih widget-a neophodnih za prikaz roba u zahtevu
+        """
         tk.Label(self.robeFrejm,text="ID").grid(row=0,column=0)
         tk.Label(self.robeFrejm,text="Naziv").grid(row=0,column=1)
         tk.Label(self.robeFrejm,text="Opis").grid(row=0,column=2)
@@ -380,11 +424,11 @@ class PrikazIstorijePanel(tk.Frame):
         tk.Label(self.robeFrejm,text="Zahtev").grid(row=0,column=7)
 
     def nazad(self):
-        '''
+        """
         Vraca se nazad na 'Potrazitelj Panel' i brise 'tabela' frejm.
         Samim brisanjem 'tabela' frejma, brisu se svi widgeti na njemu,
         pa ne dolazi do dupliranja prikaza prilikom poziva tabele iznova i iznova
-        '''
+        """
         self.controler.show_frame(PotraziteljPanel)
         self.tabela.destroy()
 

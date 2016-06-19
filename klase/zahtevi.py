@@ -66,6 +66,10 @@ class ZahtevZaSmestanjeAviona(Zahtev):
 
 
 class ZahtevZaTransport(object):
+    """
+    Klasa koja instancira objekat zahteva za transport. Taj objekat opisuju:
+    ID, datum kreiranja, datum transporta, odrediste, id potrazitelja, avion, status
+    """
     def __init__(self, odrediste, IDPotrazitelja, IDZahteva=None,
                  datumKreiranja=None, statusZahteva="kreiran", naziv=None):
         if IDZahteva == None:
@@ -86,12 +90,18 @@ class ZahtevZaTransport(object):
         self.roba = []
 
     def sacuvaj(self):
+        """
+        Cuvanje zahteva u fajl
+        """
         util.addToFile("zahteviZaTransport.txt",
                        self.IDZahteva + "|" + self.datumKreiranja + "|" + self.datumTransporta +
                        "|" + self.odrediste + "|" + self.IDPotrazitelja + "|" + self.avion +
                        "|" + self.statusZahteva + "\n")
 
     def prikazZahteva(self, IDPotrazitelja):
+        """
+        Citanje zahteva iz fajla
+        """
         lines = util.readFile("zahteviZaTransport.txt")
         for line in lines:
             l = line.strip().split("|")
@@ -99,9 +109,15 @@ class ZahtevZaTransport(object):
                 print(l)
 
     def odrediDatum(self):
+        """
+        Odredjivanje datuma kreiranja zahteva
+        """
         return datetime.now().strftime("%d/%m/%Y")
 
     def odrediIDZahteva(self):
+        """
+        Odredjivanje ID-ja novog zahteva
+        """
         lines = util.readFile("zahteviZaTransport.txt")
         ID=len(lines)+1
         return "ZT#" + str(ID)

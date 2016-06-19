@@ -11,35 +11,35 @@ def set_path(file_name):
 
 
 def readFile(filename):
+    """
+    Citanje fajla
+    """
     path = set_path(filename)
     with open(path, 'r') as f:
         lines = f.readlines()
-    # f = open(path, "r")
-    # lines = f.readlines()
-    # f.close()
     return lines
 
 
 def addToFile(filename, string):
+    """
+    Dodavanje u fajl
+    """
     path = set_path(filename)
     with open(path, 'a') as f:
         f.write(string)
-    # f = open(path, "a")
-    # f.write(string)
-    # f.close()
 
 
 def sortPoDatumuKreiranja(lista):
-    '''
+    """
     Koristi se za sortiranje zahteva za transport po datumu kreiranja
-    '''
+    """
     return sorted(lista, key=lambda x: datetime.strptime(x[1], "%d/%m/%Y"))
 
 
 def sortPoDatumuRealizacije(lista):
-    '''
+    """
     Koristi se za sortiranje zahteva za transport po datumu realizacije
-    '''
+    """
     try:
         return sorted(lista, key=lambda x: datetime.strptime(x[2], "%d/%m/%Y"))
     except:
@@ -47,16 +47,16 @@ def sortPoDatumuRealizacije(lista):
 
 
 def sortPoStatusu(lista):
-    '''
+    """
     Sortiranje zahteva za transport po statusu
-    '''
+    """
     return sorted(lista, key=lambda x: x[6])
 
 
 def proveraInputa(string):
-    '''
+    """
     Proverava se da li input sadrzi zabranjeni karakter
-    '''
+    """
     bannedChars = ["`", "~", "!", "#", "$", "%", "^", "&",
                    "*", "(", ")", "_", "+", "-", "=", "[", "]", "{", "}", "'", "|", "\\", "/", "?", "<", ">", ",",
                    ":", ";", '"']
@@ -68,9 +68,9 @@ def proveraInputa(string):
 
 
 def proveraInputaBroj(broj):
-    '''
+    """
     Provera da li je input broj
-    '''
+    """
     try:
         broj = int(broj)
         if broj <= 0:
