@@ -13,12 +13,7 @@ class Menibar(tk.Frame):
         self.controler = controler
         self.menubar = tk.Menu(self)
 
-        # fileMenu = tk.Menu(self.menubar, tearoff=0)
-        # self.menubar.add_cascade(label="File", menu=fileMenu)
-        # fileMenu.add_command(label="Exit", command=self.exit)
-
         pretragaMenu = tk.Menu(self.menubar, tearoff=0)
-        # prikaz_meni=tk.Menu(self.menubar, tearoff=0)
 
         # SubMenus
         pretragaHangara = tk.Menu(self.menubar, tearoff=0)
@@ -27,8 +22,6 @@ class Menibar(tk.Frame):
         #
 
         self.menubar.add_cascade(label="Pretraga", menu=pretragaMenu)
-        # self.menubar.add_cascade(label='Prikazi...', menu=prikaz_meni)
-        # prikaz_meni.add_command(label='Sve Hangare',command=self.prikaz_hangara)
 
         pretragaMenu.add_cascade(label="Hangari", menu=pretragaHangara)
         pretragaMenu.add_cascade(label="Avioni", menu=pretragaAviona)
@@ -74,6 +67,9 @@ class Menibar(tk.Frame):
         self.prikaz(lista)
 
     def pretragaHangaraPoNazivu(self):
+        """
+        Pretrazuje i prikazuje sve hangare po nazivu
+        """
         naziv = simpledialog.askstring("Pretraga!", "Unesite Naziv Hangara za Pretragu")
         if naziv is None:
             return
@@ -82,6 +78,9 @@ class Menibar(tk.Frame):
         self.prikaz(lista)
 
     def pretraziHangarePoDuzini(self):
+        """
+        Pretrazuje i prikazuje sve hangare po duzini
+        """
         donja_granica = simpledialog.askinteger("Pretraga!", "Unesite Duzinu Hangara za Pretragu(donju granicu)")
         gornja_granica = simpledialog.askinteger("Pretraga!", "Unesite Duzinu Hangara za Pretragu(gornju granicu)")
         if gornja_granica is None or donja_granica is None:
@@ -91,6 +90,9 @@ class Menibar(tk.Frame):
         self.prikaz(lista)
 
     def pretragaHangaraPoSirini(self):
+        """
+        Pretrazuje i prikazuje sve hangare po sirini
+        """
         donja_granica = simpledialog.askinteger("Pretraga!", "Unesite Sirinu Hangara za Pretragu(donju granicu)")
         gornja_granica = simpledialog.askinteger("Pretraga!", "Unesite Sirinu Hangara za Pretragu(gornju granicu)")
         if gornja_granica is None or donja_granica is None:
@@ -100,6 +102,9 @@ class Menibar(tk.Frame):
         self.prikaz(lista)
 
     def pretragaHangaraPoVisini(self):
+        """
+        Pretrazuje i prikazuje sve hangare po visini
+        """
         donja_granica = simpledialog.askinteger("Pretraga!", "Unesite Visinu Hangara za Pretragu(donju granicu)")
         gornja_granica = simpledialog.askinteger("Pretraga!", "Unesite Visinu Hangara za Pretragu(gornju granicu)")
         if gornja_granica is None or donja_granica is None:
@@ -122,6 +127,9 @@ class Menibar(tk.Frame):
         self.prikaz(lista)
 
     def pretragaAvionaPoDuzini(self):
+        """
+        Pretrazuje i prikazuje sve avione po duzini
+        """
         donja_granica = simpledialog.askinteger("Pretraga!", "Unesite Duzinu Aviona za Pretragu(donju granicu)")
         gornja_granica = simpledialog.askinteger("Pretraga!", "Unesite Duzinu Aviona za Pretragu(gornju granicu)")
         if gornja_granica is None or donja_granica is None:
@@ -131,6 +139,9 @@ class Menibar(tk.Frame):
         self.prikaz(lista)
 
     def pretragaAvionaPoSirini(self):
+        """
+        Pretrazuje i prikazuje sve avione po sirini
+        """
         donja_granica = simpledialog.askinteger("Pretraga!", "Unesite Sirinu Aviona za Pretragu(donju granicu)")
         gornja_granica = simpledialog.askinteger("Pretraga!", "Unesite Sirinu Aviona za Pretragu(gornju granicu)")
         if gornja_granica is None or donja_granica is None:
@@ -140,6 +151,9 @@ class Menibar(tk.Frame):
         self.prikaz(lista)
 
     def pretragaAvionaPoRasponuKrila(self):
+        """
+        Pretrazuje i prikazuje sve avione po rasponu krila
+        """
         donja_granica = simpledialog.askinteger("Pretraga!", "Unesite Raspon Krila Aviona za Pretragu(donju granicu)")
         gornja_granica = simpledialog.askinteger("Pretraga!", "Unesite Raspon Krila Aviona za Pretragu(gornju granicu)")
         if gornja_granica is None or donja_granica is None:
@@ -149,6 +163,9 @@ class Menibar(tk.Frame):
         self.prikaz(lista)
 
     def pretragaAvionaPoNosivosti(self):
+        """
+        Pretrazuje i prikazuje sve avione po nosivosti
+        """
         donja_granica = simpledialog.askinteger("Pretraga!", "Unesite Nosivost Aviona za Pretragu(donju granicu)")
         gornja_granica = simpledialog.askinteger("Pretraga!", "Unesite Nosivnost Aviona za Pretragu(gornju granicu)")
         if gornja_granica is None or donja_granica is None:
@@ -158,6 +175,9 @@ class Menibar(tk.Frame):
         self.prikaz(lista)
 
     def pretragaAvionaPoRelaciji(self):
+        """
+        Pretrazuje i prikazuje sve avione po relaciji
+        """
         pojam = simpledialog.askstring("Pretraga!", "Unesite Relaciju Aviona za Pretragu")
         if pojam is None:
             return
@@ -167,6 +187,9 @@ class Menibar(tk.Frame):
 
     # Pretraga Robe:
     def pretragaRobePoOznaci(self):
+        """
+        Pretrazuje i prikazuje svu robu po oznaci
+        """
         oznaka = simpledialog.askstring("Pretraga!", "Unesite Oznaku Robe za Pretragu")
         if oznaka is None:
             return
@@ -175,6 +198,9 @@ class Menibar(tk.Frame):
         self.prikaz(lista)
 
     def pretragaRobePoNazivu(self):
+        """
+        Pretrazuje i prikazuje svu robu po nazivu
+        """
         naziv = simpledialog.askstring("Pretraga!", "Unesite Naziv Robe za Pretragu")
         if naziv is None:
             return
@@ -183,6 +209,9 @@ class Menibar(tk.Frame):
         self.prikaz(lista)
 
     def pretragaRobePoOpisu(self):
+        """
+        Pretrazuje i prikazuje svu robu po opisu
+        """
         opis = simpledialog.askstring("Pretraga!", "Unesite Opis Robe za Pretragu")
         if opis is None:
             return
@@ -191,6 +220,9 @@ class Menibar(tk.Frame):
         self.prikaz(lista)
 
     def pretragaRobePoDuzini(self):
+        """
+        Pretrazuje i prikazuje svu robu po duzini
+        """
         donja_granica = simpledialog.askinteger("Pretraga!", "Unesite Duzinu Robe za Pretragu(donju granicu)")
         gornja_granica = simpledialog.askinteger("Pretraga!", "Unesite Duzinu Robe za Pretragu(gornju granicu)")
         if gornja_granica is None or donja_granica is None:
@@ -200,6 +232,9 @@ class Menibar(tk.Frame):
         self.prikaz(lista)
 
     def pretragaRobePoSirini(self):
+        """
+        Pretrazuje i prikazuje svu robu po sirini
+        """
         donja_granica = simpledialog.askinteger("Pretraga!", "Unesite Sirinu Robe za Pretragu(donju granicu)")
         gornja_granica = simpledialog.askinteger("Pretraga!", "Unesite Sirinu Robe za Pretragu(gornju granicu)")
         if gornja_granica is None or donja_granica is None:
@@ -209,6 +244,9 @@ class Menibar(tk.Frame):
         self.prikaz(lista)
 
     def pretragaRobePoVisini(self):
+        """
+        Pretrazuje i prikazuje svu robu po visini
+        """
         donja_granica = simpledialog.askinteger("Pretraga!", "Unesite Sirinu Robe za Pretragu(donju granicu)")
         gornja_granica = simpledialog.askinteger("Pretraga!", "Unesite Sirinu Robe za Pretragu(gornju granicu)")
         if gornja_granica is None or donja_granica is None:
@@ -218,6 +256,9 @@ class Menibar(tk.Frame):
         self.prikaz(lista)
 
     def pretragaRobePoTezini(self):
+        """
+        Pretrazuje i prikazuje svu robu po tezini
+        """
         donja_granica = simpledialog.askinteger("Pretraga!", "Unesite Sirinu Robe za Pretragu(donju granicu)")
         gornja_granica = simpledialog.askinteger("Pretraga!", "Unesite Sirinu Robe za Pretragu(gornju granicu)")
         if gornja_granica is None or donja_granica is None:
@@ -227,16 +268,15 @@ class Menibar(tk.Frame):
         self.prikaz(lista)
 
     def pretragaPoIDPotrazitelja(self):
+        """
+        Pretrazuje i prikazuje svu robu po id-ju potrazitelja
+        """
         pojam = simpledialog.askstring("Pretraga!", "Unesite ID Potrazitelja za Pretragu")
         if pojam is None:
             return
         else:
             lista = self.controler.m.pretraziRobuPoIDPotrazitelja(pojam)
         self.prikaz(lista)
-
-    # def prikaz_hangara(self):
-    #     """Poziva funkciju prikaz koristeci list-comprehension za sve hangare u aerodromu"""
-    #     self.prikaz([hangar for hangar in aplikacija.aerodrom])
 
     def prikaz(self, lista):
         """Pravi modalni prozor koji sadrzi tekst stvari koje se nalaze u listi, dugme prikazi
@@ -268,6 +308,9 @@ class Menibar(tk.Frame):
             scrollbarx.config(command=lb.xview)
 
         def prikaz_sadrzaja_entiteta(lb, lista):
+            """
+            Prikazuje sadrzaj entiteta
+            """
             try:
                 index_entiteta=lb.curselection()[0]
                 lista_sadrzaja=[]
@@ -278,6 +321,3 @@ class Menibar(tk.Frame):
                 self.prikaz(lista_sadrzaja)
             except:
                 tk.messagebox.showerror('Greska', 'Morate odabrati u sta zelite da pogledate')
-
-    # def exit(self):
-    #     self.quit()
