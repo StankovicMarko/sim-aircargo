@@ -1,5 +1,6 @@
 from klase.entiteti import Avion, Hangar, ProstorZaRobu, Aerodrom
-from klase.util_funk import snimi_entitet, ucitaj_entitet, set_path, readFile, addToFile
+from klase.util_funk import snimi_entitet, ucitaj_entitet, set_path, readFile, addToFile, proveraInputa, \
+    proveraInputaBroj
 from klase.zahtevi import ZahtevZaSmestanjeAviona
 import datetime as dt
 
@@ -54,11 +55,26 @@ def prikaz_zahteva_za_transport_utovarene_robe():
     return prikaz
 
 
+def proveri_inpute_hangar(naziv, duzina, sirina, visina):
+    """Vraca True ako su svi unosi koje je korisnik uneo validni(nazivi su string, dimenzije int ...)"""
+    if proveraInputa(naziv) and proveraInputaBroj(duzina) and \
+            proveraInputaBroj(sirina) and proveraInputaBroj(visina):
+        return True
+
+
 def napravi_hangar(naziv, duzina, sirina, visina):
     """Pravi objekat hangara i ubacije ga u aerodrom"""
     ID = len(aerodrom) + 1
     hangar = Hangar(ID, naziv, int(duzina), int(sirina), int(visina))
     aerodrom.dodaj(hangar)
+
+
+def proveri_inpute_avion(naziv, duzina, sirina, visina, raspon_krila, godiste, nosivost, relacija):
+    """Vraca True ako su svi unosi koje je korisnik uneo validni(nazivi su string, dimenzije int ...)"""
+    if proveraInputa(naziv) and proveraInputaBroj(duzina) and proveraInputaBroj(sirina) \
+        and proveraInputaBroj(visina) and proveraInputa(raspon_krila) and proveraInputa(godiste) \
+            and proveraInputa(nosivost) and proveraInputa(relacija):
+        return True
 
 
 def napravi_avion(naziv, duzina, sirina, visina, raspon_krila, godiste, nosivost, relacija):
@@ -96,6 +112,12 @@ def dodaj_odrediste(relacija):
     relacija += '\n'
     if relacija not in odredista:
         addToFile(path, relacija)
+
+
+def proveri_inpute_prostor_za_robu(naziv, duzina, sirina, visina):
+    if proveraInputa(naziv) and proveraInputaBroj(duzina) and \
+         proveraInputaBroj(sirina) and proveraInputaBroj(visina):
+        return True
 
 
 def napravi_prostor_za_robu(naziv, duzina, sirina, visina):

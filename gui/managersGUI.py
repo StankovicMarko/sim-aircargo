@@ -11,6 +11,7 @@ class ManagerTransportaPanel(tk.Frame):
     Predstavlja klasu koja se kreira pri logovanju korisnika, poziva funkije koje su locirane u
     modulu aplikacija. Ova klasa sluzi samo za graficki prikaz onoga sto menadzer transporta moze da uradi
     """
+
     def __init__(self, parent, controler):
         tk.Frame.__init__(self, parent)
         self.controler = controler
@@ -207,7 +208,6 @@ class ManagerTransportaPanel(tk.Frame):
         """Vrsi odobravanje zahteva za transport, ako roba moze da stane odmah je utovara (po sablonu iz
             modula-entiteti.py, klasa-Dimenzije, metoda-self.dodaj(other)).
             time se pri odobravanju drugog zahteva uzima u obzir roba iz zahteva koji je vec odobren"""
-        print(self.recnik[counter])
         self.checkboxovi[counter].config(state="disabled")
 
         zahtev = None
@@ -260,6 +260,7 @@ class ManagerTransportaPanel(tk.Frame):
 class ManagerHangaraPanel(tk.Frame):
     """Predstavlja klasu koja se kreira pri logovanju korisnika, poziva funkije koje su locirane u
         modulu aplikacija. Ova klasa sluzi samo za graficki prikaz onoga sto menadzer hangara moze da uradi"""
+
     def __init__(self, parent, controler):
         self.controler = controler
         tk.Frame.__init__(self, parent)
@@ -468,8 +469,7 @@ class ManagerHangaraPanel(tk.Frame):
         sirina = es.get()
         visina = ev.get()
 
-        if util.proveraInputa(naziv) and util.proveraInputaBroj(duzina) and util.proveraInputaBroj(
-                sirina) and util.proveraInputaBroj(visina):
+        if aplikacija.proveri_inpute_hangar(naziv, duzina, sirina, visina):
             aplikacija.napravi_hangar(naziv, int(duzina), int(sirina), int(visina))
             tk.messagebox.showinfo('Dodavanje hangara u aerodrom', 'Uspesno dodat hangar')
             top.destroy()
@@ -486,22 +486,11 @@ class ManagerHangaraPanel(tk.Frame):
         godiste = eg.get()
         nosivost = eno.get()
         relacija = er.get()
-        if util.proveraInputa(naziv) \
-                and util.proveraInputaBroj(duzina) \
-                and util.proveraInputaBroj(sirina) \
-                and util.proveraInputaBroj(visina) \
-                and util.proveraInputa(raspon_krila) \
-                and util.proveraInputa(godiste) \
-                and util.proveraInputa(nosivost) \
-                and util.proveraInputa(relacija):
-            aplikacija.napravi_avion(naziv,
-                                     int(duzina),
-                                     int(sirina),
-                                     int(visina),
-                                     int(raspon_krila),
-                                     int(godiste),
-                                     int(nosivost),
-                                     relacija)
+        if aplikacija.proveri_inpute_avion(naziv, duzina, sirina, visina,
+                                           raspon_krila, godiste, nosivost, relacija):
+
+            aplikacija.napravi_avion(naziv, int(duzina), int(sirina), int(visina), int(raspon_krila),
+                                     int(godiste), int(nosivost), relacija)
 
             aplikacija.dodaj_odrediste(relacija)
             tk.messagebox.showinfo('Narucivanje aviona', 'Uspesno napravljen avion')
@@ -529,8 +518,7 @@ class ManagerHangaraPanel(tk.Frame):
         sirina = es.get()
         visina = ev.get()
 
-        if util.proveraInputa(naziv) and util.proveraInputaBroj(duzina) and util.proveraInputaBroj(
-                sirina) and util.proveraInputaBroj(visina) \
+        if aplikacija.proveri_inpute_prostor_za_robu(naziv, duzina, sirina, visina) \
                 and int(duzina) < self.temp_duzina and int(sirina) < self.temp_sirina \
                 and int(visina) < self.temp_visina:
             aplikacija.napravi_prostor_za_robu(naziv, int(duzina), int(sirina), int(visina))
@@ -567,7 +555,6 @@ class ManagerHangaraPanel(tk.Frame):
             zahteva ce biti prikaza u vidu prozora sa porukom"""
         try:
             odabran_avion = avioni_bez_zahteva[self.listbox.curselection()[0]]
-            print(odabran_avion)
             aplikacija.napravi_zahtev_za_smestanje(odabran_avion, self.controler.m)
             self.dug_kreiraj_zah.config(state='disabled')
             tk.messagebox.showinfo('', 'Zahtev uspesno kreiran')
@@ -639,4 +626,3 @@ class ManagerHangaraPanel(tk.Frame):
         self.dug_smesti_avion.config(state='disabled')
         self.dug_kreiraj_zah.config(state='disabled')
         self.dug_transportuj_odobrene.config(state='disabled')
-
