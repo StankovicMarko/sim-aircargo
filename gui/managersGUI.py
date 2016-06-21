@@ -369,10 +369,15 @@ class ManagerHangaraPanel(tk.Frame):
                                                                           entry_visina, top))
         dodaj_bnt.grid(row=4, columnspan=2, sticky='new')
 
+    def _ocisti_robu(self, top):
+        aplikacija.temp_prostor_za_robu.clear()
+        top.destroy()
+
     def add_avion(self):
         """Prvi korak dodavanja aviona, kreira prozor u koji se unose vrednosti i prostori za teret"""
         self.iskljuci_dugmad()
         top = tk.Toplevel()
+        top.protocol('WM_DELETE_WINDOW', lambda: self._ocisti_robu(top))
         top.transient(self)
         top.grab_set()
         tk.Label(top, text='Naziv Aviona').grid(row=0, column=0)
