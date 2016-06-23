@@ -5,7 +5,7 @@ myPath = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, myPath + '/../')
 from klase import aplikacija
 from klase.entiteti import Avion
-from klase.korisnici import MenadzerHangara
+from klase.korisnici import MenadzerHangara, ManagerTransport, Potrazitelj
 from klase.aplikacija import napravi_zahtev_za_smestanje
 
 
@@ -28,3 +28,12 @@ def test_zahtev_smestanje():
     assert isinstance(aplikacija.zahtevi_za_smestanje_aviona[broj_zahteva_posle-1].vremeKreiranja, datetime.datetime)
     assert aplikacija.zahtevi_za_smestanje_aviona[broj_zahteva_posle-1].avion.id == 1
     assert aplikacija.zahtevi_za_smestanje_aviona[broj_zahteva_posle-1].menadzer.naziv == 'Petar'
+
+
+def test_prikaz_zahtevi_transport_potrazitelj():
+    zahtevi_za_transport = Potrazitelj("K#100","Ime","Prezime","02132123","email@email.com").prikazZahteva()
+    assert isinstance(zahtevi_za_transport, list)
+
+def test_prikaz_zahtevi_transport_menTransport():
+    svi_zahtevi_za_transport = ManagerTransport("K#3","Ime","Prezime").prikazZahteva()
+    assert isinstance(svi_zahtevi_za_transport,list)
