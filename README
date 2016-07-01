@@ -1,2 +1,38 @@
-Marko Jokic
-Marko Stankovic
+~ Sta je Aplikacija Aerodroma OIS/URS 2016?
+
+	To je simulacija transporta robe avio saobracajem.
+	Aplikacija je napisana za Python 3.x 
+	Namenjena je potraziteljima(kupcima usluge), 
+	Menadzerima Transporta - njihova uloga je da odobre zahtev kupca
+	Radnik - njegova uloga je da fizicki utovari robu u avion
+	Menadzer Hangara - smesta aviona i transportuje robu
+
+
+~ Kako se pokrece aplikacija?
+
+	Aplikacija se pokrece tako sto udjete u folder gde se nalazi(/tim8)
+	i u terminalu kucate "python3 main.py".
+	Nakon toga pojavice se Login prozor.
+
+
+~ Gde se nalazi dokumentacija?
+	
+	Da bi ste kreirali dokumentaciju potrebno je da odete u tim8/docs i
+	ukucate 'make html'.
+	.rst fajlovi se nalaze u docs/fajlovi folderu, a html prezentacija
+	dokumentacije se nalazi u docs/_build/html/index.html
+
+
+~ Gde se nalaze testovi?
+
+	Testovi se nalaze u /test folderu.
+	Da bi ste pokrenuli testove koristite 'py.test' alat za testiranje
+
+		$ py.test
+
+
+~ Autori
+
+	Marko Jokic, Marko Stankovic
+
+

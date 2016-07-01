@@ -1,5 +1,5 @@
 Fajl klase
-=========
+==========
 
 Sadrzi module:
 
@@ -8,7 +8,7 @@ Sadrzi module:
 	    .. toctree::
 	       :maxdepth: 2
 	       
-	       klase/aplikacija
+	       ../../klase/aplikacija
 		
 	   
 	#. Modul entiteti:
@@ -16,7 +16,7 @@ Sadrzi module:
 	    .. toctree::
 	       :maxdepth: 2
 	       
-	       klase/entiteti
+	       ../../klase/entiteti
 
 
 	#. Modul korisnici:
@@ -24,34 +24,34 @@ Sadrzi module:
 	    .. toctree::
 	       :maxdepth: 2
 	       
-	       klase/korisnici
+	       ../../klase/korisnici
 
 	#. Modul login:
 	
 	    .. toctree::
 	       :maxdepth: 2
 	       
-	       klase/login
+	       ../../klase/login
 
 	#. Modul roba:
 	
 	    .. toctree::
 	       :maxdepth: 2
 	       
-	       klase/roba
+	       ../../klase/roba
 
 	#. Modul util_funk:
 	
 	    .. toctree::
 	       :maxdepth: 2
 	       
-	       klase/util_funk
+	       ../../klase/util_funk
 
 	#. Modul zahtevi:
 	
 	    .. toctree::
 	       :maxdepth: 2
 	       
-	       klase/zahtevi
+	       ../../klase/zahtevi
 
 

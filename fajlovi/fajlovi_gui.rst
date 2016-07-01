@@ -14,7 +14,7 @@ Sadrzi module:
 	#. Modul menibar:
 	
 	    .. toctree::
-	       :maxdepth: 2
+	       :maxdepth: 3
 	       
 	       gui/menibar
 

@@ -5,12 +5,21 @@
 
 Welcome to Aplikacija Aerodroma OIS/URS 2016's documentation!
 =============================================================
+.. include:: README
+
+Upustvo za upotrebu:
+
+.. toctree::
+   :maxdepth: 2
+   
+   upustvo
+
 
 Contents:
 
 .. toctree::
    :maxdepth: 2
-
+   
    fajlovi/fajlovi_gui
    fajlovi/fajlovi_klase
 
