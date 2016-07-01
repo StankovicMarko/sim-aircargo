@@ -17,10 +17,10 @@
 
 ~ Gde se nalazi dokumentacija?
 	
-	Da bi ste kreirali dokumentaciju potrebno je da odete u tim8/docs i
+	Da bi ste kreirali dokumentaciju potrebno je da odete u tim8 i
 	ukucate 'make html'.
-	.rst fajlovi se nalaze u docs/fajlovi folderu, a html prezentacija
-	dokumentacije se nalazi u docs/_build/html/index.html
+	.rst fajlovi se nalaze u fajlovi folderu, a html prezentacija
+	dokumentacije se nalazi u _build/html/index.html
 
 
 ~ Gde se nalaze testovi?
