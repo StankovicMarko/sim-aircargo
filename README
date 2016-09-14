@@ -1,38 +1,36 @@
-~ Sta je Aplikacija Aerodroma OIS/URS 2016?
+~ What is sim-aircargo?
 
-	To je simulacija transporta robe avio saobracajem.
-	Aplikacija je napisana za Python 3.x 
-	Namenjena je potraziteljima(kupcima usluge), 
-	Menadzerima Transporta - njihova uloga je da odobre zahtev kupca
-	Radnik - njegova uloga je da fizicki utovari robu u avion
-	Menadzer Hangara - smesta aviona i transportuje robu
-
-
-~ Kako se pokrece aplikacija?
-
-	Aplikacija se pokrece tako sto udjete u folder gde se nalazi(/tim8)
-	i u terminalu kucate "python3 main.py".
-	Nakon toga pojavice se Login prozor.
+    It is simulation of airport cargo transport application.
+    Application is written in Python 3.x
+    People who would use this app are:
+      * Claimant - Request transport of certain cargo
+      * Transport Manager - Approve request
+      * Worker - Loading cargo
+      * Hangar Manager - Lands planes and approves transport
 
 
-~ Gde se nalazi dokumentacija?
-	
-	Da bi ste kreirali dokumentaciju potrebno je da odete u tim8 i
-	ukucate 'make html'.
-	.rst fajlovi se nalaze u fajlovi folderu, a html prezentacija
-	dokumentacije se nalazi u _build/html/index.html
+~ How to start application?
+
+    Use terminal to navigate to project folder, then type
+    "python3 main.py". Few moments later Login window will
+    appear.
 
 
-~ Gde se nalaze testovi?
+~ Where can i find documentation?
 
-	Testovi se nalaze u /test folderu.
-	Da bi ste pokrenuli testove koristite 'py.test' alat za testiranje
+	To create docs navigate to project folder using terminal and
+	type "make html".
+	Documentation index page is at _build/html/index.html
 
-		$ py.test
+
+~ Where can i find tests?
+
+    Tests can be found in /test folder.
+    To run tests use "py.test" tool for testing.
 
 
-~ Autori
+~ Authors
 
-	Marko Jokic, Marko Stankovic
+	Marko Stankovic, Marko Jokic
 
 
