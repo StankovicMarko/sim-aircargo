@@ -286,10 +286,10 @@ class ManagerHangaraPanel(tk.Frame):
         scrollbarx.grid(row=4, columnspan=4, sticky='nsew')
         scrollbary.grid(row=3, column=5, sticky='nse')
 
-        self.dug_smesti_avion = tk.Button(self.frejm, text='Smesti Avion', state='disabled')
-        self.dug_kreiraj_zah = tk.Button(self.frejm, text='Kreiraj Zah. za smestanje', state='disabled')
-        self.dug_transportuj_odobrene = tk.Button(self.frejm, text='Transportuj robu', state='disabled')
-        self.dug_prikazi_avione_za_transport = tk.Button(self.frejm, text='Prikazi Avione za Transport',
+        self.dug_smesti_avion = tk.Button(self.frejm, text='Land Airplane', state='disabled')
+        self.dug_kreiraj_zah = tk.Button(self.frejm, text='Create request', state='disabled')
+        self.dug_transportuj_odobrene = tk.Button(self.frejm, text='Transport cargo', state='disabled')
+        self.dug_prikazi_avione_za_transport = tk.Button(self.frejm, text='Airplanes ready for trans',
                                                          command=self.prikazi_avione_za_transport)
 
         self.dug_smesti_avion.grid(row=6, column=3, sticky='nsew')
@@ -297,24 +297,24 @@ class ManagerHangaraPanel(tk.Frame):
         self.dug_transportuj_odobrene.grid(row=2, column=1, sticky='nsew')
         self.dug_prikazi_avione_za_transport.grid(row=1, column=1, sticky='nsew')
 
-        dug_smestanje = tk.Button(self.frejm, text='Zahtevi za smestanje aviona', command=self.zahtevi_smestanja)
+        dug_smestanje = tk.Button(self.frejm, text='Requests for landing', command=self.zahtevi_smestanja)
         dug_smestanje.grid(row=1, column=0, sticky='nsew')
 
-        dug_transport = tk.Button(self.frejm, text='Zahtevi za transport (utovarena roba)',
+        dug_transport = tk.Button(self.frejm, text='Requests for transport(cargo loaded)',
                                   command=self.zahtevi_transport)
         dug_transport.grid(row=2, column=0, sticky='nsew')
 
-        dug_dodaj_hangar = tk.Button(self.frejm, text='Dodaj hangar', command=self.add_hangar)
+        dug_dodaj_hangar = tk.Button(self.frejm, text='Add(make) Hangar', command=self.add_hangar)
         dug_dodaj_hangar.grid(row=1, column=2, sticky='nsew')
 
-        dug_dodaj_avion = tk.Button(self.frejm, text='Dodaj avion', command=self.add_avion)
+        dug_dodaj_avion = tk.Button(self.frejm, text='Add(make) Airplane', command=self.add_avion)
         dug_dodaj_avion.grid(row=2, column=2, sticky='nsew')
 
-        dug_prikazi_avione_bez_zahteva = tk.Button(self.frejm, text='Prikaz Aviona bez zahteva',
+        dug_prikazi_avione_bez_zahteva = tk.Button(self.frejm, text='Airplanes without request',
                                                    command=self.prikazi_avione_bez_zahteva)
         dug_prikazi_avione_bez_zahteva.grid(row=1, column=3, sticky='nsew')
 
-        dug_prikazi_avione_sa_zahtevom = tk.Button(self.frejm, text='Prikaz Aviona sa zahtevom',
+        dug_prikazi_avione_sa_zahtevom = tk.Button(self.frejm, text='Airplanes with request',
                                                    command=self.prikazi_avione_sa_zahtevom)
         dug_prikazi_avione_sa_zahtevom.grid(row=2, column=3, sticky='nsew')
 
@@ -410,7 +410,7 @@ class ManagerHangaraPanel(tk.Frame):
         self.lbl_pzt = tk.Label(top, text='(prazno)')
         self.lbl_pzt.grid(row=8, column=1)
 
-        self.btn_add_avion = tk.Button(top, text='Dodaj Avion',
+        self.btn_add_avion = tk.Button(top, text='Add(make) Airplane',
                                        command=lambda: self._prikupi_inpute_aviona(entry_naziv, entry_duzina,
                                                                                    entry_sirina,
                                                                                    entry_visina,
@@ -419,7 +419,7 @@ class ManagerHangaraPanel(tk.Frame):
                                                                                    entry_nosivost,
                                                                                    entry_relacija, top))
 
-        tk.Button(top, text='Dodaj Prostor za Teret', command=lambda: self.add_pzt(entry_naziv, entry_duzina,
+        tk.Button(top, text='Add cargo space', command=lambda: self.add_pzt(entry_naziv, entry_duzina,
                                                                                    entry_sirina,
                                                                                    entry_visina,
                                                                                    entry_raspon_krila,

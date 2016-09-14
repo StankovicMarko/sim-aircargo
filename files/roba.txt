@@ -1,2 +1,6 @@
 R#1|kafa|crna kafa|10|5|2|100|ZT#1
 R#2|grasak|smrznuti grasak|5|5|1|20|ZT#1
+R#3|roba1|opis1|2|2|2|5|ZT#2
+R#4|roba2|opis2|3|3|3|3|ZT#2
+R#5|a|a|1|1|1|1|ZT#3
+R#6|a|a|1|1|1|1|ZT#4

@@ -4,3 +4,6 @@ K#3|Marko|Stankovic|admin|admin|mtransport
 K#4|Ime|Prezime|radnik|password|radnik
 K#5|user|pass|user|pass|mhangar
 K#6|Marko|Markovic|021443555|markom@gmail.com|potrazitelj
+K#7|ime1|prezime1|0222|ime@email.com|potrazitelj
+K#8|kaca|udovicci|066178905|kaca.udovicic@hotmail.com|potrazitelj
+K#9|a|a|aa|a|potrazitelj

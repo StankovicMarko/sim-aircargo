@@ -1,1 +1,4 @@
 ZT#1|01/07/2016|None|Peking|K#6|None|kreiran
+ZT#2|09/07/2016|None|Peking|K#7|None|kreiran
+ZT#3|06/09/2016|None|London|K#8|None|kreiran
+ZT#4|13/09/2016|None|London|K#9|None|kreiran

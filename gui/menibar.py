@@ -21,36 +21,36 @@ class Menibar(tk.Frame):
         pretragaRobe = tk.Menu(self.menubar, tearoff=0)
         #
 
-        self.menubar.add_cascade(label="Pretraga", menu=pretragaMenu)
+        self.menubar.add_cascade(label="Search", menu=pretragaMenu)
 
-        pretragaMenu.add_cascade(label="Hangari", menu=pretragaHangara)
-        pretragaMenu.add_cascade(label="Avioni", menu=pretragaAviona)
-        pretragaMenu.add_cascade(label="Roba", menu=pretragaRobe)
+        pretragaMenu.add_cascade(label="Hangars", menu=pretragaHangara)
+        pretragaMenu.add_cascade(label="Airports", menu=pretragaAviona)
+        pretragaMenu.add_cascade(label="Cargo", menu=pretragaRobe)
 
         # Commands za Pretraga Hangara Meni
-        pretragaHangara.add_command(label="Oznaka", command=self.pretragaHangaraPoOznaci)
-        pretragaHangara.add_command(label="Naziv", command=self.pretragaHangaraPoNazivu)
-        pretragaHangara.add_command(label="Duzina", command=self.pretraziHangarePoDuzini)
-        pretragaHangara.add_command(label="Sirina", command=self.pretragaHangaraPoSirini)
-        pretragaHangara.add_command(label="Visina", command=self.pretragaHangaraPoVisini)
+        pretragaHangara.add_command(label="Oznaka(ID)", command=self.pretragaHangaraPoOznaci)
+        pretragaHangara.add_command(label="Naziv(Name)", command=self.pretragaHangaraPoNazivu)
+        pretragaHangara.add_command(label="Duzina(Len)", command=self.pretraziHangarePoDuzini)
+        pretragaHangara.add_command(label="Sirina(Width)", command=self.pretragaHangaraPoSirini)
+        pretragaHangara.add_command(label="Visina(Height)", command=self.pretragaHangaraPoVisini)
 
         # Commands za Pretraga Aviona Meni
-        pretragaAviona.add_command(label="Oznaka", command=self.pretragaAvionaPoOznaci)
-        pretragaAviona.add_command(label="Duzina", command=self.pretragaAvionaPoDuzini)
-        pretragaAviona.add_command(label="Sirina", command=self.pretragaAvionaPoSirini)
-        pretragaAviona.add_command(label="Raspon Krila", command=self.pretragaAvionaPoRasponuKrila)
-        pretragaAviona.add_command(label="Nosivost", command=self.pretragaAvionaPoNosivosti)
-        pretragaAviona.add_command(label="Relacija", command=self.pretragaAvionaPoRelaciji)
+        pretragaAviona.add_command(label="Oznaka(ID)", command=self.pretragaAvionaPoOznaci)
+        pretragaAviona.add_command(label="Duzina(Len)", command=self.pretragaAvionaPoDuzini)
+        pretragaAviona.add_command(label="Sirina(Width)", command=self.pretragaAvionaPoSirini)
+        pretragaAviona.add_command(label="Raspon Krila(WingSpan)", command=self.pretragaAvionaPoRasponuKrila)
+        pretragaAviona.add_command(label="Nosivost(Capacity)", command=self.pretragaAvionaPoNosivosti)
+        pretragaAviona.add_command(label="Relacija(Dest)", command=self.pretragaAvionaPoRelaciji)
 
         # COmmands za Pretraga Robe Meni
-        pretragaRobe.add_command(label="Oznaka", command=self.pretragaRobePoOznaci)
-        pretragaRobe.add_command(label="Naziv", command=self.pretragaRobePoNazivu)
-        pretragaRobe.add_command(label="Opis", command=self.pretragaRobePoOpisu)
-        pretragaRobe.add_command(label="Duzina", command=self.pretragaRobePoDuzini)
-        pretragaRobe.add_command(label="Sirina", command=self.pretragaRobePoSirini)
-        pretragaRobe.add_command(label="Visina", command=self.pretragaRobePoVisini)
-        pretragaRobe.add_command(label="Tezina", command=self.pretragaRobePoTezini)
-        pretragaRobe.add_command(label="ID Potrazitelja", command=self.pretragaPoIDPotrazitelja)
+        pretragaRobe.add_command(label="Oznaka(ID)", command=self.pretragaRobePoOznaci)
+        pretragaRobe.add_command(label="Naziv(Name)", command=self.pretragaRobePoNazivu)
+        pretragaRobe.add_command(label="Opis(Desc)", command=self.pretragaRobePoOpisu)
+        pretragaRobe.add_command(label="Duzina(Len)", command=self.pretragaRobePoDuzini)
+        pretragaRobe.add_command(label="Sirina(Width)", command=self.pretragaRobePoSirini)
+        pretragaRobe.add_command(label="Visina(Height)", command=self.pretragaRobePoVisini)
+        pretragaRobe.add_command(label="Tezina(Weigt)", command=self.pretragaRobePoTezini)
+        pretragaRobe.add_command(label="ID Potrazitelja(Claimant ID) ", command=self.pretragaPoIDPotrazitelja)
 
         controler.config(menu=self.menubar)
 
